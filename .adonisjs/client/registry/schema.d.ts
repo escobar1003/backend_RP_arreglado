@@ -67,4 +67,124 @@ export interface Registry {
       errorResponse: unknown
     }
   }
+  'puntos_reciclajes.update': {
+    methods: ["PUT"]
+    pattern: '/api/puntos/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'puntos_reciclajes.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/puntos/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'roles.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/roles'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'roles.store': {
+    methods: ["POST"]
+    pattern: '/api/roles'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'roles.update': {
+    methods: ["PUT"]
+    pattern: '/api/roles/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'roles.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/roles/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'admins.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admins'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'admins.store': {
+    methods: ["POST"]
+    pattern: '/api/admins'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'admins.update': {
+    methods: ["PUT"]
+    pattern: '/api/admins/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'admins.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/admins/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
 }

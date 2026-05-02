@@ -57,7 +57,7 @@
   },
   "dependencies": {
     "@adonisjs/auth": "^10.1.0",
-    "@adonisjs/core": "^7.3.1",
+    "@adonisjs/core": "^7.3.2",
     "@adonisjs/cors": "^3.0.0",
     "@adonisjs/lucid": "^22.4.2",
     "@adonisjs/session": "^8.1.0",
@@ -67,13 +67,9 @@
     "@vinejs/vine": "^4.3.1",
     "better-sqlite3": "^12.9.0",
     "luxon": "^3.7.2",
-
+    "mysql2": "^3.22.3",
     "reflect-metadata": "^0.2.2",
-    "ts-node": "^10.9.2",
-
-    "mysql2": "^3.22.2",
-    "reflect-metadata": "^0.2.2"
-
+    "ts-node": "^10.9.2"
   },
   "hotHook": {
     "boundaries": [

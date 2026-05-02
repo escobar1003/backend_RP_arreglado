@@ -8,6 +8,7 @@ export const controllers = {
   administracion: {
     Materiales: () => import('#controllers/administracion/materiales_controller'),
   },
+  Admins: () => import('#controllers/admins_controller'),
   autenticacion: {
     Login: () => import('#controllers/autenticacion/login_controller'),
     RecuperarPasswords: () => import('#controllers/autenticacion/recuperar_passwords_controller'),
@@ -19,6 +20,7 @@ export const controllers = {
     AcumulacionPuntos: () => import('#controllers/puntos/acumulacion_puntos_controller'),
     CanjeRecompensas: () => import('#controllers/puntos/canje_recompensas_controller'),
   },
+  Roles: () => import('#controllers/roles_controller'),
   supermercados: {
     PuntosReciclajes: () => import('#controllers/supermercados/puntos_reciclajes_controller'),
   },

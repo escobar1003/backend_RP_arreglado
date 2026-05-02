@@ -1,16 +1,13 @@
-import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { DateTime } from 'luxon'
 
-export default class Punto extends BaseModel {
+export default class Role extends BaseModel {
 
   @column({ isPrimary: true })
   declare id: number
 
   @column()
   declare nombre: string
-
-  @column()
-  declare direccion: string
 
   @column()
   declare activo: boolean

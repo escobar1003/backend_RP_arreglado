@@ -5,11 +5,11 @@ export default class GestionUsuariosController {
 
   // ✅ LISTAR USUARIOS
   public async listar({ response }: HttpContext) {
-    const usuarios = await Usuario.all()
-    return response.ok(usuarios)
-  }
+  const usuarios = await Usuario.all()
+  return response.ok(usuarios)
+}
 
-  // ✅ CAMBIAR ESTADO (ACTIVAR / DESACTIVAR)
+  // ✅ CAMBIAR ESTADO (ACTIVAR / DESACTIVAR)list
   public async cambiarEstado({ params, request, response }: HttpContext) {
 
   const id = params.id
@@ -40,6 +40,14 @@ export default class GestionUsuariosController {
       ...datos,
       esta_activo: true
     })
+
+    const existe = await Usuario.findBy('correo', datos.correo)
+
+    if (existe) {
+      return response.badRequest({
+        mensaje: 'El correo ya existe'
+      })
+    }
 
     return response.created(usuario)
   }
