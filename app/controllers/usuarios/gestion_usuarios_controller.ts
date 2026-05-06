@@ -5,9 +5,9 @@ export default class GestionUsuariosController {
 
   // ✅ LISTAR USUARIOS
   public async listar({ response }: HttpContext) {
-  const usuarios = await Usuario.all()
-  return response.ok(usuarios)
-}
+    const usuarios = await Usuario.all()
+    return response.ok(usuarios)
+  }
 
   // ✅ CAMBIAR ESTADO (ACTIVAR / DESACTIVAR)list
   public async cambiarEstado({ params, request, response }: HttpContext) {
