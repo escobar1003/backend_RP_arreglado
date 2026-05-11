@@ -403,6 +403,102 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/roles_controller').default['destroy']>>>
     }
   }
+  'encargados.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/encargados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['index']>>>
+    }
+  }
+  'encargados.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['show']>>>
+    }
+  }
+  'encargados.store': {
+    methods: ["POST"]
+    pattern: '/api/admin/encargados'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/admin/encargado').crearEncargadoValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/admin/encargado').crearEncargadoValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'encargados.update': {
+    methods: ["PUT"]
+    pattern: '/api/admin/encargados/:id'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/admin/encargado').actualizarEncargadoValidator)>>
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: ExtractQuery<InferInput<(typeof import('#validators/admin/encargado').actualizarEncargadoValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['update']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
+  'encargados.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/admin/encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['destroy']>>>
+    }
+  }
+  'entregas.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/entregas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['index']>>>
+    }
+  }
+  'entregas.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/entregas/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['show']>>>
+    }
+  }
+  'entregas.actualizar_estado': {
+    methods: ["PUT"]
+    pattern: '/api/admin/entregas/:id/estado'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['actualizarEstado']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['actualizarEstado']>>>
+    }
+  }
   'perfil.mostrar': {
     methods: ["GET","HEAD"]
     pattern: '/api/usuario/perfil'

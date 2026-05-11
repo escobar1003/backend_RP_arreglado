@@ -53,15 +53,23 @@ export interface ApiDefinition {
     update: typeof routes['roles.update']
     destroy: typeof routes['roles.destroy']
   }
-  perfil: {
-    mostrar: typeof routes['perfil.mostrar']
-    actualizar: typeof routes['perfil.actualizar']
-    cambiarPassword: typeof routes['perfil.cambiar_password']
+  encargados: {
+    index: typeof routes['encargados.index']
+    show: typeof routes['encargados.show']
+    store: typeof routes['encargados.store']
+    update: typeof routes['encargados.update']
+    destroy: typeof routes['encargados.destroy']
   }
   entregas: {
     index: typeof routes['entregas.index']
     show: typeof routes['entregas.show']
+    actualizarEstado: typeof routes['entregas.actualizar_estado']
     store: typeof routes['entregas.store']
+  }
+  perfil: {
+    mostrar: typeof routes['perfil.mostrar']
+    actualizar: typeof routes['perfil.actualizar']
+    cambiarPassword: typeof routes['perfil.cambiar_password']
   }
   puntos: {
     resumen: typeof routes['puntos.resumen']

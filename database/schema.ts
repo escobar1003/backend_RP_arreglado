@@ -118,6 +118,33 @@ export class DetalleEntregasSchema extends BaseModel {
   declare puntosGenerados: number
 }
 
+export class EncargadoSchema extends BaseModel {
+  static $columns = ['correo', 'createdAt', 'fechaRegistro', 'idEncargado', 'idEstado', 'nombre', 'password', 'puntoAsignado', 'telefono', 'updatedAt', 'zona'] as const
+  $columns = EncargadoSchema.$columns
+  @column()
+  declare correo: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column.dateTime()
+  declare fechaRegistro: DateTime | null
+  @column({ isPrimary: true })
+  declare idEncargado: number
+  @column()
+  declare idEstado: number | null
+  @column()
+  declare nombre: string
+  @column({ serializeAs: null })
+  declare password: string
+  @column()
+  declare puntoAsignado: string | null
+  @column()
+  declare telefono: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare zona: string | null
+}
+
 export class EntregasSchema extends BaseModel {
   static $columns = ['createdAt', 'fechaEntrega', 'idEntrega', 'idEstadoEntrega', 'idPunto', 'idUsuario', 'observacion', 'pesoTotal', 'puntosTotales', 'updatedAt'] as const
   $columns = EntregasSchema.$columns

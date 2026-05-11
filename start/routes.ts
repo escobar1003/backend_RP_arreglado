@@ -55,13 +55,25 @@ router.group(() => {
   router.post('/recompensas', [() => import('#controllers/admin/recompensas_controller'), 'store'])
   router.put('/recompensas/:id', [() => import('#controllers/admin/recompensas_controller'), 'update'])
   router.delete('/recompensas/:id', [() => import('#controllers/admin/recompensas_controller'), 'destroy'])
-  
+
   // Roles
-router.get('/roles', [() => import('#controllers/admin/roles_controller'), 'index'])
-router.get('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'show'])
-router.post('/roles', [() => import('#controllers/admin/roles_controller'), 'store'])
-router.put('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'update'])
-router.delete('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'destroy'])
+  router.get('/roles', [() => import('#controllers/admin/roles_controller'), 'index'])
+  router.get('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'show'])
+  router.post('/roles', [() => import('#controllers/admin/roles_controller'), 'store'])
+  router.put('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'update'])
+  router.delete('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'destroy'])
+
+  // Encargados
+  router.get('/encargados', [() => import('#controllers/admin/encargados_controller'), 'index'])
+  router.get('/encargados/:id', [() => import('#controllers/admin/encargados_controller'), 'show'])
+  router.post('/encargados', [() => import('#controllers/admin/encargados_controller'), 'store'])
+  router.put('/encargados/:id', [() => import('#controllers/admin/encargados_controller'), 'update'])
+  router.delete('/encargados/:id', [() => import('#controllers/admin/encargados_controller'), 'destroy'])
+
+  // Entregas (admin)
+  router.get('/entregas', [() => import('#controllers/admin/entregas_controller'), 'index'])
+  router.get('/entregas/:id', [() => import('#controllers/admin/entregas_controller'), 'show'])
+  router.put('/entregas/:id/estado', [() => import('#controllers/admin/entregas_controller'), 'actualizarEstado'])
 
 }).prefix('/api/admin').use([middleware.auth(), middleware.verificar_rol(['admin'])])
 
