@@ -7,15 +7,17 @@ export default class ClasificacionController {
   async index({ auth, response }: HttpContext) {
     const usuario = auth.user!
 
-    const aliado = await Aliado.query()
-      .where('correo', usuario.correo)
-      .firstOrFail()
+    const aliado = usuario.idRol === 1
+      ? null
+      : await Aliado.query().where('correo', usuario.correo).firstOrFail()
 
     // Ver clasificaciones de los usuarios en los puntos de este aliado
     const clasificaciones = await ClasificacionIa.query()
-      .whereHas('entrega', (q) => {
-        q.whereHas('puntoReciclaje', (q2) => {
-          q2.where('id_aliado', aliado.idAliado)
+      .if(aliado, (query) => {
+        query.whereHas('entrega', (q) => {
+          q.whereHas('puntoReciclaje', (q2) => {
+            q2.where('id_aliado', aliado!.idAliado)
+          })
         })
       })
       .preload('usuario')

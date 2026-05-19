@@ -71,6 +71,10 @@ router.group(() => {
   router.delete('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'destroy'])
 
   // Estados Materiales
+// Puntos (ajuste)
+  router.post('/usuarios/:idUsuario/ajustar-puntos', [() => import('#controllers/admin/puntos_controller'), 'ajustarPuntos'])
+
+// Estados Materiales
   router.get('/estados-materiales', [() => import('#controllers/admin/estados_materiales_controller'), 'index'])
   router.get('/estados-materiales/:id', [() => import('#controllers/admin/estados_materiales_controller'), 'show'])
   router.post('/estados-materiales', [() => import('#controllers/admin/estados_materiales_controller'), 'store'])
@@ -151,6 +155,12 @@ router.group(() => {
   router.get('/canjes/:id', [() => import('#controllers/usuario/canjes_controller'), 'show'])
   router.post('/canjes', [() => import('#controllers/usuario/canjes_controller'), 'store'])
 
+  // Reservas (app móvil - usuario)
+  router.get('/reservas',        [() => import('#controllers/usuario/reservas_usuario_controller'), 'index'])
+  router.get('/reservas/:id',    [() => import('#controllers/usuario/reservas_usuario_controller'), 'show'])
+  router.post('/reservas',       [() => import('#controllers/usuario/reservas_usuario_controller'), 'store'])
+  router.delete('/reservas/:id', [() => import('#controllers/usuario/reservas_usuario_controller'), 'destroy'])
+
 }).prefix('/api/usuario').use([middleware.auth(), middleware.verificar_rol(['usuario'])])
 
 
@@ -173,6 +183,27 @@ router.group(() => {
   router.post('/clasificaciones', [() => import('#controllers/aliado/clasificacion_controller'), 'store'])
 
 }).prefix('/api/aliado').use([middleware.auth(), middleware.verificar_rol(['aliado'])])
+
+// ENCARGADO
+router.group(() => {
+  router.get('/reservas',        [() => import('#controllers/encargado/reservas_encargado_controller'), 'index'])
+  router.get('/reservas/:id',    [() => import('#controllers/encargado/reservas_encargado_controller'), 'show'])
+  router.post('/reservas',       [() => import('#controllers/encargado/reservas_encargado_controller'), 'store'])
+  router.put('/reservas/:id',    [() => import('#controllers/encargado/reservas_encargado_controller'), 'update'])
+  router.delete('/reservas/:id', [() => import('#controllers/encargado/reservas_encargado_controller'), 'destroy'])
+
+  // Notificaciones
+  router.get('/notificaciones', [() => import('#controllers/encargado/notificaciones_controller'), 'index'])
+  router.put('/notificaciones/:id/leer', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarLeida'])
+  router.put('/notificaciones/leer-todas', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarTodasLeidas'])
+
+ // Entregas
+  router.get('/entregas', [() => import('#controllers/encargado/entregas_controller'), 'index'])
+  router.get('/entregas/:id', [() => import('#controllers/encargado/entregas_controller'), 'show'])
+  router.put('/entregas/:id/estado', [() => import('#controllers/encargado/entregas_controller'), 'actualizarEstado'])
+
+}).prefix('/api/encargado').use([middleware.auth(), middleware.verificar_rol(['encargado'])])
+
 
 // SWAGGER / OPENAPI
 import openapi from '@foadonis/openapi/services/main'

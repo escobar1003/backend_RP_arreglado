@@ -415,6 +415,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/roles_controller').default['destroy']>>>
     }
   }
+  'puntos.ajustar_puntos': {
+    methods: ["POST"]
+    pattern: '/api/admin/usuarios/:idUsuario/ajustar-puntos'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { idUsuario: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/puntos_controller').default['ajustarPuntos']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/puntos_controller').default['ajustarPuntos']>>>
+    }
+  }
   'estados_materiales.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/admin/estados-materiales'
@@ -1027,6 +1039,54 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/canjes_controller').default['store']>>>
     }
   }
+  'reservas_usuario.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/usuario/reservas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['index']>>>
+    }
+  }
+  'reservas_usuario.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/usuario/reservas/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['show']>>>
+    }
+  }
+  'reservas_usuario.store': {
+    methods: ["POST"]
+    pattern: '/api/usuario/reservas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['store']>>>
+    }
+  }
+  'reservas_usuario.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/usuario/reservas/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['destroy']>>>
+    }
+  }
   'perfil_aliado.mostrar': {
     methods: ["GET","HEAD"]
     pattern: '/api/aliado/perfil'
@@ -1133,6 +1193,102 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/aliado/clasificacion_controller').default['store']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/aliado/clasificacion_controller').default['store']>>>
+    }
+  }
+  'reservas_encargado.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/reservas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['index']>>>
+    }
+  }
+  'reservas_encargado.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/reservas/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['show']>>>
+    }
+  }
+  'reservas_encargado.store': {
+    methods: ["POST"]
+    pattern: '/api/encargado/reservas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['store']>>>
+    }
+  }
+  'reservas_encargado.update': {
+    methods: ["PUT"]
+    pattern: '/api/encargado/reservas/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['update']>>>
+    }
+  }
+  'reservas_encargado.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/encargado/reservas/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['destroy']>>>
+    }
+  }
+  'notificaciones.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/notificaciones'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['index']>>>
+    }
+  }
+  'notificaciones.marcar_leida': {
+    methods: ["PUT"]
+    pattern: '/api/encargado/notificaciones/:id/leer'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarLeida']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarLeida']>>>
+    }
+  }
+  'notificaciones.marcar_todas_leidas': {
+    methods: ["PUT"]
+    pattern: '/api/encargado/notificaciones/leer-todas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarTodasLeidas']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarTodasLeidas']>>>
     }
   }
   'openapi.html': {

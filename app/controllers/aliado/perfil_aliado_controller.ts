@@ -7,6 +7,19 @@ export default class PerfilAliadoController {
     const usuario = auth.user!
     await usuario.load('rol')
 
+    if (usuario.rol.nombre === 'admin') {
+      return response.ok({
+        mensaje: 'Perfil consultado como Administrador',
+        admin: {
+          idUsuario: usuario.idUsuario,
+          nombre: usuario.nombre,
+          correo: usuario.correo,
+          rol: usuario.rol.nombre,
+        },
+        info: 'Los administradores no poseen un registro vinculado en la tabla de aliados.',
+      })
+    }
+
     // Buscar el aliado vinculado por correo
     const aliado = await Aliado.query()
       .where('correo', usuario.correo)
@@ -19,6 +32,12 @@ export default class PerfilAliadoController {
 
   async actualizar({ auth, request, response }: HttpContext) {
     const usuario = auth.user!
+    await usuario.load('rol')
+    if (usuario.rol.nombre === 'admin') {
+      return response.forbidden({
+        mensaje: 'Un administrador no puede modificar el perfil de un aliado de esta manera.',
+      })
+    }
 
     const aliado = await Aliado.query()
       .where('correo', usuario.correo)
@@ -43,6 +62,12 @@ export default class PerfilAliadoController {
 
   async agregarPunto({ auth, request, response }: HttpContext) {
     const usuario = auth.user!
+    await usuario.load('rol')
+    if (usuario.rol.nombre === 'admin') {
+      return response.forbidden({
+        mensaje: 'Un administrador no puede crear puntos de reciclaje asignados a sí mismo.',
+      })
+    }
 
     const aliado = await Aliado.query()
       .where('correo', usuario.correo)
@@ -70,6 +95,12 @@ export default class PerfilAliadoController {
 
   async actualizarPunto({ auth, params, request, response }: HttpContext) {
     const usuario = auth.user!
+    await usuario.load('rol')
+    if (usuario.rol.nombre === 'admin') {
+      return response.forbidden({
+        mensaje: 'Un administrador no puede modificar los puntos de reciclaje de los aliados.',
+      })
+    }
 
     const aliado = await Aliado.query()
       .where('correo', usuario.correo)

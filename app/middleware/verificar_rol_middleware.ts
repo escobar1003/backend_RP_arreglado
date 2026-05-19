@@ -13,6 +13,10 @@ export default class VerificarRolMiddleware {
 
     await usuario.load('rol')
 
+    if (usuario.rol.nombre === 'admin') {
+      return await next()
+    }
+
     if (!roles.includes(usuario.rol.nombre)) {
       return ctx.response.forbidden({
         mensaje: 'No tienes permiso para acceder a este recurso',
