@@ -7,6 +7,7 @@ import { DateTime } from 'luxon'
 import type { BelongsTo, HasOne } from '@adonisjs/lucid/types/relations'
 import Role from './role.js'
 import EstadoUsuario from './estado_usuario.js'
+import Aliado from './aliado.js'
 import PuntoReciclaje from './punto_reciclaje.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
@@ -72,6 +73,11 @@ export default class Usuario extends compose(BaseModel, AuthFinder) {
   @belongsTo(() => EstadoUsuario, { foreignKey: 'idEstadoUsuario' })
   declare estadoUsuario: BelongsTo<typeof EstadoUsuario>
 
+  @column()
+  declare idAliado: number | null
+
+  @belongsTo(() => Aliado, { foreignKey: 'idAliado' })
+  declare aliado: BelongsTo<typeof Aliado>
   // Si este usuario es encargado, aquí está el punto que tiene a cargo
   @hasOne(() => PuntoReciclaje, { foreignKey: 'idEncargado' })
   declare puntoACargo: HasOne<typeof PuntoReciclaje>
