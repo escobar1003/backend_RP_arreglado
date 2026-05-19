@@ -358,8 +358,27 @@ export class TiposRecompensaSchema extends BaseModel {
   declare nombre: string
 }
 
+export class TransaccionPuntoSchema extends BaseModel {
+  static $columns = ['cantidadPuntos', 'createdAt', 'descripcion', 'idTransaccion', 'idUsuario', 'tipoMaterial', 'updatedAt'] as const
+  $columns = TransaccionPuntoSchema.$columns
+  @column()
+  declare cantidadPuntos: number
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare descripcion: string | null
+  @column({ isPrimary: true })
+  declare idTransaccion: number
+  @column()
+  declare idUsuario: number | null
+  @column()
+  declare tipoMaterial: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
 export class UsuarioSchema extends BaseModel {
-  static $columns = ['codigoExpiracion', 'codigoRecuperacion', 'correo', 'createdAt', 'fechaRegistro', 'idEstadoUsuario', 'idRol', 'idUsuario', 'nombre', 'password', 'telefono', 'updatedAt'] as const
+  static $columns = ['codigoExpiracion', 'codigoRecuperacion', 'correo', 'createdAt', 'fechaRegistro', 'idEstadoUsuario', 'idRol', 'idUsuario', 'nombre', 'password', 'puntosTotales', 'telefono', 'updatedAt'] as const
   $columns = UsuarioSchema.$columns
   @column.dateTime()
   declare codigoExpiracion: DateTime | null
@@ -381,6 +400,8 @@ export class UsuarioSchema extends BaseModel {
   declare nombre: string
   @column({ serializeAs: null })
   declare password: string
+  @column()
+  declare puntosTotales: number | null
   @column()
   declare telefono: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })

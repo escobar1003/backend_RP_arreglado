@@ -48,6 +48,10 @@ export default class Usuario extends compose(BaseModel, AuthFinder) {
   @column()
   declare imagen: string | null
 
+  // Agrega esto a tu clase Usuario
+  @column()
+  declare puntosTotales: number
+
   // ── Recuperación de contraseña ──────────────────────────────────────────────
   @column({ columnName: 'codigo_recuperacion', serializeAs: null })
   declare codigoRecuperacion: string | null

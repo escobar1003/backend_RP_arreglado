@@ -30,6 +30,8 @@ export const controllers = {
     RecuperarPasswords: () => import('#controllers/auth/recuperar_passwords_controller'),
     Registros: () => import('#controllers/auth/registros_controller'),
   },
+  Deteccion: () => import('#controllers/deteccion_controller'),
+  Puntos: () => import('#controllers/puntos_controller'),
   usuario: {
     Canjes: () => import('#controllers/usuario/canjes_controller'),
     Entregas: () => import('#controllers/usuario/entregas_controller'),

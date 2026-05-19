@@ -7,6 +7,18 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
+  'puntos.asignar': {
+    methods: ["POST"]
+    pattern: '/puntos/asignar'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
   'login.iniciar_sesion': {
     methods: ["POST"]
     pattern: '/api/auth/iniciar-sesion'
@@ -1150,6 +1162,18 @@ export interface Registry {
   'openapi.yaml': {
     methods: ["GET","HEAD"]
     pattern: '/swagger.yaml'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'deteccion.procesar_camara': {
+    methods: ["POST"]
+    pattern: '/api/detectar-material'
     types: {
       body: {}
       paramsTuple: []
