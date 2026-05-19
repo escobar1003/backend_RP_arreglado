@@ -5,6 +5,7 @@ import EstadoPunto from './estado_punto.js'
 import Aliado from './aliado.js'
 import Material from './material.js'
 import Entrega from './entrega.js'
+import Usuario from './usuario.ts'
 
 export default class PuntoReciclaje extends BaseModel {
   public static table = 'puntos_reciclaje'
@@ -17,6 +18,9 @@ export default class PuntoReciclaje extends BaseModel {
 
   @column()
   declare idAliado: number
+
+  @column()
+  declare idEncargado: number | null
 
   @column()
   declare nombre: string
@@ -44,6 +48,9 @@ export default class PuntoReciclaje extends BaseModel {
 
   @belongsTo(() => Aliado, { foreignKey: 'idAliado' })
   declare aliado: BelongsTo<typeof Aliado>
+
+  @belongsTo(() => Usuario, { foreignKey: 'idEncargado' })
+  declare encargado: BelongsTo<typeof Usuario>
 
   @manyToMany(() => Material, {
     pivotTable: 'punto_material',
