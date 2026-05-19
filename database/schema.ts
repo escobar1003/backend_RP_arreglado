@@ -276,7 +276,7 @@ export class NotificacioneSchema extends BaseModel {
 }
 
 export class PuntosReciclajeSchema extends BaseModel {
-  static $columns = ['createdAt', 'direccion', 'horario', 'idAliado', 'idEstadoPunto', 'idPunto', 'latitud', 'longitud', 'nombre', 'updatedAt'] as const
+  static $columns = ['createdAt', 'direccion', 'horario', 'idAliado', 'idEncargado', 'idEstadoPunto', 'idPunto', 'latitud', 'longitud', 'nombre', 'updatedAt'] as const
   $columns = PuntosReciclajeSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -286,6 +286,8 @@ export class PuntosReciclajeSchema extends BaseModel {
   declare horario: string | null
   @column()
   declare idAliado: number
+  @column()
+  declare idEncargado: number | null
   @column()
   declare idEstadoPunto: number
   @column({ isPrimary: true })
@@ -355,6 +357,29 @@ export class RecompensaSchema extends BaseModel {
   declare puntosRequeridos: number
   @column()
   declare stock: number | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+}
+
+export class ReservaSchema extends BaseModel {
+  static $columns = ['createdAt', 'estado', 'fecha', 'hora', 'idPunto', 'idReserva', 'idUsuario', 'notas', 'updatedAt'] as const
+  $columns = ReservaSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column()
+  declare estado: string
+  @column.date()
+  declare fecha: DateTime
+  @column()
+  declare hora: string
+  @column()
+  declare idPunto: number
+  @column({ isPrimary: true })
+  declare idReserva: number
+  @column()
+  declare idUsuario: number
+  @column()
+  declare notas: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }
