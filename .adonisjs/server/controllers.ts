@@ -33,11 +33,13 @@ export const controllers = {
   },
   encargado: {
     Notificaciones: () => import('#controllers/encargado/notificaciones_controller'),
+    ReservasEncargado: () => import('#controllers/encargado/reservas_encargado_controller'),
   },
   usuario: {
     Canjes: () => import('#controllers/usuario/canjes_controller'),
     Entregas: () => import('#controllers/usuario/entregas_controller'),
     Perfil: () => import('#controllers/usuario/perfil_controller'),
     Puntos: () => import('#controllers/usuario/puntos_controller'),
+    ReservasUsuario: () => import('#controllers/usuario/reservas_usuario_controller'),
   },
 }

@@ -516,6 +516,30 @@ const routes = {
     tokens: [{"old":"/api/usuario/canjes","type":0,"val":"api","end":""},{"old":"/api/usuario/canjes","type":0,"val":"usuario","end":""},{"old":"/api/usuario/canjes","type":0,"val":"canjes","end":""}],
     types: placeholder as Registry['canjes.store']['types'],
   },
+  'reservas_usuario.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/usuario/reservas',
+    tokens: [{"old":"/api/usuario/reservas","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas","type":0,"val":"reservas","end":""}],
+    types: placeholder as Registry['reservas_usuario.index']['types'],
+  },
+  'reservas_usuario.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/usuario/reservas/:id',
+    tokens: [{"old":"/api/usuario/reservas/:id","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas/:id","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas/:id","type":0,"val":"reservas","end":""},{"old":"/api/usuario/reservas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['reservas_usuario.show']['types'],
+  },
+  'reservas_usuario.store': {
+    methods: ["POST"],
+    pattern: '/api/usuario/reservas',
+    tokens: [{"old":"/api/usuario/reservas","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas","type":0,"val":"reservas","end":""}],
+    types: placeholder as Registry['reservas_usuario.store']['types'],
+  },
+  'reservas_usuario.destroy': {
+    methods: ["DELETE"],
+    pattern: '/api/usuario/reservas/:id',
+    tokens: [{"old":"/api/usuario/reservas/:id","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas/:id","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas/:id","type":0,"val":"reservas","end":""},{"old":"/api/usuario/reservas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['reservas_usuario.destroy']['types'],
+  },
   'perfil_aliado.mostrar': {
     methods: ["GET","HEAD"],
     pattern: '/api/aliado/perfil',
@@ -569,6 +593,36 @@ const routes = {
     pattern: '/api/aliado/clasificaciones',
     tokens: [{"old":"/api/aliado/clasificaciones","type":0,"val":"api","end":""},{"old":"/api/aliado/clasificaciones","type":0,"val":"aliado","end":""},{"old":"/api/aliado/clasificaciones","type":0,"val":"clasificaciones","end":""}],
     types: placeholder as Registry['clasificacion.store']['types'],
+  },
+  'reservas_encargado.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/reservas',
+    tokens: [{"old":"/api/encargado/reservas","type":0,"val":"api","end":""},{"old":"/api/encargado/reservas","type":0,"val":"encargado","end":""},{"old":"/api/encargado/reservas","type":0,"val":"reservas","end":""}],
+    types: placeholder as Registry['reservas_encargado.index']['types'],
+  },
+  'reservas_encargado.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/reservas/:id',
+    tokens: [{"old":"/api/encargado/reservas/:id","type":0,"val":"api","end":""},{"old":"/api/encargado/reservas/:id","type":0,"val":"encargado","end":""},{"old":"/api/encargado/reservas/:id","type":0,"val":"reservas","end":""},{"old":"/api/encargado/reservas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['reservas_encargado.show']['types'],
+  },
+  'reservas_encargado.store': {
+    methods: ["POST"],
+    pattern: '/api/encargado/reservas',
+    tokens: [{"old":"/api/encargado/reservas","type":0,"val":"api","end":""},{"old":"/api/encargado/reservas","type":0,"val":"encargado","end":""},{"old":"/api/encargado/reservas","type":0,"val":"reservas","end":""}],
+    types: placeholder as Registry['reservas_encargado.store']['types'],
+  },
+  'reservas_encargado.update': {
+    methods: ["PUT"],
+    pattern: '/api/encargado/reservas/:id',
+    tokens: [{"old":"/api/encargado/reservas/:id","type":0,"val":"api","end":""},{"old":"/api/encargado/reservas/:id","type":0,"val":"encargado","end":""},{"old":"/api/encargado/reservas/:id","type":0,"val":"reservas","end":""},{"old":"/api/encargado/reservas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['reservas_encargado.update']['types'],
+  },
+  'reservas_encargado.destroy': {
+    methods: ["DELETE"],
+    pattern: '/api/encargado/reservas/:id',
+    tokens: [{"old":"/api/encargado/reservas/:id","type":0,"val":"api","end":""},{"old":"/api/encargado/reservas/:id","type":0,"val":"encargado","end":""},{"old":"/api/encargado/reservas/:id","type":0,"val":"reservas","end":""},{"old":"/api/encargado/reservas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['reservas_encargado.destroy']['types'],
   },
   'notificaciones.index': {
     methods: ["GET","HEAD"],
