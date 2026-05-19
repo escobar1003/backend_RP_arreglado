@@ -184,6 +184,11 @@ router.group(() => {
   router.put('/notificaciones/:id/leer', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarLeida'])
   router.put('/notificaciones/leer-todas', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarTodasLeidas'])
 
+ // Entregas
+  router.get('/entregas', [() => import('#controllers/encargado/entregas_controller'), 'index'])
+  router.get('/entregas/:id', [() => import('#controllers/encargado/entregas_controller'), 'show'])
+  router.put('/entregas/:id/estado', [() => import('#controllers/encargado/entregas_controller'), 'actualizarEstado'])
+
 }).prefix('/api/encargado').use([middleware.auth(), middleware.verificar_rol(['encargado'])])
 
 
