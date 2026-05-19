@@ -1,13 +1,18 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+import PuntosController from '#controllers/puntos_controller'
+import { sep, normalize } from 'node:path'
+
+// RUTA PARA ASIGNACIÓN DE PUNTOS (SCRUM-506)
+router.post('/puntos/asignar', [PuntosController, 'asignar'])
 
 router.get('/', async () => {
   return {
     mensaje: 'Backend funcionando'
   }
 })
-// AUTH (públicas)
 
+// AUTH (públicas)
 router.group(() => {
   router.post('/iniciar-sesion', [() => import('#controllers/auth/login_controller'), 'iniciarSesion'])
   router.post('/registrarse', [() => import('#controllers/auth/registros_controller'), 'registrarse'])
@@ -17,14 +22,12 @@ router.group(() => {
 
 
 // AUTH (protegidas)
-
 router.group(() => {
   router.delete('/cerrar-sesion', [() => import('#controllers/auth/login_controller'), 'cerrarSesion'])
 }).prefix('/api/auth').use(middleware.auth())
 
 
 // ADMIN
-
 router.group(() => {
 
   // Administradores
@@ -61,12 +64,13 @@ router.group(() => {
   router.delete('/recompensas/:id', [() => import('#controllers/admin/recompensas_controller'), 'destroy'])
   
   // Roles
-router.get('/roles', [() => import('#controllers/admin/roles_controller'), 'index'])
-router.get('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'show'])
-router.post('/roles', [() => import('#controllers/admin/roles_controller'), 'store'])
-router.put('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'update'])
-router.delete('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'destroy'])
+  router.get('/roles', [() => import('#controllers/admin/roles_controller'), 'index'])
+  router.get('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'show'])
+  router.post('/roles', [() => import('#controllers/admin/roles_controller'), 'store'])
+  router.put('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'update'])
+  router.delete('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'destroy'])
 
+  // Estados Materiales
 // Puntos (ajuste)
   router.post('/usuarios/:idUsuario/ajustar-puntos', [() => import('#controllers/admin/puntos_controller'), 'ajustarPuntos'])
 
@@ -120,7 +124,7 @@ router.delete('/roles/:id', [() => import('#controllers/admin/roles_controller')
   router.put('/estados-recompensas/:id', [() => import('#controllers/admin/estados_recompensas_controller'), 'update'])
   router.delete('/estados-recompensas/:id', [() => import('#controllers/admin/estados_recompensas_controller'), 'destroy'])
 
- // Tipos Recompensa
+  // Tipos Recompensa
   router.get('/tipos-recompensas', [() => import('#controllers/admin/tipos_recompensas_controller'), 'index'])
   router.get('/tipos-recompensas/:id', [() => import('#controllers/admin/tipos_recompensas_controller'), 'show'])
   router.post('/tipos-recompensas', [() => import('#controllers/admin/tipos_recompensas_controller'), 'store'])
@@ -130,7 +134,6 @@ router.delete('/roles/:id', [() => import('#controllers/admin/roles_controller')
 
 
 // USUARIO
-
 router.group(() => {
 
   // Perfil
@@ -162,7 +165,6 @@ router.group(() => {
 
 
 // ALIADO
-
 router.group(() => {
 
   // Perfil aliado
@@ -206,3 +208,5 @@ router.group(() => {
 // SWAGGER / OPENAPI
 import openapi from '@foadonis/openapi/services/main'
 openapi.registerRoutes('/swagger')
+
+router.post('/api/detectar-material', '#controllers/deteccion_controller.procesarCamara')

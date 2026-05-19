@@ -31,6 +31,8 @@ export const controllers = {
     RecuperarPasswords: () => import('#controllers/auth/recuperar_passwords_controller'),
     Registros: () => import('#controllers/auth/registros_controller'),
   },
+  Deteccion: () => import('#controllers/deteccion_controller'),
+  Puntos: () => import('#controllers/puntos_controller'),
   encargado: {
     Notificaciones: () => import('#controllers/encargado/notificaciones_controller'),
     ReservasEncargado: () => import('#controllers/encargado/reservas_encargado_controller'),

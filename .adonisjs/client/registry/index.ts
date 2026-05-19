@@ -6,6 +6,12 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
+  'puntos.asignar': {
+    methods: ["POST"],
+    pattern: '/puntos/asignar',
+    tokens: [{"old":"/puntos/asignar","type":0,"val":"puntos","end":""},{"old":"/puntos/asignar","type":0,"val":"asignar","end":""}],
+    types: placeholder as Registry['puntos.asignar']['types'],
+  },
   'login.iniciar_sesion': {
     methods: ["POST"],
     pattern: '/api/auth/iniciar-sesion',
@@ -659,6 +665,12 @@ const routes = {
     pattern: '/swagger.yaml',
     tokens: [{"old":"/swagger.yaml","type":0,"val":"swagger.yaml","end":""}],
     types: placeholder as Registry['openapi.yaml']['types'],
+  },
+  'deteccion.procesar_camara': {
+    methods: ["POST"],
+    pattern: '/api/detectar-material',
+    tokens: [{"old":"/api/detectar-material","type":0,"val":"api","end":""},{"old":"/api/detectar-material","type":0,"val":"detectar-material","end":""}],
+    types: placeholder as Registry['deteccion.procesar_camara']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 

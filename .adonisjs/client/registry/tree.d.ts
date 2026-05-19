@@ -2,6 +2,11 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
+  puntos: {
+    asignar: typeof routes['puntos.asignar']
+    resumen: typeof routes['puntos.resumen']
+    historial: typeof routes['puntos.historial']
+  }
   login: {
     iniciarSesion: typeof routes['login.iniciar_sesion']
     cerrarSesion: typeof routes['login.cerrar_sesion']
@@ -166,5 +171,8 @@ export interface ApiDefinition {
     html: typeof routes['openapi.html']
     json: typeof routes['openapi.json']
     yaml: typeof routes['openapi.yaml']
+  }
+  deteccion: {
+    procesarCamara: typeof routes['deteccion.procesar_camara']
   }
 }
