@@ -4,6 +4,7 @@ import type { routes } from './index.ts'
 export interface ApiDefinition {
   puntos: {
     asignar: typeof routes['puntos.asignar']
+    ajustarPuntos: typeof routes['puntos.ajustar_puntos']
     resumen: typeof routes['puntos.resumen']
     historial: typeof routes['puntos.historial']
   }
@@ -57,11 +58,6 @@ export interface ApiDefinition {
     store: typeof routes['roles.store']
     update: typeof routes['roles.update']
     destroy: typeof routes['roles.destroy']
-  }
-  puntos: {
-    ajustarPuntos: typeof routes['puntos.ajustar_puntos']
-    resumen: typeof routes['puntos.resumen']
-    historial: typeof routes['puntos.historial']
   }
   estadosMateriales: {
     index: typeof routes['estados_materiales.index']
@@ -128,6 +124,7 @@ export interface ApiDefinition {
     index: typeof routes['entregas.index']
     show: typeof routes['entregas.show']
     store: typeof routes['entregas.store']
+    actualizarEstado: typeof routes['entregas.actualizar_estado']
   }
   canjes: {
     index: typeof routes['canjes.index']

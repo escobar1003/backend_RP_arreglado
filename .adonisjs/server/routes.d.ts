@@ -24,8 +24,6 @@ export type ScannedRoutes = {
     'openapi.json': { paramsTuple?: []; params?: {} }
     'openapi.yaml': { paramsTuple?: []; params?: {} }
   }
-  POST: {
-  }
   DELETE: {
   }
   PUT: {
