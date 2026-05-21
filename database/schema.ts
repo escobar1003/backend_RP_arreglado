@@ -8,8 +8,10 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class AliadoSchema extends BaseModel {
-  static $columns = ['correo', 'createdAt', 'descripcion', 'direccion', 'idAliado', 'idEstadoAliado', 'nombre', 'telefono', 'tipoNegocio', 'updatedAt'] as const
+  static $columns = ['comision', 'correo', 'createdAt', 'descripcion', 'direccion', 'idAliado', 'idEstadoAliado', 'nombre', 'telefono', 'tipoNegocio', 'updatedAt'] as const
   $columns = AliadoSchema.$columns
+  @column()
+  declare comision: string | null
   @column()
   declare correo: string | null
   @column.dateTime({ autoCreate: true })
@@ -253,26 +255,26 @@ export class MovimientosPuntoSchema extends BaseModel {
 }
 
 export class NotificacioneSchema extends BaseModel {
-  static $columns = ['createdAt', 'id', 'idReferencia', 'leida', 'mensaje', 'tipo', 'titulo', 'updatedAt', 'usuarioId'] as const
+  static $columns = ['createdAt', 'idNotificacion', 'idReferencia', 'idUsuario', 'leida', 'mensaje', 'tipo', 'titulo', 'updatedAt'] as const
   $columns = NotificacioneSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column({ isPrimary: true })
-  declare id: number
+  declare idNotificacion: number
   @column()
   declare idReferencia: number | null
+  @column()
+  declare idUsuario: number
   @column()
   declare leida: boolean | null
   @column()
   declare mensaje: string
   @column()
-  declare tipo: string
+  declare tipo: string | null
   @column()
   declare titulo: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
-  @column()
-  declare usuarioId: number | null
 }
 
 export class PuntosReciclajeSchema extends BaseModel {
@@ -426,7 +428,7 @@ export class TransaccionPuntoSchema extends BaseModel {
 }
 
 export class UsuarioSchema extends BaseModel {
-  static $columns = ['codigoExpiracion', 'codigoRecuperacion', 'correo', 'createdAt', 'fechaRegistro', 'idAliado', 'idEstadoUsuario', 'idRol', 'idUsuario', 'nombre', 'password', 'telefono', 'updatedAt'] as const
+  static $columns = ['codigoExpiracion', 'codigoRecuperacion', 'correo', 'createdAt', 'fechaRegistro', 'idEstadoUsuario', 'idRol', 'idUsuario', 'nombre', 'password', 'puntosTotales', 'telefono', 'updatedAt'] as const
   $columns = UsuarioSchema.$columns
   @column.dateTime()
   declare codigoExpiracion: DateTime | null
@@ -438,8 +440,6 @@ export class UsuarioSchema extends BaseModel {
   declare createdAt: DateTime | null
   @column.dateTime()
   declare fechaRegistro: DateTime
-  @column()
-  declare idAliado: number | null
   @column()
   declare idEstadoUsuario: number
   @column()
