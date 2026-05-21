@@ -43,6 +43,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/recuperar_passwords_controller').default['solicitarCodigo']>>>
     }
   }
+  
   'recuperar_passwords.restablecer_password': {
     methods: ["POST"]
     pattern: '/api/auth/recuperar-password/restablecer'
