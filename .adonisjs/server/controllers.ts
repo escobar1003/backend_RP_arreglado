@@ -31,15 +31,20 @@ export const controllers = {
     RecuperarPasswords: () => import('#controllers/auth/recuperar_passwords_controller'),
     Registros: () => import('#controllers/auth/registros_controller'),
   },
+  Deteccion: () => import('#controllers/deteccion_controller'),
   encargado: {
     Canjes: () => import('#controllers/encargado/canjes_controller'),
     Materiales: () => import('#controllers/encargado/materiales_controller'),
+    Entregas: () => import('#controllers/encargado/entregas_controller'),
     Notificaciones: () => import('#controllers/encargado/notificaciones_controller'),
+    ReservasEncargado: () => import('#controllers/encargado/reservas_encargado_controller'),
   },
+  Puntos: () => import('#controllers/puntos_controller'),
   usuario: {
     Canjes: () => import('#controllers/usuario/canjes_controller'),
     Entregas: () => import('#controllers/usuario/entregas_controller'),
     Perfil: () => import('#controllers/usuario/perfil_controller'),
     Puntos: () => import('#controllers/usuario/puntos_controller'),
+    ReservasUsuario: () => import('#controllers/usuario/reservas_usuario_controller'),
   },
 }

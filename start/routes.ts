@@ -1,5 +1,10 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+import PuntosController from '#controllers/puntos_controller'
+import { sep, normalize } from 'node:path'
+
+// RUTA PARA ASIGNACIÓN DE PUNTOS (SCRUM-506)
+router.post('/puntos/asignar', [PuntosController, 'asignar'])
 
 router.get('/', async () => {
   return {
@@ -65,7 +70,8 @@ router.group(() => {
   router.put('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'update'])
   router.delete('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'destroy'])
 
-  // Puntos (ajuste)
+
+// Puntos (ajuste)
   router.post('/usuarios/:idUsuario/ajustar-puntos', [() => import('#controllers/admin/puntos_controller'), 'ajustarPuntos'])
 
   // Estados Materiales
@@ -149,6 +155,12 @@ router.group(() => {
   router.get('/canjes/:id', [() => import('#controllers/usuario/canjes_controller'), 'show'])
   router.post('/canjes', [() => import('#controllers/usuario/canjes_controller'), 'store'])
 
+  // Reservas (app móvil - usuario)
+  router.get('/reservas',        [() => import('#controllers/usuario/reservas_usuario_controller'), 'index'])
+  router.get('/reservas/:id',    [() => import('#controllers/usuario/reservas_usuario_controller'), 'show'])
+  router.post('/reservas',       [() => import('#controllers/usuario/reservas_usuario_controller'), 'store'])
+  router.delete('/reservas/:id', [() => import('#controllers/usuario/reservas_usuario_controller'), 'destroy'])
+
 }).prefix('/api/usuario').use([middleware.auth(), middleware.verificar_rol(['usuario'])])
 
 
@@ -175,6 +187,11 @@ router.group(() => {
 
 // ENCARGADO
 router.group(() => {
+  router.get('/reservas',        [() => import('#controllers/encargado/reservas_encargado_controller'), 'index'])
+  router.get('/reservas/:id',    [() => import('#controllers/encargado/reservas_encargado_controller'), 'show'])
+  router.post('/reservas',       [() => import('#controllers/encargado/reservas_encargado_controller'), 'store'])
+  router.put('/reservas/:id',    [() => import('#controllers/encargado/reservas_encargado_controller'), 'update'])
+  router.delete('/reservas/:id', [() => import('#controllers/encargado/reservas_encargado_controller'), 'destroy'])
 
   // Notificaciones
   router.get('/notificaciones', [() => import('#controllers/encargado/notificaciones_controller'), 'index'])
@@ -191,7 +208,7 @@ router.group(() => {
 router.get('/entregas', [() => import('#controllers/encargado/materiales_controller'), 'indexEntregas'])
 router.get('/entregas/:id', [() => import('#controllers/encargado/materiales_controller'), 'showEntrega'])
 router.post('/entregas', [() => import('#controllers/encargado/materiales_controller'), 'storeEntrega'])
-// ✅ Agregar esta línea:
+//  Agregar esta línea:
 router.put('/entregas/:id/estado', [() => import('#controllers/encargado/materiales_controller'), 'actualizarEstadoEntrega'])
 
   // Canjes
@@ -199,6 +216,10 @@ router.put('/entregas/:id/estado', [() => import('#controllers/encargado/materia
   router.get('/canjes/:id', [() => import('#controllers/encargado/canjes_controller'), 'show'])
   router.post('/canjes', [() => import('#controllers/encargado/canjes_controller'), 'store'])
   router.put('/canjes/:id/estado', [() => import('#controllers/encargado/canjes_controller'), 'actualizarEstado'])
+ // Entregas
+  router.get('/entregas', [() => import('#controllers/encargado/entregas_controller'), 'index'])
+  router.get('/entregas/:id', [() => import('#controllers/encargado/entregas_controller'), 'show'])
+  router.put('/entregas/:id/estado', [() => import('#controllers/encargado/entregas_controller'), 'actualizarEstado'])
 
 }).prefix('/api/encargado').use([middleware.auth(), middleware.verificar_rol(['encargado'])])
 
@@ -206,3 +227,5 @@ router.put('/entregas/:id/estado', [() => import('#controllers/encargado/materia
 // SWAGGER / OPENAPI
 import openapi from '@foadonis/openapi/services/main'
 openapi.registerRoutes('/swagger')
+
+router.post('/api/detectar-material', '#controllers/deteccion_controller.procesarCamara')
