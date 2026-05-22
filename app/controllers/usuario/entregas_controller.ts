@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Entrega from '#models/entrega'
+import Notificacion from '#models/notificacion'
 import DetalleEntrega from '#models/detalle_entrega'
 import MovimientoPunto from '#models/movimiento_punto'
 import Material from '#models/material'
@@ -77,6 +78,16 @@ export default class EntregasController {
       puntos: puntosTotales,
       descripcion: `Puntos ganados por entrega #${entrega.idEntrega}`,
       fechaMovimiento: DateTime.now(),
+    })
+
+        // SCRUM-582: Generar notificación al registrar entrega
+    await Notificacion.create({
+      usuarioId: auth.user!.idUsuario,
+      titulo: 'Entrega registrada',
+      mensaje: `Tu entrega #${entrega.idEntrega} fue registrada correctamente. Peso total: ${pesoTotal}kg, Puntos ganados: ${puntosTotales}pts.`,
+      leida: false,
+      tipo: 'entrega',
+      idReferencia: entrega.idEntrega,
     })
 
     return response.created({

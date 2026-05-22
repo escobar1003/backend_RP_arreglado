@@ -1,5 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Canje from '#models/canje'
+import Notificacion from '#models/notificacion'
 import Recompensa from '#models/recompensa'
 import MovimientoPunto from '#models/movimiento_punto'
 import MovimientoPuntoModel from '#models/movimiento_punto'
@@ -98,6 +99,16 @@ export default class CanjesController {
       recompensa.stock -= 1
       await recompensa.save()
     }
+
+        // SCRUM-583: Generar notificación al aprobar canje
+    await Notificacion.create({
+      usuarioId: auth.user!.idUsuario,
+      titulo: 'Canje realizado',
+      mensaje: `Tu canje de "${recompensa.nombre}" fue registrado correctamente. Código: ${codigoCanje}. Puntos usados: ${recompensa.puntosRequeridos}pts.`,
+      leida: false,
+      tipo: 'canje',
+      idReferencia: canje.idCanje,
+    })
 
     return response.created({
       mensaje: 'Canje realizado correctamente',

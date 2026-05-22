@@ -2,6 +2,12 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
+  puntos: {
+    asignar: typeof routes['puntos.asignar']
+    ajustarPuntos: typeof routes['puntos.ajustar_puntos']
+    resumen: typeof routes['puntos.resumen']
+    historial: typeof routes['puntos.historial']
+  }
   login: {
     iniciarSesion: typeof routes['login.iniciar_sesion']
     cerrarSesion: typeof routes['login.cerrar_sesion']
@@ -118,15 +124,18 @@ export interface ApiDefinition {
     index: typeof routes['entregas.index']
     show: typeof routes['entregas.show']
     store: typeof routes['entregas.store']
-  }
-  puntos: {
-    resumen: typeof routes['puntos.resumen']
-    historial: typeof routes['puntos.historial']
+    actualizarEstado: typeof routes['entregas.actualizar_estado']
   }
   canjes: {
     index: typeof routes['canjes.index']
     show: typeof routes['canjes.show']
     store: typeof routes['canjes.store']
+  }
+  reservasUsuario: {
+    index: typeof routes['reservas_usuario.index']
+    show: typeof routes['reservas_usuario.show']
+    store: typeof routes['reservas_usuario.store']
+    destroy: typeof routes['reservas_usuario.destroy']
   }
   perfilAliado: {
     mostrar: typeof routes['perfil_aliado.mostrar']
@@ -143,9 +152,24 @@ export interface ApiDefinition {
     index: typeof routes['clasificacion.index']
     store: typeof routes['clasificacion.store']
   }
+  reservasEncargado: {
+    index: typeof routes['reservas_encargado.index']
+    show: typeof routes['reservas_encargado.show']
+    store: typeof routes['reservas_encargado.store']
+    update: typeof routes['reservas_encargado.update']
+    destroy: typeof routes['reservas_encargado.destroy']
+  }
+  notificaciones: {
+    index: typeof routes['notificaciones.index']
+    marcarLeida: typeof routes['notificaciones.marcar_leida']
+    marcarTodasLeidas: typeof routes['notificaciones.marcar_todas_leidas']
+  }
   openapi: {
     html: typeof routes['openapi.html']
     json: typeof routes['openapi.json']
     yaml: typeof routes['openapi.yaml']
+  }
+  deteccion: {
+    procesarCamara: typeof routes['deteccion.procesar_camara']
   }
 }

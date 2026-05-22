@@ -6,6 +6,12 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
+  'puntos.asignar': {
+    methods: ["POST"],
+    pattern: '/puntos/asignar',
+    tokens: [{"old":"/puntos/asignar","type":0,"val":"puntos","end":""},{"old":"/puntos/asignar","type":0,"val":"asignar","end":""}],
+    types: placeholder as Registry['puntos.asignar']['types'],
+  },
   'login.iniciar_sesion': {
     methods: ["POST"],
     pattern: '/api/auth/iniciar-sesion',
@@ -203,6 +209,12 @@ const routes = {
     pattern: '/api/admin/roles/:id',
     tokens: [{"old":"/api/admin/roles/:id","type":0,"val":"api","end":""},{"old":"/api/admin/roles/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/roles/:id","type":0,"val":"roles","end":""},{"old":"/api/admin/roles/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['roles.destroy']['types'],
+  },
+  'puntos.ajustar_puntos': {
+    methods: ["POST"],
+    pattern: '/api/admin/usuarios/:idUsuario/ajustar-puntos',
+    tokens: [{"old":"/api/admin/usuarios/:idUsuario/ajustar-puntos","type":0,"val":"api","end":""},{"old":"/api/admin/usuarios/:idUsuario/ajustar-puntos","type":0,"val":"admin","end":""},{"old":"/api/admin/usuarios/:idUsuario/ajustar-puntos","type":0,"val":"usuarios","end":""},{"old":"/api/admin/usuarios/:idUsuario/ajustar-puntos","type":1,"val":"idUsuario","end":""},{"old":"/api/admin/usuarios/:idUsuario/ajustar-puntos","type":0,"val":"ajustar-puntos","end":""}],
+    types: placeholder as Registry['puntos.ajustar_puntos']['types'],
   },
   'estados_materiales.index': {
     methods: ["GET","HEAD"],
@@ -510,6 +522,30 @@ const routes = {
     tokens: [{"old":"/api/usuario/canjes","type":0,"val":"api","end":""},{"old":"/api/usuario/canjes","type":0,"val":"usuario","end":""},{"old":"/api/usuario/canjes","type":0,"val":"canjes","end":""}],
     types: placeholder as Registry['canjes.store']['types'],
   },
+  'reservas_usuario.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/usuario/reservas',
+    tokens: [{"old":"/api/usuario/reservas","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas","type":0,"val":"reservas","end":""}],
+    types: placeholder as Registry['reservas_usuario.index']['types'],
+  },
+  'reservas_usuario.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/usuario/reservas/:id',
+    tokens: [{"old":"/api/usuario/reservas/:id","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas/:id","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas/:id","type":0,"val":"reservas","end":""},{"old":"/api/usuario/reservas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['reservas_usuario.show']['types'],
+  },
+  'reservas_usuario.store': {
+    methods: ["POST"],
+    pattern: '/api/usuario/reservas',
+    tokens: [{"old":"/api/usuario/reservas","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas","type":0,"val":"reservas","end":""}],
+    types: placeholder as Registry['reservas_usuario.store']['types'],
+  },
+  'reservas_usuario.destroy': {
+    methods: ["DELETE"],
+    pattern: '/api/usuario/reservas/:id',
+    tokens: [{"old":"/api/usuario/reservas/:id","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas/:id","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas/:id","type":0,"val":"reservas","end":""},{"old":"/api/usuario/reservas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['reservas_usuario.destroy']['types'],
+  },
   'perfil_aliado.mostrar': {
     methods: ["GET","HEAD"],
     pattern: '/api/aliado/perfil',
@@ -564,6 +600,72 @@ const routes = {
     tokens: [{"old":"/api/aliado/clasificaciones","type":0,"val":"api","end":""},{"old":"/api/aliado/clasificaciones","type":0,"val":"aliado","end":""},{"old":"/api/aliado/clasificaciones","type":0,"val":"clasificaciones","end":""}],
     types: placeholder as Registry['clasificacion.store']['types'],
   },
+  'reservas_encargado.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/reservas',
+    tokens: [{"old":"/api/encargado/reservas","type":0,"val":"api","end":""},{"old":"/api/encargado/reservas","type":0,"val":"encargado","end":""},{"old":"/api/encargado/reservas","type":0,"val":"reservas","end":""}],
+    types: placeholder as Registry['reservas_encargado.index']['types'],
+  },
+  'reservas_encargado.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/reservas/:id',
+    tokens: [{"old":"/api/encargado/reservas/:id","type":0,"val":"api","end":""},{"old":"/api/encargado/reservas/:id","type":0,"val":"encargado","end":""},{"old":"/api/encargado/reservas/:id","type":0,"val":"reservas","end":""},{"old":"/api/encargado/reservas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['reservas_encargado.show']['types'],
+  },
+  'reservas_encargado.store': {
+    methods: ["POST"],
+    pattern: '/api/encargado/reservas',
+    tokens: [{"old":"/api/encargado/reservas","type":0,"val":"api","end":""},{"old":"/api/encargado/reservas","type":0,"val":"encargado","end":""},{"old":"/api/encargado/reservas","type":0,"val":"reservas","end":""}],
+    types: placeholder as Registry['reservas_encargado.store']['types'],
+  },
+  'reservas_encargado.update': {
+    methods: ["PUT"],
+    pattern: '/api/encargado/reservas/:id',
+    tokens: [{"old":"/api/encargado/reservas/:id","type":0,"val":"api","end":""},{"old":"/api/encargado/reservas/:id","type":0,"val":"encargado","end":""},{"old":"/api/encargado/reservas/:id","type":0,"val":"reservas","end":""},{"old":"/api/encargado/reservas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['reservas_encargado.update']['types'],
+  },
+  'reservas_encargado.destroy': {
+    methods: ["DELETE"],
+    pattern: '/api/encargado/reservas/:id',
+    tokens: [{"old":"/api/encargado/reservas/:id","type":0,"val":"api","end":""},{"old":"/api/encargado/reservas/:id","type":0,"val":"encargado","end":""},{"old":"/api/encargado/reservas/:id","type":0,"val":"reservas","end":""},{"old":"/api/encargado/reservas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['reservas_encargado.destroy']['types'],
+  },
+  'notificaciones.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/notificaciones',
+    tokens: [{"old":"/api/encargado/notificaciones","type":0,"val":"api","end":""},{"old":"/api/encargado/notificaciones","type":0,"val":"encargado","end":""},{"old":"/api/encargado/notificaciones","type":0,"val":"notificaciones","end":""}],
+    types: placeholder as Registry['notificaciones.index']['types'],
+  },
+  'notificaciones.marcar_leida': {
+    methods: ["PUT"],
+    pattern: '/api/encargado/notificaciones/:id/leer',
+    tokens: [{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"api","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"encargado","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"notificaciones","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":1,"val":"id","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"leer","end":""}],
+    types: placeholder as Registry['notificaciones.marcar_leida']['types'],
+  },
+  'notificaciones.marcar_todas_leidas': {
+    methods: ["PUT"],
+    pattern: '/api/encargado/notificaciones/leer-todas',
+    tokens: [{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"api","end":""},{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"encargado","end":""},{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"notificaciones","end":""},{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"leer-todas","end":""}],
+    types: placeholder as Registry['notificaciones.marcar_todas_leidas']['types'],
+  },
+  'entregas.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/entregas',
+    tokens: [{"old":"/api/encargado/entregas","type":0,"val":"api","end":""},{"old":"/api/encargado/entregas","type":0,"val":"encargado","end":""},{"old":"/api/encargado/entregas","type":0,"val":"entregas","end":""}],
+    types: placeholder as Registry['entregas.index']['types'],
+  },
+  'entregas.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/entregas/:id',
+    tokens: [{"old":"/api/encargado/entregas/:id","type":0,"val":"api","end":""},{"old":"/api/encargado/entregas/:id","type":0,"val":"encargado","end":""},{"old":"/api/encargado/entregas/:id","type":0,"val":"entregas","end":""},{"old":"/api/encargado/entregas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['entregas.show']['types'],
+  },
+  'entregas.actualizar_estado': {
+    methods: ["PUT"],
+    pattern: '/api/encargado/entregas/:id/estado',
+    tokens: [{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"api","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"encargado","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"entregas","end":""},{"old":"/api/encargado/entregas/:id/estado","type":1,"val":"id","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"estado","end":""}],
+    types: placeholder as Registry['entregas.actualizar_estado']['types'],
+  },
   'openapi.html': {
     methods: ["GET","HEAD"],
     pattern: '/swagger',
@@ -581,6 +683,12 @@ const routes = {
     pattern: '/swagger.yaml',
     tokens: [{"old":"/swagger.yaml","type":0,"val":"swagger.yaml","end":""}],
     types: placeholder as Registry['openapi.yaml']['types'],
+  },
+  'deteccion.procesar_camara': {
+    methods: ["POST"],
+    pattern: '/api/detectar-material',
+    tokens: [{"old":"/api/detectar-material","type":0,"val":"api","end":""},{"old":"/api/detectar-material","type":0,"val":"detectar-material","end":""}],
+    types: placeholder as Registry['deteccion.procesar_camara']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 

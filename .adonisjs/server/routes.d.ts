@@ -4,9 +4,15 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
+    'puntos.asignar': { paramsTuple?: []; params?: {} }
     'openapi.html': { paramsTuple?: []; params?: {} }
     'openapi.json': { paramsTuple?: []; params?: {} }
     'openapi.yaml': { paramsTuple?: []; params?: {} }
+    'deteccion.procesar_camara': { paramsTuple?: []; params?: {} }
+  }
+  POST: {
+    'puntos.asignar': { paramsTuple?: []; params?: {} }
+    'deteccion.procesar_camara': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'openapi.html': { paramsTuple?: []; params?: {} }
@@ -17,8 +23,6 @@ export type ScannedRoutes = {
     'openapi.html': { paramsTuple?: []; params?: {} }
     'openapi.json': { paramsTuple?: []; params?: {} }
     'openapi.yaml': { paramsTuple?: []; params?: {} }
-  }
-  POST: {
   }
   DELETE: {
   }
