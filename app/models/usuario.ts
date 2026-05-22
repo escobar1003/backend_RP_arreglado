@@ -1,12 +1,14 @@
-import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
+import { BaseModel, column, belongsTo, hasOne } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import { compose } from '@adonisjs/core/helpers'
 import hash from '@adonisjs/core/services/hash'
 import { DateTime } from 'luxon'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, HasOne } from '@adonisjs/lucid/types/relations'
 import Role from './role.js'
 import EstadoUsuario from './estado_usuario.js'
+import Aliado from './aliado.js'
+import PuntoReciclaje from './punto_reciclaje.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['correo'],
@@ -48,6 +50,18 @@ export default class Usuario extends compose(BaseModel, AuthFinder) {
   @column()
   declare imagen: string | null
 
+  // Agrega esto a tu clase Usuario
+  @column()
+  declare puntosTotales: number
+
+  // ── Recuperación de contraseña ──────────────────────────────────────────────
+  @column({ columnName: 'codigo_recuperacion', serializeAs: null })
+  declare codigoRecuperacion: string | null
+
+  @column.dateTime({ columnName: 'codigo_expiracion', serializeAs: null })
+  declare codigoExpiracion: DateTime | null
+  // ───────────────────────────────────────────────────────────────────────────
+
   @column.dateTime()
   declare fechaRegistro: DateTime
 
@@ -62,4 +76,13 @@ export default class Usuario extends compose(BaseModel, AuthFinder) {
 
   @belongsTo(() => EstadoUsuario, { foreignKey: 'idEstadoUsuario' })
   declare estadoUsuario: BelongsTo<typeof EstadoUsuario>
+
+  @column()
+  declare idAliado: number | null
+
+  @belongsTo(() => Aliado, { foreignKey: 'idAliado' })
+  declare aliado: BelongsTo<typeof Aliado>
+  // Si este usuario es encargado, aquí está el punto que tiene a cargo
+  @hasOne(() => PuntoReciclaje, { foreignKey: 'idEncargado' })
+  declare puntoACargo: HasOne<typeof PuntoReciclaje>
 }

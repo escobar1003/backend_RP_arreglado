@@ -1,0 +1,26 @@
+[1mdiff --git a/.adonisjs/server/routes.d.ts b/.adonisjs/server/routes.d.ts[m
+[1mindex d2a0992..85eea3a 100644[m
+[1m--- a/.adonisjs/server/routes.d.ts[m
+[1m+++ b/.adonisjs/server/routes.d.ts[m
+[36m@@ -8,10 +8,6 @@[m [mexport type ScannedRoutes = {[m
+     'openapi.json': { paramsTuple?: []; params?: {} }[m
+     'openapi.yaml': { paramsTuple?: []; params?: {} }[m
+   }[m
+[31m-  POST: {[m
+[31m-  }[m
+[31m-  DELETE: {[m
+[31m-  }[m
+   GET: {[m
+     'openapi.html': { paramsTuple?: []; params?: {} }[m
+     'openapi.json': { paramsTuple?: []; params?: {} }[m
+[36m@@ -22,6 +18,10 @@[m [mexport type ScannedRoutes = {[m
+     'openapi.json': { paramsTuple?: []; params?: {} }[m
+     'openapi.yaml': { paramsTuple?: []; params?: {} }[m
+   }[m
+[32m+[m[32m  POST: {[m
+[32m+[m[32m  }[m
+[32m+[m[32m  DELETE: {[m
+[32m+[m[32m  }[m
+   PUT: {[m
+   }[m
+ }[m

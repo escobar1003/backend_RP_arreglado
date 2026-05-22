@@ -2,6 +2,12 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
+  puntos: {
+    asignar: typeof routes['puntos.asignar']
+    ajustarPuntos: typeof routes['puntos.ajustar_puntos']
+    resumen: typeof routes['puntos.resumen']
+    historial: typeof routes['puntos.historial']
+  }
   login: {
     iniciarSesion: typeof routes['login.iniciar_sesion']
     cerrarSesion: typeof routes['login.cerrar_sesion']
@@ -18,6 +24,13 @@ export interface ApiDefinition {
     store: typeof routes['administradores.store']
     update: typeof routes['administradores.update']
     destroy: typeof routes['administradores.destroy']
+  }
+  encargados: {
+    index: typeof routes['encargados.index']
+    show: typeof routes['encargados.show']
+    store: typeof routes['encargados.store']
+    update: typeof routes['encargados.update']
+    destroy: typeof routes['encargados.destroy']
   }
   usuarios: {
     index: typeof routes['usuarios.index']
@@ -46,6 +59,69 @@ export interface ApiDefinition {
     update: typeof routes['recompensas.update']
     destroy: typeof routes['recompensas.destroy']
   }
+  roles: {
+    index: typeof routes['roles.index']
+    show: typeof routes['roles.show']
+    store: typeof routes['roles.store']
+    update: typeof routes['roles.update']
+    destroy: typeof routes['roles.destroy']
+  }
+  estadosMateriales: {
+    index: typeof routes['estados_materiales.index']
+    show: typeof routes['estados_materiales.show']
+    store: typeof routes['estados_materiales.store']
+    update: typeof routes['estados_materiales.update']
+    destroy: typeof routes['estados_materiales.destroy']
+  }
+  estadosPuntos: {
+    index: typeof routes['estados_puntos.index']
+    show: typeof routes['estados_puntos.show']
+    store: typeof routes['estados_puntos.store']
+    update: typeof routes['estados_puntos.update']
+    destroy: typeof routes['estados_puntos.destroy']
+  }
+  estadosEntregas: {
+    index: typeof routes['estados_entregas.index']
+    show: typeof routes['estados_entregas.show']
+    store: typeof routes['estados_entregas.store']
+    update: typeof routes['estados_entregas.update']
+    destroy: typeof routes['estados_entregas.destroy']
+  }
+  estadosAliados: {
+    index: typeof routes['estados_aliados.index']
+    show: typeof routes['estados_aliados.show']
+    store: typeof routes['estados_aliados.store']
+    update: typeof routes['estados_aliados.update']
+    destroy: typeof routes['estados_aliados.destroy']
+  }
+  estadosCanjes: {
+    index: typeof routes['estados_canjes.index']
+    show: typeof routes['estados_canjes.show']
+    store: typeof routes['estados_canjes.store']
+    update: typeof routes['estados_canjes.update']
+    destroy: typeof routes['estados_canjes.destroy']
+  }
+  estadosUsuarios: {
+    index: typeof routes['estados_usuarios.index']
+    show: typeof routes['estados_usuarios.show']
+    store: typeof routes['estados_usuarios.store']
+    update: typeof routes['estados_usuarios.update']
+    destroy: typeof routes['estados_usuarios.destroy']
+  }
+  estadosRecompensas: {
+    index: typeof routes['estados_recompensas.index']
+    show: typeof routes['estados_recompensas.show']
+    store: typeof routes['estados_recompensas.store']
+    update: typeof routes['estados_recompensas.update']
+    destroy: typeof routes['estados_recompensas.destroy']
+  }
+  tiposRecompensas: {
+    index: typeof routes['tipos_recompensas.index']
+    show: typeof routes['tipos_recompensas.show']
+    store: typeof routes['tipos_recompensas.store']
+    update: typeof routes['tipos_recompensas.update']
+    destroy: typeof routes['tipos_recompensas.destroy']
+  }
   perfil: {
     mostrar: typeof routes['perfil.mostrar']
     actualizar: typeof routes['perfil.actualizar']
@@ -55,15 +131,18 @@ export interface ApiDefinition {
     index: typeof routes['entregas.index']
     show: typeof routes['entregas.show']
     store: typeof routes['entregas.store']
-  }
-  puntos: {
-    resumen: typeof routes['puntos.resumen']
-    historial: typeof routes['puntos.historial']
+    actualizarEstado: typeof routes['entregas.actualizar_estado']
   }
   canjes: {
     index: typeof routes['canjes.index']
     show: typeof routes['canjes.show']
     store: typeof routes['canjes.store']
+  }
+  reservasUsuario: {
+    index: typeof routes['reservas_usuario.index']
+    show: typeof routes['reservas_usuario.show']
+    store: typeof routes['reservas_usuario.store']
+    destroy: typeof routes['reservas_usuario.destroy']
   }
   perfilAliado: {
     mostrar: typeof routes['perfil_aliado.mostrar']
@@ -79,5 +158,25 @@ export interface ApiDefinition {
   clasificacion: {
     index: typeof routes['clasificacion.index']
     store: typeof routes['clasificacion.store']
+  }
+  reservasEncargado: {
+    index: typeof routes['reservas_encargado.index']
+    show: typeof routes['reservas_encargado.show']
+    store: typeof routes['reservas_encargado.store']
+    update: typeof routes['reservas_encargado.update']
+    destroy: typeof routes['reservas_encargado.destroy']
+  }
+  notificaciones: {
+    index: typeof routes['notificaciones.index']
+    marcarLeida: typeof routes['notificaciones.marcar_leida']
+    marcarTodasLeidas: typeof routes['notificaciones.marcar_todas_leidas']
+  }
+  openapi: {
+    html: typeof routes['openapi.html']
+    json: typeof routes['openapi.json']
+    yaml: typeof routes['openapi.yaml']
+  }
+  deteccion: {
+    procesarCamara: typeof routes['deteccion.procesar_camara']
   }
 }
