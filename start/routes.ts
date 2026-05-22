@@ -36,6 +36,13 @@ router.group(() => {
   router.put('/admins/:id', [() => import('#controllers/admin/administradores_controller'), 'update'])
   router.delete('/admins/:id', [() => import('#controllers/admin/administradores_controller'), 'destroy'])
 
+  // Encargados
+  router.get('/encargados', [() => import('#controllers/admin/encargados_controller'), 'index'])
+  router.get('/encargados/:id', [() => import('#controllers/admin/encargados_controller'), 'show'])
+  router.post('/encargados', [() => import('#controllers/admin/encargados_controller'), 'store'])
+  router.put('/encargados/:id', [() => import('#controllers/admin/encargados_controller'), 'update'])
+  router.delete('/encargados/:id', [() => import('#controllers/admin/encargados_controller'), 'destroy'])
+
   // Usuarios
   router.get('/usuarios', [() => import('#controllers/admin/usuarios_controller'), 'index'])
   router.get('/usuarios/:id', [() => import('#controllers/admin/usuarios_controller'), 'show'])

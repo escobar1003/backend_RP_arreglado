@@ -66,6 +66,36 @@ const routes = {
     tokens: [{"old":"/api/admin/admins/:id","type":0,"val":"api","end":""},{"old":"/api/admin/admins/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/admins/:id","type":0,"val":"admins","end":""},{"old":"/api/admin/admins/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['administradores.destroy']['types'],
   },
+  'encargados.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/encargados',
+    tokens: [{"old":"/api/admin/encargados","type":0,"val":"api","end":""},{"old":"/api/admin/encargados","type":0,"val":"admin","end":""},{"old":"/api/admin/encargados","type":0,"val":"encargados","end":""}],
+    types: placeholder as Registry['encargados.index']['types'],
+  },
+  'encargados.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/encargados/:id',
+    tokens: [{"old":"/api/admin/encargados/:id","type":0,"val":"api","end":""},{"old":"/api/admin/encargados/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/encargados/:id","type":0,"val":"encargados","end":""},{"old":"/api/admin/encargados/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['encargados.show']['types'],
+  },
+  'encargados.store': {
+    methods: ["POST"],
+    pattern: '/api/admin/encargados',
+    tokens: [{"old":"/api/admin/encargados","type":0,"val":"api","end":""},{"old":"/api/admin/encargados","type":0,"val":"admin","end":""},{"old":"/api/admin/encargados","type":0,"val":"encargados","end":""}],
+    types: placeholder as Registry['encargados.store']['types'],
+  },
+  'encargados.update': {
+    methods: ["PUT"],
+    pattern: '/api/admin/encargados/:id',
+    tokens: [{"old":"/api/admin/encargados/:id","type":0,"val":"api","end":""},{"old":"/api/admin/encargados/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/encargados/:id","type":0,"val":"encargados","end":""},{"old":"/api/admin/encargados/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['encargados.update']['types'],
+  },
+  'encargados.destroy': {
+    methods: ["DELETE"],
+    pattern: '/api/admin/encargados/:id',
+    tokens: [{"old":"/api/admin/encargados/:id","type":0,"val":"api","end":""},{"old":"/api/admin/encargados/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/encargados/:id","type":0,"val":"encargados","end":""},{"old":"/api/admin/encargados/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['encargados.destroy']['types'],
+  },
   'usuarios.index': {
     methods: ["GET","HEAD"],
     pattern: '/api/admin/usuarios',
