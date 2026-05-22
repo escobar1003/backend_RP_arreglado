@@ -7,6 +7,7 @@ export const controllers = {
   admin: {
     Administradores: () => import('#controllers/admin/administradores_controller'),
     Aliados: () => import('#controllers/admin/aliados_controller'),
+    Encargados: () => import('#controllers/admin/encargados_controller'),
     EstadosAliados: () => import('#controllers/admin/estados_aliados_controller'),
     EstadosCanjes: () => import('#controllers/admin/estados_canjes_controller'),
     EstadosEntregas: () => import('#controllers/admin/estados_entregas_controller'),

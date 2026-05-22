@@ -25,6 +25,13 @@ export interface ApiDefinition {
     update: typeof routes['administradores.update']
     destroy: typeof routes['administradores.destroy']
   }
+  encargados: {
+    index: typeof routes['encargados.index']
+    show: typeof routes['encargados.show']
+    store: typeof routes['encargados.store']
+    update: typeof routes['encargados.update']
+    destroy: typeof routes['encargados.destroy']
+  }
   usuarios: {
     index: typeof routes['usuarios.index']
     show: typeof routes['usuarios.show']
