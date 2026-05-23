@@ -1,11 +1,10 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
-import PuntosController from '#controllers/puntos_controller'
+
 
 
 // RUTA PARA ASIGNACIÓN DE PUNTOS (SCRUM-506)
-router.post('/puntos/asignar', [PuntosController, 'asignar'])
-
+router.post('/puntos/asignar', [() => import('#controllers/puntos_controller'), 'asignar'])
 router.get('/', async () => {
   return {
     mensaje: 'Backend funcionando'
