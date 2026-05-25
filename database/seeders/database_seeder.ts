@@ -1,5 +1,7 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import db from '@adonisjs/lucid/services/db'
+import hash from '@adonisjs/core/services/hash'
+import { DateTime } from 'luxon'
 
 export default class DatabaseSeeder extends BaseSeeder {
   async run() {
@@ -83,5 +85,17 @@ export default class DatabaseSeeder extends BaseSeeder {
     ])
 
     console.log('Seeders ejecutados correctamente')
+    await db.table('usuarios').insert({
+      id_rol: 1,
+      id_estado_usuario: 1,
+      nombre: 'Administrador',
+      correo: 'admin@test.com',
+      password: await hash.make('123456'),
+      fecha_registro: new Date(),
+      created_at: new Date(),
+      updated_at: new Date(),
+    })
+
+    console.log('Usuario admin creado: admin@test.com / 123456')
   }
 }
