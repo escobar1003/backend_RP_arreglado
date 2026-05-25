@@ -12,6 +12,7 @@ export default class DatabaseSeeder extends BaseSeeder {
       { nombre: 'admin', descripcion: 'Administrador del sistema' },
       { nombre: 'aliado', descripcion: 'Punto de reciclaje en supermercado aliado' },
       { nombre: 'usuario', descripcion: 'Usuario que recicla y acumula puntos' },
+      { nombre: 'encargado', descripcion: 'Persona que recibe material,asigna puntos a Usuarios ' },
     ])
 
     // =====================
@@ -21,6 +22,11 @@ export default class DatabaseSeeder extends BaseSeeder {
       { nombre: 'activo' },
       { nombre: 'inactivo' },
       { nombre: 'suspendido' },
+    ])
+
+    await db.table('estados_encargados').multiInsert([
+      { nombre: 'activo' },
+      { nombre: 'inactivo' },
     ])
 
     // =====================
