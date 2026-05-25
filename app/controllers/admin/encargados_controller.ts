@@ -37,7 +37,7 @@ export default class EncargadosController {
       idEstadoUsuario: 1,
       nombre: datos.nombre,
       correo: datos.correo,
-      password: await hash.make(datos.password),
+      password: vine.string().minLength(4),
       telefono: datos.telefono ?? null,
       idAliado: datos.idAliado ?? null,
       fechaRegistro: DateTime.now(),
