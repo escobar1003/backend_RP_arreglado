@@ -9,7 +9,6 @@ export const controllers = {
     Aliados: () => import('#controllers/admin/aliados_controller'),
     EstadosAliados: () => import('#controllers/admin/estados_aliados_controller'),
     EstadosCanjes: () => import('#controllers/admin/estados_canjes_controller'),
-    EstadosEncargados: () => import('#controllers/admin/estados_encargados_controller'),
     EstadosEntregas: () => import('#controllers/admin/estados_entregas_controller'),
     EstadosMateriales: () => import('#controllers/admin/estados_materiales_controller'),
     EstadosPuntos: () => import('#controllers/admin/estados_puntos_controller'),
@@ -22,6 +21,7 @@ export const controllers = {
     TiposRecompensas: () => import('#controllers/admin/tipos_recompensas_controller'),
     Usuarios: () => import('#controllers/admin/usuarios_controller'),
     Encargados: () => import('#controllers/admin/encargados_controller'),
+    EstadosEncargados: () => import('#controllers/admin/estados_encargados_controller'),
   },
   aliado: {
     Clasificacion: () => import('#controllers/aliado/clasificacion_controller'),
@@ -29,9 +29,9 @@ export const controllers = {
     PerfilAliado: () => import('#controllers/aliado/perfil_aliado_controller'),
   },
   auth: {
-    Login: () => import('#controllers/auth/login_controller'),
     RecuperarPasswords: () => import('#controllers/auth/recuperar_passwords_controller'),
     Registros: () => import('#controllers/auth/registros_controller'),
+    Login: () => import('#controllers/auth/login_controller'),
   },
   Deteccion: () => import('#controllers/deteccion_controller'),
   encargado: {
