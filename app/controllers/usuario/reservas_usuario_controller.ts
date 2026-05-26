@@ -15,7 +15,18 @@ export default class ReservasUsuarioController {
       .orderBy('fecha', 'asc')
       .orderBy('hora', 'asc')
 
-    return response.ok({ reservas })
+    return response.ok({ reserva: reservas.map(r => ({
+    idReserva: r.idReserva,
+    estado: r.estado,
+    fecha: r.fecha,
+    hora: r.hora,
+    notas: r.notas,
+    puntoReciclaje: {
+      nombre: r.punto.nombre,
+      direccion: r.punto.direccion,
+    }
+  }))
+})
   }
 
   /**
@@ -28,10 +39,21 @@ export default class ReservasUsuarioController {
     const reserva = await Reserva.query()
       .where('id_reserva', params.id)
       .where('id_usuario', usuario.idUsuario)
-      .preload('punto', (q) => q.select('id_punto', 'nombre', 'direccion', 'horario'))
+      .preload('punto', (q) => q.select('id_punto', 'nombre', 'direccion', 'horario',  'latitud', 'longitud'))
       .firstOrFail()
 
-    return response.ok({ reserva })
+    return response.ok({ idReserva: reserva.idReserva,
+  estado: reserva.estado,
+  fecha: reserva.fecha,
+  hora: reserva.hora,
+  notas: reserva.notas,
+  puntoReciclaje: {
+    nombre: reserva.punto.nombre,
+    direccion: reserva.punto.direccion,
+    latitud: reserva.punto.latitud,
+    longitud: reserva.punto.longitud, 
+  }
+    })
   }
 
   /**

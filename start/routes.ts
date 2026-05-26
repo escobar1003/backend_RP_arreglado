@@ -167,7 +167,8 @@ router.group(() => {
   router.get('/reservas/:id',    [() => import('#controllers/usuario/reservas_usuario_controller'), 'show'])
   router.post('/reservas',       [() => import('#controllers/usuario/reservas_usuario_controller'), 'store'])
   router.delete('/reservas/:id', [() => import('#controllers/usuario/reservas_usuario_controller'), 'destroy'])
-
+  router.post('/reservas/:id/cancelar', [() => import('#controllers/usuario/reservas_usuarios_controller'), 'cancelar'])
+  
 }).prefix('/api/usuario').use([middleware.auth(), middleware.verificar_rol(['usuario'])])
 
 
@@ -203,6 +204,20 @@ router.group(() => {
   router.get('/notificaciones', [() => import('#controllers/encargado/notificaciones_controller'), 'index'])
   router.put('/notificaciones/:id/leer', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarLeida'])
   router.put('/notificaciones/leer-todas', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarTodasLeidas'])
+
+  // SSE - Notificaciones en tiempo real
+  router.get('/sse', async ({ auth, response }) => {
+    response.response.setHeader('Content-Type', 'text/event-stream')
+    response.response.setHeader('Cache-Control', 'no-cache')
+    response.response.setHeader('Connection', 'keep-alive')
+
+    const { default: SseManager } = await import('#services/sse_manager')
+    SseManager.addClient(auth.user!.idUsuario, response)
+
+    response.response.on('close', () => {
+      SseManager.removeClient(auth.user!.idUsuario)
+    })
+  })
 
  // Entregas
   router.get('/entregas', [() => import('#controllers/encargado/entregas_controller'), 'index'])
