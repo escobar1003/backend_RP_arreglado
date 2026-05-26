@@ -11,6 +11,9 @@ router.get('/', async () => {
   }
 })
 
+// PUNTOS DE RECICLAJE (públicas)
+router.get('/api/puntos-reciclaje', [() => import('#controllers/puntos_reciclajes_controller'), 'index'])
+router.get('/api/puntos-reciclaje/:id', [() => import('#controllers/puntos_reciclajes_controller'), 'show'])
 // AUTH (públicas)
 router.group(() => {
   router.post('/iniciar-sesion', [() => import('#controllers/auth/login_controller'), 'iniciarSesion'])
@@ -68,7 +71,7 @@ router.group(() => {
   router.post('/recompensas', [() => import('#controllers/admin/recompensas_controller'), 'store'])
   router.put('/recompensas/:id', [() => import('#controllers/admin/recompensas_controller'), 'update'])
   router.delete('/recompensas/:id', [() => import('#controllers/admin/recompensas_controller'), 'destroy'])
-  
+
   // Roles
   router.get('/roles', [() => import('#controllers/admin/roles_controller'), 'index'])
   router.get('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'show'])
@@ -150,7 +153,8 @@ router.group(() => {
   router.get('/perfil', [() => import('#controllers/usuario/perfil_controller'), 'mostrar'])
   router.put('/perfil', [() => import('#controllers/usuario/perfil_controller'), 'actualizar'])
   router.put('/perfil/cambiar-password', [() => import('#controllers/usuario/perfil_controller'), 'cambiarPassword'])
-
+  // Foto de perfil
+  router.post('/perfil/foto', [() => import('#controllers/usuario/foto_perfils_controller'), 'store'])
   // Entregas
   router.get('/entregas', [() => import('#controllers/usuario/entregas_controller'), 'index'])
   router.get('/entregas/:id', [() => import('#controllers/usuario/entregas_controller'), 'show'])
@@ -165,12 +169,16 @@ router.group(() => {
   router.get('/canjes/:id', [() => import('#controllers/usuario/canjes_controller'), 'show'])
   router.post('/canjes', [() => import('#controllers/usuario/canjes_controller'), 'store'])
 
+  // Recompensas
+  router.get('/recompensas', [() => import('#controllers/usuario/recompensas_controller'), 'index'])
+
+   // Aliados
+  router.get('/aliados', [() => import('#controllers/usuario/aliados_usuarios_controller'), 'index'])
   // Reservas (app móvil - usuario)
   router.get('/reservas',        [() => import('#controllers/usuario/reservas_usuario_controller'), 'index'])
   router.get('/reservas/:id',    [() => import('#controllers/usuario/reservas_usuario_controller'), 'show'])
   router.post('/reservas',       [() => import('#controllers/usuario/reservas_usuario_controller'), 'store'])
   router.delete('/reservas/:id', [() => import('#controllers/usuario/reservas_usuario_controller'), 'destroy'])
-  router.post('/reservas/:id/cancelar', [() => import('#controllers/usuario/reservas_usuarios_controller'), 'cancelar'])
   
 }).prefix('/api/usuario').use([middleware.auth(), middleware.verificar_rol(['usuario'])])
 

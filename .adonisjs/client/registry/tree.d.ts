@@ -8,6 +8,10 @@ export interface ApiDefinition {
     resumen: typeof routes['puntos.resumen']
     historial: typeof routes['puntos.historial']
   }
+  puntosReciclajes: {
+    index: typeof routes['puntos_reciclajes.index']
+    show: typeof routes['puntos_reciclajes.show']
+  }
   login: {
     iniciarSesion: typeof routes['login.iniciar_sesion']
     cerrarSesion: typeof routes['login.cerrar_sesion']
@@ -134,6 +138,9 @@ export interface ApiDefinition {
     actualizar: typeof routes['perfil.actualizar']
     cambiarPassword: typeof routes['perfil.cambiar_password']
   }
+  fotoPerfils: {
+    store: typeof routes['foto_perfils.store']
+  }
   entregas: {
     index: typeof routes['entregas.index']
     show: typeof routes['entregas.show']
@@ -144,6 +151,9 @@ export interface ApiDefinition {
     index: typeof routes['canjes.index']
     show: typeof routes['canjes.show']
     store: typeof routes['canjes.store']
+  }
+  aliadosUsuarios: {
+    index: typeof routes['aliados_usuarios.index']
   }
   reservasUsuario: {
     index: typeof routes['reservas_usuario.index']

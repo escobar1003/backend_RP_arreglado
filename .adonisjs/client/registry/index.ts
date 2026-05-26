@@ -12,6 +12,18 @@ const routes = {
     tokens: [{"old":"/puntos/asignar","type":0,"val":"puntos","end":""},{"old":"/puntos/asignar","type":0,"val":"asignar","end":""}],
     types: placeholder as Registry['puntos.asignar']['types'],
   },
+  'puntos_reciclajes.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/puntos-reciclaje',
+    tokens: [{"old":"/api/puntos-reciclaje","type":0,"val":"api","end":""},{"old":"/api/puntos-reciclaje","type":0,"val":"puntos-reciclaje","end":""}],
+    types: placeholder as Registry['puntos_reciclajes.index']['types'],
+  },
+  'puntos_reciclajes.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/puntos-reciclaje/:id',
+    tokens: [{"old":"/api/puntos-reciclaje/:id","type":0,"val":"api","end":""},{"old":"/api/puntos-reciclaje/:id","type":0,"val":"puntos-reciclaje","end":""},{"old":"/api/puntos-reciclaje/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['puntos_reciclajes.show']['types'],
+  },
   'login.iniciar_sesion': {
     methods: ["POST"],
     pattern: '/api/auth/iniciar-sesion',
@@ -534,6 +546,12 @@ const routes = {
     tokens: [{"old":"/api/usuario/perfil/cambiar-password","type":0,"val":"api","end":""},{"old":"/api/usuario/perfil/cambiar-password","type":0,"val":"usuario","end":""},{"old":"/api/usuario/perfil/cambiar-password","type":0,"val":"perfil","end":""},{"old":"/api/usuario/perfil/cambiar-password","type":0,"val":"cambiar-password","end":""}],
     types: placeholder as Registry['perfil.cambiar_password']['types'],
   },
+  'foto_perfils.store': {
+    methods: ["POST"],
+    pattern: '/api/usuario/perfil/foto',
+    tokens: [{"old":"/api/usuario/perfil/foto","type":0,"val":"api","end":""},{"old":"/api/usuario/perfil/foto","type":0,"val":"usuario","end":""},{"old":"/api/usuario/perfil/foto","type":0,"val":"perfil","end":""},{"old":"/api/usuario/perfil/foto","type":0,"val":"foto","end":""}],
+    types: placeholder as Registry['foto_perfils.store']['types'],
+  },
   'entregas.index': {
     methods: ["GET","HEAD"],
     pattern: '/api/usuario/entregas',
@@ -581,6 +599,18 @@ const routes = {
     pattern: '/api/usuario/canjes',
     tokens: [{"old":"/api/usuario/canjes","type":0,"val":"api","end":""},{"old":"/api/usuario/canjes","type":0,"val":"usuario","end":""},{"old":"/api/usuario/canjes","type":0,"val":"canjes","end":""}],
     types: placeholder as Registry['canjes.store']['types'],
+  },
+  'recompensas.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/usuario/recompensas',
+    tokens: [{"old":"/api/usuario/recompensas","type":0,"val":"api","end":""},{"old":"/api/usuario/recompensas","type":0,"val":"usuario","end":""},{"old":"/api/usuario/recompensas","type":0,"val":"recompensas","end":""}],
+    types: placeholder as Registry['recompensas.index']['types'],
+  },
+  'aliados_usuarios.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/usuario/aliados',
+    tokens: [{"old":"/api/usuario/aliados","type":0,"val":"api","end":""},{"old":"/api/usuario/aliados","type":0,"val":"usuario","end":""},{"old":"/api/usuario/aliados","type":0,"val":"aliados","end":""}],
+    types: placeholder as Registry['aliados_usuarios.index']['types'],
   },
   'reservas_usuario.index': {
     methods: ["GET","HEAD"],

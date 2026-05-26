@@ -19,6 +19,30 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/puntos_controller').default['asignar']>>>
     }
   }
+  'puntos_reciclajes.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/puntos-reciclaje'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/puntos_reciclajes_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/puntos_reciclajes_controller').default['index']>>>
+    }
+  }
+  'puntos_reciclajes.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/puntos-reciclaje/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/puntos_reciclajes_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/puntos_reciclajes_controller').default['show']>>>
+    }
+  }
   'login.iniciar_sesion': {
     methods: ["POST"]
     pattern: '/api/auth/iniciar-sesion'
@@ -1063,6 +1087,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/perfil_controller').default['cambiarPassword']>>>
     }
   }
+  'foto_perfils.store': {
+    methods: ["POST"]
+    pattern: '/api/usuario/perfil/foto'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/foto_perfils_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/foto_perfils_controller').default['store']>>>
+    }
+  }
   'entregas.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/usuario/entregas'
@@ -1157,6 +1193,30 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/canjes_controller').default['store']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/canjes_controller').default['store']>>>
+    }
+  }
+  'recompensas.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/usuario/recompensas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/recompensas_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/recompensas_controller').default['index']>>>
+    }
+  }
+  'aliados_usuarios.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/usuario/aliados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/aliados_usuarios_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/aliados_usuarios_controller').default['index']>>>
     }
   }
   'reservas_usuario.index': {
