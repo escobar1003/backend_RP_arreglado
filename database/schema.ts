@@ -159,6 +159,15 @@ export class EstadosCanjeSchema extends BaseModel {
   declare nombre: string
 }
 
+export class EstadosEncargadoSchema extends BaseModel {
+  static $columns = ['idEstadoEncargado', 'nombre'] as const
+  $columns = EstadosEncargadoSchema.$columns
+  @column({ isPrimary: true })
+  declare idEstadoEncargado: number
+  @column()
+  declare nombre: string
+}
+
 export class EstadosEntregasSchema extends BaseModel {
   static $columns = ['idEstadoEntrega', 'nombre'] as const
   $columns = EstadosEntregasSchema.$columns
@@ -253,30 +262,30 @@ export class MovimientosPuntoSchema extends BaseModel {
 }
 
 export class NotificacioneSchema extends BaseModel {
-  static $columns = ['createdAt', 'id', 'idReferencia', 'leida', 'mensaje', 'tipo', 'titulo', 'updatedAt', 'usuarioId'] as const
+  static $columns = ['createdAt', 'idNotificacion', 'idReferencia', 'idUsuario', 'leida', 'mensaje', 'tipo', 'titulo', 'updatedAt'] as const
   $columns = NotificacioneSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
   @column({ isPrimary: true })
-  declare id: number
+  declare idNotificacion: number
   @column()
   declare idReferencia: number | null
+  @column()
+  declare idUsuario: number
   @column()
   declare leida: boolean | null
   @column()
   declare mensaje: string
   @column()
-  declare tipo: string
+  declare tipo: string | null
   @column()
   declare titulo: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
-  @column()
-  declare usuarioId: number | null
 }
 
 export class PuntosReciclajeSchema extends BaseModel {
-  static $columns = ['createdAt', 'direccion', 'horario', 'idAliado', 'idEncargado', 'idEstadoPunto', 'idPunto', 'latitud', 'longitud', 'nombre', 'updatedAt'] as const
+  static $columns = ['createdAt', 'direccion', 'horario', 'idAliado', 'idEncargado', 'idEstadoEncargado', 'idEstadoPunto', 'idPunto', 'latitud', 'longitud', 'nombre', 'updatedAt'] as const
   $columns = PuntosReciclajeSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -288,6 +297,8 @@ export class PuntosReciclajeSchema extends BaseModel {
   declare idAliado: number
   @column()
   declare idEncargado: number | null
+  @column()
+  declare idEstadoEncargado: number | null
   @column()
   declare idEstadoPunto: number
   @column({ isPrimary: true })
@@ -426,7 +437,7 @@ export class TransaccionPuntoSchema extends BaseModel {
 }
 
 export class UsuarioSchema extends BaseModel {
-  static $columns = ['codigoExpiracion', 'codigoRecuperacion', 'correo', 'createdAt', 'fechaRegistro', 'idAliado', 'idEstadoUsuario', 'idRol', 'idUsuario', 'nombre', 'password', 'telefono', 'updatedAt'] as const
+  static $columns = ['codigoExpiracion', 'codigoRecuperacion', 'correo', 'createdAt', 'fechaRegistro', 'idAliado', 'idEstadoUsuario', 'idRol', 'idUsuario', 'nombre', 'password', 'puntosTotales', 'telefono', 'updatedAt'] as const
   $columns = UsuarioSchema.$columns
   @column.dateTime()
   declare codigoExpiracion: DateTime | null

@@ -967,6 +967,66 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/tipos_recompensas_controller').default['destroy']>>>
     }
   }
+  'estados_encargados.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/estados-encargados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.store': {
+    methods: ["POST"]
+    pattern: '/api/admin/estados-encargados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/estados-encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.update': {
+    methods: ["PUT","PATCH"]
+    pattern: '/api/admin/estados-encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/admin/estados-encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
   'perfil.mostrar': {
     methods: ["GET","HEAD"]
     pattern: '/api/usuario/perfil'

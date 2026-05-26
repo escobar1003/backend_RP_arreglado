@@ -486,6 +486,36 @@ const routes = {
     tokens: [{"old":"/api/admin/tipos-recompensas/:id","type":0,"val":"api","end":""},{"old":"/api/admin/tipos-recompensas/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/tipos-recompensas/:id","type":0,"val":"tipos-recompensas","end":""},{"old":"/api/admin/tipos-recompensas/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['tipos_recompensas.destroy']['types'],
   },
+  'estados_encargados.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/estados-encargados',
+    tokens: [{"old":"/api/admin/estados-encargados","type":0,"val":"api","end":""},{"old":"/api/admin/estados-encargados","type":0,"val":"admin","end":""},{"old":"/api/admin/estados-encargados","type":0,"val":"estados-encargados","end":""}],
+    types: placeholder as Registry['estados_encargados.index']['types'],
+  },
+  'estados_encargados.store': {
+    methods: ["POST"],
+    pattern: '/api/admin/estados-encargados',
+    tokens: [{"old":"/api/admin/estados-encargados","type":0,"val":"api","end":""},{"old":"/api/admin/estados-encargados","type":0,"val":"admin","end":""},{"old":"/api/admin/estados-encargados","type":0,"val":"estados-encargados","end":""}],
+    types: placeholder as Registry['estados_encargados.store']['types'],
+  },
+  'estados_encargados.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/estados-encargados/:id',
+    tokens: [{"old":"/api/admin/estados-encargados/:id","type":0,"val":"api","end":""},{"old":"/api/admin/estados-encargados/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/estados-encargados/:id","type":0,"val":"estados-encargados","end":""},{"old":"/api/admin/estados-encargados/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['estados_encargados.show']['types'],
+  },
+  'estados_encargados.update': {
+    methods: ["PUT","PATCH"],
+    pattern: '/api/admin/estados-encargados/:id',
+    tokens: [{"old":"/api/admin/estados-encargados/:id","type":0,"val":"api","end":""},{"old":"/api/admin/estados-encargados/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/estados-encargados/:id","type":0,"val":"estados-encargados","end":""},{"old":"/api/admin/estados-encargados/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['estados_encargados.update']['types'],
+  },
+  'estados_encargados.destroy': {
+    methods: ["DELETE"],
+    pattern: '/api/admin/estados-encargados/:id',
+    tokens: [{"old":"/api/admin/estados-encargados/:id","type":0,"val":"api","end":""},{"old":"/api/admin/estados-encargados/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/estados-encargados/:id","type":0,"val":"estados-encargados","end":""},{"old":"/api/admin/estados-encargados/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['estados_encargados.destroy']['types'],
+  },
   'perfil.mostrar': {
     methods: ["GET","HEAD"],
     pattern: '/api/usuario/perfil',

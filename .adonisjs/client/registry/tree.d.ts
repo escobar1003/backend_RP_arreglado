@@ -122,6 +122,13 @@ export interface ApiDefinition {
     update: typeof routes['tipos_recompensas.update']
     destroy: typeof routes['tipos_recompensas.destroy']
   }
+  estadosEncargados: {
+    index: typeof routes['estados_encargados.index']
+    store: typeof routes['estados_encargados.store']
+    show: typeof routes['estados_encargados.show']
+    update: typeof routes['estados_encargados.update']
+    destroy: typeof routes['estados_encargados.destroy']
+  }
   perfil: {
     mostrar: typeof routes['perfil.mostrar']
     actualizar: typeof routes['perfil.actualizar']
