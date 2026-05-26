@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Usuario from '#models/usuario'
 import TransaccionPunto from '#models/transaccion_punto'
 
+
 export default class PuntosController {
   
   public async asignar({ request, response }: HttpContext) {

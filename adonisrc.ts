@@ -53,7 +53,8 @@ export default defineConfig({
     () => import('@adonisjs/cors/cors_provider'),
     () => import('@adonisjs/auth/auth_provider'),
     () => import('#providers/api_provider'),
-    () => import('@foadonis/openapi/openapi_provider')
+    () => import('@foadonis/openapi/openapi_provider'),
+    () => import('@adonisjs/static/static_provider')
   ],
 
   /*
@@ -104,7 +105,10 @@ export default defineConfig({
   | the production build.
   |
   */
-  metaFiles: [],
+  metaFiles: [{
+    pattern: 'public/**',
+    reloadServer: false,
+  }],
 
   hooks: {
     init: [
