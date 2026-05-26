@@ -37,7 +37,6 @@ export const controllers = {
     Notificaciones: () => import('#controllers/encargado/notificaciones_controller'),
     ReservasEncargado: () => import('#controllers/encargado/reservas_encargado_controller'),
   },
-  Puntos: () => import('#controllers/puntos_controller'),
   usuario: {
     Canjes: () => import('#controllers/usuario/canjes_controller'),
     Entregas: () => import('#controllers/usuario/entregas_controller'),
@@ -45,4 +44,5 @@ export const controllers = {
     Puntos: () => import('#controllers/usuario/puntos_controller'),
     ReservasUsuario: () => import('#controllers/usuario/reservas_usuario_controller'),
   },
+  Puntos: () => import('#controllers/puntos_controller'),
 }
