@@ -27,6 +27,12 @@ export default class EncargadosController {
   async store({ request, response }: HttpContext) {
     const datos = request.only(['nombre', 'correo', 'password', 'telefono', 'idAliado'])
 
+    if (!datos.password || typeof datos.password !== 'string') {
+      return response.badRequest({ 
+        mensaje: 'La contraseña es requerida y debe ser un texto válido.' 
+      })
+    }
+
     const correoExiste = await Usuario.findBy('correo', datos.correo)
     if (correoExiste) {
       return response.conflict({ mensaje: 'Ya existe una cuenta con ese correo' })
