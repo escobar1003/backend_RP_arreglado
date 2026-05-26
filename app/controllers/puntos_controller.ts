@@ -40,14 +40,17 @@ export default class PuntosController {
       usuario.puntosTotales += puntosAGanar
       await usuario.save()
 
-      return response.ok({
+            return response.ok({
         message: 'Puntos asignados correctamente',
         puntosGanados: puntosAGanar,
         nuevoSaldo: usuario.puntosTotales
       })
 
-    } catch (error) {
-      return response.internalServerError({ message: 'Error al procesar los puntos', error: error.message })
+    } catch (error: any) {
+      return response.internalServerError({
+        message: 'Error al procesar los puntos',
+        error: error.message
+      })
     }
   }
 }

@@ -159,6 +159,15 @@ export class EstadosCanjeSchema extends BaseModel {
   declare nombre: string
 }
 
+export class EstadosEncargadoSchema extends BaseModel {
+  static $columns = ['idEstadoEncargado', 'nombre'] as const
+  $columns = EstadosEncargadoSchema.$columns
+  @column({ isPrimary: true })
+  declare idEstadoEncargado: number
+  @column()
+  declare nombre: string
+}
+
 export class EstadosEntregasSchema extends BaseModel {
   static $columns = ['idEstadoEntrega', 'nombre'] as const
   $columns = EstadosEntregasSchema.$columns
@@ -291,7 +300,7 @@ export class PuntoMaterialSchema extends BaseModel {
 }
 
 export class PuntosReciclajeSchema extends BaseModel {
-  static $columns = ['createdAt', 'direccion', 'horario', 'idAliado', 'idEncargado', 'idEstadoPunto', 'idPunto', 'latitud', 'longitud', 'nombre', 'updatedAt'] as const
+  static $columns = ['createdAt', 'direccion', 'horario', 'idAliado', 'idEncargado', 'idEstadoEncargado', 'idEstadoPunto', 'idPunto', 'latitud', 'longitud', 'nombre', 'updatedAt'] as const
   $columns = PuntosReciclajeSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -303,6 +312,8 @@ export class PuntosReciclajeSchema extends BaseModel {
   declare idAliado: number
   @column()
   declare idEncargado: number | null
+  @column()
+  declare idEstadoEncargado: number | null
   @column()
   declare idEstadoPunto: number
   @column({ isPrimary: true })

@@ -15,8 +15,8 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
-      errorResponse: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/puntos_controller').default['asignar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/puntos_controller').default['asignar']>>>
     }
   }
   'puntos_reciclajes.index': {
@@ -991,6 +991,66 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/tipos_recompensas_controller').default['destroy']>>>
     }
   }
+  'estados_encargados.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/estados-encargados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.store': {
+    methods: ["POST"]
+    pattern: '/api/admin/estados-encargados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/estados-encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.update': {
+    methods: ["PUT","PATCH"]
+    pattern: '/api/admin/estados-encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/admin/estados-encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
   'perfil.mostrar': {
     methods: ["GET","HEAD"]
     pattern: '/api/usuario/perfil'
@@ -1205,6 +1265,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['destroy']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['destroy']>>>
+    }
+  }
+  'reservas_usuarios.cancelar': {
+    methods: ["POST"]
+    pattern: '/api/usuario/reservas/:id/cancelar'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuarios_controller').default['cancelar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuarios_controller').default['cancelar']>>>
     }
   }
   'perfil_aliado.mostrar': {

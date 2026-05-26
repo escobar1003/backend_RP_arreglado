@@ -10,6 +10,7 @@ export const controllers = {
     Encargados: () => import('#controllers/admin/encargados_controller'),
     EstadosAliados: () => import('#controllers/admin/estados_aliados_controller'),
     EstadosCanjes: () => import('#controllers/admin/estados_canjes_controller'),
+    EstadosEncargados: () => import('#controllers/admin/estados_encargados_controller'),
     EstadosEntregas: () => import('#controllers/admin/estados_entregas_controller'),
     EstadosMateriales: () => import('#controllers/admin/estados_materiales_controller'),
     EstadosPuntos: () => import('#controllers/admin/estados_puntos_controller'),
