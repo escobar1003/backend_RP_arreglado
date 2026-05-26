@@ -9,10 +9,12 @@ export type ScannedRoutes = {
     'openapi.json': { paramsTuple?: []; params?: {} }
     'openapi.yaml': { paramsTuple?: []; params?: {} }
     'deteccion.procesar_camara': { paramsTuple?: []; params?: {} }
+    'chat.preguntar': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'puntos.asignar': { paramsTuple?: []; params?: {} }
     'deteccion.procesar_camara': { paramsTuple?: []; params?: {} }
+    'chat.preguntar': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'openapi.html': { paramsTuple?: []; params?: {} }

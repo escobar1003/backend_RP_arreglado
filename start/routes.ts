@@ -210,3 +210,4 @@ import openapi from '@foadonis/openapi/services/main'
 openapi.registerRoutes('/swagger')
 
 router.post('/api/detectar-material', '#controllers/deteccion_controller.procesarCamara')
+router.post('/api/chat', '#controllers/chat_controller.preguntar')
