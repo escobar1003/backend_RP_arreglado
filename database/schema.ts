@@ -159,6 +159,15 @@ export class EstadosCanjeSchema extends BaseModel {
   declare nombre: string
 }
 
+export class EstadosEncargadoSchema extends BaseModel {
+  static $columns = ['idEstadoEncargado', 'nombre'] as const
+  $columns = EstadosEncargadoSchema.$columns
+  @column({ isPrimary: true })
+  declare idEstadoEncargado: number
+  @column()
+  declare nombre: string
+}
+
 export class EstadosEntregasSchema extends BaseModel {
   static $columns = ['idEstadoEntrega', 'nombre'] as const
   $columns = EstadosEntregasSchema.$columns

@@ -9,6 +9,7 @@ import Role from './role.js'
 import EstadoUsuario from './estado_usuario.js'
 import Aliado from './aliado.js'
 import PuntoReciclaje from './punto_reciclaje.js'
+import EstadoEncargado from './estado_encargado.ts'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['correo'],
@@ -85,4 +86,10 @@ export default class Usuario extends compose(BaseModel, AuthFinder) {
   // Si este usuario es encargado, aquí está el punto que tiene a cargo
   @hasOne(() => PuntoReciclaje, { foreignKey: 'idEncargado' })
   declare puntoACargo: HasOne<typeof PuntoReciclaje>
+
+  @column()
+  declare idEstadoEncargado: number | null
+
+  @belongsTo(() => EstadoEncargado, { foreignKey: 'idEstadoEncargado' })
+  declare estadoEncargado: BelongsTo<typeof EstadoEncargado>
 }

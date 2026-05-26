@@ -137,7 +137,11 @@ router.group(() => {
   router.post('/tipos-recompensas', [() => import('#controllers/admin/tipos_recompensas_controller'), 'store'])
   router.put('/tipos-recompensas/:id', [() => import('#controllers/admin/tipos_recompensas_controller'), 'update'])
   router.delete('/tipos-recompensas/:id', [() => import('#controllers/admin/tipos_recompensas_controller'), 'destroy'])
+  // Estado Encargados
+  router.resource('estados-encargados', '#controllers/admin/estados_encargados_controller').apiOnly()
 }).prefix('/api/admin').use([middleware.auth(), middleware.verificar_rol(['admin'])])
+
+
 
 
 // USUARIO
