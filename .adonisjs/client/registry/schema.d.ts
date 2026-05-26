@@ -127,6 +127,66 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/administradores_controller').default['destroy']>>>
     }
   }
+  'encargados.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/encargados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['index']>>>
+    }
+  }
+  'encargados.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['show']>>>
+    }
+  }
+  'encargados.store': {
+    methods: ["POST"]
+    pattern: '/api/admin/encargados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['store']>>>
+    }
+  }
+  'encargados.update': {
+    methods: ["PUT"]
+    pattern: '/api/admin/encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['update']>>>
+    }
+  }
+  'encargados.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/admin/encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['destroy']>>>
+    }
+  }
   'usuarios.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/admin/usuarios'
@@ -905,6 +965,66 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/tipos_recompensas_controller').default['destroy']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/tipos_recompensas_controller').default['destroy']>>>
+    }
+  }
+  'estados_encargados.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/estados-encargados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.store': {
+    methods: ["POST"]
+    pattern: '/api/admin/estados-encargados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/estados-encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.update': {
+    methods: ["PUT","PATCH"]
+    pattern: '/api/admin/estados-encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/admin/estados-encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
     }
   }
   'perfil.mostrar': {

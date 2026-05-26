@@ -25,6 +25,13 @@ export interface ApiDefinition {
     update: typeof routes['administradores.update']
     destroy: typeof routes['administradores.destroy']
   }
+  encargados: {
+    index: typeof routes['encargados.index']
+    show: typeof routes['encargados.show']
+    store: typeof routes['encargados.store']
+    update: typeof routes['encargados.update']
+    destroy: typeof routes['encargados.destroy']
+  }
   usuarios: {
     index: typeof routes['usuarios.index']
     show: typeof routes['usuarios.show']
@@ -114,6 +121,13 @@ export interface ApiDefinition {
     store: typeof routes['tipos_recompensas.store']
     update: typeof routes['tipos_recompensas.update']
     destroy: typeof routes['tipos_recompensas.destroy']
+  }
+  estadosEncargados: {
+    index: typeof routes['estados_encargados.index']
+    store: typeof routes['estados_encargados.store']
+    show: typeof routes['estados_encargados.show']
+    update: typeof routes['estados_encargados.update']
+    destroy: typeof routes['estados_encargados.destroy']
   }
   perfil: {
     mostrar: typeof routes['perfil.mostrar']
