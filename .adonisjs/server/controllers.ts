@@ -7,8 +7,10 @@ export const controllers = {
   admin: {
     Administradores: () => import('#controllers/admin/administradores_controller'),
     Aliados: () => import('#controllers/admin/aliados_controller'),
+    Encargados: () => import('#controllers/admin/encargados_controller'),
     EstadosAliados: () => import('#controllers/admin/estados_aliados_controller'),
     EstadosCanjes: () => import('#controllers/admin/estados_canjes_controller'),
+    EstadosEncargados: () => import('#controllers/admin/estados_encargados_controller'),
     EstadosEntregas: () => import('#controllers/admin/estados_entregas_controller'),
     EstadosMateriales: () => import('#controllers/admin/estados_materiales_controller'),
     EstadosPuntos: () => import('#controllers/admin/estados_puntos_controller'),
@@ -20,8 +22,6 @@ export const controllers = {
     Roles: () => import('#controllers/admin/roles_controller'),
     TiposRecompensas: () => import('#controllers/admin/tipos_recompensas_controller'),
     Usuarios: () => import('#controllers/admin/usuarios_controller'),
-    Encargados: () => import('#controllers/admin/encargados_controller'),
-    EstadosEncargados: () => import('#controllers/admin/estados_encargados_controller'),
   },
   aliado: {
     Clasificacion: () => import('#controllers/aliado/clasificacion_controller'),
@@ -29,22 +29,24 @@ export const controllers = {
     PerfilAliado: () => import('#controllers/aliado/perfil_aliado_controller'),
   },
   auth: {
+    Login: () => import('#controllers/auth/login_controller'),
     RecuperarPasswords: () => import('#controllers/auth/recuperar_passwords_controller'),
     Registros: () => import('#controllers/auth/registros_controller'),
-    Login: () => import('#controllers/auth/login_controller'),
   },
   Deteccion: () => import('#controllers/deteccion_controller'),
   encargado: {
     Entregas: () => import('#controllers/encargado/entregas_controller'),
     Notificaciones: () => import('#controllers/encargado/notificaciones_controller'),
     ReservasEncargado: () => import('#controllers/encargado/reservas_encargado_controller'),
+    ReservasEncargados: () => import('#controllers/encargado/reservas_encargados_controller'),
   },
+  Puntos: () => import('#controllers/puntos_controller'),
   usuario: {
     Canjes: () => import('#controllers/usuario/canjes_controller'),
     Entregas: () => import('#controllers/usuario/entregas_controller'),
     Perfil: () => import('#controllers/usuario/perfil_controller'),
     Puntos: () => import('#controllers/usuario/puntos_controller'),
     ReservasUsuario: () => import('#controllers/usuario/reservas_usuario_controller'),
+    ReservasUsuarios: () => import('#controllers/usuario/reservas_usuarios_controller'),
   },
-  Puntos: () => import('#controllers/puntos_controller'),
 }

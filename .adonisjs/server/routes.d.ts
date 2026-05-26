@@ -4,7 +4,6 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
-    'puntos.asignar': { paramsTuple?: []; params?: {} }
     'estados_encargados.index': { paramsTuple?: []; params?: {} }
     'estados_encargados.store': { paramsTuple?: []; params?: {} }
     'estados_encargados.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -16,7 +15,6 @@ export type ScannedRoutes = {
     'deteccion.procesar_camara': { paramsTuple?: []; params?: {} }
   }
   POST: {
-    'puntos.asignar': { paramsTuple?: []; params?: {} }
     'estados_encargados.store': { paramsTuple?: []; params?: {} }
     'deteccion.procesar_camara': { paramsTuple?: []; params?: {} }
   }
