@@ -1,6 +1,6 @@
-FROM node:20-alpine
+FROM node:24-alpine
 
-# Instalar dependencias del sistema si tu backend procesa imágenes localmente
+# Instalar dependencias del sistema necesarias para la IA y Node
 RUN apk add --no-cache python3 make g++
 
 WORKDIR /app
@@ -10,10 +10,10 @@ RUN npm install
 
 COPY . .
 
-# Compilar AdonisJS
-RUN node ace build --ignore-ts-errors
+# Compilar AdonisJS v6 de forma nativa
+RUN node ace build
 
 EXPOSE 3333
 
-# Comando para arrancar en producción
-CMD ["node", "build/server.js"]
+# Comando para arrancar en producción usando el build de Adonis v6
+CMD ["node", "build/bin/server.js"]
