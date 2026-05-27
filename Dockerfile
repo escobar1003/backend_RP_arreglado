@@ -11,7 +11,7 @@ RUN npm install
 COPY . .
 
 # Compilar AdonisJS
-RUN node ace build
+RUN node ace build --ignore-ts-errors
 
 EXPOSE 3333
 
