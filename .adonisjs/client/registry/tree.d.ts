@@ -161,9 +161,6 @@ export interface ApiDefinition {
     store: typeof routes['reservas_usuario.store']
     destroy: typeof routes['reservas_usuario.destroy']
   }
-  reservasUsuarios: {
-    cancelar: typeof routes['reservas_usuarios.cancelar']
-  }
   perfilAliado: {
     mostrar: typeof routes['perfil_aliado.mostrar']
     actualizar: typeof routes['perfil_aliado.actualizar']
