@@ -636,12 +636,6 @@ const routes = {
     tokens: [{"old":"/api/usuario/reservas/:id","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas/:id","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas/:id","type":0,"val":"reservas","end":""},{"old":"/api/usuario/reservas/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['reservas_usuario.destroy']['types'],
   },
-  'reservas_usuarios.cancelar': {
-    methods: ["POST"],
-    pattern: '/api/usuario/reservas/:id/cancelar',
-    tokens: [{"old":"/api/usuario/reservas/:id/cancelar","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas/:id/cancelar","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas/:id/cancelar","type":0,"val":"reservas","end":""},{"old":"/api/usuario/reservas/:id/cancelar","type":1,"val":"id","end":""},{"old":"/api/usuario/reservas/:id/cancelar","type":0,"val":"cancelar","end":""}],
-    types: placeholder as Registry['reservas_usuarios.cancelar']['types'],
-  },
   'perfil_aliado.mostrar': {
     methods: ["GET","HEAD"],
     pattern: '/api/aliado/perfil',

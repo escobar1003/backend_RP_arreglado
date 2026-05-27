@@ -1267,18 +1267,6 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['destroy']>>>
     }
   }
-  'reservas_usuarios.cancelar': {
-    methods: ["POST"]
-    pattern: '/api/usuario/reservas/:id/cancelar'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuarios_controller').default['cancelar']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuarios_controller').default['cancelar']>>>
-    }
-  }
   'perfil_aliado.mostrar': {
     methods: ["GET","HEAD"]
     pattern: '/api/aliado/perfil'
