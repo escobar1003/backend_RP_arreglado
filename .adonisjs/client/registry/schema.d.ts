@@ -1555,4 +1555,16 @@ export interface Registry {
       errorResponse: unknown
     }
   }
+  'chat.preguntar': {
+    methods: ["POST"]
+    pattern: '/api/chat'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
 }
