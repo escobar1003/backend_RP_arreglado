@@ -1,8 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { createWriteStream, mkdirSync } from 'node:fs'
 import { join, extname } from 'node:path'
 import { randomUUID } from 'node:crypto'
-import Usuario from '#models/usuario'
+import { mkdirSync } from 'node:fs'
+
 
 export default class FotoPerfilController {
   async store({ auth, request, response }: HttpContext) {
@@ -25,7 +25,7 @@ export default class FotoPerfilController {
 
     // Nombre único para el archivo
     const nombreArchivo = `${randomUUID()}${extname(foto.clientName)}`
-    const rutaCompleta = join(uploadDir, nombreArchivo)
+    
 
     // Mover el archivo
     await foto.move(uploadDir, { name: nombreArchivo })

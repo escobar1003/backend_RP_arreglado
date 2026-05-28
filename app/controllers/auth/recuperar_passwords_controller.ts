@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { DateTime } from 'luxon'
-import hash from '@adonisjs/core/services/hash'
+
 import Usuario from '#models/usuario'
 import mail from '@adonisjs/mail/services/main'
 
