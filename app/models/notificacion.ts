@@ -7,12 +7,12 @@ export default class Notificacion extends BaseModel {
   public static table = 'notificaciones'
 
   @column({ isPrimary: true })
-  declare id: number
+  declare idNotificacion: number
 
   @column()
   declare usuarioId: number
 
-  @column()
+  @column({columnName: 'id_usuario'})
   declare titulo: string
 
   @column()

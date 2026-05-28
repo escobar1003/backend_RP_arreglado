@@ -25,14 +25,22 @@ export default class DeteccionController {
     const filePath = `${app.tmpPath('uploads')}/${imagenMobile.fileName}`
 
     try {
-      // 3. Preparar el formulario para reenviar la foto al script de Python (YOLOv11)
-      const formData = new FormData()
-      formData.append('image', fs.createReadStream(filePath))
+  // 3. Preparar el formulario para reenviar la foto al script de Python (YOLOv11)
+  const formData = new FormData()
+  formData.append('image', fs.createReadStream(filePath))
 
-      // 4. Hacer la petición HTTP POST al puerto 5000 (donde corre app.py)
-      const apiResponse = await axios.post('http://localhost:5000/predict', formData, {
-        headers: formData.getHeaders(),
-      })
+  // 4. Hacer la petición HTTP POST al puerto 5000 (donde corre app.py)
+  const apiResponse = await axios.post('http://localhost:5000/predict', formData, {
+    headers: formData.getHeaders(),
+  })
+
+  // 5. Borrar la foto temporal del servidor de Adonis para no acumular basura
+  if (fs.existsSync(filePath)) {
+    fs.unlinkSync(filePath)
+  }
+
+  // 6. Responderle los resultados de la IA de vuelta a Flutter
+  return response.ok(apiResponse.data)
 
       // 5. Borrar la foto temporal del servidor de Adonis para no acumular basura
       if (fs.existsSync(filePath)) {

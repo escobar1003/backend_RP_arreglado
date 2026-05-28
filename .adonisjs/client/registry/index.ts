@@ -12,6 +12,18 @@ const routes = {
     tokens: [{"old":"/puntos/asignar","type":0,"val":"puntos","end":""},{"old":"/puntos/asignar","type":0,"val":"asignar","end":""}],
     types: placeholder as Registry['puntos.asignar']['types'],
   },
+  'puntos_reciclajes.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/puntos-reciclaje',
+    tokens: [{"old":"/api/puntos-reciclaje","type":0,"val":"api","end":""},{"old":"/api/puntos-reciclaje","type":0,"val":"puntos-reciclaje","end":""}],
+    types: placeholder as Registry['puntos_reciclajes.index']['types'],
+  },
+  'puntos_reciclajes.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/puntos-reciclaje/:id',
+    tokens: [{"old":"/api/puntos-reciclaje/:id","type":0,"val":"api","end":""},{"old":"/api/puntos-reciclaje/:id","type":0,"val":"puntos-reciclaje","end":""},{"old":"/api/puntos-reciclaje/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['puntos_reciclajes.show']['types'],
+  },
   'login.iniciar_sesion': {
     methods: ["POST"],
     pattern: '/api/auth/iniciar-sesion',
@@ -65,6 +77,36 @@ const routes = {
     pattern: '/api/admin/admins/:id',
     tokens: [{"old":"/api/admin/admins/:id","type":0,"val":"api","end":""},{"old":"/api/admin/admins/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/admins/:id","type":0,"val":"admins","end":""},{"old":"/api/admin/admins/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['administradores.destroy']['types'],
+  },
+  'encargados.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/encargados',
+    tokens: [{"old":"/api/admin/encargados","type":0,"val":"api","end":""},{"old":"/api/admin/encargados","type":0,"val":"admin","end":""},{"old":"/api/admin/encargados","type":0,"val":"encargados","end":""}],
+    types: placeholder as Registry['encargados.index']['types'],
+  },
+  'encargados.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/encargados/:id',
+    tokens: [{"old":"/api/admin/encargados/:id","type":0,"val":"api","end":""},{"old":"/api/admin/encargados/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/encargados/:id","type":0,"val":"encargados","end":""},{"old":"/api/admin/encargados/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['encargados.show']['types'],
+  },
+  'encargados.store': {
+    methods: ["POST"],
+    pattern: '/api/admin/encargados',
+    tokens: [{"old":"/api/admin/encargados","type":0,"val":"api","end":""},{"old":"/api/admin/encargados","type":0,"val":"admin","end":""},{"old":"/api/admin/encargados","type":0,"val":"encargados","end":""}],
+    types: placeholder as Registry['encargados.store']['types'],
+  },
+  'encargados.update': {
+    methods: ["PUT"],
+    pattern: '/api/admin/encargados/:id',
+    tokens: [{"old":"/api/admin/encargados/:id","type":0,"val":"api","end":""},{"old":"/api/admin/encargados/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/encargados/:id","type":0,"val":"encargados","end":""},{"old":"/api/admin/encargados/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['encargados.update']['types'],
+  },
+  'encargados.destroy': {
+    methods: ["DELETE"],
+    pattern: '/api/admin/encargados/:id',
+    tokens: [{"old":"/api/admin/encargados/:id","type":0,"val":"api","end":""},{"old":"/api/admin/encargados/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/encargados/:id","type":0,"val":"encargados","end":""},{"old":"/api/admin/encargados/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['encargados.destroy']['types'],
   },
   'usuarios.index': {
     methods: ["GET","HEAD"],
@@ -456,6 +498,36 @@ const routes = {
     tokens: [{"old":"/api/admin/tipos-recompensas/:id","type":0,"val":"api","end":""},{"old":"/api/admin/tipos-recompensas/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/tipos-recompensas/:id","type":0,"val":"tipos-recompensas","end":""},{"old":"/api/admin/tipos-recompensas/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['tipos_recompensas.destroy']['types'],
   },
+  'estados_encargados.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/estados-encargados',
+    tokens: [{"old":"/api/admin/estados-encargados","type":0,"val":"api","end":""},{"old":"/api/admin/estados-encargados","type":0,"val":"admin","end":""},{"old":"/api/admin/estados-encargados","type":0,"val":"estados-encargados","end":""}],
+    types: placeholder as Registry['estados_encargados.index']['types'],
+  },
+  'estados_encargados.store': {
+    methods: ["POST"],
+    pattern: '/api/admin/estados-encargados',
+    tokens: [{"old":"/api/admin/estados-encargados","type":0,"val":"api","end":""},{"old":"/api/admin/estados-encargados","type":0,"val":"admin","end":""},{"old":"/api/admin/estados-encargados","type":0,"val":"estados-encargados","end":""}],
+    types: placeholder as Registry['estados_encargados.store']['types'],
+  },
+  'estados_encargados.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/estados-encargados/:id',
+    tokens: [{"old":"/api/admin/estados-encargados/:id","type":0,"val":"api","end":""},{"old":"/api/admin/estados-encargados/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/estados-encargados/:id","type":0,"val":"estados-encargados","end":""},{"old":"/api/admin/estados-encargados/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['estados_encargados.show']['types'],
+  },
+  'estados_encargados.update': {
+    methods: ["PUT","PATCH"],
+    pattern: '/api/admin/estados-encargados/:id',
+    tokens: [{"old":"/api/admin/estados-encargados/:id","type":0,"val":"api","end":""},{"old":"/api/admin/estados-encargados/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/estados-encargados/:id","type":0,"val":"estados-encargados","end":""},{"old":"/api/admin/estados-encargados/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['estados_encargados.update']['types'],
+  },
+  'estados_encargados.destroy': {
+    methods: ["DELETE"],
+    pattern: '/api/admin/estados-encargados/:id',
+    tokens: [{"old":"/api/admin/estados-encargados/:id","type":0,"val":"api","end":""},{"old":"/api/admin/estados-encargados/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/estados-encargados/:id","type":0,"val":"estados-encargados","end":""},{"old":"/api/admin/estados-encargados/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['estados_encargados.destroy']['types'],
+  },
   'perfil.mostrar': {
     methods: ["GET","HEAD"],
     pattern: '/api/usuario/perfil',
@@ -473,6 +545,12 @@ const routes = {
     pattern: '/api/usuario/perfil/cambiar-password',
     tokens: [{"old":"/api/usuario/perfil/cambiar-password","type":0,"val":"api","end":""},{"old":"/api/usuario/perfil/cambiar-password","type":0,"val":"usuario","end":""},{"old":"/api/usuario/perfil/cambiar-password","type":0,"val":"perfil","end":""},{"old":"/api/usuario/perfil/cambiar-password","type":0,"val":"cambiar-password","end":""}],
     types: placeholder as Registry['perfil.cambiar_password']['types'],
+  },
+  'foto_perfils.store': {
+    methods: ["POST"],
+    pattern: '/api/usuario/perfil/foto',
+    tokens: [{"old":"/api/usuario/perfil/foto","type":0,"val":"api","end":""},{"old":"/api/usuario/perfil/foto","type":0,"val":"usuario","end":""},{"old":"/api/usuario/perfil/foto","type":0,"val":"perfil","end":""},{"old":"/api/usuario/perfil/foto","type":0,"val":"foto","end":""}],
+    types: placeholder as Registry['foto_perfils.store']['types'],
   },
   'entregas.index': {
     methods: ["GET","HEAD"],
@@ -521,6 +599,18 @@ const routes = {
     pattern: '/api/usuario/canjes',
     tokens: [{"old":"/api/usuario/canjes","type":0,"val":"api","end":""},{"old":"/api/usuario/canjes","type":0,"val":"usuario","end":""},{"old":"/api/usuario/canjes","type":0,"val":"canjes","end":""}],
     types: placeholder as Registry['canjes.store']['types'],
+  },
+  'recompensas.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/usuario/recompensas',
+    tokens: [{"old":"/api/usuario/recompensas","type":0,"val":"api","end":""},{"old":"/api/usuario/recompensas","type":0,"val":"usuario","end":""},{"old":"/api/usuario/recompensas","type":0,"val":"recompensas","end":""}],
+    types: placeholder as Registry['recompensas.index']['types'],
+  },
+  'aliados_usuarios.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/usuario/aliados',
+    tokens: [{"old":"/api/usuario/aliados","type":0,"val":"api","end":""},{"old":"/api/usuario/aliados","type":0,"val":"usuario","end":""},{"old":"/api/usuario/aliados","type":0,"val":"aliados","end":""}],
+    types: placeholder as Registry['aliados_usuarios.index']['types'],
   },
   'reservas_usuario.index': {
     methods: ["GET","HEAD"],

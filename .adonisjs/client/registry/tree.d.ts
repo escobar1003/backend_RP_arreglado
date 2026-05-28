@@ -8,6 +8,10 @@ export interface ApiDefinition {
     resumen: typeof routes['puntos.resumen']
     historial: typeof routes['puntos.historial']
   }
+  puntosReciclajes: {
+    index: typeof routes['puntos_reciclajes.index']
+    show: typeof routes['puntos_reciclajes.show']
+  }
   login: {
     iniciarSesion: typeof routes['login.iniciar_sesion']
     cerrarSesion: typeof routes['login.cerrar_sesion']
@@ -24,6 +28,13 @@ export interface ApiDefinition {
     store: typeof routes['administradores.store']
     update: typeof routes['administradores.update']
     destroy: typeof routes['administradores.destroy']
+  }
+  encargados: {
+    index: typeof routes['encargados.index']
+    show: typeof routes['encargados.show']
+    store: typeof routes['encargados.store']
+    update: typeof routes['encargados.update']
+    destroy: typeof routes['encargados.destroy']
   }
   usuarios: {
     index: typeof routes['usuarios.index']
@@ -115,10 +126,20 @@ export interface ApiDefinition {
     update: typeof routes['tipos_recompensas.update']
     destroy: typeof routes['tipos_recompensas.destroy']
   }
+  estadosEncargados: {
+    index: typeof routes['estados_encargados.index']
+    store: typeof routes['estados_encargados.store']
+    show: typeof routes['estados_encargados.show']
+    update: typeof routes['estados_encargados.update']
+    destroy: typeof routes['estados_encargados.destroy']
+  }
   perfil: {
     mostrar: typeof routes['perfil.mostrar']
     actualizar: typeof routes['perfil.actualizar']
     cambiarPassword: typeof routes['perfil.cambiar_password']
+  }
+  fotoPerfils: {
+    store: typeof routes['foto_perfils.store']
   }
   entregas: {
     index: typeof routes['entregas.index']
@@ -130,6 +151,9 @@ export interface ApiDefinition {
     index: typeof routes['canjes.index']
     show: typeof routes['canjes.show']
     store: typeof routes['canjes.store']
+  }
+  aliadosUsuarios: {
+    index: typeof routes['aliados_usuarios.index']
   }
   reservasUsuario: {
     index: typeof routes['reservas_usuario.index']

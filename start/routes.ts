@@ -3,15 +3,19 @@ import { middleware } from './kernel.js'
 import PuntosController from '#controllers/puntos_controller'
 
 
-// RUTA PARA ASIGNACIÓN DE PUNTOS (SCRUM-506)
-router.post('/puntos/asignar', [PuntosController, 'asignar'])
 
+
+// RUTA PARA ASIGNACIÓN DE PUNTOS (SCRUM-506)
+router.post('/puntos/asignar', [() => import('#controllers/puntos_controller'), 'asignar'])
 router.get('/', async () => {
   return {
     mensaje: 'Backend funcionando'
   }
 })
 
+// PUNTOS DE RECICLAJE (públicas)
+router.get('/api/puntos-reciclaje', [() => import('#controllers/puntos_reciclajes_controller'), 'index'])
+router.get('/api/puntos-reciclaje/:id', [() => import('#controllers/puntos_reciclajes_controller'), 'show'])
 // AUTH (públicas)
 router.group(() => {
   router.post('/iniciar-sesion', [() => import('#controllers/auth/login_controller'), 'iniciarSesion'])
@@ -35,6 +39,13 @@ router.group(() => {
   router.post('/admins', [() => import('#controllers/admin/administradores_controller'), 'store'])
   router.put('/admins/:id', [() => import('#controllers/admin/administradores_controller'), 'update'])
   router.delete('/admins/:id', [() => import('#controllers/admin/administradores_controller'), 'destroy'])
+
+  // Encargados
+  router.get('/encargados', [() => import('#controllers/admin/encargados_controller'), 'index'])
+  router.get('/encargados/:id', [() => import('#controllers/admin/encargados_controller'), 'show'])
+  router.post('/encargados', [() => import('#controllers/admin/encargados_controller'), 'store'])
+  router.put('/encargados/:id', [() => import('#controllers/admin/encargados_controller'), 'update'])
+  router.delete('/encargados/:id', [() => import('#controllers/admin/encargados_controller'), 'destroy'])
 
   // Usuarios
   router.get('/usuarios', [() => import('#controllers/admin/usuarios_controller'), 'index'])
@@ -62,7 +73,7 @@ router.group(() => {
   router.post('/recompensas', [() => import('#controllers/admin/recompensas_controller'), 'store'])
   router.put('/recompensas/:id', [() => import('#controllers/admin/recompensas_controller'), 'update'])
   router.delete('/recompensas/:id', [() => import('#controllers/admin/recompensas_controller'), 'destroy'])
-  
+
   // Roles
   router.get('/roles', [() => import('#controllers/admin/roles_controller'), 'index'])
   router.get('/roles/:id', [() => import('#controllers/admin/roles_controller'), 'show'])
@@ -130,7 +141,11 @@ router.group(() => {
   router.post('/tipos-recompensas', [() => import('#controllers/admin/tipos_recompensas_controller'), 'store'])
   router.put('/tipos-recompensas/:id', [() => import('#controllers/admin/tipos_recompensas_controller'), 'update'])
   router.delete('/tipos-recompensas/:id', [() => import('#controllers/admin/tipos_recompensas_controller'), 'destroy'])
+  // Estado Encargados
+  router.resource('estados-encargados', '#controllers/admin/estados_encargados_controller').apiOnly()
 }).prefix('/api/admin').use([middleware.auth(), middleware.verificar_rol(['admin'])])
+
+
 
 
 // USUARIO
@@ -140,7 +155,8 @@ router.group(() => {
   router.get('/perfil', [() => import('#controllers/usuario/perfil_controller'), 'mostrar'])
   router.put('/perfil', [() => import('#controllers/usuario/perfil_controller'), 'actualizar'])
   router.put('/perfil/cambiar-password', [() => import('#controllers/usuario/perfil_controller'), 'cambiarPassword'])
-
+  // Foto de perfil
+  router.post('/perfil/foto', [() => import('#controllers/usuario/foto_perfils_controller'), 'store'])
   // Entregas
   router.get('/entregas', [() => import('#controllers/usuario/entregas_controller'), 'index'])
   router.get('/entregas/:id', [() => import('#controllers/usuario/entregas_controller'), 'show'])
@@ -155,12 +171,17 @@ router.group(() => {
   router.get('/canjes/:id', [() => import('#controllers/usuario/canjes_controller'), 'show'])
   router.post('/canjes', [() => import('#controllers/usuario/canjes_controller'), 'store'])
 
+  // Recompensas
+  router.get('/recompensas', [() => import('#controllers/usuario/recompensas_controller'), 'index'])
+
+   // Aliados
+  router.get('/aliados', [() => import('#controllers/usuario/aliados_usuarios_controller'), 'index'])
   // Reservas (app móvil - usuario)
   router.get('/reservas',        [() => import('#controllers/usuario/reservas_usuario_controller'), 'index'])
   router.get('/reservas/:id',    [() => import('#controllers/usuario/reservas_usuario_controller'), 'show'])
   router.post('/reservas',       [() => import('#controllers/usuario/reservas_usuario_controller'), 'store'])
   router.delete('/reservas/:id', [() => import('#controllers/usuario/reservas_usuario_controller'), 'destroy'])
-
+  
 }).prefix('/api/usuario').use([middleware.auth(), middleware.verificar_rol(['usuario'])])
 
 
@@ -196,6 +217,20 @@ router.group(() => {
   router.get('/notificaciones', [() => import('#controllers/encargado/notificaciones_controller'), 'index'])
   router.put('/notificaciones/:id/leer', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarLeida'])
   router.put('/notificaciones/leer-todas', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarTodasLeidas'])
+
+  // SSE - Notificaciones en tiempo real
+  router.get('/sse', async ({ auth, response }) => {
+    response.response.setHeader('Content-Type', 'text/event-stream')
+    response.response.setHeader('Cache-Control', 'no-cache')
+    response.response.setHeader('Connection', 'keep-alive')
+
+    const { default: SseManager } = await import('#services/sse_manager')
+    SseManager.addClient(auth.user!.idUsuario, response)
+
+    response.response.on('close', () => {
+      SseManager.removeClient(auth.user!.idUsuario)
+    })
+  })
 
  // Entregas
   router.get('/entregas', [() => import('#controllers/encargado/entregas_controller'), 'index'])
