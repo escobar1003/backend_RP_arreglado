@@ -780,6 +780,12 @@ const routes = {
     tokens: [{"old":"/api/detectar-material","type":0,"val":"api","end":""},{"old":"/api/detectar-material","type":0,"val":"detectar-material","end":""}],
     types: placeholder as Registry['deteccion.procesar_camara']['types'],
   },
+  'chat.preguntar': {
+    methods: ["POST"],
+    pattern: '/api/chat',
+    tokens: [{"old":"/api/chat","type":0,"val":"api","end":""},{"old":"/api/chat","type":0,"val":"chat","end":""}],
+    types: placeholder as Registry['chat.preguntar']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }
