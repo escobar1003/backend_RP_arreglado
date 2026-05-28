@@ -21,7 +21,7 @@ ENV APP_KEY=ClaveSecretaSuperLargaYEstricta12345!
 ENV DB_CONNECTION=mysql
 ENV DB_HOST=bsczq2jyp0c0ier7ihzy-mysql.services.clever-cloud.com
 ENV DB_PORT=3306
-ENV DB_USER=uw9k92byoe4asegy
+ENV DB_USER=bsczq2jyp0c0ier7ihzy
 ENV DB_PASSWORD=B9IjilAoHSqDxYsAY5ls
 ENV DB_DATABASE=bsczq2jyp0c0ier7ihzy
 

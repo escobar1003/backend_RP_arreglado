@@ -42,7 +42,7 @@ export default class DeteccionController {
       // 6. Responderle los resultados de la IA de vuelta a Flutter
       return response.ok(apiResponse.data)
 
-    } catch (error) {
+    } catch (error:any) {
       // Si algo falla, borrar la foto temporal para evitar bloqueos
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath)

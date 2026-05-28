@@ -648,6 +648,24 @@ const routes = {
     tokens: [{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"api","end":""},{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"encargado","end":""},{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"notificaciones","end":""},{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"leer-todas","end":""}],
     types: placeholder as Registry['notificaciones.marcar_todas_leidas']['types'],
   },
+  'entregas.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/entregas',
+    tokens: [{"old":"/api/encargado/entregas","type":0,"val":"api","end":""},{"old":"/api/encargado/entregas","type":0,"val":"encargado","end":""},{"old":"/api/encargado/entregas","type":0,"val":"entregas","end":""}],
+    types: placeholder as Registry['entregas.index']['types'],
+  },
+  'entregas.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/entregas/:id',
+    tokens: [{"old":"/api/encargado/entregas/:id","type":0,"val":"api","end":""},{"old":"/api/encargado/entregas/:id","type":0,"val":"encargado","end":""},{"old":"/api/encargado/entregas/:id","type":0,"val":"entregas","end":""},{"old":"/api/encargado/entregas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['entregas.show']['types'],
+  },
+  'entregas.actualizar_estado': {
+    methods: ["PUT"],
+    pattern: '/api/encargado/entregas/:id/estado',
+    tokens: [{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"api","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"encargado","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"entregas","end":""},{"old":"/api/encargado/entregas/:id/estado","type":1,"val":"id","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"estado","end":""}],
+    types: placeholder as Registry['entregas.actualizar_estado']['types'],
+  },
   'openapi.html': {
     methods: ["GET","HEAD"],
     pattern: '/swagger',

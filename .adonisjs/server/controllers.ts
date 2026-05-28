@@ -33,11 +33,12 @@ export const controllers = {
   },
   Chat: () => import('#controllers/chat_controller'),
   Deteccion: () => import('#controllers/deteccion_controller'),
-  Puntos: () => import('#controllers/puntos_controller'),
   encargado: {
+    Entregas: () => import('#controllers/encargado/entregas_controller'),
     Notificaciones: () => import('#controllers/encargado/notificaciones_controller'),
     ReservasEncargado: () => import('#controllers/encargado/reservas_encargado_controller'),
   },
+  Puntos: () => import('#controllers/puntos_controller'),
   usuario: {
     Canjes: () => import('#controllers/usuario/canjes_controller'),
     Entregas: () => import('#controllers/usuario/entregas_controller'),
