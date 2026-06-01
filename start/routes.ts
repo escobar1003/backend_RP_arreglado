@@ -14,6 +14,11 @@ router.get('/', async () => {
 // PUNTOS DE RECICLAJE (públicas)
 router.get('/api/puntos-reciclaje', [() => import('#controllers/puntos_reciclajes_controller'), 'index'])
 router.get('/api/puntos-reciclaje/:id', [() => import('#controllers/puntos_reciclajes_controller'), 'show'])
+
+
+// CHATBOT (público)
+router.post('/api/chatbot', [() => import('#controllers/chatbot_controller'), 'preguntar'])
+
 // AUTH (públicas)
 router.group(() => {
   router.post('/iniciar-sesion', [() => import('#controllers/auth/login_controller'), 'iniciarSesion'])
