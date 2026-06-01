@@ -9,9 +9,9 @@ app = Flask(__name__)
 MODEL_PATH = "best.pt"
 if os.path.exists(MODEL_PATH):
     model = YOLO(MODEL_PATH)
-    print("🚀 ¡Modelo YOLOv11 cargado con éxito!")
+    print(" ¡Modelo YOLOv11 cargado con éxito!")
 else:
-    print(f"❌ Error: No se encontró el archivo {MODEL_PATH} en esta ruta.")
+    print(f" Error: No se encontró el archivo {MODEL_PATH} en esta ruta.")
 
 @app.route("/predict", methods=["POST"])
 def predict():
