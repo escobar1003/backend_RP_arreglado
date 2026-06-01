@@ -1,9 +1,13 @@
 from flask import Flask, request, jsonify
 from groq import Groq
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 
-client = Groq(api_key="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")
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 SISTEMA_PROMPT = """
 Eres EcoBot, un asistente educativo especializado en reciclaje, sostenibilidad y manejo de residuos.
