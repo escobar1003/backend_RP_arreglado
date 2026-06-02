@@ -24,6 +24,12 @@ const routes = {
     tokens: [{"old":"/api/puntos-reciclaje/:id","type":0,"val":"api","end":""},{"old":"/api/puntos-reciclaje/:id","type":0,"val":"puntos-reciclaje","end":""},{"old":"/api/puntos-reciclaje/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['puntos_reciclajes.show']['types'],
   },
+  'chatbot.preguntar': {
+    methods: ["POST"],
+    pattern: '/api/chatbot',
+    tokens: [{"old":"/api/chatbot","type":0,"val":"api","end":""},{"old":"/api/chatbot","type":0,"val":"chatbot","end":""}],
+    types: placeholder as Registry['chatbot.preguntar']['types'],
+  },
   'login.iniciar_sesion': {
     methods: ["POST"],
     pattern: '/api/auth/iniciar-sesion',

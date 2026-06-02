@@ -43,6 +43,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/puntos_reciclajes_controller').default['show']>>>
     }
   }
+  'chatbot.preguntar': {
+    methods: ["POST"]
+    pattern: '/api/chatbot'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/chatbot_controller').default['preguntar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/chatbot_controller').default['preguntar']>>>
+    }
+  }
   'login.iniciar_sesion': {
     methods: ["POST"]
     pattern: '/api/auth/iniciar-sesion'

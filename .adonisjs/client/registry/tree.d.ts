@@ -12,6 +12,9 @@ export interface ApiDefinition {
     index: typeof routes['puntos_reciclajes.index']
     show: typeof routes['puntos_reciclajes.show']
   }
+  chatbot: {
+    preguntar: typeof routes['chatbot.preguntar']
+  }
   login: {
     iniciarSesion: typeof routes['login.iniciar_sesion']
     cerrarSesion: typeof routes['login.cerrar_sesion']
