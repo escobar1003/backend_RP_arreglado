@@ -1,7 +1,7 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import db from '@adonisjs/lucid/services/db'
 import hash from '@adonisjs/core/services/hash'
-import { DateTime } from 'luxon'
+
 
 export default class DatabaseSeeder extends BaseSeeder {
   async run() {

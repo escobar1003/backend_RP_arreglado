@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Reserva from '#models/reserva'
 import PuntoReciclaje from '#models/punto_reciclaje'
+import Notificacion from '#models/notificacion'
 
 export default class ReservasEncargadoController {
   /**
@@ -140,6 +141,17 @@ export default class ReservasEncargadoController {
 
     await reserva.save()
     await reserva.load('usuario', (q) => q.select('id_usuario', 'nombre', 'correo', 'telefono'))
+
+    if (estado) {
+      await Notificacion.create({
+        usuarioId: reserva.idUsuario,
+        titulo: 'Estado de tu reserva actualizado',
+        mensaje: `Tu reserva del ${reserva.fecha} a las ${reserva.hora} en ${punto.nombre} ha cambiado a: ${estado}.`,
+        leida: false,
+        tipo: 'reserva',
+        idReferencia: reserva.idReserva,
+      })
+    }
 
     return response.ok({ mensaje: 'Reserva actualizada', reserva })
   }
