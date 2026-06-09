@@ -34,7 +34,7 @@ export default class RecuperarPasswordsController {
     // En producción: aquí se enviaría el código por correo (SMTP / Mailgun / etc.)
     // Por ahora se retorna en la respuesta para facilitar el desarrollo y las pruebas
 
-    await mail.send((message) => {
+   await mail.send((message) => {
       message
         .to(correo)
         .from(process.env.SMTP_USERNAME!)
@@ -50,6 +50,7 @@ export default class RecuperarPasswordsController {
           <p>Equipo Recycling Points</p>
         `)
     })
+        
 
     return response.ok({
       mensaje: 'Si el correo existe, recibirás un código de recuperación',
