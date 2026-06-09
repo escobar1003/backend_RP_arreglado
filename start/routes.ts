@@ -5,11 +5,7 @@ import { middleware } from './kernel.js'
 
 // RUTA PARA ASIGNACIÓN DE PUNTOS (SCRUM-506)
 router.post('/puntos/asignar', [() => import('#controllers/puntos_controller'), 'asignar'])
-router.get('/', async () => {
-  return {
-    mensaje: 'Backend funcionando'
-  }
-})
+
 
 // PUNTOS DE RECICLAJE (públicas)
 router.get('/api/puntos-reciclaje', [() => import('#controllers/puntos_reciclajes_controller'), 'index'])
