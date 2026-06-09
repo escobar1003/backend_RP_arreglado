@@ -48,6 +48,7 @@ export const controllers = {
     Canjes: () => import('#controllers/usuario/canjes_controller'),
     Entregas: () => import('#controllers/usuario/entregas_controller'),
     FotoPerfils: () => import('#controllers/usuario/foto_perfils_controller'),
+    NotificacionesUsuario: () => import('#controllers/usuario/notificaciones_usuario_controller'),
     Perfil: () => import('#controllers/usuario/perfil_controller'),
     Puntos: () => import('#controllers/usuario/puntos_controller'),
     Recompensas: () => import('#controllers/usuario/recompensas_controller'),

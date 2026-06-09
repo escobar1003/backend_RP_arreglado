@@ -732,17 +732,17 @@ const routes = {
     tokens: [{"old":"/api/encargado/notificaciones","type":0,"val":"api","end":""},{"old":"/api/encargado/notificaciones","type":0,"val":"encargado","end":""},{"old":"/api/encargado/notificaciones","type":0,"val":"notificaciones","end":""}],
     types: placeholder as Registry['notificaciones.index']['types'],
   },
-  'notificaciones.marcar_leida': {
-    methods: ["PUT"],
-    pattern: '/api/encargado/notificaciones/:id/leer',
-    tokens: [{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"api","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"encargado","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"notificaciones","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":1,"val":"id","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"leer","end":""}],
-    types: placeholder as Registry['notificaciones.marcar_leida']['types'],
-  },
   'notificaciones.marcar_todas_leidas': {
     methods: ["PUT"],
     pattern: '/api/encargado/notificaciones/leer-todas',
     tokens: [{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"api","end":""},{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"encargado","end":""},{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"notificaciones","end":""},{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"leer-todas","end":""}],
     types: placeholder as Registry['notificaciones.marcar_todas_leidas']['types'],
+  },
+  'notificaciones.marcar_leida': {
+    methods: ["PUT"],
+    pattern: '/api/encargado/notificaciones/:id/leer',
+    tokens: [{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"api","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"encargado","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"notificaciones","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":1,"val":"id","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"leer","end":""}],
+    types: placeholder as Registry['notificaciones.marcar_leida']['types'],
   },
   'entregas.index': {
     methods: ["GET","HEAD"],

@@ -218,8 +218,8 @@ router.group(() => {
 
   // Notificaciones
   router.get('/notificaciones', [() => import('#controllers/encargado/notificaciones_controller'), 'index'])
-  router.put('/notificaciones/:id/leer', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarLeida'])
   router.put('/notificaciones/leer-todas', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarTodasLeidas'])
+  router.put('/notificaciones/:id/leer', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarLeida'])
 
   // SSE - Notificaciones en tiempo real
   router.get('/sse', async ({ auth, response }) => {

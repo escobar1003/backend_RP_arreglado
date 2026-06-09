@@ -188,8 +188,8 @@ export interface ApiDefinition {
   }
   notificaciones: {
     index: typeof routes['notificaciones.index']
-    marcarLeida: typeof routes['notificaciones.marcar_leida']
     marcarTodasLeidas: typeof routes['notificaciones.marcar_todas_leidas']
+    marcarLeida: typeof routes['notificaciones.marcar_leida']
   }
   openapi: {
     html: typeof routes['openapi.html']
