@@ -6,12 +6,8 @@ import PuntosController from '#controllers/puntos_controller'
 
 
 // RUTA PARA ASIGNACIÓN DE PUNTOS (SCRUM-506)
-router.post('/puntos/asignar', [() => import('#controllers/puntos_controller'), 'asignar'])
-router.get('/', async () => {
-  return {
-    mensaje: 'Backend funcionando'
-  }
-})
+
+
 
 // PUNTOS DE RECICLAJE (públicas)
 router.get('/api/puntos-reciclaje', [() => import('#controllers/puntos_reciclajes_controller'), 'index'])
@@ -220,8 +216,8 @@ router.group(() => {
 
   // Notificaciones
   router.get('/notificaciones', [() => import('#controllers/encargado/notificaciones_controller'), 'index'])
-  router.put('/notificaciones/:id/leer', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarLeida'])
   router.put('/notificaciones/leer-todas', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarTodasLeidas'])
+  router.put('/notificaciones/:id/leer', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarLeida'])
 
   // SSE - Notificaciones en tiempo real
   router.get('/sse', async ({ auth, response }) => {

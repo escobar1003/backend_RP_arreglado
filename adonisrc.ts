@@ -68,10 +68,11 @@ export default defineConfig({
   |
   */
   preloads: [
-    () => import('#start/routes'),
-    () => import('#start/kernel'),
-    () => import('#start/validator'),
-  ],
+  () => import('#start/routes'),
+  () => import('#start/kernel'),
+  () => import('#start/validator'),
+  () => import('#start/ws'),   // ← esto es lo único nuevo
+],
 
   /*
   |--------------------------------------------------------------------------

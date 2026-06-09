@@ -10,7 +10,47 @@ export default class PerfilController {
       .preload('estadoUsuario')
       .firstOrFail()
 
-    return response.ok({
+        // SCRUM-874: Total de entregas
+  const { default: Entrega } = await import('#models/entrega')
+  const totalEntregas = await Entrega.query()
+    .where('id_usuario', usuario.idUsuario)
+    .count('* as total')
+  const entregas = Number(totalEntregas[0].$extras.total)
+
+  // SCRUM-875: Puntos acumulados
+  const { default: MovimientoPunto } = await import('#models/movimiento_punto')
+  const movimientos = await MovimientoPunto.query()
+    .where('id_usuario', usuario.idUsuario)
+
+  const ganados = movimientos
+    .filter(m => m.tipoMovimiento === 'ganados')
+    .reduce((sum, m) => sum + m.puntos, 0)
+  const descontados = movimientos
+    .filter(m => m.tipoMovimiento === 'descontados')
+    .reduce((sum, m) => sum + m.puntos, 0)
+  const ajuste = movimientos
+    .filter(m => m.tipoMovimiento === 'ajuste')
+    .reduce((sum, m) => sum + m.puntos, 0)
+  const puntosAcumulados = ganados - descontados + ajuste
+
+  // SCRUM-876: Total de canjes
+  const { default: Canje } = await import('#models/canje')
+  const totalCanjesQuery = await Canje.query()
+    .where('id_usuario', usuario.idUsuario)
+    .count('* as total')
+  const totalCanjes = Number(totalCanjesQuery[0].$extras.total)
+
+  // SCRUM-877: Nivel ecológico
+  let nivelEcologico = 'Semilla'
+  if (puntosAcumulados >= 5000) nivelEcologico = 'Diamante'
+  else if (puntosAcumulados >= 2000) nivelEcologico = 'Oro'
+  else if (puntosAcumulados >= 1000) nivelEcologico = 'Plata'
+  else if (puntosAcumulados >= 500) nivelEcologico = 'Bronce'
+  else if (puntosAcumulados >= 100) nivelEcologico = 'Verde'
+
+  // SCRUM-878: Respuesta JSON actualizada
+  return response.ok({
+    usuario: {
       idUsuario: usuario.idUsuario,
       nombre: usuario.nombre,
       correo: usuario.correo,
@@ -19,8 +59,17 @@ export default class PerfilController {
       fechaRegistro: usuario.fechaRegistro,
       rol: usuario.rol.nombre,
       estado: usuario.estadoUsuario.nombre,
-    })
-  }
+    },
+    estadisticas: {
+      totalEntregas: entregas,
+      puntosAcumulados,
+      totalCanjes,
+      nivelEcologico,
+    }
+  })
+}
+
+
 
   async actualizar({ auth, request, response }: HttpContext) {
     const usuario = await Usuario.findOrFail(auth.user!.idUsuario)

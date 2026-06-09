@@ -33,7 +33,11 @@ export const controllers = {
     RecuperarPasswords: () => import('#controllers/auth/recuperar_passwords_controller'),
     Registros: () => import('#controllers/auth/registros_controller'),
   },
+<<<<<<< HEAD
   Chat: () => import('#controllers/chat_controller'),
+=======
+  Chatbot: () => import('#controllers/chatbot_controller'),
+>>>>>>> notificaciones_socket
   Deteccion: () => import('#controllers/deteccion_controller'),
   encargado: {
     Entregas: () => import('#controllers/encargado/entregas_controller'),
@@ -48,11 +52,11 @@ export const controllers = {
     Canjes: () => import('#controllers/usuario/canjes_controller'),
     Entregas: () => import('#controllers/usuario/entregas_controller'),
     FotoPerfils: () => import('#controllers/usuario/foto_perfils_controller'),
+    NotificacionesUsuario: () => import('#controllers/usuario/notificaciones_usuario_controller'),
     Perfil: () => import('#controllers/usuario/perfil_controller'),
     Puntos: () => import('#controllers/usuario/puntos_controller'),
     Recompensas: () => import('#controllers/usuario/recompensas_controller'),
     ReservasUsuario: () => import('#controllers/usuario/reservas_usuario_controller'),
     ReservasUsuarios: () => import('#controllers/usuario/reservas_usuarios_controller'),
   },
-  Chatbot: () => import('#controllers/chatbot_controller'),
 }
