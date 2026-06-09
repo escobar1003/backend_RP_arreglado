@@ -55,6 +55,7 @@ router.group(() => {
   // Usuarios
   router.get('/usuarios', [() => import('#controllers/admin/usuarios_controller'), 'index'])
   router.get('/usuarios/:id', [() => import('#controllers/admin/usuarios_controller'), 'show'])
+  router.post('/usuarios', [() => import('#controllers/admin/usuarios_controller'), 'store'])
   router.put('/usuarios/:id', [() => import('#controllers/admin/usuarios_controller'), 'update'])
   router.delete('/usuarios/:id', [() => import('#controllers/admin/usuarios_controller'), 'destroy'])
 
@@ -148,6 +149,11 @@ router.group(() => {
   router.delete('/tipos-recompensas/:id', [() => import('#controllers/admin/tipos_recompensas_controller'), 'destroy'])
   // Estado Encargados
   router.resource('estados-encargados', '#controllers/admin/estados_encargados_controller').apiOnly()
+
+
+  // Perfil
+  router.get('/perfil', [() => import('#controllers/admin/perfil_admin_controller'), 'mostrar'])
+  router.put('/perfil', [() => import('#controllers/admin/perfil_admin_controller'), 'actualizar'])
 }).prefix('/api/admin').use([middleware.auth(), middleware.verificar_rol(['admin'])])
 
 
@@ -186,6 +192,11 @@ router.group(() => {
   router.get('/reservas/:id',    [() => import('#controllers/usuario/reservas_usuario_controller'), 'show'])
   router.post('/reservas',       [() => import('#controllers/usuario/reservas_usuario_controller'), 'store'])
   router.delete('/reservas/:id', [() => import('#controllers/usuario/reservas_usuario_controller'), 'destroy'])
+
+  // Notificaciones
+  router.get('/notificaciones', [() => import('#controllers/usuario/notificaciones_usuario_controller'), 'index'])
+  router.put('/notificaciones/:id/leer', [() => import('#controllers/usuario/notificaciones_usuario_controller'), 'marcarLeida'])
+  router.put('/notificaciones/leer-todas', [() => import('#controllers/usuario/notificaciones_usuario_controller'), 'marcarTodasLeidas'])
   
 }).prefix('/api/usuario').use([middleware.auth(), middleware.verificar_rol(['usuario'])])
 
@@ -218,10 +229,17 @@ router.group(() => {
   router.put('/reservas/:id',    [() => import('#controllers/encargado/reservas_encargado_controller'), 'update'])
   router.delete('/reservas/:id', [() => import('#controllers/encargado/reservas_encargado_controller'), 'destroy'])
 
+  // Materiales
+  router.get('/materiales', [() => import('#controllers/admin/materiales_controller'), 'index'])
+
   // Notificaciones
   router.get('/notificaciones', [() => import('#controllers/encargado/notificaciones_controller'), 'index'])
   router.put('/notificaciones/:id/leer', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarLeida'])
   router.put('/notificaciones/leer-todas', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarTodasLeidas'])
+
+  // Perfil
+  router.get('/perfil', [() => import('#controllers/encargado/perfil_encargado_controller'), 'mostrar'])
+  router.put('/perfil', [() => import('#controllers/encargado/perfil_encargado_controller'), 'actualizar'])
 
   // SSE - Notificaciones en tiempo real
   router.get('/sse', async ({ auth, response }) => {
