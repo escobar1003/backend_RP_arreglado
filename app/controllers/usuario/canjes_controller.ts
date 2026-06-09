@@ -102,7 +102,7 @@ export default class CanjesController {
 
         // SCRUM-583: Generar notificación al aprobar canje
     await Notificacion.create({
-      usuarioId: auth.user!.idUsuario,
+      idUsuario: auth.user!.idUsuario,
       titulo: 'Canje realizado',
       mensaje: `Tu canje de "${recompensa.nombre}" fue registrado correctamente. Código: ${codigoCanje}. Puntos usados: ${recompensa.puntosRequeridos}pts.`,
       leida: false,

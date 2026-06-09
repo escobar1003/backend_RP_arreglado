@@ -5,13 +5,19 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.alterTable(this.tableName, (table) => {
-      table.integer('id_aliado').unsigned().nullable()
-        .references('id_aliado').inTable('aliados').onDelete('SET NULL')
+      table
+        .integer('id_aliado')
+        .unsigned()
+        .nullable()
+        .references('id_aliado')
+        .inTable('aliados')
+        .onDelete('SET NULL')
     })
   }
 
   async down() {
     this.schema.alterTable(this.tableName, (table) => {
+      table.dropForeign(['id_aliado'])
       table.dropColumn('id_aliado')
     })
   }

@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Usuario from '#models/usuario'
 import TransaccionPunto from '#models/transaccion_punto'
 
+
 export default class PuntosController {
   
   public async asignar({ request, response }: HttpContext) {
@@ -39,14 +40,17 @@ export default class PuntosController {
       usuario.puntosTotales += puntosAGanar
       await usuario.save()
 
-      return response.ok({
+            return response.ok({
         message: 'Puntos asignados correctamente',
         puntosGanados: puntosAGanar,
         nuevoSaldo: usuario.puntosTotales
       })
 
-    } catch (error) {
-      return response.internalServerError({ message: 'Error al procesar los puntos', error: error.message })
+    } catch (error: any) {
+      return response.internalServerError({
+        message: 'Error al procesar los puntos',
+        error: error.message
+      })
     }
   }
 }

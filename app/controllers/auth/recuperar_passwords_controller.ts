@@ -1,7 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { DateTime } from 'luxon'
-import hash from '@adonisjs/core/services/hash'
 import Usuario from '#models/usuario'
+import mail from '@adonisjs/mail/services/main'
+
 import {
   solicitarCodigoValidator,
   verificarCodigoValidator,
@@ -32,10 +33,25 @@ export default class RecuperarPasswordsController {
     // En producción: aquí se enviaría el código por correo (SMTP / Mailgun / etc.)
     // Por ahora se retorna en la respuesta para facilitar el desarrollo y las pruebas
 
+    await mail.send((message) => {
+      message
+        .to(correo)
+        .from(process.env.SMTP_USERNAME!)
+        .subject('Recycling Points - Código de recuperación')
+        .html(`
+          <h2>Hola ${usuario.nombre},</h2>
+          <p>Recibimos una solicitud para restablecer tu contraseña.</p>
+          <p>Tu código de recuperación es:</p>
+          <h1 style="letter-spacing: 8px; color: #2e7d32;">${codigo}</h1>
+          <p>Este código expira en <strong>15 minutos</strong>.</p>
+          <p>Si no solicitaste esto, ignora este correo.</p>
+          <br/>
+          <p>Equipo Recycling Points</p>
+        `)
+    })
+
     return response.ok({
-      mensaje: 'Código de recuperación generado correctamente',
-      codigo, // ⚠️ QUITAR EN PRODUCCIÓN — solo para desarrollo/pruebas
-      expiracion: usuario.codigoExpiracion,
+      mensaje: 'Si el correo existe, recibirás un código de recuperación',
     })
   }
 
@@ -106,7 +122,7 @@ export default class RecuperarPasswordsController {
     }
 
     // Todo correcto — hashear y guardar la nueva contraseña, limpiar el código
-    usuario.password = await hash.make(nuevaPassword)
+    usuario.password = nuevaPassword
     usuario.codigoRecuperacion = null
     usuario.codigoExpiracion = null
     await usuario.save()

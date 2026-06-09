@@ -15,8 +15,44 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: unknown
-      errorResponse: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/puntos_controller').default['asignar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/puntos_controller').default['asignar']>>>
+    }
+  }
+  'puntos_reciclajes.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/puntos-reciclaje'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/puntos_reciclajes_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/puntos_reciclajes_controller').default['index']>>>
+    }
+  }
+  'puntos_reciclajes.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/puntos-reciclaje/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/puntos_reciclajes_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/puntos_reciclajes_controller').default['show']>>>
+    }
+  }
+  'chatbot.preguntar': {
+    methods: ["POST"]
+    pattern: '/api/chatbot'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/chatbot_controller').default['preguntar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/chatbot_controller').default['preguntar']>>>
     }
   }
   'login.iniciar_sesion': {
@@ -125,6 +161,66 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/administradores_controller').default['destroy']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/administradores_controller').default['destroy']>>>
+    }
+  }
+  'encargados.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/encargados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['index']>>>
+    }
+  }
+  'encargados.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['show']>>>
+    }
+  }
+  'encargados.store': {
+    methods: ["POST"]
+    pattern: '/api/admin/encargados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['store']>>>
+    }
+  }
+  'encargados.update': {
+    methods: ["PUT"]
+    pattern: '/api/admin/encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['update']>>>
+    }
+  }
+  'encargados.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/admin/encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['destroy']>>>
     }
   }
   'usuarios.index': {
@@ -907,6 +1003,66 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/tipos_recompensas_controller').default['destroy']>>>
     }
   }
+  'estados_encargados.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/estados-encargados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.store': {
+    methods: ["POST"]
+    pattern: '/api/admin/estados-encargados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/estados-encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.update': {
+    methods: ["PUT","PATCH"]
+    pattern: '/api/admin/estados-encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'estados_encargados.destroy': {
+    methods: ["DELETE"]
+    pattern: '/api/admin/estados-encargados/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
   'perfil.mostrar': {
     methods: ["GET","HEAD"]
     pattern: '/api/usuario/perfil'
@@ -941,6 +1097,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/perfil_controller').default['cambiarPassword']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/perfil_controller').default['cambiarPassword']>>>
+    }
+  }
+  'foto_perfils.store': {
+    methods: ["POST"]
+    pattern: '/api/usuario/perfil/foto'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/foto_perfils_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/foto_perfils_controller').default['store']>>>
     }
   }
   'entregas.index': {
@@ -1037,6 +1205,30 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/canjes_controller').default['store']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/canjes_controller').default['store']>>>
+    }
+  }
+  'recompensas.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/usuario/recompensas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/recompensas_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/recompensas_controller').default['index']>>>
+    }
+  }
+  'aliados_usuarios.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/usuario/aliados'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/aliados_usuarios_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/aliados_usuarios_controller').default['index']>>>
     }
   }
   'reservas_usuario.index': {

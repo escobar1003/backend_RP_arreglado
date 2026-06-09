@@ -25,34 +25,35 @@ export default class DeteccionController {
     const filePath = `${app.tmpPath('uploads')}/${imagenMobile.fileName}`
 
     try {
-      // 3. Preparar el formulario para reenviar la foto al script de Python (YOLOv11)
-      const formData = new FormData()
-      formData.append('image', fs.createReadStream(filePath))
+  // 3. Preparar el formulario para reenviar la foto al script de Python (YOLOv11)
+  const formData = new FormData()
+  formData.append('image', fs.createReadStream(filePath))
 
-      // 4. Hacer la petición HTTP POST al puerto 5000 (donde corre app.py)
-      const apiResponse = await axios.post('http://localhost:5000/predict', formData, {
-        headers: formData.getHeaders(),
-      })
+  // 4. Hacer la petición HTTP POST al puerto 5000 (donde corre app.py)
+  const apiResponse = await axios.post('http://localhost:5000/predict', formData, {
+    headers: formData.getHeaders(),
+  })
 
-      // 5. Borrar la foto temporal del servidor de Adonis para no acumular basura
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath)
-      }
+  // 5. Borrar la foto temporal del servidor de Adonis para no acumular basura
+  if (fs.existsSync(filePath)) {
+    fs.unlinkSync(filePath)
+  }
 
-      // 6. Responderle los resultados de la IA de vuelta a Flutter
-      return response.ok(apiResponse.data)
+  // 6. Responderle los resultados de la IA de vuelta a Flutter
+  return response.ok(apiResponse.data)
 
-    } catch (error:any) {
-      // Si algo falla, borrar la foto temporal para evitar bloqueos
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath)
-      }
-      
-      return response.internalServerError({ 
-        status: 'error', 
-        message: 'Error de conexión con el motor de Inteligencia Artificial.',
-        error: error.message 
-      })
-    }
+} catch (error: any) {
+
+  // Si algo falla, borrar la foto temporal para evitar bloqueos
+  if (fs.existsSync(filePath)) {
+    fs.unlinkSync(filePath)
+  }
+
+    return response.internalServerError({
+    status: 'error',
+    message: 'Error de conexión con el motor de Inteligencia Artificial.',
+    error: error.message
+  })
+}
   }
 }
