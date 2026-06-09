@@ -1,5 +1,8 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+import PuntosController from '#controllers/puntos_controller'
+
+
 
 
 // RUTA PARA ASIGNACIÓN DE PUNTOS (SCRUM-506)

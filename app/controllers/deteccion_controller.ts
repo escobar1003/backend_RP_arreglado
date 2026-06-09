@@ -42,18 +42,25 @@ export default class DeteccionController {
   // 6. Responderle los resultados de la IA de vuelta a Flutter
   return response.ok(apiResponse.data)
 
-} catch (error: any) {
+      // 5. Borrar la foto temporal del servidor de Adonis para no acumular basura
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath)
+      }
 
-  // Si algo falla, borrar la foto temporal para evitar bloqueos
-  if (fs.existsSync(filePath)) {
-    fs.unlinkSync(filePath)
-  }
+      // 6. Responderle los resultados de la IA de vuelta a Flutter
+      return response.ok(apiResponse.data)
 
-    return response.internalServerError({
-    status: 'error',
-    message: 'Error de conexión con el motor de Inteligencia Artificial.',
-    error: error.message
-  })
-}
+    } catch (error:any) {
+      // Si algo falla, borrar la foto temporal para evitar bloqueos
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath)
+      }
+      
+      return response.internalServerError({ 
+        status: 'error', 
+        message: 'Error de conexión con el motor de Inteligencia Artificial.',
+        error: error.message 
+      })
+    }
   }
 }
