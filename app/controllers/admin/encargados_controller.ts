@@ -2,11 +2,12 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Usuario from '#models/usuario'
 import hash from '@adonisjs/core/services/hash'
 import mail from '@adonisjs/mail/services/main'
+import PuntoReciclaje from '#models/punto_reciclaje'
 
 export default class EncargadosController {
   async index({ response }: HttpContext) {
     const encargados = await Usuario.query()
-      .where('id_rol', 2)
+      .where('id_rol', 4)
       .preload('rol')
       .preload('estadoUsuario')
       .preload('aliado')
@@ -16,7 +17,7 @@ export default class EncargadosController {
   async show({ params, response }: HttpContext) {
     const encargado = await Usuario.query()
       .where('id_usuario', params.id)
-      .where('id_rol', 2)
+      .where('id_rol', 4)
       .preload('rol')
       .preload('estadoUsuario')
       .preload('aliado')
@@ -32,13 +33,13 @@ export default class EncargadosController {
       return response.notFound({ mensaje: 'No existe un usuario registrado con ese correo' })
     }
 
-    if (usuario.idRol === 2) {
+    if (usuario.idRol === 4) {
       return response.conflict({ mensaje: 'Este usuario ya es encargado' })
     }
 
     const passwordTemporal = Math.random().toString(36).slice(-8) + 'A1*'
 
-    usuario.idRol = 2
+    usuario.idRol = 4
     usuario.idAliado = datos.idAliado ?? null
     usuario.password = await hash.make(passwordTemporal)
     await usuario.save()
@@ -65,7 +66,7 @@ export default class EncargadosController {
   async update({ params, request, response }: HttpContext) {
     const encargado = await Usuario.query()
       .where('id_usuario', params.id)
-      .where('id_rol', 2)
+      .where('id_rol', 4)
       .firstOrFail()
 
     const datos = request.only(['nombre', 'telefono', 'idEstadoUsuario', 'idAliado'])
@@ -77,10 +78,32 @@ export default class EncargadosController {
   async destroy({ params, response }: HttpContext) {
     const encargado = await Usuario.query()
       .where('id_usuario', params.id)
-      .where('id_rol', 2)
+      .where('id_rol', 4)
       .firstOrFail()
 
     await encargado.delete()
     return response.ok({ mensaje: 'Encargado eliminado correctamente' })
+  }
+
+  async asignarPunto({ params, request, response }: HttpContext) {
+    const encargado = await Usuario.query()
+      .where('id_usuario', params.id)
+      .where('id_rol', 4)
+      .firstOrFail()
+
+    const { idPunto } = request.only(['idPunto'])
+
+    const punto = await PuntoReciclaje.query()
+      .where('id_punto', idPunto)
+      .firstOrFail()
+
+    if (punto.idEncargado && punto.idEncargado !== encargado.idUsuario) {
+      return response.conflict({ mensaje: 'Este punto ya tiene un encargado asignado' })
+    }
+
+    punto.idEncargado = encargado.idUsuario
+    await punto.save()
+
+    return response.ok({ mensaje: 'Punto de reciclaje asignado correctamente', punto })
   }
 }

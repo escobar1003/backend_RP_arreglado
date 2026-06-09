@@ -114,6 +114,12 @@ const routes = {
     tokens: [{"old":"/api/admin/encargados/:id","type":0,"val":"api","end":""},{"old":"/api/admin/encargados/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/encargados/:id","type":0,"val":"encargados","end":""},{"old":"/api/admin/encargados/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['encargados.destroy']['types'],
   },
+  'encargados.asignar_punto': {
+    methods: ["PUT"],
+    pattern: '/api/admin/encargados/:id/asignar-punto',
+    tokens: [{"old":"/api/admin/encargados/:id/asignar-punto","type":0,"val":"api","end":""},{"old":"/api/admin/encargados/:id/asignar-punto","type":0,"val":"admin","end":""},{"old":"/api/admin/encargados/:id/asignar-punto","type":0,"val":"encargados","end":""},{"old":"/api/admin/encargados/:id/asignar-punto","type":1,"val":"id","end":""},{"old":"/api/admin/encargados/:id/asignar-punto","type":0,"val":"asignar-punto","end":""}],
+    types: placeholder as Registry['encargados.asignar_punto']['types'],
+  },
   'usuarios.index': {
     methods: ["GET","HEAD"],
     pattern: '/api/admin/usuarios',
@@ -810,11 +816,47 @@ const routes = {
     tokens: [{"old":"/api/encargado/entregas/:id","type":0,"val":"api","end":""},{"old":"/api/encargado/entregas/:id","type":0,"val":"encargado","end":""},{"old":"/api/encargado/entregas/:id","type":0,"val":"entregas","end":""},{"old":"/api/encargado/entregas/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['entregas.show']['types'],
   },
+  'entregas.store': {
+    methods: ["POST"],
+    pattern: '/api/encargado/entregas',
+    tokens: [{"old":"/api/encargado/entregas","type":0,"val":"api","end":""},{"old":"/api/encargado/entregas","type":0,"val":"encargado","end":""},{"old":"/api/encargado/entregas","type":0,"val":"entregas","end":""}],
+    types: placeholder as Registry['entregas.store']['types'],
+  },
   'entregas.actualizar_estado': {
     methods: ["PUT"],
     pattern: '/api/encargado/entregas/:id/estado',
     tokens: [{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"api","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"encargado","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"entregas","end":""},{"old":"/api/encargado/entregas/:id/estado","type":1,"val":"id","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"estado","end":""}],
     types: placeholder as Registry['entregas.actualizar_estado']['types'],
+  },
+  'canjes_encargado.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/canjes',
+    tokens: [{"old":"/api/encargado/canjes","type":0,"val":"api","end":""},{"old":"/api/encargado/canjes","type":0,"val":"encargado","end":""},{"old":"/api/encargado/canjes","type":0,"val":"canjes","end":""}],
+    types: placeholder as Registry['canjes_encargado.index']['types'],
+  },
+  'canjes_encargado.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/canjes/:id',
+    tokens: [{"old":"/api/encargado/canjes/:id","type":0,"val":"api","end":""},{"old":"/api/encargado/canjes/:id","type":0,"val":"encargado","end":""},{"old":"/api/encargado/canjes/:id","type":0,"val":"canjes","end":""},{"old":"/api/encargado/canjes/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['canjes_encargado.show']['types'],
+  },
+  'canjes_encargado.validar': {
+    methods: ["PUT"],
+    pattern: '/api/encargado/canjes/:id/validar',
+    tokens: [{"old":"/api/encargado/canjes/:id/validar","type":0,"val":"api","end":""},{"old":"/api/encargado/canjes/:id/validar","type":0,"val":"encargado","end":""},{"old":"/api/encargado/canjes/:id/validar","type":0,"val":"canjes","end":""},{"old":"/api/encargado/canjes/:id/validar","type":1,"val":"id","end":""},{"old":"/api/encargado/canjes/:id/validar","type":0,"val":"validar","end":""}],
+    types: placeholder as Registry['canjes_encargado.validar']['types'],
+  },
+  'recompensas.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/recompensas',
+    tokens: [{"old":"/api/encargado/recompensas","type":0,"val":"api","end":""},{"old":"/api/encargado/recompensas","type":0,"val":"encargado","end":""},{"old":"/api/encargado/recompensas","type":0,"val":"recompensas","end":""}],
+    types: placeholder as Registry['recompensas.index']['types'],
+  },
+  'usuarios.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/usuarios',
+    tokens: [{"old":"/api/encargado/usuarios","type":0,"val":"api","end":""},{"old":"/api/encargado/usuarios","type":0,"val":"encargado","end":""},{"old":"/api/encargado/usuarios","type":0,"val":"usuarios","end":""}],
+    types: placeholder as Registry['usuarios.index']['types'],
   },
   'openapi.html': {
     methods: ["GET","HEAD"],

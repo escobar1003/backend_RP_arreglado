@@ -223,6 +223,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['destroy']>>>
     }
   }
+  'encargados.asignar_punto': {
+    methods: ["PUT"]
+    pattern: '/api/admin/encargados/:id/asignar-punto'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['asignarPunto']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['asignarPunto']>>>
+    }
+  }
   'usuarios.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/admin/usuarios'
@@ -1615,6 +1627,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['show']>>>
     }
   }
+  'entregas.store': {
+    methods: ["POST"]
+    pattern: '/api/encargado/entregas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['store']>>>
+    }
+  }
   'entregas.actualizar_estado': {
     methods: ["PUT"]
     pattern: '/api/encargado/entregas/:id/estado'
@@ -1625,6 +1649,66 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['actualizarEstado']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['actualizarEstado']>>>
+    }
+  }
+  'canjes_encargado.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/canjes'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['index']>>>
+    }
+  }
+  'canjes_encargado.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/canjes/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['show']>>>
+    }
+  }
+  'canjes_encargado.validar': {
+    methods: ["PUT"]
+    pattern: '/api/encargado/canjes/:id/validar'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['validar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['validar']>>>
+    }
+  }
+  'recompensas.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/recompensas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/recompensas_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/recompensas_controller').default['index']>>>
+    }
+  }
+  'usuarios.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/usuarios'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/usuarios_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/usuarios_controller').default['index']>>>
     }
   }
   'openapi.html': {

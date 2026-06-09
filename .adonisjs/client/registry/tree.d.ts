@@ -38,6 +38,7 @@ export interface ApiDefinition {
     store: typeof routes['encargados.store']
     update: typeof routes['encargados.update']
     destroy: typeof routes['encargados.destroy']
+    asignarPunto: typeof routes['encargados.asignar_punto']
   }
   usuarios: {
     index: typeof routes['usuarios.index']
@@ -204,6 +205,11 @@ export interface ApiDefinition {
   perfilEncargado: {
     mostrar: typeof routes['perfil_encargado.mostrar']
     actualizar: typeof routes['perfil_encargado.actualizar']
+  }
+  canjesEncargado: {
+    index: typeof routes['canjes_encargado.index']
+    show: typeof routes['canjes_encargado.show']
+    validar: typeof routes['canjes_encargado.validar']
   }
   openapi: {
     html: typeof routes['openapi.html']
