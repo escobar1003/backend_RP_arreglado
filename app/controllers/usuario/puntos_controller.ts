@@ -37,4 +37,18 @@ export default class PuntosController {
 
     return response.ok({ movimientos })
   }
+
+  // 👇 ESTE ES EL MÉTODO QUE DETECTABA EL COMPILADOR CON EL ERROR EN LA LÍNEA 49 👇
+  async guardar({ request, response }: HttpContext) {
+    try {
+      const data = request.only(['id_usuario', 'puntos', 'tipo_movimiento', 'motivo'])
+      const movimiento = await MovimientoPunto.create(data)
+      return response.created({ movimiento })
+    } catch (error: any) { // El ": any" soluciona el fallo de TypeScript en producción
+      return response.internalServerError({
+        message: 'Error al procesar los puntos',
+        error: error.message,
+      })
+    }
+  }
 }

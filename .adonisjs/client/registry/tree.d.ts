@@ -199,4 +199,7 @@ export interface ApiDefinition {
   deteccion: {
     procesarCamara: typeof routes['deteccion.procesar_camara']
   }
+  chat: {
+    preguntar: typeof routes['chat.preguntar']
+  }
 }

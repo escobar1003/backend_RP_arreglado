@@ -1,5 +1,7 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+import PuntosController from '#controllers/puntos_controller'
+
 
 
 
@@ -248,3 +250,4 @@ import openapi from '@foadonis/openapi/services/main'
 openapi.registerRoutes('/swagger')
 
 router.post('/api/detectar-material', '#controllers/deteccion_controller.procesarCamara')
+router.post('/api/chat', '#controllers/chat_controller.preguntar')
