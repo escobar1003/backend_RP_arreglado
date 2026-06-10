@@ -13,6 +13,7 @@ export type ScannedRoutes = {
     'openapi.json': { paramsTuple?: []; params?: {} }
     'openapi.yaml': { paramsTuple?: []; params?: {} }
     'deteccion.procesar_camara': { paramsTuple?: []; params?: {} }
+    'chat.preguntar': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'estados_encargados.index': { paramsTuple?: []; params?: {} }
@@ -31,6 +32,7 @@ export type ScannedRoutes = {
   POST: {
     'estados_encargados.store': { paramsTuple?: []; params?: {} }
     'deteccion.procesar_camara': { paramsTuple?: []; params?: {} }
+    'chat.preguntar': { paramsTuple?: []; params?: {} }
   }
   DELETE: {
     'estados_encargados.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

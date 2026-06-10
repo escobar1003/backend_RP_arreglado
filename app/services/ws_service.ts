@@ -11,9 +11,10 @@ class WsService {
         credentials: true,
       },
     })
-  }  // ← esta llave cerraba el boot y faltaba
+  }
 
   public emitToEncargado(idEncargado: number, event: string, data: any) {
+    console.log(`📤 Emitiendo ${event} a encargado_${idEncargado}`)
     this.io?.to(`encargado_${idEncargado}`).emit(event, data)
   }
 

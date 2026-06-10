@@ -33,11 +33,8 @@ export const controllers = {
     RecuperarPasswords: () => import('#controllers/auth/recuperar_passwords_controller'),
     Registros: () => import('#controllers/auth/registros_controller'),
   },
-<<<<<<< HEAD
   Chat: () => import('#controllers/chat_controller'),
-=======
   Chatbot: () => import('#controllers/chatbot_controller'),
->>>>>>> notificaciones_socket
   Deteccion: () => import('#controllers/deteccion_controller'),
   encargado: {
     Entregas: () => import('#controllers/encargado/entregas_controller'),
