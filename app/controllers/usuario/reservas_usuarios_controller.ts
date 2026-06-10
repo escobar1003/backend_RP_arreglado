@@ -73,6 +73,8 @@ export default class ReservasUsuarioController {
       .where('id_rol', 2)
       .first()
 
+      console.log("👤 Encargado encontrado:", encargado)
+
     if (encargado) {
       console.log("📤 Voy a emitir socket al encargado", encargado.idUsuario)
       await Notificacion.create({
