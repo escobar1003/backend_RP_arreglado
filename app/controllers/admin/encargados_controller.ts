@@ -1,12 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Usuario from '#models/usuario'
-import Mail from '@adonisjs/mail/services/main'
-import { DateTime } from 'luxon'
-
-function generarPassword(): string {
-  const random = Math.random().toString(36).slice(-6)
-  return 'Enc' + random + '1!'
-}
+import hash from '@adonisjs/core/services/hash'
+import mail from '@adonisjs/mail/services/main'
+import PuntoReciclaje from '#models/punto_reciclaje'
 
 export default class EncargadosController {
   async index({ response }: HttpContext) {
@@ -52,6 +48,9 @@ export default class EncargadosController {
             <p>Inicia sesión para gestionar las entregas.</p>
           `)
       })
+    if (usuario.idRol === 4) {
+      return response.conflict({ mensaje: 'Este usuario ya es encargado' })
+    }
 
       return response.ok({ mensaje: 'Usuario actualizado a encargado. Se enviaron las credenciales a su correo.', encargado: correoExiste })
     }
@@ -67,6 +66,10 @@ export default class EncargadosController {
       telefono: datos.telefono ?? null,
       fechaRegistro: DateTime.now(),
     })
+    usuario.idRol = 4
+    usuario.idAliado = datos.idAliado ?? null
+    usuario.password = await hash.make(passwordTemporal)
+    await usuario.save()
 
     await Mail.send((message) => {
       message
@@ -107,5 +110,27 @@ export default class EncargadosController {
 
     await encargado.delete()
     return response.ok({ mensaje: 'Encargado eliminado correctamente' })
+  }
+
+  async asignarPunto({ params, request, response }: HttpContext) {
+    const encargado = await Usuario.query()
+      .where('id_usuario', params.id)
+      .where('id_rol', 4)
+      .firstOrFail()
+
+    const { idPunto } = request.only(['idPunto'])
+
+    const punto = await PuntoReciclaje.query()
+      .where('id_punto', idPunto)
+      .firstOrFail()
+
+    if (punto.idEncargado && punto.idEncargado !== encargado.idUsuario) {
+      return response.conflict({ mensaje: 'Este punto ya tiene un encargado asignado' })
+    }
+
+    punto.idEncargado = encargado.idUsuario
+    await punto.save()
+
+    return response.ok({ mensaje: 'Punto de reciclaje asignado correctamente', punto })
   }
 }
