@@ -7,18 +7,6 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
-  'puntos.asignar': {
-    methods: ["POST"]
-    pattern: '/puntos/asignar'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/puntos_controller').default['asignar']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/puntos_controller').default['asignar']>>>
-    }
-  }
   'puntos_reciclajes.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/puntos-reciclaje'
