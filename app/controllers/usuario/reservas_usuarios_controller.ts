@@ -74,6 +74,7 @@ export default class ReservasUsuarioController {
       .first()
 
     if (encargado) {
+      console.log("📤 Voy a emitir socket al encargado", encargado.idUsuario)
       await Notificacion.create({
         idUsuario: encargado.idUsuario,
         titulo: 'Nueva reserva',
