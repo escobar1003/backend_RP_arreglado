@@ -50,9 +50,16 @@ export default class ReservasUsuarioController {
   }
 
   async store({ auth, request, response }: HttpContext) {
-    const { idPunto, fecha, hora, notas } = request.only([
-      'idPunto', 'fecha', 'hora', 'notas',
-    ])
+  console.log("🚀 Entró al store de reservas")
+
+  const { idPunto, fecha, hora, notas } = request.only([
+    'idPunto',
+    'fecha',
+    'hora',
+    'notas',
+  ])
+
+
 
     const punto = await PuntoReciclaje.query()
       .where('id_punto', idPunto)
