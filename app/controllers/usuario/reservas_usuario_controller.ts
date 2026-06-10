@@ -77,7 +77,7 @@ export default class ReservasUsuarioController {
 
     const encargado = await Usuario.query()
       .where('id_aliado', punto.idAliado)
-      .where('id_rol', 2)
+      .where('id_rol', 4)
       .first()
 
       console.log("👤 Encargado encontrado:", encargado)
@@ -139,7 +139,7 @@ export default class ReservasUsuarioController {
 
     const encargado = await Usuario.query()
       .where('id_aliado', punto.idAliado)
-      .where('id_rol', 2)
+      .where('id_rol', 4)
       .first()
 
     if (encargado) {
