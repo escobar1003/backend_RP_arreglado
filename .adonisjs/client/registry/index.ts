@@ -6,12 +6,6 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
-  'puntos.asignar': {
-    methods: ["POST"],
-    pattern: '/puntos/asignar',
-    tokens: [{"old":"/puntos/asignar","type":0,"val":"puntos","end":""},{"old":"/puntos/asignar","type":0,"val":"asignar","end":""}],
-    types: placeholder as Registry['puntos.asignar']['types'],
-  },
   'puntos_reciclajes.index': {
     methods: ["GET","HEAD"],
     pattern: '/api/puntos-reciclaje',
