@@ -6,12 +6,6 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
-  'puntos.asignar': {
-    methods: ["POST"],
-    pattern: '/puntos/asignar',
-    tokens: [{"old":"/puntos/asignar","type":0,"val":"puntos","end":""},{"old":"/puntos/asignar","type":0,"val":"asignar","end":""}],
-    types: placeholder as Registry['puntos.asignar']['types'],
-  },
   'puntos_reciclajes.index': {
     methods: ["GET","HEAD"],
     pattern: '/api/puntos-reciclaje',
@@ -780,18 +774,17 @@ const routes = {
     tokens: [{"old":"/api/encargado/notificaciones","type":0,"val":"api","end":""},{"old":"/api/encargado/notificaciones","type":0,"val":"encargado","end":""},{"old":"/api/encargado/notificaciones","type":0,"val":"notificaciones","end":""}],
     types: placeholder as Registry['notificaciones.index']['types'],
   },
-  'notificaciones.marcar_leida': {
-    methods: ["PUT"],
-    pattern: '/api/encargado/notificaciones/:id/leer',
-    tokens: [{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"api","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"encargado","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"notificaciones","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":1,"val":"id","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"leer","end":""}],
-    types: placeholder as Registry['notificaciones.marcar_leida']['types'],
-  },
   'notificaciones.marcar_todas_leidas': {
     methods: ["PUT"],
     pattern: '/api/encargado/notificaciones/leer-todas',
     tokens: [{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"api","end":""},{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"encargado","end":""},{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"notificaciones","end":""},{"old":"/api/encargado/notificaciones/leer-todas","type":0,"val":"leer-todas","end":""}],
     types: placeholder as Registry['notificaciones.marcar_todas_leidas']['types'],
   },
+  'notificaciones.marcar_leida': {
+    methods: ["PUT"],
+    pattern: '/api/encargado/notificaciones/:id/leer',
+    tokens: [{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"api","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"encargado","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"notificaciones","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":1,"val":"id","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"leer","end":""}],
+    types: placeholder as Registry['notificaciones.marcar_leida']['types'],
   'perfil_encargado.mostrar': {
     methods: ["GET","HEAD"],
     pattern: '/api/encargado/perfil',

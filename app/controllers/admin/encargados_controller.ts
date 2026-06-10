@@ -10,7 +10,6 @@ export default class EncargadosController {
       .where('id_rol', 4)
       .preload('rol')
       .preload('estadoUsuario')
-      .preload('aliado')
     return response.ok({ encargados })
   }
 
@@ -20,47 +19,72 @@ export default class EncargadosController {
       .where('id_rol', 4)
       .preload('rol')
       .preload('estadoUsuario')
-      .preload('aliado')
       .firstOrFail()
     return response.ok({ encargado })
   }
 
   async store({ request, response }: HttpContext) {
-    const datos = request.only(['correo', 'idAliado'])
+    const datos = request.only(['nombre', 'correo', 'password', 'telefono'])
 
-    const usuario = await Usuario.findBy('correo', datos.correo)
-    if (!usuario) {
-      return response.notFound({ mensaje: 'No existe un usuario registrado con ese correo' })
-    }
+    const correoExiste = await Usuario.findBy('correo', datos.correo)
+    if (correoExiste) {
+      if (correoExiste.idRol === 4) {
+        return response.conflict({ mensaje: 'Este usuario ya es encargado' })
+      }
+      const password = datos.password || generarPassword()
+      correoExiste.idRol = 4
+      correoExiste.password = password
+      await correoExiste.save()
 
+      await Mail.send((message) => {
+        message
+          .to(correoExiste.correo)
+          .subject('Tus credenciales de acceso - Recycling Points')
+          .html(`
+            <h2>Hola ${correoExiste.nombre},</h2>
+            <p>Has sido registrado como <strong>encargado</strong> en Recycling Points.</p>
+            <p><strong>Correo:</strong> ${correoExiste.correo}</p>
+            <p><strong>Contraseña:</strong> ${password}</p>
+            <p>Inicia sesión para gestionar las entregas.</p>
+          `)
+      })
     if (usuario.idRol === 4) {
       return response.conflict({ mensaje: 'Este usuario ya es encargado' })
     }
 
-    const passwordTemporal = Math.random().toString(36).slice(-8) + 'A1*'
+      return response.ok({ mensaje: 'Usuario actualizado a encargado. Se enviaron las credenciales a su correo.', encargado: correoExiste })
+    }
 
+    // Crear usuario nuevo
+    const password = datos.password || generarPassword()
+    const encargado = await Usuario.create({
+      idRol: 4,
+      idEstadoUsuario: 1,
+      nombre: datos.nombre,
+      correo: datos.correo,
+      password: password,
+      telefono: datos.telefono ?? null,
+      fechaRegistro: DateTime.now(),
+    })
     usuario.idRol = 4
     usuario.idAliado = datos.idAliado ?? null
     usuario.password = await hash.make(passwordTemporal)
     await usuario.save()
 
-    await mail.send((message) => {
+    await Mail.send((message) => {
       message
-        .to(datos.correo)
-        .from(process.env.SMTP_USERNAME!)
-        .subject('Recycling Points - Ahora eres encargado')
+        .to(encargado.correo)
+        .subject('Tus credenciales de acceso - Recycling Points')
         .html(`
-          <h2>Hola ${usuario.nombre},</h2>
-          <p>Tu cuenta ha sido actualizada al rol de <strong>encargado</strong>.</p>
-          <p><strong>Correo:</strong> ${datos.correo}</p>
-          <p><strong>Contraseña temporal:</strong> ${passwordTemporal}</p>
-          <p>Por seguridad, te recomendamos cambiar tu contraseña al iniciar sesión.</p>
-          <br/>
-          <p>Equipo Recycling Points</p>
+          <h2>Hola ${encargado.nombre},</h2>
+          <p>Has sido registrado como <strong>encargado</strong> en Recycling Points.</p>
+          <p><strong>Correo:</strong> ${encargado.correo}</p>
+          <p><strong>Contraseña:</strong> ${password}</p>
+          <p>Inicia sesión para gestionar las entregas.</p>
         `)
     })
 
-    return response.ok({ mensaje: 'Usuario actualizado a encargado. Se envió la contraseña al correo.', encargado: usuario })
+    return response.created({ mensaje: 'Encargado creado correctamente. Se enviaron las credenciales a su correo.', encargado })
   }
 
   async update({ params, request, response }: HttpContext) {
@@ -69,8 +93,11 @@ export default class EncargadosController {
       .where('id_rol', 4)
       .firstOrFail()
 
-    const datos = request.only(['nombre', 'telefono', 'idEstadoUsuario', 'idAliado'])
+    const datos = request.only(['nombre', 'telefono', 'idEstadoUsuario'])
     encargado.merge(datos)
+    if (request.input('password')) {
+      encargado.password = request.input('password')
+    }
     await encargado.save()
     return response.ok({ mensaje: 'Encargado actualizado correctamente', encargado })
   }

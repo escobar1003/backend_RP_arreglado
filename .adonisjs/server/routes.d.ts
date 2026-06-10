@@ -15,11 +15,6 @@ export type ScannedRoutes = {
     'deteccion.procesar_camara': { paramsTuple?: []; params?: {} }
     'chat.preguntar': { paramsTuple?: []; params?: {} }
   }
-  POST: {
-    'estados_encargados.store': { paramsTuple?: []; params?: {} }
-    'deteccion.procesar_camara': { paramsTuple?: []; params?: {} }
-    'chat.preguntar': { paramsTuple?: []; params?: {} }
-  }
   GET: {
     'estados_encargados.index': { paramsTuple?: []; params?: {} }
     'estados_encargados.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
@@ -33,6 +28,11 @@ export type ScannedRoutes = {
     'openapi.html': { paramsTuple?: []; params?: {} }
     'openapi.json': { paramsTuple?: []; params?: {} }
     'openapi.yaml': { paramsTuple?: []; params?: {} }
+  }
+  POST: {
+    'estados_encargados.store': { paramsTuple?: []; params?: {} }
+    'deteccion.procesar_camara': { paramsTuple?: []; params?: {} }
+    'chat.preguntar': { paramsTuple?: []; params?: {} }
   }
   DELETE: {
     'estados_encargados.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }

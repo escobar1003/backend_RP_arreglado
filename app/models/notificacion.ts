@@ -16,7 +16,7 @@ export default class Notificacion extends BaseModel {
   declare titulo: string
 
   @column()
-  declare mensaje: string
+  declare descripcion: string
 
   @column()
   declare leida: boolean
@@ -25,7 +25,7 @@ export default class Notificacion extends BaseModel {
   declare tipo: string
 
   @column()
-  declare idReferencia: number | null
+  declare idEncargado: number | null
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

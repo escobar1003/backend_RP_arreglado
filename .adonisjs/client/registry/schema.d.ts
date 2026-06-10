@@ -7,18 +7,6 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
-  'puntos.asignar': {
-    methods: ["POST"]
-    pattern: '/puntos/asignar'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/puntos_controller').default['asignar']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/puntos_controller').default['asignar']>>>
-    }
-  }
   'puntos_reciclajes.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/puntos-reciclaje'
@@ -44,6 +32,18 @@ export interface Registry {
     }
   }
   'chatbot.preguntar': {
+    methods: ["POST"]
+    pattern: '/api/chatbot'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/chatbot_controller').default['preguntar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/chatbot_controller').default['preguntar']>>>
+    }
+  }
+  'login.iniciar_sesion': {
     methods: ["POST"]
     pattern: '/api/chatbot'
     types: {
@@ -1555,18 +1555,6 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['index']>>>
     }
   }
-  'notificaciones.marcar_leida': {
-    methods: ["PUT"]
-    pattern: '/api/encargado/notificaciones/:id/leer'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarLeida']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarLeida']>>>
-    }
-  }
   'notificaciones.marcar_todas_leidas': {
     methods: ["PUT"]
     pattern: '/api/encargado/notificaciones/leer-todas'
@@ -1579,6 +1567,16 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarTodasLeidas']>>>
     }
   }
+  'notificaciones.marcar_leida': {
+    methods: ["PUT"]
+    pattern: '/api/encargado/notificaciones/:id/leer'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarLeida']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarLeida']>>>
   'perfil_encargado.mostrar': {
     methods: ["GET","HEAD"]
     pattern: '/api/encargado/perfil'
