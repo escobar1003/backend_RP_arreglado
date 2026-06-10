@@ -1,83 +1,73 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Reserva from '#models/reserva'
+import PuntoReciclaje from '#models/punto_reciclaje'
+import Notificacion from '#models/notificacion'
+import WsService from '#services/ws_service'
+import Usuario from '#models/usuario'
 
 export default class ReservasUsuarioController {
-  /**
-   * GET /api/usuario/reservas
-   * El usuario consulta sus propias reservas
-   */
   async index({ auth, response }: HttpContext) {
-    const usuario = auth.user!
-
     const reservas = await Reserva.query()
-      .where('id_usuario', usuario.idUsuario)
+      .where('id_usuario', auth.user!.idUsuario)
       .preload('punto', (q) => q.select('id_punto', 'nombre', 'direccion', 'horario'))
-      .orderBy('fecha', 'asc')
-      .orderBy('hora', 'asc')
+      .orderBy('fecha', 'desc')
 
-    return response.ok({ reserva: reservas.map(r => ({
-    idReserva: r.idReserva,
-    estado: r.estado,
-    fecha: r.fecha,
-    hora: r.hora,
-    notas: r.notas,
-    puntoReciclaje: {
-      nombre: r.punto.nombre,
-      direccion: r.punto.direccion,
-    }
-  }))
-})
-  }
-
-  /**
-   * GET /api/usuario/reservas/:id
-   * El usuario consulta el detalle de una reserva
-   */
-  async show({ auth, params, response }: HttpContext) {
-    const usuario = auth.user!
-
-    const reserva = await Reserva.query()
-      .where('id_reserva', params.id)
-      .where('id_usuario', usuario.idUsuario)
-      .preload('punto', (q) => q.select('id_punto', 'nombre', 'direccion', 'horario',  'latitud', 'longitud'))
-      .firstOrFail()
-
-    return response.ok({ idReserva: reserva.idReserva,
-  estado: reserva.estado,
-  fecha: reserva.fecha,
-  hora: reserva.hora,
-  notas: reserva.notas,
-  puntoReciclaje: {
-    nombre: reserva.punto.nombre,
-    direccion: reserva.punto.direccion,
-    latitud: reserva.punto.latitud,
-    longitud: reserva.punto.longitud, 
-  }
+    return response.ok({
+      reservas: reservas.map(r => ({
+        idReserva: r.idReserva,
+        estado: r.estado,
+        fecha: r.fecha,
+        hora: r.hora,
+        notas: r.notas,
+        puntoReciclaje: {
+          nombre: r.punto.nombre,
+          direccion: r.punto.direccion,
+        }
+      }))
     })
   }
 
-  /**
-   * POST /api/usuario/reservas
-   * El usuario crea una nueva reserva desde la app móvil
-   * Body: { idPunto, fecha, hora, notas? }
-   */
+  async show({ auth, params, response }: HttpContext) {
+    const reserva = await Reserva.query()
+      .where('id_reserva', params.id)
+      .where('id_usuario', auth.user!.idUsuario)
+      .preload('punto', (q) => q.select('id_punto', 'nombre', 'direccion', 'horario', 'latitud', 'longitud'))
+      .firstOrFail()
+
+    return response.ok({
+      idReserva: reserva.idReserva,
+      estado: reserva.estado,
+      fecha: reserva.fecha,
+      hora: reserva.hora,
+      notas: reserva.notas,
+      puntoReciclaje: {
+        nombre: reserva.punto.nombre,
+        direccion: reserva.punto.direccion,
+        latitud: reserva.punto.latitud,
+        longitud: reserva.punto.longitud,
+      }
+    })
+  }
+
   async store({ auth, request, response }: HttpContext) {
-    const usuario = auth.user!
+  console.log("🚀 Entró al store de reservas")
 
-    const { idPunto, fecha, hora, notas } = request.only(['idPunto', 'fecha', 'hora', 'notas'])
+  const { idPunto, fecha, hora, notas } = request.only([
+    'idPunto',
+    'fecha',
+    'hora',
+    'notas',
+  ])
 
-    if (!idPunto || !fecha || !hora) {
-      return response.badRequest({ mensaje: 'idPunto, fecha y hora son obligatorios' })
-    }
 
-    // Validar que la fecha no sea pasada
-    const fechaReserva = new Date(`${fecha}T${hora}`)
-    if (fechaReserva < new Date()) {
-      return response.badRequest({ mensaje: 'No puedes reservar en una fecha u hora pasada' })
-    }
+
+    const punto = await PuntoReciclaje.query()
+      .where('id_punto', idPunto)
+      .preload('aliado')
+      .firstOrFail()
 
     const reserva = await Reserva.create({
-      idUsuario: usuario.idUsuario,
+      idUsuario: auth.user!.idUsuario,
       idPunto,
       fecha,
       hora,
@@ -85,24 +75,53 @@ export default class ReservasUsuarioController {
       notas: notas ?? null,
     })
 
-    await reserva.load('punto', (q) => q.select('id_punto', 'nombre', 'direccion'))
+    const encargado = await Usuario.query()
+      .where('id_aliado', punto.idAliado)
+      .where('id_rol', 2)
+      .first()
+
+      console.log("👤 Encargado encontrado:", encargado)
+
+    if (encargado) {
+      console.log("📤 Voy a emitir socket al encargado", encargado.idUsuario)
+      await Notificacion.create({
+        idUsuario: encargado.idUsuario,
+        titulo: 'Nueva reserva',
+        mensaje: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
+        leida: false,
+        tipo: 'reserva',
+        idReferencia: reserva.idReserva,
+      })
+
+      WsService.emitToEncargado(encargado.idUsuario, 'notificacion', {
+        tipo: 'nueva_reserva',
+        reserva: {
+          idReserva: reserva.idReserva,
+          nombreUsuario: auth.user!.nombre,
+          nombrePunto: punto.nombre,
+          fecha,
+          hora,
+          estado: 'pendiente',
+        },
+      })
+    }  // ← esta llave faltaba
 
     return response.created({
-      mensaje: 'Reserva creada exitosamente',
-      reserva,
+      mensaje: 'Reserva registrada correctamente',
+      reserva: {
+        idReserva: reserva.idReserva,
+        estado: reserva.estado,
+        fecha: reserva.fecha,
+        hora: reserva.hora,
+        nombrePunto: punto.nombre,
+      },
     })
   }
 
-  /**
-   * DELETE /api/usuario/reservas/:id
-   * El usuario cancela su propia reserva (solo si está pendiente)
-   */
-  async destroy({ auth, params, response }: HttpContext) {
-    const usuario = auth.user!
-
+  async cancelar({ auth, params, response }: HttpContext) {
     const reserva = await Reserva.query()
       .where('id_reserva', params.id)
-      .where('id_usuario', usuario.idUsuario)
+      .where('id_usuario', auth.user!.idUsuario)
       .firstOrFail()
 
     if (reserva.estado !== 'pendiente') {
@@ -114,6 +133,39 @@ export default class ReservasUsuarioController {
     reserva.estado = 'cancelada'
     await reserva.save()
 
-    return response.ok({ mensaje: 'Reserva cancelada exitosamente' })
+    const punto = await PuntoReciclaje.query()
+      .where('id_punto', reserva.idPunto)
+      .firstOrFail()
+
+    const encargado = await Usuario.query()
+      .where('id_aliado', punto.idAliado)
+      .where('id_rol', 2)
+      .first()
+
+    if (encargado) {
+      WsService.emitToEncargado(encargado.idUsuario, 'notificacion', {
+        tipo: 'reserva_cancelada',
+        idReserva: reserva.idReserva,
+        mensaje: `El usuario canceló la reserva #${reserva.idReserva}`,
+      })
+    }
+
+    return response.ok({
+      mensaje: 'Reserva cancelada',
+      idReserva: reserva.idReserva,
+      estado: reserva.estado,
+    })
+  }
+
+  async destroy({ auth, params, response }: HttpContext) {
+    const reserva = await Reserva.query()
+      .where('id_reserva', params.id)
+      .where('id_usuario', auth.user!.idUsuario)
+      .firstOrFail()
+
+    reserva.estado = 'cancelada'
+    await reserva.save()
+
+    return response.ok({ mensaje: 'Reserva cancelada correctamente' })
   }
 }
