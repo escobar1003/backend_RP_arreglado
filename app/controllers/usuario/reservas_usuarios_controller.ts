@@ -87,10 +87,10 @@ export default class ReservasUsuarioController {
       await Notificacion.create({
         idUsuario: encargado.idUsuario,
         titulo: 'Nueva reserva',
-        mensaje: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
+        descripcion: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
         leida: false,
         tipo: 'reserva',
-        idReferencia: reserva.idReserva,
+        idEncargado: encargado.idUsuario,
       })
 
       WsService.emitToEncargado(encargado.idUsuario, 'notificacion', {
