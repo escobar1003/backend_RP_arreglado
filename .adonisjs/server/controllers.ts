@@ -17,6 +17,7 @@ export const controllers = {
     EstadosRecompensas: () => import('#controllers/admin/estados_recompensas_controller'),
     EstadosUsuarios: () => import('#controllers/admin/estados_usuarios_controller'),
     Materiales: () => import('#controllers/admin/materiales_controller'),
+    PerfilAdmin: () => import('#controllers/admin/perfil_admin_controller'),
     Puntos: () => import('#controllers/admin/puntos_controller'),
     Recompensas: () => import('#controllers/admin/recompensas_controller'),
     Roles: () => import('#controllers/admin/roles_controller'),
@@ -39,8 +40,9 @@ export const controllers = {
   encargado: {
     Entregas: () => import('#controllers/encargado/entregas_controller'),
     Notificaciones: () => import('#controllers/encargado/notificaciones_controller'),
+    PerfilEncargado: () => import('#controllers/encargado/perfil_encargado_controller'),
     ReservasEncargado: () => import('#controllers/encargado/reservas_encargado_controller'),
-    ReservasEncargados: () => import('#controllers/encargado/reservas_encargados_controller'),
+    CanjesEncargado: () => import('#controllers/encargado/canjes_encargado_controller'),
   },
   Puntos: () => import('#controllers/puntos_controller'),
   PuntosReciclajes: () => import('#controllers/puntos_reciclajes_controller'),

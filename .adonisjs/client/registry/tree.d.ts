@@ -32,10 +32,12 @@ export interface ApiDefinition {
     store: typeof routes['encargados.store']
     update: typeof routes['encargados.update']
     destroy: typeof routes['encargados.destroy']
+    asignarPunto: typeof routes['encargados.asignar_punto']
   }
   usuarios: {
     index: typeof routes['usuarios.index']
     show: typeof routes['usuarios.show']
+    store: typeof routes['usuarios.store']
     update: typeof routes['usuarios.update']
     destroy: typeof routes['usuarios.destroy']
   }
@@ -135,6 +137,10 @@ export interface ApiDefinition {
     update: typeof routes['estados_encargados.update']
     destroy: typeof routes['estados_encargados.destroy']
   }
+  perfilAdmin: {
+    mostrar: typeof routes['perfil_admin.mostrar']
+    actualizar: typeof routes['perfil_admin.actualizar']
+  }
   perfil: {
     mostrar: typeof routes['perfil.mostrar']
     actualizar: typeof routes['perfil.actualizar']
@@ -163,6 +169,11 @@ export interface ApiDefinition {
     store: typeof routes['reservas_usuario.store']
     destroy: typeof routes['reservas_usuario.destroy']
   }
+  notificacionesUsuario: {
+    index: typeof routes['notificaciones_usuario.index']
+    marcarLeida: typeof routes['notificaciones_usuario.marcar_leida']
+    marcarTodasLeidas: typeof routes['notificaciones_usuario.marcar_todas_leidas']
+  }
   perfilAliado: {
     mostrar: typeof routes['perfil_aliado.mostrar']
     actualizar: typeof routes['perfil_aliado.actualizar']
@@ -189,6 +200,15 @@ export interface ApiDefinition {
     index: typeof routes['notificaciones.index']
     marcarTodasLeidas: typeof routes['notificaciones.marcar_todas_leidas']
     marcarLeida: typeof routes['notificaciones.marcar_leida']
+  }
+  perfilEncargado: {
+    mostrar: typeof routes['perfil_encargado.mostrar']
+    actualizar: typeof routes['perfil_encargado.actualizar']
+  }
+  canjesEncargado: {
+    index: typeof routes['canjes_encargado.index']
+    show: typeof routes['canjes_encargado.show']
+    validar: typeof routes['canjes_encargado.validar']
   }
   openapi: {
     html: typeof routes['openapi.html']

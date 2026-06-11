@@ -465,6 +465,8 @@ export class UsuarioSchema extends BaseModel {
   @column.dateTime()
   declare fechaRegistro: DateTime
   @column()
+  declare idAliado: number | null
+  @column()
   declare idEstadoUsuario: number
   @column()
   declare idRol: number
