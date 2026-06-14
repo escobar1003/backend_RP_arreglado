@@ -785,6 +785,7 @@ const routes = {
     pattern: '/api/encargado/notificaciones/:id/leer',
     tokens: [{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"api","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"encargado","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"notificaciones","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":1,"val":"id","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"leer","end":""}],
     types: placeholder as Registry['notificaciones.marcar_leida']['types'],
+  },
   'perfil_encargado.mostrar': {
     methods: ["GET","HEAD"],
     pattern: '/api/encargado/perfil',
