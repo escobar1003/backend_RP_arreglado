@@ -53,6 +53,7 @@ export default class PerfilController {
     usuario: {
       idUsuario: usuario.idUsuario,
       nombre: usuario.nombre,
+      apellido: usuario.apellido,
       correo: usuario.correo,
       telefono: usuario.telefono,
       imagen: usuario.imagen,
@@ -74,7 +75,7 @@ export default class PerfilController {
   async actualizar({ auth, request, response }: HttpContext) {
     const usuario = await Usuario.findOrFail(auth.user!.idUsuario)
 
-    const datos = request.only(['nombre', 'telefono', 'imagen'])
+    const datos = request.only(['nombre', 'apellido', 'telefono', 'imagen'])
     usuario.merge(datos)
     await usuario.save()
 
@@ -83,6 +84,7 @@ export default class PerfilController {
       usuario: {
         idUsuario: usuario.idUsuario,
         nombre: usuario.nombre,
+        apellido: usuario.apellido,
         correo: usuario.correo,
         telefono: usuario.telefono,
         imagen: usuario.imagen,
