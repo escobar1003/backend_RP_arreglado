@@ -167,6 +167,7 @@ export interface ApiDefinition {
     index: typeof routes['reservas_usuario.index']
     show: typeof routes['reservas_usuario.show']
     store: typeof routes['reservas_usuario.store']
+    cancelar: typeof routes['reservas_usuario.cancelar']
     destroy: typeof routes['reservas_usuario.destroy']
   }
   notificacionesUsuario: {

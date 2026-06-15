@@ -38,11 +38,11 @@ export const controllers = {
   Chatbot: () => import('#controllers/chatbot_controller'),
   Deteccion: () => import('#controllers/deteccion_controller'),
   encargado: {
+    CanjesEncargado: () => import('#controllers/encargado/canjes_encargado_controller'),
     Entregas: () => import('#controllers/encargado/entregas_controller'),
     Notificaciones: () => import('#controllers/encargado/notificaciones_controller'),
     PerfilEncargado: () => import('#controllers/encargado/perfil_encargado_controller'),
     ReservasEncargado: () => import('#controllers/encargado/reservas_encargado_controller'),
-    CanjesEncargado: () => import('#controllers/encargado/canjes_encargado_controller'),
   },
   Puntos: () => import('#controllers/puntos_controller'),
   PuntosReciclajes: () => import('#controllers/puntos_reciclajes_controller'),

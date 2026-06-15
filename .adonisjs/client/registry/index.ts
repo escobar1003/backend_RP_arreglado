@@ -654,6 +654,12 @@ const routes = {
     tokens: [{"old":"/api/usuario/reservas","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas","type":0,"val":"reservas","end":""}],
     types: placeholder as Registry['reservas_usuario.store']['types'],
   },
+  'reservas_usuario.cancelar': {
+    methods: ["PUT"],
+    pattern: '/api/usuario/reservas/:id/cancelar',
+    tokens: [{"old":"/api/usuario/reservas/:id/cancelar","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas/:id/cancelar","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas/:id/cancelar","type":0,"val":"reservas","end":""},{"old":"/api/usuario/reservas/:id/cancelar","type":1,"val":"id","end":""},{"old":"/api/usuario/reservas/:id/cancelar","type":0,"val":"cancelar","end":""}],
+    types: placeholder as Registry['reservas_usuario.cancelar']['types'],
+  },
   'reservas_usuario.destroy': {
     methods: ["DELETE"],
     pattern: '/api/usuario/reservas/:id',
@@ -785,6 +791,7 @@ const routes = {
     pattern: '/api/encargado/notificaciones/:id/leer',
     tokens: [{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"api","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"encargado","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"notificaciones","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":1,"val":"id","end":""},{"old":"/api/encargado/notificaciones/:id/leer","type":0,"val":"leer","end":""}],
     types: placeholder as Registry['notificaciones.marcar_leida']['types'],
+  },
   'perfil_encargado.mostrar': {
     methods: ["GET","HEAD"],
     pattern: '/api/encargado/perfil',
