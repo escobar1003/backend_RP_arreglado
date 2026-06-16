@@ -45,18 +45,6 @@ export interface Registry {
   }
   'login.iniciar_sesion': {
     methods: ["POST"]
-    pattern: '/api/chatbot'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/chatbot_controller').default['preguntar']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/chatbot_controller').default['preguntar']>>>
-    }
-  }
-  'login.iniciar_sesion': {
-    methods: ["POST"]
     pattern: '/api/auth/iniciar-sesion'
     types: {
       body: ExtractBody<InferInput<(typeof import('#validators/auth/login').loginValidator)>>
@@ -1577,6 +1565,8 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarLeida']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarLeida']>>>
+    }
+  }
   'perfil_encargado.mostrar': {
     methods: ["GET","HEAD"]
     pattern: '/api/encargado/perfil'

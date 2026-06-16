@@ -7,7 +7,7 @@ import fs from 'fs'
 export default class DeteccionController {
   
   public async procesarCamara({ request, response }: HttpContext) {
-    // 1. Recibir la foto que envía la app móvil de Flutter
+    // 1. Recibir la foto de la app móvil
     const imagenMobile = request.file('image', {
       size: '5mb',
       extnames: ['jpg', 'png', 'jpeg'],
@@ -20,47 +20,35 @@ export default class DeteccionController {
       })
     }
 
-    // 2. Mover la foto temporalmente a la carpeta del servidor de Adonis
+    // 2. Mover la foto a la carpeta temporal
     await imagenMobile.move(app.tmpPath('uploads'))
     const filePath = `${app.tmpPath('uploads')}/${imagenMobile.fileName}`
 
     try {
-  // 3. Preparar el formulario para reenviar la foto al script de Python (YOLOv11)
-  const formData = new FormData()
-  formData.append('image', fs.createReadStream(filePath))
+      // 3. Preparar el formulario
+      const formData = new FormData()
+      formData.append('image', fs.createReadStream(filePath))
 
-  // 4. Hacer la petición HTTP POST al puerto 5000 (donde corre app.py)
-  const apiResponse = await axios.post('http://localhost:5000/predict', formData, {
-    headers: formData.getHeaders(),
-  })
+      // 4. Petición al servicio de IA (usando variable de entorno)
+      const iaUrl = process.env.IA_SERVICE_URL || 'http://localhost:5000'
+      const apiResponse = await axios.post(`${iaUrl}/predict`, formData, {
+        headers: formData.getHeaders(),
+      })
 
-  // 5. Borrar la foto temporal del servidor de Adonis para no acumular basura
-  if (fs.existsSync(filePath)) {
-    fs.unlinkSync(filePath)
-  }
-
-  // 6. Responderle los resultados de la IA de vuelta a Flutter
-  return response.ok(apiResponse.data)
-
-      // 5. Borrar la foto temporal del servidor de Adonis para no acumular basura
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath)
-      }
-
-      // 6. Responderle los resultados de la IA de vuelta a Flutter
+      // 5. Responder a Flutter
       return response.ok(apiResponse.data)
 
-    } catch (error:any) {
-      // Si algo falla, borrar la foto temporal para evitar bloqueos
+    } catch (error: any) {
+      return response.internalServerError({ 
+        status: 'error', 
+        message: 'Error de conexión con el motor de IA.',
+        error: error.message 
+      })
+    } finally {
+      // 6. Limpieza segura del archivo temporal
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath)
       }
-      
-      return response.internalServerError({ 
-        status: 'error', 
-        message: 'Error de conexión con el motor de Inteligencia Artificial.',
-        error: error.message 
-      })
     }
   }
 }
