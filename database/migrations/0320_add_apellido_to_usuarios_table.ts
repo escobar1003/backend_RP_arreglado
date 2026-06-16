@@ -4,7 +4,7 @@ export default class extends BaseSchema {
   protected tableName = 'usuarios'
 
   async up() {
-    const hasColumn = await this.db.connection().schema.hasColumn(this.tableName, 'apellido')
+    const hasColumn = await this.schema.hasColumn(this.tableName, 'apellido')
 
     if (!hasColumn) {
       this.schema.alterTable(this.tableName, (table) => {
@@ -14,7 +14,7 @@ export default class extends BaseSchema {
   }
 
   async down() {
-    const hasColumn = await this.db.connection().schema.hasColumn(this.tableName, 'apellido')
+    const hasColumn = await this.schema.hasColumn(this.tableName, 'apellido')
 
     if (hasColumn) {
       this.schema.alterTable(this.tableName, (table) => {
