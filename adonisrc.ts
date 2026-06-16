@@ -56,7 +56,7 @@ export default defineConfig({
     () => import('#providers/api_provider'),
     () => import('@foadonis/openapi/openapi_provider'),
     () => import('@adonisjs/static/static_provider'),
-    () => import('@adonisjs/mail/mail_provider')
+    () => import('@adonisjs/mail/mail_provider'),
   ],
 
   /*
@@ -68,10 +68,11 @@ export default defineConfig({
   |
   */
   preloads: [
-    () => import('#start/routes'),
-    () => import('#start/kernel'),
-    () => import('#start/validator'),
-  ],
+  () => import('#start/routes'),
+  () => import('#start/kernel'),
+  () => import('#start/validator'),
+  () => import('#start/ws'),   // ← esto es lo único nuevo
+],
 
   /*
   |--------------------------------------------------------------------------

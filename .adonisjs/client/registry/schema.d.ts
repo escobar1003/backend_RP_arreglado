@@ -7,18 +7,6 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
-  'puntos.asignar': {
-    methods: ["POST"]
-    pattern: '/puntos/asignar'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/puntos_controller').default['asignar']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/puntos_controller').default['asignar']>>>
-    }
-  }
   'puntos_reciclajes.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/puntos-reciclaje'
@@ -221,6 +209,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['destroy']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['destroy']>>>
+    }
+  }
+  'encargados.asignar_punto': {
+    methods: ["PUT"]
+    pattern: '/api/admin/encargados/:id/asignar-punto'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['asignarPunto']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/encargados_controller').default['asignarPunto']>>>
     }
   }
   'usuarios.index': {
@@ -1303,6 +1303,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['store']>>>
     }
   }
+  'reservas_usuario.cancelar': {
+    methods: ["PUT"]
+    pattern: '/api/usuario/reservas/:id/cancelar'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['cancelar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['cancelar']>>>
+    }
+  }
   'reservas_usuario.destroy': {
     methods: ["DELETE"]
     pattern: '/api/usuario/reservas/:id'
@@ -1543,18 +1555,6 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['index']>>>
     }
   }
-  'notificaciones.marcar_leida': {
-    methods: ["PUT"]
-    pattern: '/api/encargado/notificaciones/:id/leer'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarLeida']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarLeida']>>>
-    }
-  }
   'notificaciones.marcar_todas_leidas': {
     methods: ["PUT"]
     pattern: '/api/encargado/notificaciones/leer-todas'
@@ -1565,6 +1565,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarTodasLeidas']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarTodasLeidas']>>>
+    }
+  }
+  'notificaciones.marcar_leida': {
+    methods: ["PUT"]
+    pattern: '/api/encargado/notificaciones/:id/leer'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarLeida']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarLeida']>>>
     }
   }
   'perfil_encargado.mostrar': {
@@ -1615,6 +1627,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['show']>>>
     }
   }
+  'entregas.store': {
+    methods: ["POST"]
+    pattern: '/api/encargado/entregas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['store']>>>
+    }
+  }
   'entregas.actualizar_estado': {
     methods: ["PUT"]
     pattern: '/api/encargado/entregas/:id/estado'
@@ -1625,6 +1649,66 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['actualizarEstado']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['actualizarEstado']>>>
+    }
+  }
+  'canjes_encargado.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/canjes'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['index']>>>
+    }
+  }
+  'canjes_encargado.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/canjes/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['show']>>>
+    }
+  }
+  'canjes_encargado.validar': {
+    methods: ["PUT"]
+    pattern: '/api/encargado/canjes/:id/validar'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['validar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['validar']>>>
+    }
+  }
+  'recompensas.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/recompensas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/recompensas_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/recompensas_controller').default['index']>>>
+    }
+  }
+  'usuarios.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/usuarios'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/usuarios_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/usuarios_controller').default['index']>>>
     }
   }
   'openapi.html': {

@@ -2,7 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Reserva from '#models/reserva'
 import PuntoReciclaje from '#models/punto_reciclaje'
 import Notificacion from '#models/notificacion'
-import SseManager from '#services/sse_manager'
+import WsService from '#services/ws_service'
 import Usuario from '#models/usuario'
 
 export default class ReservasUsuarioController {
@@ -50,9 +50,16 @@ export default class ReservasUsuarioController {
   }
 
   async store({ auth, request, response }: HttpContext) {
-    const { idPunto, fecha, hora, notas } = request.only([
-      'idPunto', 'fecha', 'hora', 'notas',
-    ])
+  console.log("🚀 Entró al store de reservas")
+
+  const { idPunto, fecha, hora, notas } = request.only([
+    'idPunto',
+    'fecha',
+    'hora',
+    'notas',
+  ])
+
+
 
     const punto = await PuntoReciclaje.query()
       .where('id_punto', idPunto)
@@ -73,17 +80,21 @@ export default class ReservasUsuarioController {
       .where('id_rol', 2)
       .first()
 
+      console.log("👤 Encargado encontrado:", encargado)
+
     if (encargado) {
+      console.log("📤 Voy a emitir socket al encargado", encargado.idUsuario)
       await Notificacion.create({
-        usuarioId: encargado.idUsuario,
+        idUsuario: encargado.idUsuario,
         titulo: 'Nueva reserva',
-        mensaje: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
+        descripcion: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
         leida: false,
         tipo: 'reserva',
-        idReferencia: reserva.idReserva,
+        idEncargado: encargado.idUsuario,
       })
+      
 
-      SseManager.notificarEncargado(encargado.idUsuario, {
+      WsService.emitToEncargado(encargado.idUsuario, 'notificacion', {
         tipo: 'nueva_reserva',
         reserva: {
           idReserva: reserva.idReserva,
@@ -94,7 +105,7 @@ export default class ReservasUsuarioController {
           estado: 'pendiente',
         },
       })
-    }
+    }  // ← esta llave faltaba
 
     return response.created({
       mensaje: 'Reserva registrada correctamente',
@@ -123,18 +134,26 @@ export default class ReservasUsuarioController {
     reserva.estado = 'cancelada'
     await reserva.save()
 
-    // Notificar al encargado vía SSE
     const punto = await PuntoReciclaje.query()
       .where('id_punto', reserva.idPunto)
       .firstOrFail()
 
     const encargado = await Usuario.query()
       .where('id_aliado', punto.idAliado)
-      .where('id_rol', 2)
+      .where('id_rol', 4)
       .first()
 
     if (encargado) {
-      SseManager.notificarEncargado(encargado.idUsuario, {
+      await Notificacion.create({
+        idUsuario: encargado.idUsuario,
+        idEncargado: encargado.idUsuario,
+        tipo: 'reserva_cancelada',
+        titulo: 'Reserva cancelada',
+        descripcion: `El usuario canceló la reserva #${reserva.idReserva}`,
+        leida: false,
+      })
+
+      WsService.emitToEncargado(encargado.idUsuario, 'notificacion', {
         tipo: 'reserva_cancelada',
         idReserva: reserva.idReserva,
         mensaje: `El usuario canceló la reserva #${reserva.idReserva}`,

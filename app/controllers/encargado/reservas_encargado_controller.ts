@@ -4,15 +4,11 @@ import PuntoReciclaje from '#models/punto_reciclaje'
 import Notificacion from '#models/notificacion'
 
 export default class ReservasEncargadoController {
-  /**
-   * GET /api/encargado/reservas
-   * El encargado consulta todas las reservas del punto a su cargo.
-   * Soporta filtros opcionales: ?fecha=YYYY-MM-DD  ?estado=pendiente
-   */
   async index({ auth, request, response }: HttpContext) {
+    console.log('✅ Llegó al controlador de reservas encargado')
     const usuario = auth.user!
+    console.log('👤 Usuario:', usuario.idUsuario)
 
-    // El encargado está asociado a un punto de reciclaje
     const punto = await PuntoReciclaje.query()
       .where('id_encargado', usuario.idUsuario)
       .first()
@@ -41,10 +37,6 @@ export default class ReservasEncargadoController {
     })
   }
 
-  /**
-   * GET /api/encargado/reservas/:id
-   * Detalle de una reserva específica
-   */
   async show({ auth, params, response }: HttpContext) {
     const usuario = auth.user!
 
@@ -65,11 +57,6 @@ export default class ReservasEncargadoController {
     return response.ok({ reserva })
   }
 
-  /**
-   * POST /api/encargado/reservas
-   * El encargado crea una reserva manual (por llamada, presencial, etc.)
-   * Body: { idUsuario, fecha, hora, notas? }
-   */
   async store({ auth, request, response }: HttpContext) {
     const usuario = auth.user!
 
@@ -92,7 +79,7 @@ export default class ReservasEncargadoController {
       idPunto: punto.idPunto,
       fecha,
       hora,
-      estado: 'confirmada', // las del encargado quedan confirmadas de una
+      estado: 'confirmada',
       notas: notas ?? null,
     })
 
@@ -104,11 +91,6 @@ export default class ReservasEncargadoController {
     })
   }
 
-  /**
-   * PUT /api/encargado/reservas/:id
-   * El encargado edita una reserva: puede cambiar fecha, hora, estado o notas
-   * Body: { fecha?, hora?, estado?, notas? }
-   */
   async update({ auth, params, request, response }: HttpContext) {
     const usuario = auth.user!
 
@@ -144,22 +126,18 @@ export default class ReservasEncargadoController {
 
     if (estado) {
       await Notificacion.create({
-        usuarioId: reserva.idUsuario,
-        titulo: 'Estado de tu reserva actualizado',
-        mensaje: `Tu reserva del ${reserva.fecha} a las ${reserva.hora} en ${punto.nombre} ha cambiado a: ${estado}.`,
+        idUsuario: encargado.idUsuario,
+        titulo: 'Nueva reserva',
+        descripcion: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
         leida: false,
         tipo: 'reserva',
-        idReferencia: reserva.idReserva,
+        idEncargado: encargado.idUsuario,
       })
     }
 
     return response.ok({ mensaje: 'Reserva actualizada', reserva })
   }
 
-  /**
-   * DELETE /api/encargado/reservas/:id
-   * El encargado elimina una reserva de su agenda
-   */
   async destroy({ auth, params, response }: HttpContext) {
     const usuario = auth.user!
 

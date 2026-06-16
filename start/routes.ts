@@ -6,12 +6,8 @@ import PuntosController from '#controllers/puntos_controller'
 
 
 // RUTA PARA ASIGNACIÓN DE PUNTOS (SCRUM-506)
-router.post('/puntos/asignar', [() => import('#controllers/puntos_controller'), 'asignar'])
-router.get('/', async () => {
-  return {
-    mensaje: 'Backend funcionando'
-  }
-})
+
+
 
 // PUNTOS DE RECICLAJE (públicas)
 router.get('/api/puntos-reciclaje', [() => import('#controllers/puntos_reciclajes_controller'), 'index'])
@@ -51,6 +47,7 @@ router.group(() => {
   router.post('/encargados', [() => import('#controllers/admin/encargados_controller'), 'store'])
   router.put('/encargados/:id', [() => import('#controllers/admin/encargados_controller'), 'update'])
   router.delete('/encargados/:id', [() => import('#controllers/admin/encargados_controller'), 'destroy'])
+  router.put('/encargados/:id/asignar-punto', [() => import('#controllers/admin/encargados_controller'), 'asignarPunto'])
 
   // Usuarios
   router.get('/usuarios', [() => import('#controllers/admin/usuarios_controller'), 'index'])
@@ -191,6 +188,7 @@ router.group(() => {
   router.get('/reservas',        [() => import('#controllers/usuario/reservas_usuario_controller'), 'index'])
   router.get('/reservas/:id',    [() => import('#controllers/usuario/reservas_usuario_controller'), 'show'])
   router.post('/reservas',       [() => import('#controllers/usuario/reservas_usuario_controller'), 'store'])
+  router.put('/reservas/:id/cancelar', [() => import('#controllers/usuario/reservas_usuario_controller'), 'cancelar']) //para cancelar una cita
   router.delete('/reservas/:id', [() => import('#controllers/usuario/reservas_usuario_controller'), 'destroy'])
 
   // Notificaciones
@@ -234,8 +232,8 @@ router.group(() => {
 
   // Notificaciones
   router.get('/notificaciones', [() => import('#controllers/encargado/notificaciones_controller'), 'index'])
-  router.put('/notificaciones/:id/leer', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarLeida'])
   router.put('/notificaciones/leer-todas', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarTodasLeidas'])
+  router.put('/notificaciones/:id/leer', [() => import('#controllers/encargado/notificaciones_controller'), 'marcarLeida'])
 
   // Perfil
   router.get('/perfil', [() => import('#controllers/encargado/perfil_encargado_controller'), 'mostrar'])
@@ -258,7 +256,19 @@ router.group(() => {
  // Entregas
   router.get('/entregas', [() => import('#controllers/encargado/entregas_controller'), 'index'])
   router.get('/entregas/:id', [() => import('#controllers/encargado/entregas_controller'), 'show'])
+  router.post('/entregas', [() => import('#controllers/encargado/entregas_controller'), 'store']) 
   router.put('/entregas/:id/estado', [() => import('#controllers/encargado/entregas_controller'), 'actualizarEstado'])
+
+  //canjes
+  router.get('/canjes', [() => import('#controllers/encargado/canjes_encargado_controller'), 'index'])
+  router.get('/canjes/:id', [() => import('#controllers/encargado/canjes_encargado_controller'), 'show'])
+  router.put('/canjes/:id/validar', [() => import('#controllers/encargado/canjes_encargado_controller'), 'validar'])
+
+  //recompensas
+  router.get('/recompensas', [() => import('#controllers/admin/recompensas_controller'), 'index'])
+
+  //usuarios
+  router.get('/usuarios', [() => import('#controllers/admin/usuarios_controller'), 'index'])
 
 }).prefix('/api/encargado').use([middleware.auth(), middleware.verificar_rol(['encargado'])])
 
