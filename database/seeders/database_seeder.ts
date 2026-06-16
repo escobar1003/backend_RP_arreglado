@@ -13,6 +13,7 @@ export default class DatabaseSeeder extends BaseSeeder {
       { nombre: 'aliado', descripcion: 'Punto de reciclaje en supermercado aliado' },
       { nombre: 'usuario', descripcion: 'Usuario que recicla y acumula puntos' },
       { nombre: 'encargado', descripcion: 'Persona que recibe material,asigna puntos a Usuarios ' },
+      { nombre: 'superadmin', descripcion: 'Super administrador del sistema' },  // ← AGREGAR
     ])
 
 
@@ -101,6 +102,19 @@ export default class DatabaseSeeder extends BaseSeeder {
     })
 
     console.log('Usuario admin creado: admin@test.com / 123456')
+
+    await db.table('usuarios').insert({                                              // ← AGREGAR
+      id_rol: 5,                                                                     // ← AGREGAR
+      id_estado_usuario: 1,                                                          // ← AGREGAR
+      nombre: 'Super Administrador',                                                 // ← AGREGAR
+      correo: 'superadmin@test.com',                                                 // ← AGREGAR
+      password: await hash.make('123456'),                                           // ← AGREGAR
+      fecha_registro: new Date(),                                                    // ← AGREGAR
+      created_at: new Date(),                                                        // ← AGREGAR
+      updated_at: new Date(),                                                        // ← AGREGAR
+    })                                                                               // ← AGREGAR
+
+    console.log('Usuario superadmin creado: superadmin@test.com / 123456')           // ← AGREGAR
 
 // MATERIALES
     await db.table('materiales').multiInsert([
