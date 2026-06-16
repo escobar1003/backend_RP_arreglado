@@ -452,7 +452,7 @@ export class TransaccionPuntoSchema extends BaseModel {
 }
 
 export class UsuarioSchema extends BaseModel {
-  static $columns = ['codigoExpiracion', 'codigoRecuperacion', 'correo', 'createdAt', 'fechaRegistro', 'idEstadoUsuario', 'idRol', 'idUsuario', 'nombre', 'password', 'puntosTotales', 'telefono', 'updatedAt'] as const
+  static $columns = ['codigoExpiracion', 'codigoRecuperacion', 'correo', 'createdAt', 'fechaRegistro', 'idAliado', 'idEstadoUsuario', 'idRol', 'idUsuario', 'nombre', 'password', 'puntosTotales', 'telefono', 'updatedAt'] as const
   $columns = UsuarioSchema.$columns
   @column.dateTime()
   declare codigoExpiracion: DateTime | null
@@ -464,6 +464,8 @@ export class UsuarioSchema extends BaseModel {
   declare createdAt: DateTime | null
   @column.dateTime()
   declare fechaRegistro: DateTime
+  @column()
+  declare idAliado: number | null
   @column()
   declare idEstadoUsuario: number
   @column()

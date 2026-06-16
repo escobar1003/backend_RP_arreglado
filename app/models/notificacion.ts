@@ -10,9 +10,9 @@ export default class Notificacion extends BaseModel {
   declare idNotificacion: number
 
   @column()
-  declare usuarioId: number
+  declare idUsuario: number
 
-  @column({columnName: 'id_usuario'})
+  @column()
   declare titulo: string
 
   @column()
@@ -33,6 +33,6 @@ export default class Notificacion extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
 
-  @belongsTo(() => Usuario, { foreignKey: 'usuarioId' })
+  @belongsTo(() => Usuario, { foreignKey: 'idUsuario' })
   declare usuario: BelongsTo<typeof Usuario>
 }

@@ -1,10 +1,11 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Usuario from '#models/usuario'
 import hash from '@adonisjs/core/services/hash'
+import { loginValidator } from '#validators/auth/login'
 
 export default class LoginController {
   async iniciarSesion({ request, response }: HttpContext) {
-    const { correo, password } = request.only(['correo', 'password'])
+    const { correo, password } = await request.validateUsing(loginValidator)
 
     // Buscar usuario manualmente
     const usuario = await Usuario.query()

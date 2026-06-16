@@ -59,12 +59,12 @@ export interface Registry {
     methods: ["POST"]
     pattern: '/api/auth/iniciar-sesion'
     types: {
-      body: {}
+      body: ExtractBody<InferInput<(typeof import('#validators/auth/login').loginValidator)>>
       paramsTuple: []
       params: {}
-      query: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/auth/login').loginValidator)>>
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/login_controller').default['iniciarSesion']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/login_controller').default['iniciarSesion']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/login_controller').default['iniciarSesion']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'registros.registrarse': {
@@ -245,6 +245,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/usuarios_controller').default['show']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/usuarios_controller').default['show']>>>
+    }
+  }
+  'usuarios.store': {
+    methods: ["POST"]
+    pattern: '/api/admin/usuarios'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/admin/usuario').crearUsuarioValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/admin/usuario').crearUsuarioValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/usuarios_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/usuarios_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'usuarios.update': {
@@ -1063,6 +1075,30 @@ export interface Registry {
       errorResponse: unknown
     }
   }
+  'perfil_admin.mostrar': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/perfil'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/perfil_admin_controller').default['mostrar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/perfil_admin_controller').default['mostrar']>>>
+    }
+  }
+  'perfil_admin.actualizar': {
+    methods: ["PUT"]
+    pattern: '/api/admin/perfil'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/perfil_admin_controller').default['actualizar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/perfil_admin_controller').default['actualizar']>>>
+    }
+  }
   'perfil.mostrar': {
     methods: ["GET","HEAD"]
     pattern: '/api/usuario/perfil'
@@ -1279,6 +1315,42 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['destroy']>>>
     }
   }
+  'notificaciones_usuario.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/usuario/notificaciones'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/notificaciones_usuario_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/notificaciones_usuario_controller').default['index']>>>
+    }
+  }
+  'notificaciones_usuario.marcar_leida': {
+    methods: ["PUT"]
+    pattern: '/api/usuario/notificaciones/:id/leer'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/notificaciones_usuario_controller').default['marcarLeida']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/notificaciones_usuario_controller').default['marcarLeida']>>>
+    }
+  }
+  'notificaciones_usuario.marcar_todas_leidas': {
+    methods: ["PUT"]
+    pattern: '/api/usuario/notificaciones/leer-todas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/notificaciones_usuario_controller').default['marcarTodasLeidas']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/notificaciones_usuario_controller').default['marcarTodasLeidas']>>>
+    }
+  }
   'perfil_aliado.mostrar': {
     methods: ["GET","HEAD"]
     pattern: '/api/aliado/perfil'
@@ -1447,6 +1519,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['destroy']>>>
     }
   }
+  'materiales.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/materiales'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/materiales_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/materiales_controller').default['index']>>>
+    }
+  }
   'notificaciones.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/encargado/notificaciones'
@@ -1481,6 +1565,30 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarTodasLeidas']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/notificaciones_controller').default['marcarTodasLeidas']>>>
+    }
+  }
+  'perfil_encargado.mostrar': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/perfil'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/perfil_encargado_controller').default['mostrar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/perfil_encargado_controller').default['mostrar']>>>
+    }
+  }
+  'perfil_encargado.actualizar': {
+    methods: ["PUT"]
+    pattern: '/api/encargado/perfil'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/perfil_encargado_controller').default['actualizar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/perfil_encargado_controller').default['actualizar']>>>
     }
   }
   'entregas.index': {
@@ -1558,6 +1666,18 @@ export interface Registry {
   'deteccion.procesar_camara': {
     methods: ["POST"]
     pattern: '/api/detectar-material'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
+  'chat.preguntar': {
+    methods: ["POST"]
+    pattern: '/api/chat'
     types: {
       body: {}
       paramsTuple: []

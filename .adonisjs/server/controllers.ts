@@ -22,6 +22,7 @@ export const controllers = {
     Roles: () => import('#controllers/admin/roles_controller'),
     TiposRecompensas: () => import('#controllers/admin/tipos_recompensas_controller'),
     Usuarios: () => import('#controllers/admin/usuarios_controller'),
+    PerfilAdmin: () => import('#controllers/admin/perfil_admin_controller'),
   },
   aliado: {
     Clasificacion: () => import('#controllers/aliado/clasificacion_controller'),
@@ -34,12 +35,12 @@ export const controllers = {
     Registros: () => import('#controllers/auth/registros_controller'),
   },
   Chatbot: () => import('#controllers/chatbot_controller'),
-  Deteccion: () => import('#controllers/deteccion_controller'),
   encargado: {
     Entregas: () => import('#controllers/encargado/entregas_controller'),
     Notificaciones: () => import('#controllers/encargado/notificaciones_controller'),
     ReservasEncargado: () => import('#controllers/encargado/reservas_encargado_controller'),
     ReservasEncargados: () => import('#controllers/encargado/reservas_encargados_controller'),
+    PerfilEncargado: () => import('#controllers/encargado/perfil_encargado_controller'),
   },
   Puntos: () => import('#controllers/puntos_controller'),
   PuntosReciclajes: () => import('#controllers/puntos_reciclajes_controller'),
@@ -53,5 +54,8 @@ export const controllers = {
     Recompensas: () => import('#controllers/usuario/recompensas_controller'),
     ReservasUsuario: () => import('#controllers/usuario/reservas_usuario_controller'),
     ReservasUsuarios: () => import('#controllers/usuario/reservas_usuarios_controller'),
+    NotificacionesUsuario: () => import('#controllers/usuario/notificaciones_usuario_controller'),
   },
+  Chat: () => import('#controllers/chat_controller'),
+  Deteccion: () => import('#controllers/deteccion_controller'),
 }
