@@ -1,8 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Usuario from '#models/usuario'
 import hash from '@adonisjs/core/services/hash'
-import mail from '@adonisjs/mail/services/main'
 import PuntoReciclaje from '#models/punto_reciclaje'
+import { DateTime } from 'luxon'
 
 export default class EncargadosController {
   async index({ response }: HttpContext) {
@@ -31,60 +31,23 @@ export default class EncargadosController {
       if (correoExiste.idRol === 4) {
         return response.conflict({ mensaje: 'Este usuario ya es encargado' })
       }
-      const password = datos.password || generarPassword()
       correoExiste.idRol = 4
-      correoExiste.password = password
+      correoExiste.password = await hash.make(datos.password || '123456')
       await correoExiste.save()
-
-      await Mail.send((message) => {
-        message
-          .to(correoExiste.correo)
-          .subject('Tus credenciales de acceso - Recycling Points')
-          .html(`
-            <h2>Hola ${correoExiste.nombre},</h2>
-            <p>Has sido registrado como <strong>encargado</strong> en Recycling Points.</p>
-            <p><strong>Correo:</strong> ${correoExiste.correo}</p>
-            <p><strong>Contraseña:</strong> ${password}</p>
-            <p>Inicia sesión para gestionar las entregas.</p>
-          `)
-      })
-    if (usuario.idRol === 4) {
-      return response.conflict({ mensaje: 'Este usuario ya es encargado' })
+      return response.ok({ mensaje: 'Usuario actualizado a encargado', encargado: correoExiste })
     }
 
-      return response.ok({ mensaje: 'Usuario actualizado a encargado. Se enviaron las credenciales a su correo.', encargado: correoExiste })
-    }
-
-    // Crear usuario nuevo
-    const password = datos.password || generarPassword()
     const encargado = await Usuario.create({
       idRol: 4,
       idEstadoUsuario: 1,
       nombre: datos.nombre,
       correo: datos.correo,
-      password: password,
+      password: await hash.make(datos.password || '123456'),
       telefono: datos.telefono ?? null,
       fechaRegistro: DateTime.now(),
     })
-    usuario.idRol = 4
-    usuario.idAliado = datos.idAliado ?? null
-    usuario.password = await hash.make(passwordTemporal)
-    await usuario.save()
 
-    await Mail.send((message) => {
-      message
-        .to(encargado.correo)
-        .subject('Tus credenciales de acceso - Recycling Points')
-        .html(`
-          <h2>Hola ${encargado.nombre},</h2>
-          <p>Has sido registrado como <strong>encargado</strong> en Recycling Points.</p>
-          <p><strong>Correo:</strong> ${encargado.correo}</p>
-          <p><strong>Contraseña:</strong> ${password}</p>
-          <p>Inicia sesión para gestionar las entregas.</p>
-        `)
-    })
-
-    return response.created({ mensaje: 'Encargado creado correctamente. Se enviaron las credenciales a su correo.', encargado })
+    return response.created({ mensaje: 'Encargado creado correctamente', encargado })
   }
 
   async update({ params, request, response }: HttpContext) {
@@ -96,7 +59,7 @@ export default class EncargadosController {
     const datos = request.only(['nombre', 'telefono', 'idEstadoUsuario'])
     encargado.merge(datos)
     if (request.input('password')) {
-      encargado.password = request.input('password')
+      encargado.password = await hash.make(request.input('password'))
     }
     await encargado.save()
     return response.ok({ mensaje: 'Encargado actualizado correctamente', encargado })
@@ -107,7 +70,6 @@ export default class EncargadosController {
       .where('id_usuario', params.id)
       .where('id_rol', 4)
       .firstOrFail()
-
     await encargado.delete()
     return response.ok({ mensaje: 'Encargado eliminado correctamente' })
   }
@@ -119,7 +81,6 @@ export default class EncargadosController {
       .firstOrFail()
 
     const { idPunto } = request.only(['idPunto'])
-
     const punto = await PuntoReciclaje.query()
       .where('id_punto', idPunto)
       .firstOrFail()
@@ -130,7 +91,6 @@ export default class EncargadosController {
 
     punto.idEncargado = encargado.idUsuario
     await punto.save()
-
     return response.ok({ mensaje: 'Punto de reciclaje asignado correctamente', punto })
   }
 }

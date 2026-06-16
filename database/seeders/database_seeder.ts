@@ -1,6 +1,7 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import db from '@adonisjs/lucid/services/db'
 import hash from '@adonisjs/core/services/hash'
+import Usuario from '#models/usuario'
 
 
 export default class DatabaseSeeder extends BaseSeeder {
@@ -89,18 +90,32 @@ export default class DatabaseSeeder extends BaseSeeder {
     ])
 
     console.log('Seeders ejecutados correctamente')
-    await db.table('usuarios').insert({
-      id_rol: 1,
-      id_estado_usuario: 1,
-      nombre: 'Administrador',
-      correo: 'admin@test.com',
-      password: await hash.make('123456'),
-      fecha_registro: new Date(),
-      created_at: new Date(),
-      updated_at: new Date(),
-    })
+    const adminExiste = await db.from('usuarios').where('correo', 'admin@test.com').first()
+    if (!adminExiste) {
+      await db.table('usuarios').insert({
+        id_rol: 1,
+        id_estado_usuario: 1,
+        nombre: 'Administrador',
+        correo: 'admin@test.com',
+        password: await hash.make('123456'),
+        fecha_registro: new Date(),
+        created_at: new Date(),
+        updated_at: new Date(),
+      })
+      console.log('Usuario admin creado: admin@test.com / 123456')
+    }
 
-    console.log('Usuario admin creado: admin@test.com / 123456')
+    
+
+    const superadminExiste = await Usuario.findBy('correo', 'superadmin@test.com')
+if (!superadminExiste) {
+  await db.table('usuarios').insert({
+    id_rol: 5, id_estado_usuario: 1,
+    nombre: 'Super Administrador', correo: 'superadmin@test.com',
+    password: await hash.make('123456'),
+    fecha_registro: new Date(), created_at: new Date(), updated_at: new Date(),
+  })
+}
 
 // MATERIALES
     await db.table('materiales').multiInsert([
@@ -184,6 +199,7 @@ export default class DatabaseSeeder extends BaseSeeder {
       created_at: new Date(),
       updated_at: new Date(),
     })
+    
 
     console.log(`Punto creado (id: ${idPunto}) → encargado (id: ${idEncargado})`)
   }
