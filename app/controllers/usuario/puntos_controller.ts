@@ -22,6 +22,7 @@ export default class PuntosController {
     const saldo = ganados - descontados + ajuste
 
     return response.ok({
+      puntos: saldo,
       saldo,
       ganados,
       descontados,

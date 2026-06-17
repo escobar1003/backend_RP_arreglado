@@ -5,61 +5,71 @@ import FormData from 'form-data'
 import fs from 'fs'
 
 export default class DeteccionController {
-  
+
   public async procesarCamara({ request, response }: HttpContext) {
-    // 1. Recibir la foto que envía la app móvil de Flutter
+
+    // 1. Recibir la imagen desde Flutter
     const imagenMobile = request.file('image', {
       size: '5mb',
       extnames: ['jpg', 'png', 'jpeg'],
     })
 
     if (!imagenMobile) {
-      return response.badRequest({ 
-        status: 'error', 
-        message: 'No se recibió ninguna imagen de la cámara.' 
+      return response.badRequest({
+        status: 'error',
+        message: 'No se recibió ninguna imagen de la cámara.',
       })
     }
 
-    // 2. Mover la foto temporalmente a la carpeta del servidor de Adonis
+    // 2. Guardar temporalmente en el servidor
     await imagenMobile.move(app.tmpPath('uploads'))
     const filePath = `${app.tmpPath('uploads')}/${imagenMobile.fileName}`
 
+    const cleanup = () => {
+      if (fs.existsSync(filePath)) fs.unlinkSync(filePath)
+    }
+
     try {
-  // 3. Preparar el formulario para reenviar la foto al script de Python (YOLOv11)
-  const formData = new FormData()
-  formData.append('image', fs.createReadStream(filePath))
+      // 3. Armar el FormData para reenviar al servicio YOLO
+      const formData = new FormData()
+      formData.append('image', fs.createReadStream(filePath), {
+        filename: imagenMobile.fileName,
+        contentType: imagenMobile.headers['content-type'] ?? 'image/jpeg',
+      })
 
-  // 4. Hacer la petición HTTP POST al puerto 5000 (donde corre app.py)
-  const apiResponse = await axios.post('http://localhost:5000/predict', formData, {
-    headers: formData.getHeaders(),
-  })
+      // 4. URL del servicio YOLO desde variable de entorno
+      //    En Render: IA_SERVICE_URL=https://recycling-ia-service.onrender.com
+      const iaUrl = process.env.IA_SERVICE_URL ?? 'http://localhost:5000'
 
-  // 5. Borrar la foto temporal del servidor de Adonis para no acumular basura
-  if (fs.existsSync(filePath)) {
-    fs.unlinkSync(filePath)
-  }
+      console.log(`[IA] Enviando imagen a: ${iaUrl}/predict`)
 
-  // 6. Responderle los resultados de la IA de vuelta a Flutter
-  return response.ok(apiResponse.data)
+      const apiResponse = await axios.post(`${iaUrl}/predict`, formData, {
+        headers: formData.getHeaders(),
+        timeout: 60000, // 60s para tolerar el cold start de Render Free
+      })
 
-      // 5. Borrar la foto temporal del servidor de Adonis para no acumular basura
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath)
-      }
+      cleanup()
 
-      // 6. Responderle los resultados de la IA de vuelta a Flutter
+      console.log('[IA] Respuesta recibida:', apiResponse.data)
+
+      // 5. Devolver resultado a Flutter
       return response.ok(apiResponse.data)
 
-    } catch (error:any) {
-      // Si algo falla, borrar la foto temporal para evitar bloqueos
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath)
-      }
-      
-      return response.internalServerError({ 
-        status: 'error', 
+    } catch (error: any) {
+      cleanup()
+
+      // Log detallado para ver en Render → Logs
+      console.error('[IA] Error:', {
+        message: error.message,
+        code: error.code,
+        iaStatus: error.response?.status,
+        iaData: error.response?.data,
+      })
+
+      return response.internalServerError({
+        status: 'error',
         message: 'Error de conexión con el motor de Inteligencia Artificial.',
-        error: error.message 
+        error: error.message || error.code || 'Sin detalles',
       })
     }
   }
