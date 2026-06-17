@@ -828,6 +828,12 @@ const routes = {
     tokens: [{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"api","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"encargado","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"entregas","end":""},{"old":"/api/encargado/entregas/:id/estado","type":1,"val":"id","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"estado","end":""}],
     types: placeholder as Registry['entregas.actualizar_estado']['types'],
   },
+  'entregas.comprobante': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/entregas/:id/comprobante',
+    tokens: [{"old":"/api/encargado/entregas/:id/comprobante","type":0,"val":"api","end":""},{"old":"/api/encargado/entregas/:id/comprobante","type":0,"val":"encargado","end":""},{"old":"/api/encargado/entregas/:id/comprobante","type":0,"val":"entregas","end":""},{"old":"/api/encargado/entregas/:id/comprobante","type":1,"val":"id","end":""},{"old":"/api/encargado/entregas/:id/comprobante","type":0,"val":"comprobante","end":""}],
+    types: placeholder as Registry['entregas.comprobante']['types'],
+  },
   'canjes_encargado.index': {
     methods: ["GET","HEAD"],
     pattern: '/api/encargado/canjes',

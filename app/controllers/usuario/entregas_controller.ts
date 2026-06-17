@@ -82,7 +82,7 @@ export default class EntregasController {
 
         // SCRUM-582: Generar notificación al registrar entrega
     await Notificacion.create({
-      usuarioId: auth.user!.idUsuario,
+      idUsuario: auth.user!.idUsuario,
       titulo: 'Entrega registrada',
       mensaje: `Tu entrega #${entrega.idEntrega} fue registrada correctamente. Peso total: ${pesoTotal}kg, Puntos ganados: ${puntosTotales}pts.`,
       leida: false,

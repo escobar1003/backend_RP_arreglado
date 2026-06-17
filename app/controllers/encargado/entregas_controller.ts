@@ -144,12 +144,38 @@ export default class EntregasController {
     idReferencia: entrega.idEntrega,
   })
 
+  // registro de entrega con detalle para comprobante
   await entrega.load('detalles', (q) => q.preload('material'))
   await entrega.load('estadoEntrega')
+  await entrega.load('usuario')
+  await entrega.load('puntoReciclaje')
 
   return response.created({
     mensaje: 'Entrega registrada exitosamente',
-    entrega,
+    comprobante: {
+      idEntrega: entrega.idEntrega,
+      fechaEntrega: entrega.fechaEntrega,
+      estado: entrega.estadoEntrega,
+      usuario: {
+        idUsuario: entrega.usuario.idUsuario,
+        nombre: entrega.usuario.nombre,
+        apellido: entrega.usuario.apellido,
+        correo: entrega.usuario.correo,
+        puntosAcumulados: usuarioObj.puntosTotales,
+      },
+      puntoReciclaje: {
+        nombre: entrega.puntoReciclaje.nombre,
+        direccion: entrega.puntoReciclaje.direccion,
+      },
+      materiales: entrega.detalles.map((d) => ({
+        nombre: d.material.nombre,
+        peso: d.peso,
+        puntosGenerados: d.puntosGenerados,
+      })),
+      pesoTotal: entrega.pesoTotal,
+      puntosTotales: entrega.puntosTotales,
+      observacion: entrega.observacion,
+    },
   })
 }
 
@@ -186,6 +212,53 @@ export default class EntregasController {
     return response.ok({
       mensaje: 'Estado de entrega actualizado correctamente',
       entrega,
+    })
+  }
+  async comprobante({ auth, params, response }: HttpContext) {
+    const usuario = auth.user!
+
+    const punto = await PuntoReciclaje.query()
+      .where('id_encargado', usuario.idUsuario)
+      .first()
+
+    if (!punto) {
+      return response.notFound({ mensaje: 'No tienes un punto de reciclaje asignado' })
+    }
+
+    const entrega = await Entrega.query()
+      .where('id_entrega', params.id)
+      .where('id_punto', punto.idPunto)
+      .preload('puntoReciclaje')
+      .preload('usuario')
+      .preload('estadoEntrega')
+      .preload('detalles', (q) => q.preload('material'))
+      .firstOrFail()
+
+    return response.ok({
+      comprobante: {
+        idEntrega: entrega.idEntrega,
+        fechaEntrega: entrega.fechaEntrega,
+        estado: entrega.estadoEntrega,
+        usuario: {
+          idUsuario: entrega.usuario.idUsuario,
+          nombre: entrega.usuario.nombre,
+          apellido: entrega.usuario.apellido,
+          correo: entrega.usuario.correo,
+          puntosAcumulados: entrega.usuario.puntosTotales,
+        },
+        puntoReciclaje: {
+          nombre: entrega.puntoReciclaje.nombre,
+          direccion: entrega.puntoReciclaje.direccion,
+        },
+        materiales: entrega.detalles.map((d) => ({
+          nombre: d.material.nombre,
+          peso: d.peso,
+          puntosGenerados: d.puntosGenerados,
+        })),
+        pesoTotal: entrega.pesoTotal,
+        puntosTotales: entrega.puntosTotales,
+        observacion: entrega.observacion,
+      },
     })
   }
 }

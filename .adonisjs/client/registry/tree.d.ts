@@ -154,6 +154,7 @@ export interface ApiDefinition {
     show: typeof routes['entregas.show']
     store: typeof routes['entregas.store']
     actualizarEstado: typeof routes['entregas.actualizar_estado']
+    comprobante: typeof routes['entregas.comprobante']
   }
   canjes: {
     index: typeof routes['canjes.index']

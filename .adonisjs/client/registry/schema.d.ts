@@ -1651,6 +1651,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['actualizarEstado']>>>
     }
   }
+  'entregas.comprobante': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/entregas/:id/comprobante'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['comprobante']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['comprobante']>>>
+    }
+  }
   'canjes_encargado.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/encargado/canjes'

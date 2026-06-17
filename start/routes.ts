@@ -258,6 +258,7 @@ router.group(() => {
   router.get('/entregas/:id', [() => import('#controllers/encargado/entregas_controller'), 'show'])
   router.post('/entregas', [() => import('#controllers/encargado/entregas_controller'), 'store']) 
   router.put('/entregas/:id/estado', [() => import('#controllers/encargado/entregas_controller'), 'actualizarEstado'])
+  router.get('/entregas/:id/comprobante', [() => import('#controllers/encargado/entregas_controller'), 'comprobante'])
 
   //canjes
   router.get('/canjes', [() => import('#controllers/encargado/canjes_encargado_controller'), 'index'])
