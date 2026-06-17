@@ -16,13 +16,16 @@ export default class Notificacion extends BaseModel {
   declare titulo: string
 
   @column()
-  declare descripcion: string
+  declare mensaje: string
 
   @column()
   declare leida: boolean
 
   @column()
   declare tipo: string
+
+  @column()
+  declare idReferencia: number | null
 
   @column()
   declare idEncargado: number | null
