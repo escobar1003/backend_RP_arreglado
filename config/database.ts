@@ -1,16 +1,10 @@
-import env from '#start/env' // <--- Faltaba esta importación
+import env from '#start/env'
 import { defineConfig } from '@adonisjs/lucid'
 
 const dbConfig = defineConfig({
-  /**
-   * Conexión por defecto
-   */
   connection: 'mysql',
 
   connections: {
-    /**
-     * Configuración de MySQL
-     */
     mysql: {
       client: 'mysql2',
       connection: {
@@ -21,20 +15,22 @@ const dbConfig = defineConfig({
         database: env.get('DB_DATABASE'),
       },
       pool: {
-        min: 1,
-        max: 1,
+        min: 0,
+        max: 5,
         acquireTimeoutMillis: 30000,
+        idleTimeoutMillis: 30000,
+        reapIntervalMillis: 1000,
+        afterCreate: (conn: any, done: any) => {
+          conn.query('SELECT 1', (err: any) => {
+            done(err, conn)
+          })
+        },
       },
       migrations: {
         naturalSort: true,
         paths: ['database/migrations'],
       },
     },
-
-    /**
-     * Puedes dejar SQLite como respaldo si quieres, 
-     * pero lo importante es que MySQL esté bien cerrado arriba.
-     */
   },
 })
 
