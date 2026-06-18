@@ -28,6 +28,9 @@ export default class MovimientoPunto extends BaseModel {
   @column.dateTime()
   declare fechaMovimiento: DateTime
 
+  @column.dateTime()
+  declare fechaCaducidad: DateTime | null
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

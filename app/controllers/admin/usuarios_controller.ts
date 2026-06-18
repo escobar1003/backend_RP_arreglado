@@ -5,18 +5,35 @@ import hash from '@adonisjs/core/services/hash'
 import { DateTime } from 'luxon'
 
 export default class UsuariosController {
-  async index({ response }: HttpContext) {
-    const usuarios = await Usuario.query().preload('rol').preload('estadoUsuario')
+  async index({ auth, response }: HttpContext) {
+    const usuario = auth.user!
+    await usuario.load('rol')
+
+    const query = Usuario.query().preload('rol').preload('estadoUsuario')
+
+    if (usuario.rol.nombre === 'admin' && usuario.idAliado) {
+      query.where('id_aliado', usuario.idAliado)
+    }
+
+    const usuarios = await query
     return response.ok({ usuarios })
   }
 
-  async show({ params, response }: HttpContext) {
-    const usuario = await Usuario.query()
+  async show({ auth, params, response }: HttpContext) {
+    const usuario = auth.user!
+    await usuario.load('rol')
+
+    const query = Usuario.query()
       .where('id_usuario', params.id)
       .preload('rol')
       .preload('estadoUsuario')
-      .firstOrFail()
-    return response.ok({ usuario })
+
+    if (usuario.rol.nombre === 'admin' && usuario.idAliado) {
+      query.where('id_aliado', usuario.idAliado)
+    }
+
+    const usuarioEncontrado = await query.firstOrFail()
+    return response.ok({ usuario: usuarioEncontrado })
   }
 
   async store({ request, response }: HttpContext) {

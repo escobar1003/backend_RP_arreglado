@@ -174,6 +174,18 @@ const routes = {
     tokens: [{"old":"/api/admin/aliados/:id","type":0,"val":"api","end":""},{"old":"/api/admin/aliados/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/aliados/:id","type":0,"val":"aliados","end":""},{"old":"/api/admin/aliados/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['aliados.destroy']['types'],
   },
+  'aliados.materiales': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/aliados/:id/materiales',
+    tokens: [{"old":"/api/admin/aliados/:id/materiales","type":0,"val":"api","end":""},{"old":"/api/admin/aliados/:id/materiales","type":0,"val":"admin","end":""},{"old":"/api/admin/aliados/:id/materiales","type":0,"val":"aliados","end":""},{"old":"/api/admin/aliados/:id/materiales","type":1,"val":"id","end":""},{"old":"/api/admin/aliados/:id/materiales","type":0,"val":"materiales","end":""}],
+    types: placeholder as Registry['aliados.materiales']['types'],
+  },
+  'aliados.sincronizar_materiales': {
+    methods: ["PUT"],
+    pattern: '/api/admin/aliados/:id/materiales',
+    tokens: [{"old":"/api/admin/aliados/:id/materiales","type":0,"val":"api","end":""},{"old":"/api/admin/aliados/:id/materiales","type":0,"val":"admin","end":""},{"old":"/api/admin/aliados/:id/materiales","type":0,"val":"aliados","end":""},{"old":"/api/admin/aliados/:id/materiales","type":1,"val":"id","end":""},{"old":"/api/admin/aliados/:id/materiales","type":0,"val":"materiales","end":""}],
+    types: placeholder as Registry['aliados.sincronizar_materiales']['types'],
+  },
   'materiales.index': {
     methods: ["GET","HEAD"],
     pattern: '/api/admin/materiales',
@@ -828,6 +840,12 @@ const routes = {
     tokens: [{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"api","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"encargado","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"entregas","end":""},{"old":"/api/encargado/entregas/:id/estado","type":1,"val":"id","end":""},{"old":"/api/encargado/entregas/:id/estado","type":0,"val":"estado","end":""}],
     types: placeholder as Registry['entregas.actualizar_estado']['types'],
   },
+  'entregas.comprobante': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/entregas/:id/comprobante',
+    tokens: [{"old":"/api/encargado/entregas/:id/comprobante","type":0,"val":"api","end":""},{"old":"/api/encargado/entregas/:id/comprobante","type":0,"val":"encargado","end":""},{"old":"/api/encargado/entregas/:id/comprobante","type":0,"val":"entregas","end":""},{"old":"/api/encargado/entregas/:id/comprobante","type":1,"val":"id","end":""},{"old":"/api/encargado/entregas/:id/comprobante","type":0,"val":"comprobante","end":""}],
+    types: placeholder as Registry['entregas.comprobante']['types'],
+  },
   'canjes_encargado.index': {
     methods: ["GET","HEAD"],
     pattern: '/api/encargado/canjes',
@@ -840,6 +858,18 @@ const routes = {
     tokens: [{"old":"/api/encargado/canjes/:id","type":0,"val":"api","end":""},{"old":"/api/encargado/canjes/:id","type":0,"val":"encargado","end":""},{"old":"/api/encargado/canjes/:id","type":0,"val":"canjes","end":""},{"old":"/api/encargado/canjes/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['canjes_encargado.show']['types'],
   },
+  'canjes_encargado.store': {
+    methods: ["POST"],
+    pattern: '/api/encargado/canjes',
+    tokens: [{"old":"/api/encargado/canjes","type":0,"val":"api","end":""},{"old":"/api/encargado/canjes","type":0,"val":"encargado","end":""},{"old":"/api/encargado/canjes","type":0,"val":"canjes","end":""}],
+    types: placeholder as Registry['canjes_encargado.store']['types'],
+  },
+  'canjes_encargado.actualizar_estado': {
+    methods: ["PUT"],
+    pattern: '/api/encargado/canjes/:id/estado',
+    tokens: [{"old":"/api/encargado/canjes/:id/estado","type":0,"val":"api","end":""},{"old":"/api/encargado/canjes/:id/estado","type":0,"val":"encargado","end":""},{"old":"/api/encargado/canjes/:id/estado","type":0,"val":"canjes","end":""},{"old":"/api/encargado/canjes/:id/estado","type":1,"val":"id","end":""},{"old":"/api/encargado/canjes/:id/estado","type":0,"val":"estado","end":""}],
+    types: placeholder as Registry['canjes_encargado.actualizar_estado']['types'],
+  },
   'canjes_encargado.validar': {
     methods: ["PUT"],
     pattern: '/api/encargado/canjes/:id/validar',
@@ -851,6 +881,12 @@ const routes = {
     pattern: '/api/encargado/recompensas',
     tokens: [{"old":"/api/encargado/recompensas","type":0,"val":"api","end":""},{"old":"/api/encargado/recompensas","type":0,"val":"encargado","end":""},{"old":"/api/encargado/recompensas","type":0,"val":"recompensas","end":""}],
     types: placeholder as Registry['recompensas.index']['types'],
+  },
+  'recompensas.store': {
+    methods: ["POST"],
+    pattern: '/api/encargado/recompensas',
+    tokens: [{"old":"/api/encargado/recompensas","type":0,"val":"api","end":""},{"old":"/api/encargado/recompensas","type":0,"val":"encargado","end":""},{"old":"/api/encargado/recompensas","type":0,"val":"recompensas","end":""}],
+    types: placeholder as Registry['recompensas.store']['types'],
   },
   'usuarios.index': {
     methods: ["GET","HEAD"],

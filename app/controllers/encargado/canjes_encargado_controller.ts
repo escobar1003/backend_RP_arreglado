@@ -1,7 +1,10 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Canje from '#models/canje'
-import PuntoReciclaje from '#models/punto_reciclaje'
+import Recompensa from '#models/recompensa'
+import MovimientoPunto from '#models/movimiento_punto'
+import { asegurarPuntoEncargado } from '#services/encargado_punto'
 import Notificacion from '#models/notificacion'
+import { DateTime } from 'luxon'
 
 export default class CanjesEncargadoController {
   /**
@@ -11,12 +14,9 @@ export default class CanjesEncargadoController {
   async index({ auth, request, response }: HttpContext) {
     const usuario = auth.user!
 
-    const punto = await PuntoReciclaje.query()
-    .where('id_encargado', usuario.idUsuario)
-    .first()
-
+    const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
     if (!punto) {
-      return response.notFound({ mensaje: 'No tienes un punto de reciclaje asignado' })
+      return response.notFound({ mensaje })
     }
 
     const { estado, usuario_id } = request.qs()
@@ -34,9 +34,35 @@ export default class CanjesEncargadoController {
     if (estado) query.where('id_estado_canje', estado)
     if (usuario_id) query.where('id_usuario', usuario_id)
 
+    const ahora = DateTime.now()
     const canjes = await query
 
-    return response.ok({ total: canjes.length, canjes })
+    // Auto-marcar como vencidos si pasó la fecha
+    const result = await Promise.all(canjes.map(async (c) => {
+      let estadoCanje = c.estadoCanje
+      if (c.fechaVencimiento && c.fechaVencimiento < ahora && estadoCanje?.idEstadoCanje !== 3) {
+        c.idEstadoCanje = 3
+        await c.save()
+        estadoCanje = { idEstadoCanje: 3, nombre: 'vencido' }
+      }
+      return {
+        idCanje: c.idCanje,
+        usuario: c.usuario?.nombre ?? 'Desconocido',
+        recompensa: c.recompensa?.nombre ?? 'Desconocida',
+        puntosUsados: c.puntosUsados,
+        codigoCanje: c.codigoCanje,
+        fechaCanje: c.fechaCanje,
+        diasRestantes: c.fechaVencimiento
+          ? Math.ceil(c.fechaVencimiento.diff(ahora, 'days').days)
+          : null,
+        estadoCanje: {
+          idEstadoCanje: estadoCanje?.idEstadoCanje,
+          nombre: estadoCanje?.nombre ?? 'Pendiente',
+        },
+      }
+    }))
+
+    return response.ok({ total: result.length, canjes: result })
   }
 
   /**
@@ -55,47 +81,82 @@ export default class CanjesEncargadoController {
   }
 
   /**
-   * PUT /api/encargado/canjes/:id/validar
-   * El encargado valida (aprueba o rechaza) un canje por código físico
-   * Body: { idEstadoCanje: 2 (canjeado) | 3 (vencido), codigoCanje }
+   * POST /api/encargado/canjes
+   * El encargado registra un canje para un usuario
    */
-  async validar({ auth, params, request, response }: HttpContext) {
+  async store({ auth, request, response }: HttpContext) {
     const usuario = auth.user!
 
-    const punto = await PuntoReciclaje.query()
-      .where('id_encargado', usuario.idUsuario)
-      .first()
-
+    const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
     if (!punto) {
-      return response.notFound({ mensaje: 'No tienes un punto de reciclaje asignado' })
+      return response.notFound({ mensaje })
     }
 
-    const canje = await Canje.query()
-      .where('id_canje', params.id)
-      .preload('recompensa')
-      .firstOrFail()
+    const recompensa = await Recompensa.findOrFail(idRecompensa)
 
-    const { idEstadoCanje, codigoCanje } = request.only(['idEstadoCanje', 'codigoCanje'])
-
-    if (codigoCanje && canje.codigoCanje !== codigoCanje) {
-      return response.badRequest({ mensaje: 'El código de canje no coincide' })
+    if (recompensa.idEstadoRecompensa !== 1) {
+      return response.badRequest({ mensaje: 'Esta recompensa no está disponible' })
     }
 
-    const estadosValidos = [2, 3] // canjeado, vencido
-    if (!estadosValidos.includes(idEstadoCanje)) {
-      return response.badRequest({ mensaje: 'Estado inválido. Use 2 (canjeado) o 3 (vencido)' })
+    if (recompensa.stock !== null && recompensa.stock <= 0) {
+      return response.badRequest({ mensaje: 'Esta recompensa está agotada' })
     }
 
-    canje.idEstadoCanje = idEstadoCanje
-    await canje.save()
+    if (recompensa.fechaFin && DateTime.now() > DateTime.fromISO(recompensa.fechaFin)) {
+      return response.badRequest({ mensaje: 'Esta recompensa ha expirado' })
+    }
+
+    const ahora = DateTime.now()
+    const movimientos = await MovimientoPunto.query().where('id_usuario', idUsuario)
+    const ganados = movimientos
+      .filter(m => m.tipoMovimiento === 'ganados' && (!m.fechaCaducidad || m.fechaCaducidad > ahora))
+      .reduce((s, m) => s + m.puntos, 0)
+    const descontados = movimientos
+      .filter(m => m.tipoMovimiento === 'descontados')
+      .reduce((s, m) => s + m.puntos, 0)
+    const ajuste = movimientos
+      .filter(m => m.tipoMovimiento === 'ajuste' && (!m.fechaCaducidad || m.fechaCaducidad > ahora))
+      .reduce((s, m) => s + m.puntos, 0)
+    const saldo = ganados - descontados + ajuste
+
+    if (saldo < recompensa.puntosRequeridos) {
+      return response.badRequest({
+        mensaje: `Puntos insuficientes. Necesitas ${recompensa.puntosRequeridos} y tienes ${saldo}`,
+      })
+    }
+
+    const codigoCanje = `CJ-${Date.now()}-${idUsuario}`
+
+    const canje = await Canje.create({
+      idUsuario,
+      idRecompensa,
+      idEstadoCanje: 1,
+      puntosUsados: recompensa.puntosRequeridos,
+      codigoCanje,
+      fechaCanje: DateTime.now(),
+      fechaVencimiento: fechaVencimiento ? DateTime.fromISO(fechaVencimiento) : null,
+    })
+
+    await MovimientoPunto.create({
+      idUsuario,
+      idEntrega: null,
+      tipoMovimiento: 'descontados',
+      puntos: recompensa.puntosRequeridos,
+      descripcion: `Canje de recompensa: ${recompensa.nombre}`,
+      fechaMovimiento: DateTime.now(),
+    })
+
+    if (recompensa.stock !== null) {
+      recompensa.stock -= 1
+      await recompensa.save()
+    }
 
     await Notificacion.create({
-      idUsuario: canje.idUsuario,
-      titulo: 'Tu canje fue procesado',
-      mensaje: `Tu canje de "${canje.recompensa.nombre}" fue ${idEstadoCanje === 2 ? 'canjeado exitosamente' : 'marcado como vencido'}.`,
+      idUsuario,
+      titulo: 'Canje realizado',
+      mensaje: `Tu canje de "${recompensa.nombre}" fue registrado. Código: ${codigoCanje}.`,
       leida: false,
       tipo: 'canje',
-      idReferencia: canje.idCanje,
     })
 
     return response.ok({ mensaje: 'Canje actualizado correctamente', canje })
