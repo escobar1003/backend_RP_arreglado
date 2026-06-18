@@ -40,9 +40,12 @@ export const controllers = {
   encargado: {
     CanjesEncargado: () => import('#controllers/encargado/canjes_encargado_controller'),
     Entregas: () => import('#controllers/encargado/entregas_controller'),
+    Materiales: () => import('#controllers/encargado/materiales_controller'),
     Notificaciones: () => import('#controllers/encargado/notificaciones_controller'),
     PerfilEncargado: () => import('#controllers/encargado/perfil_encargado_controller'),
+    Recompensas: () => import('#controllers/encargado/recompensas_controller'),
     ReservasEncargado: () => import('#controllers/encargado/reservas_encargado_controller'),
+    Usuarios: () => import('#controllers/encargado/usuarios_controller'),
   },
   Puntos: () => import('#controllers/puntos_controller'),
   PuntosReciclajes: () => import('#controllers/puntos_reciclajes_controller'),

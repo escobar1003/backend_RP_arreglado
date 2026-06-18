@@ -29,6 +29,9 @@ export default class Canje extends BaseModel {
   @column.dateTime()
   declare fechaCanje: DateTime
 
+  @column.dateTime()
+  declare fechaVencimiento: DateTime | null
+
   @belongsTo(() => Usuario, { foreignKey: 'idUsuario' })
   declare usuario: BelongsTo<typeof Usuario>
 

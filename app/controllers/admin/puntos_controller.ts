@@ -23,12 +23,11 @@ export default class PuntosController {
 
     // Generar notificación al usuario
     await Notificacion.create({
-      usuarioId: usuario.idUsuario,
+      idUsuario: usuario.idUsuario,
       titulo: 'Corrección de puntos',
       mensaje: `Tu saldo de puntos fue ajustado en ${puntos > 0 ? '+' : ''}${puntos}pts. Motivo: ${descripcion ?? 'Corrección administrativa'}.`,
       leida: false,
       tipo: 'puntos',
-      idReferencia: movimiento.idMovimiento,
     })
 
     return response.ok({
