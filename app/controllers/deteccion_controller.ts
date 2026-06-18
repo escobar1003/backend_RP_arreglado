@@ -29,10 +29,12 @@ export default class DeteccionController {
       const formData = new FormData()
       formData.append('image', fs.createReadStream(filePath))
 
-      // 4. Petición al servicio de IA (usando variable de entorno)
+      // 4. Petición al servicio de IA
       const iaUrl = process.env.IA_SERVICE_URL || 'http://localhost:5000'
+      
       const apiResponse = await axios.post(`${iaUrl}/predict`, formData, {
-        headers: formData.getHeaders(),
+        headers: { ...formData.getHeaders() },
+        timeout: 120000,
       })
 
       // 5. Responder a Flutter
