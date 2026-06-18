@@ -12,6 +12,7 @@ export default class LoginController {
       .where('correo', correo)
       .preload('rol')
       .preload('estadoUsuario')
+      .preload('aliado')
       .first()
 
     if (!usuario) {
@@ -47,6 +48,8 @@ export default class LoginController {
         telefono: usuario.telefono,
         imagen: usuario.imagen,
         rol: usuario.rol.nombre,
+        idAliado: usuario.idAliado,
+        aliadoNombre: usuario.aliado?.nombre ?? null,
       },
     })
   }

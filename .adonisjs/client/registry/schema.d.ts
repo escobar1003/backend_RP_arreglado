@@ -343,6 +343,30 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/aliados_controller').default['destroy']>>>
     }
   }
+  'aliados.materiales': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/aliados/:id/materiales'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/aliados_controller').default['materiales']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/aliados_controller').default['materiales']>>>
+    }
+  }
+  'aliados.sincronizar_materiales': {
+    methods: ["PUT"]
+    pattern: '/api/admin/aliados/:id/materiales'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/aliados_controller').default['sincronizarMateriales']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/aliados_controller').default['sincronizarMateriales']>>>
+    }
+  }
   'materiales.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/admin/materiales'
@@ -1303,6 +1327,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['store']>>>
     }
   }
+  'reservas_usuario.cancelar': {
+    methods: ["PUT"]
+    pattern: '/api/usuario/reservas/:id/cancelar'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['cancelar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['cancelar']>>>
+    }
+  }
   'reservas_usuario.destroy': {
     methods: ["DELETE"]
     pattern: '/api/usuario/reservas/:id'
@@ -1527,8 +1563,8 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/materiales_controller').default['index']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/materiales_controller').default['index']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/materiales_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/materiales_controller').default['index']>>>
     }
   }
   'notificaciones.index': {
@@ -1639,6 +1675,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['actualizarEstado']>>>
     }
   }
+  'entregas.comprobante': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/entregas/:id/comprobante'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['comprobante']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/entregas_controller').default['comprobante']>>>
+    }
+  }
   'canjes_encargado.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/encargado/canjes'
@@ -1663,6 +1711,30 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['show']>>>
     }
   }
+  'canjes_encargado.store': {
+    methods: ["POST"]
+    pattern: '/api/encargado/canjes'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['store']>>>
+    }
+  }
+  'canjes_encargado.actualizar_estado': {
+    methods: ["PUT"]
+    pattern: '/api/encargado/canjes/:id/estado'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['actualizarEstado']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/canjes_encargado_controller').default['actualizarEstado']>>>
+    }
+  }
   'canjes_encargado.validar': {
     methods: ["PUT"]
     pattern: '/api/encargado/canjes/:id/validar'
@@ -1683,8 +1755,20 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/recompensas_controller').default['index']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/recompensas_controller').default['index']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/recompensas_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/recompensas_controller').default['index']>>>
+    }
+  }
+  'recompensas.store': {
+    methods: ["POST"]
+    pattern: '/api/encargado/recompensas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/recompensas_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/recompensas_controller').default['store']>>>
     }
   }
   'usuarios.index': {
@@ -1695,8 +1779,8 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/usuarios_controller').default['index']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/usuarios_controller').default['index']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/usuarios_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/usuarios_controller').default['index']>>>
     }
   }
   'openapi.html': {

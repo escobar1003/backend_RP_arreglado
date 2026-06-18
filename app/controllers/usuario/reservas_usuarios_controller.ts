@@ -87,11 +87,11 @@ export default class ReservasUsuarioController {
       await Notificacion.create({
         idUsuario: encargado.idUsuario,
         titulo: 'Nueva reserva',
-        descripcion: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
+        mensaje: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
         leida: false,
         tipo: 'reserva',
-        idEncargado: encargado.idUsuario,
       })
+      
 
       WsService.emitToEncargado(encargado.idUsuario, 'notificacion', {
         tipo: 'nueva_reserva',
@@ -139,10 +139,18 @@ export default class ReservasUsuarioController {
 
     const encargado = await Usuario.query()
       .where('id_aliado', punto.idAliado)
-      .where('id_rol', 2)
+      .where('id_rol', 4)
       .first()
 
     if (encargado) {
+      await Notificacion.create({
+        idUsuario: encargado.idUsuario,
+        tipo: 'reserva_cancelada',
+        titulo: 'Reserva cancelada',
+        mensaje: `El usuario canceló la reserva #${reserva.idReserva}`,
+        leida: false,
+      })
+
       WsService.emitToEncargado(encargado.idUsuario, 'notificacion', {
         tipo: 'reserva_cancelada',
         idReserva: reserva.idReserva,

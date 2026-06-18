@@ -51,8 +51,9 @@ export default class CanjesController {
     const movimientos = await MovimientoPunto.query()
       .where('id_usuario', auth.user!.idUsuario)
 
+    const ahora = DateTime.now()
     const ganados = movimientos
-      .filter((m) => m.tipoMovimiento === 'ganados')
+      .filter((m) => m.tipoMovimiento === 'ganados' && (!m.fechaCaducidad || m.fechaCaducidad > ahora))
       .reduce((sum, m) => sum + m.puntos, 0)
 
     const descontados = movimientos
@@ -60,7 +61,7 @@ export default class CanjesController {
       .reduce((sum, m) => sum + m.puntos, 0)
 
     const ajuste = movimientos
-      .filter((m) => m.tipoMovimiento === 'ajuste')
+      .filter((m) => m.tipoMovimiento === 'ajuste' && (!m.fechaCaducidad || m.fechaCaducidad > ahora))
       .reduce((sum, m) => sum + m.puntos, 0)
 
     const saldo = ganados - descontados + ajuste
@@ -107,7 +108,6 @@ export default class CanjesController {
       mensaje: `Tu canje de "${recompensa.nombre}" fue registrado correctamente. Código: ${codigoCanje}. Puntos usados: ${recompensa.puntosRequeridos}pts.`,
       leida: false,
       tipo: 'canje',
-      idReferencia: canje.idCanje,
     })
 
     return response.created({

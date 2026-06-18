@@ -1,7 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import { mkdirSync } from 'node:fs'
-import { join, extname } from 'node:path'
-import { randomUUID } from 'node:crypto'
+import CloudinaryService from '#services/cloudinary_service'
 
 export default class FotoPerfilController {
   async store({ auth, request, response }: HttpContext) {
@@ -18,25 +16,15 @@ export default class FotoPerfilController {
       return response.badRequest({ mensaje: foto.errors })
     }
 
-    // Crear carpeta si no existe
-    const uploadDir = join(process.cwd(), 'public', 'uploads', 'perfil')
-    mkdirSync(uploadDir, { recursive: true })
-
-    // Nombre único para el archivo
-    const nombreArchivo = `${randomUUID()}${extname(foto.clientName)}`
-    //const rutaCompleta = join(uploadDir, nombreArchivo)
-
-    // Mover el archivo
-    await foto.move(uploadDir, { name: nombreArchivo })
-
     // Actualizar en BD
     const usuario = auth.user!
-    usuario.imagen = `/uploads/perfil/${nombreArchivo}`
+    const url = await CloudinaryService.uploadImage(foto.tmpPath!, 'recycling/perfil')
+    usuario.imagen = url
     await usuario.save()
 
     return response.ok({
       mensaje: 'Foto actualizada correctamente',
-      foto: `${request.protocol()}://${request.host()}/uploads/perfil/${nombreArchivo}`,
+      foto: url,
     })
   }
 }

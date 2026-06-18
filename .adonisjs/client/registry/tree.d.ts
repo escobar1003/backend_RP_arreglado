@@ -47,6 +47,8 @@ export interface ApiDefinition {
     store: typeof routes['aliados.store']
     update: typeof routes['aliados.update']
     destroy: typeof routes['aliados.destroy']
+    materiales: typeof routes['aliados.materiales']
+    sincronizarMateriales: typeof routes['aliados.sincronizar_materiales']
   }
   materiales: {
     index: typeof routes['materiales.index']
@@ -154,6 +156,7 @@ export interface ApiDefinition {
     show: typeof routes['entregas.show']
     store: typeof routes['entregas.store']
     actualizarEstado: typeof routes['entregas.actualizar_estado']
+    comprobante: typeof routes['entregas.comprobante']
   }
   canjes: {
     index: typeof routes['canjes.index']
@@ -167,6 +170,7 @@ export interface ApiDefinition {
     index: typeof routes['reservas_usuario.index']
     show: typeof routes['reservas_usuario.show']
     store: typeof routes['reservas_usuario.store']
+    cancelar: typeof routes['reservas_usuario.cancelar']
     destroy: typeof routes['reservas_usuario.destroy']
   }
   notificacionesUsuario: {
@@ -208,6 +212,8 @@ export interface ApiDefinition {
   canjesEncargado: {
     index: typeof routes['canjes_encargado.index']
     show: typeof routes['canjes_encargado.show']
+    store: typeof routes['canjes_encargado.store']
+    actualizarEstado: typeof routes['canjes_encargado.actualizar_estado']
     validar: typeof routes['canjes_encargado.validar']
   }
   openapi: {

@@ -87,10 +87,9 @@ export default class ReservasUsuarioController {
       console.log("📤 Voy a emitir socket al encargado", encargado.idUsuario)
       await Notificacion.create({ //Guarda una notificación permanente en la base de datos.
         idUsuario: encargado.idUsuario,
-        idEncargado: encargado.idUsuario,
         tipo: 'nueva_reserva',
         titulo: 'Nueva reserva',
-        descripcion: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
+        mensaje: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
         leida: false,
       })
       // idReferencia: reserva.idReserva,

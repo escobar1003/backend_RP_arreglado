@@ -7,8 +7,7 @@ import fs from 'fs'
 export default class DeteccionController {
 
   public async procesarCamara({ request, response }: HttpContext) {
-
-    // 1. Recibir la imagen desde Flutter
+    // 1. Recibir la foto de la app móvil
     const imagenMobile = request.file('image', {
       size: '5mb',
       extnames: ['jpg', 'png', 'jpeg'],
@@ -21,7 +20,7 @@ export default class DeteccionController {
       })
     }
 
-    // 2. Guardar temporalmente en el servidor
+    // 2. Mover la foto a la carpeta temporal
     await imagenMobile.move(app.tmpPath('uploads'))
     const filePath = `${app.tmpPath('uploads')}/${imagenMobile.fileName}`
 
@@ -30,47 +29,32 @@ export default class DeteccionController {
     }
 
     try {
-      // 3. Armar el FormData para reenviar al servicio YOLO
+      // 3. Preparar el formulario
       const formData = new FormData()
-      formData.append('image', fs.createReadStream(filePath), {
-        filename: imagenMobile.fileName,
-        contentType: imagenMobile.headers['content-type'] ?? 'image/jpeg',
-      })
+      formData.append('image', fs.createReadStream(filePath))
 
-      // 4. URL del servicio YOLO desde variable de entorno
-      //    En Render: IA_SERVICE_URL=https://recycling-ia-service.onrender.com
-      const iaUrl = process.env.IA_SERVICE_URL ?? 'http://localhost:5000'
-
-      console.log(`[IA] Enviando imagen a: ${iaUrl}/predict`)
-
+      // 4. Petición al servicio de IA
+      const iaUrl = process.env.IA_SERVICE_URL || 'http://localhost:5000'
+      
       const apiResponse = await axios.post(`${iaUrl}/predict`, formData, {
-        headers: formData.getHeaders(),
-        timeout: 60000, // 60s para tolerar el cold start de Render Free
+        headers: { ...formData.getHeaders() },
+        timeout: 120000,
       })
 
-      cleanup()
-
-      console.log('[IA] Respuesta recibida:', apiResponse.data)
-
-      // 5. Devolver resultado a Flutter
+      // 5. Responder a Flutter
       return response.ok(apiResponse.data)
 
     } catch (error: any) {
-      cleanup()
-
-      // Log detallado para ver en Render → Logs
-      console.error('[IA] Error:', {
-        message: error.message,
-        code: error.code,
-        iaStatus: error.response?.status,
-        iaData: error.response?.data,
+      return response.internalServerError({ 
+        status: 'error', 
+        message: 'Error de conexión con el motor de IA.',
+        error: error.message 
       })
-
-      return response.internalServerError({
-        status: 'error',
-        message: 'Error de conexión con el motor de Inteligencia Artificial.',
-        error: error.message || error.code || 'Sin detalles',
-      })
+    } finally {
+      // 6. Limpieza segura del archivo temporal
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath)
+      }
     }
   }
 }

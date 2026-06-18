@@ -1,14 +1,17 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import MovimientoPunto from '#models/movimiento_punto'
+import { DateTime } from 'luxon'
+
 
 export default class PuntosController {
   async resumen({ auth, response }: HttpContext) {
+    const ahora = DateTime.now()
     const movimientos = await MovimientoPunto.query()
       .where('id_usuario', auth.user!.idUsuario)
       .orderBy('fecha_movimiento', 'desc')
 
     const ganados = movimientos
-      .filter((m) => m.tipoMovimiento === 'ganados')
+      .filter((m) => m.tipoMovimiento === 'ganados' && (!m.fechaCaducidad || m.fechaCaducidad > ahora))
       .reduce((sum, m) => sum + m.puntos, 0)
 
     const descontados = movimientos
@@ -16,7 +19,7 @@ export default class PuntosController {
       .reduce((sum, m) => sum + m.puntos, 0)
 
     const ajuste = movimientos
-      .filter((m) => m.tipoMovimiento === 'ajuste')
+      .filter((m) => m.tipoMovimiento === 'ajuste' && (!m.fechaCaducidad || m.fechaCaducidad > ahora))
       .reduce((sum, m) => sum + m.puntos, 0)
 
     const saldo = ganados - descontados + ajuste

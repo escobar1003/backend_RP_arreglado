@@ -58,12 +58,14 @@ export class ApiTokenSchema extends BaseModel {
 }
 
 export class CanjeSchema extends BaseModel {
-  static $columns = ['codigoCanje', 'fechaCanje', 'idCanje', 'idEstadoCanje', 'idRecompensa', 'idUsuario', 'puntosUsados'] as const
+  static $columns = ['codigoCanje', 'fechaCanje', 'fechaVencimiento', 'idCanje', 'idEstadoCanje', 'idRecompensa', 'idUsuario', 'puntosUsados'] as const
   $columns = CanjeSchema.$columns
   @column()
   declare codigoCanje: string | null
   @column.dateTime()
   declare fechaCanje: DateTime
+  @column.dateTime()
+  declare fechaVencimiento: DateTime | null
   @column({ isPrimary: true })
   declare idCanje: number
   @column()
@@ -241,12 +243,14 @@ export class MaterialeSchema extends BaseModel {
 }
 
 export class MovimientosPuntoSchema extends BaseModel {
-  static $columns = ['createdAt', 'descripcion', 'fechaMovimiento', 'idEntrega', 'idMovimiento', 'idUsuario', 'puntos', 'tipoMovimiento'] as const
+  static $columns = ['createdAt', 'descripcion', 'fechaCaducidad', 'fechaMovimiento', 'idEntrega', 'idMovimiento', 'idUsuario', 'puntos', 'tipoMovimiento'] as const
   $columns = MovimientosPuntoSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
   @column()
   declare descripcion: string | null
+  @column.dateTime()
+  declare fechaCaducidad: DateTime | null
   @column.dateTime()
   declare fechaMovimiento: DateTime
   @column()
@@ -262,10 +266,14 @@ export class MovimientosPuntoSchema extends BaseModel {
 }
 
 export class NotificacioneSchema extends BaseModel {
-  static $columns = ['createdAt', 'idNotificacion', 'idReferencia', 'idUsuario', 'leida', 'mensaje', 'tipo', 'titulo', 'updatedAt'] as const
+  static $columns = ['createdAt', 'descripcion', 'idEncargado', 'idNotificacion', 'idReferencia', 'idUsuario', 'leida', 'tipo', 'titulo', 'updatedAt'] as const
   $columns = NotificacioneSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column()
+  declare descripcion: string | null
+  @column()
+  declare idEncargado: number | null
   @column({ isPrimary: true })
   declare idNotificacion: number
   @column()
@@ -273,15 +281,13 @@ export class NotificacioneSchema extends BaseModel {
   @column()
   declare idUsuario: number
   @column()
-  declare leida: boolean | null
+  declare leida: boolean
   @column()
-  declare mensaje: string
-  @column()
-  declare tipo: string | null
+  declare tipo: string
   @column()
   declare titulo: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime
+  declare updatedAt: DateTime | null
 }
 
 export class PuntoMaterialSchema extends BaseModel {
@@ -300,7 +306,7 @@ export class PuntoMaterialSchema extends BaseModel {
 }
 
 export class PuntosReciclajeSchema extends BaseModel {
-  static $columns = ['createdAt', 'direccion', 'horario', 'idAliado', 'idEncargado', 'idEstadoEncargado', 'idEstadoPunto', 'idPunto', 'latitud', 'longitud', 'nombre', 'updatedAt'] as const
+  static $columns = ['createdAt', 'direccion', 'horario', 'idAliado', 'idEncargado', 'idEstadoPunto', 'idPunto', 'latitud', 'longitud', 'nombre', 'updatedAt'] as const
   $columns = PuntosReciclajeSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -312,8 +318,6 @@ export class PuntosReciclajeSchema extends BaseModel {
   declare idAliado: number
   @column()
   declare idEncargado: number | null
-  @column()
-  declare idEstadoEncargado: number | null
   @column()
   declare idEstadoPunto: number
   @column({ isPrimary: true })
@@ -432,28 +436,11 @@ export class TiposRecompensaSchema extends BaseModel {
   declare nombre: string
 }
 
-export class TransaccionPuntoSchema extends BaseModel {
-  static $columns = ['cantidadPuntos', 'createdAt', 'descripcion', 'idTransaccion', 'idUsuario', 'tipoMaterial', 'updatedAt'] as const
-  $columns = TransaccionPuntoSchema.$columns
-  @column()
-  declare cantidadPuntos: number
-  @column.dateTime({ autoCreate: true })
-  declare createdAt: DateTime | null
-  @column()
-  declare descripcion: string | null
-  @column({ isPrimary: true })
-  declare idTransaccion: number
-  @column()
-  declare idUsuario: number | null
-  @column()
-  declare tipoMaterial: string
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
-  declare updatedAt: DateTime | null
-}
-
 export class UsuarioSchema extends BaseModel {
-  static $columns = ['codigoExpiracion', 'codigoRecuperacion', 'correo', 'createdAt', 'fechaRegistro', 'idAliado', 'idEstadoUsuario', 'idRol', 'idUsuario', 'nombre', 'password', 'puntosTotales', 'telefono', 'updatedAt'] as const
+  static $columns = ['apellido', 'codigoExpiracion', 'codigoRecuperacion', 'correo', 'createdAt', 'fechaRegistro', 'idAliado', 'idEstadoUsuario', 'idRol', 'idUsuario', 'nombre', 'password', 'puntosTotales', 'telefono', 'updatedAt'] as const
   $columns = UsuarioSchema.$columns
+  @column()
+  declare apellido: string | null
   @column.dateTime()
   declare codigoExpiracion: DateTime | null
   @column()
