@@ -87,10 +87,9 @@ export default class ReservasUsuarioController {
       await Notificacion.create({
         idUsuario: encargado.idUsuario,
         titulo: 'Nueva reserva',
-        descripcion: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
+        mensaje: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
         leida: false,
         tipo: 'reserva',
-        idEncargado: encargado.idUsuario,
       })
       
 
@@ -146,10 +145,9 @@ export default class ReservasUsuarioController {
     if (encargado) {
       await Notificacion.create({
         idUsuario: encargado.idUsuario,
-        idEncargado: encargado.idUsuario,
         tipo: 'reserva_cancelada',
         titulo: 'Reserva cancelada',
-        descripcion: `El usuario canceló la reserva #${reserva.idReserva}`,
+        mensaje: `El usuario canceló la reserva #${reserva.idReserva}`,
         leida: false,
       })
 

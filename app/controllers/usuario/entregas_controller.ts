@@ -13,9 +13,18 @@ export default class EntregasController {
       .preload('estadoEntrega')
       .preload('puntoReciclaje')
       .preload('detalles', (q) => q.preload('material'))
+      .preload('movimientos')
       .orderBy('fecha_entrega', 'desc')
 
-    return response.ok({ entregas })
+    const result = entregas.map((e) => {
+      const data = e.toJSON()
+      const mov = data.movimientos?.find((m: any) => m.fechaCaducidad)
+      delete data.movimientos
+      data.fechaVencimientoPuntos = mov?.fechaCaducidad ?? null
+      return data
+    })
+
+    return response.ok({ entregas: result })
   }
 
   async show({ auth, params, response }: HttpContext) {
@@ -25,16 +34,23 @@ export default class EntregasController {
       .preload('estadoEntrega')
       .preload('puntoReciclaje')
       .preload('detalles', (q) => q.preload('material'))
+      .preload('movimientos')
       .firstOrFail()
 
-    return response.ok({ entrega })
+    const data = entrega.toJSON()
+    const mov = data.movimientos?.find((m: any) => m.fechaCaducidad)
+    delete data.movimientos
+    data.fechaVencimientoPuntos = mov?.fechaCaducidad ?? null
+
+    return response.ok({ entrega: data })
   }
 
   async store({ auth, request, response }: HttpContext) {
-    const { idPunto, detalles, observacion } = request.only([
+    const { idPunto, detalles, observacion, fechaVencimientoPuntos } = request.only([
       'idPunto',
-      'detalles', // array: [{ idMaterial, peso }]
+      'detalles',
       'observacion',
+      'fechaVencimientoPuntos',
     ])
 
     // Calcular peso total y puntos totales
@@ -78,16 +94,16 @@ export default class EntregasController {
       puntos: puntosTotales,
       descripcion: `Puntos ganados por entrega #${entrega.idEntrega}`,
       fechaMovimiento: DateTime.now(),
+      fechaCaducidad: fechaVencimientoPuntos ? DateTime.fromISO(fechaVencimientoPuntos) : null,
     })
 
         // SCRUM-582: Generar notificación al registrar entrega
     await Notificacion.create({
-      usuarioId: auth.user!.idUsuario,
+      idUsuario: auth.user!.idUsuario,
       titulo: 'Entrega registrada',
       mensaje: `Tu entrega #${entrega.idEntrega} fue registrada correctamente. Peso total: ${pesoTotal}kg, Puntos ganados: ${puntosTotales}pts.`,
       leida: false,
       tipo: 'entrega',
-      idReferencia: entrega.idEntrega,
     })
 
     return response.created({

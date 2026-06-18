@@ -118,7 +118,7 @@ if (!superadminExiste) {
 }
 
 // MATERIALES
-    await db.table('materiales').multiInsert([
+    const materialesData = [
       {
         id_estado_material: 1,
         nombre: 'Plástico',
@@ -149,7 +149,14 @@ if (!superadminExiste) {
         created_at: new Date(),
         updated_at: new Date(),
       },
-    ])
+    ]
+
+    for (const mat of materialesData) {
+      const [existe] = await db.rawQuery('SELECT COUNT(*) as total FROM materiales WHERE nombre = ?', [mat.nombre])
+      if (Number(existe[0]?.total ?? 0) === 0) {
+        await db.table('materiales').insert(mat)
+      }
+    }
 
     console.log('Materiales creados')
 
