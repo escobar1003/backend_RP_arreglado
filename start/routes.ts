@@ -1,6 +1,7 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 import PuntosController from '#controllers/puntos_controller'
+import './seed.js'
 
 
 
@@ -62,6 +63,8 @@ router.group(() => {
   router.post('/aliados', [() => import('#controllers/admin/aliados_controller'), 'store'])
   router.put('/aliados/:id', [() => import('#controllers/admin/aliados_controller'), 'update'])
   router.delete('/aliados/:id', [() => import('#controllers/admin/aliados_controller'), 'destroy'])
+  router.get('/aliados/:id/materiales', [() => import('#controllers/admin/aliados_controller'), 'materiales'])
+  router.put('/aliados/:id/materiales', [() => import('#controllers/admin/aliados_controller'), 'sincronizarMateriales'])
 
   // Materiales
   router.get('/materiales', [() => import('#controllers/admin/materiales_controller'), 'index'])
@@ -151,7 +154,7 @@ router.group(() => {
   // Perfil
   router.get('/perfil', [() => import('#controllers/admin/perfil_admin_controller'), 'mostrar'])
   router.put('/perfil', [() => import('#controllers/admin/perfil_admin_controller'), 'actualizar'])
-}).prefix('/api/admin').use([middleware.auth(), middleware.verificar_rol(['admin'])])
+}).prefix('/api/admin').use([middleware.auth(), middleware.verificar_rol(['admin', 'superadmin'])])
 
 
 
@@ -227,8 +230,8 @@ router.group(() => {
   router.put('/reservas/:id',    [() => import('#controllers/encargado/reservas_encargado_controller'), 'update'])
   router.delete('/reservas/:id', [() => import('#controllers/encargado/reservas_encargado_controller'), 'destroy'])
 
-  // Materiales
-  router.get('/materiales', [() => import('#controllers/admin/materiales_controller'), 'index'])
+  // Materiales del supermercado asignado
+  router.get('/materiales', [() => import('#controllers/encargado/materiales_controller'), 'index'])
 
   // Notificaciones
   router.get('/notificaciones', [() => import('#controllers/encargado/notificaciones_controller'), 'index'])
@@ -263,13 +266,16 @@ router.group(() => {
   //canjes
   router.get('/canjes', [() => import('#controllers/encargado/canjes_encargado_controller'), 'index'])
   router.get('/canjes/:id', [() => import('#controllers/encargado/canjes_encargado_controller'), 'show'])
+  router.post('/canjes', [() => import('#controllers/encargado/canjes_encargado_controller'), 'store'])
+  router.put('/canjes/:id/estado', [() => import('#controllers/encargado/canjes_encargado_controller'), 'actualizarEstado'])
   router.put('/canjes/:id/validar', [() => import('#controllers/encargado/canjes_encargado_controller'), 'validar'])
 
-  //recompensas
-  router.get('/recompensas', [() => import('#controllers/admin/recompensas_controller'), 'index'])
+  // Recompensas
+  router.get('/recompensas', [() => import('#controllers/encargado/recompensas_controller'), 'index'])
+  router.post('/recompensas', [() => import('#controllers/encargado/recompensas_controller'), 'store'])
 
   //usuarios
-  router.get('/usuarios', [() => import('#controllers/admin/usuarios_controller'), 'index'])
+  router.get('/usuarios', [() => import('#controllers/encargado/usuarios_controller'), 'index'])
 
 }).prefix('/api/encargado').use([middleware.auth(), middleware.verificar_rol(['encargado'])])
 

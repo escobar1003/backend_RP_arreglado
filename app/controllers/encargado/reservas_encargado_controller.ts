@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Reserva from '#models/reserva'
-import PuntoReciclaje from '#models/punto_reciclaje'
+import { asegurarPuntoEncargado } from '#services/encargado_punto'
 import Notificacion from '#models/notificacion'
 
 export default class ReservasEncargadoController {
@@ -9,12 +9,9 @@ export default class ReservasEncargadoController {
     const usuario = auth.user!
     console.log('👤 Usuario:', usuario.idUsuario)
 
-    const punto = await PuntoReciclaje.query()
-      .where('id_encargado', usuario.idUsuario)
-      .first()
-
+    const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
     if (!punto) {
-      return response.notFound({ mensaje: 'No tienes un punto de reciclaje asignado' })
+      return response.notFound({ mensaje })
     }
 
     const { fecha, estado } = request.qs()
@@ -40,12 +37,9 @@ export default class ReservasEncargadoController {
   async show({ auth, params, response }: HttpContext) {
     const usuario = auth.user!
 
-    const punto = await PuntoReciclaje.query()
-      .where('id_encargado', usuario.idUsuario)
-      .first()
-
+    const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
     if (!punto) {
-      return response.notFound({ mensaje: 'No tienes un punto de reciclaje asignado' })
+      return response.notFound({ mensaje })
     }
 
     const reserva = await Reserva.query()
@@ -60,12 +54,9 @@ export default class ReservasEncargadoController {
   async store({ auth, request, response }: HttpContext) {
     const usuario = auth.user!
 
-    const punto = await PuntoReciclaje.query()
-      .where('id_encargado', usuario.idUsuario)
-      .first()
-
+    const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
     if (!punto) {
-      return response.notFound({ mensaje: 'No tienes un punto de reciclaje asignado' })
+      return response.notFound({ mensaje })
     }
 
     const { idUsuario, fecha, hora, notas } = request.only(['idUsuario', 'fecha', 'hora', 'notas'])
@@ -94,12 +85,9 @@ export default class ReservasEncargadoController {
   async update({ auth, params, request, response }: HttpContext) {
     const usuario = auth.user!
 
-    const punto = await PuntoReciclaje.query()
-      .where('id_encargado', usuario.idUsuario)
-      .first()
-
+    const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
     if (!punto) {
-      return response.notFound({ mensaje: 'No tienes un punto de reciclaje asignado' })
+      return response.notFound({ mensaje })
     }
 
     const reserva = await Reserva.query()
@@ -128,10 +116,9 @@ export default class ReservasEncargadoController {
       await Notificacion.create({
         idUsuario: encargado.idUsuario,
         titulo: 'Nueva reserva',
-        descripcion: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
+        mensaje: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
         leida: false,
         tipo: 'reserva',
-        idEncargado: encargado.idUsuario,
       })
     }
 
@@ -141,12 +128,9 @@ export default class ReservasEncargadoController {
   async destroy({ auth, params, response }: HttpContext) {
     const usuario = auth.user!
 
-    const punto = await PuntoReciclaje.query()
-      .where('id_encargado', usuario.idUsuario)
-      .first()
-
+    const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
     if (!punto) {
-      return response.notFound({ mensaje: 'No tienes un punto de reciclaje asignado' })
+      return response.notFound({ mensaje })
     }
 
     const reserva = await Reserva.query()

@@ -58,12 +58,14 @@ export class ApiTokenSchema extends BaseModel {
 }
 
 export class CanjeSchema extends BaseModel {
-  static $columns = ['codigoCanje', 'fechaCanje', 'idCanje', 'idEstadoCanje', 'idRecompensa', 'idUsuario', 'puntosUsados'] as const
+  static $columns = ['codigoCanje', 'fechaCanje', 'fechaVencimiento', 'idCanje', 'idEstadoCanje', 'idRecompensa', 'idUsuario', 'puntosUsados'] as const
   $columns = CanjeSchema.$columns
   @column()
   declare codigoCanje: string | null
   @column.dateTime()
   declare fechaCanje: DateTime
+  @column.dateTime()
+  declare fechaVencimiento: DateTime | null
   @column({ isPrimary: true })
   declare idCanje: number
   @column()
@@ -241,12 +243,14 @@ export class MaterialeSchema extends BaseModel {
 }
 
 export class MovimientosPuntoSchema extends BaseModel {
-  static $columns = ['createdAt', 'descripcion', 'fechaMovimiento', 'idEntrega', 'idMovimiento', 'idUsuario', 'puntos', 'tipoMovimiento'] as const
+  static $columns = ['createdAt', 'descripcion', 'fechaCaducidad', 'fechaMovimiento', 'idEntrega', 'idMovimiento', 'idUsuario', 'puntos', 'tipoMovimiento'] as const
   $columns = MovimientosPuntoSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
   @column()
   declare descripcion: string | null
+  @column.dateTime()
+  declare fechaCaducidad: DateTime | null
   @column.dateTime()
   declare fechaMovimiento: DateTime
   @column()
@@ -262,7 +266,7 @@ export class MovimientosPuntoSchema extends BaseModel {
 }
 
 export class NotificacioneSchema extends BaseModel {
-  static $columns = ['createdAt', 'descripcion', 'idEncargado', 'idNotificacion', 'idUsuario', 'leida', 'tipo', 'titulo', 'updatedAt'] as const
+  static $columns = ['createdAt', 'descripcion', 'idEncargado', 'idNotificacion', 'idReferencia', 'idUsuario', 'leida', 'tipo', 'titulo', 'updatedAt'] as const
   $columns = NotificacioneSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -272,6 +276,8 @@ export class NotificacioneSchema extends BaseModel {
   declare idEncargado: number | null
   @column({ isPrimary: true })
   declare idNotificacion: number
+  @column()
+  declare idReferencia: number | null
   @column()
   declare idUsuario: number
   @column()
