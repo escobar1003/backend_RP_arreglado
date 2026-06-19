@@ -1,0 +1,2669 @@
+c[ info ] starting server in hmr mode...
+[ info ] loading hooks...
+[ info ] generating indexes...
+[ info ] codegen: created 5 file(s)
+[ info ] starting HTTP server...
+╭─────────────────────────────────────────────────╮
+│                                                 │
+│    Server address: http://127.0.0.1:3333        │
+│    Mode: hmr                                    │
+│    Ready in: 1.33 s                             │
+│    Press h to show help                         │
+│                                                 │
+╰─────────────────────────────────────────────────╯
+[08:54:08.658] [32mINFO[39m (31636): [36mstarted HTTP server on 127.0.0.1:3333[39m
+[ info ] watching file system for changes...
+[ info ] tuyau: created api client registry (./.adonisjs/client/registry) (4.24 ms)
+[seed] 0 materiales creados automáticamente
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+[08:57:44.098] [33mWARN[39m (31636): [36mRow not found[39m
+    [35mrequest_id[39m: "903eab82-c398-4df6-8577-c030c20bf87a"
+    [35mx-request-id[39m: "903eab82-c398-4df6-8577-c030c20bf87a"
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+[09:05:36.548] [33mWARN[39m (31636): [36mRow not found[39m
+    [35mrequest_id[39m: "2fc659f9-295a-40ed-9f75-f67abcdda233"
+    [35mx-request-id[39m: "2fc659f9-295a-40ed-9f75-f67abcdda233"
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+[09:05:37.821] [33mWARN[39m (31636): [36mRow not found[39m
+    [35mrequest_id[39m: "25e3d28b-0897-4e01-8ff9-5e13465a8ea9"
+    [35mx-request-id[39m: "25e3d28b-0897-4e01-8ff9-5e13465a8ea9"
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+[09:05:38.950] [33mWARN[39m (31636): [36mRow not found[39m
+    [35mrequest_id[39m: "67b8a507-4daf-4f7a-8ebc-d0962c763b8d"
+    [35mx-request-id[39m: "67b8a507-4daf-4f7a-8ebc-d0962c763b8d"
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+[09:05:39.746] [33mWARN[39m (31636): [36mRow not found[39m
+    [35mrequest_id[39m: "9752de60-f337-47fd-a3ae-ce93f7e8fff0"
+    [35mx-request-id[39m: "9752de60-f337-47fd-a3ae-ce93f7e8fff0"
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+[09:05:40.369] [33mWARN[39m (31636): [36mRow not found[39m
+    [35mrequest_id[39m: "e9254dab-9444-469d-a3bf-30b949b8e00a"
+    [35mx-request-id[39m: "e9254dab-9444-469d-a3bf-30b949b8e00a"
+[09:11:12.651] [33mWARN[39m (31636): [36mConnection Error: Error: Connection lost: The server closed the connection.[39m
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+[09:11:16.179] [33mWARN[39m (31636): [36mRow not found[39m
+    [35mrequest_id[39m: "ebc7b419-f3c5-4585-8dc9-cd4142a1e4e2"
+    [35mx-request-id[39m: "ebc7b419-f3c5-4585-8dc9-cd4142a1e4e2"
+[09:11:16.284] [33mWARN[39m (31636): [36mRow not found[39m
+    [35mrequest_id[39m: "3e946f7c-85c1-449c-98de-99092d238245"
+    [35mx-request-id[39m: "3e946f7c-85c1-449c-98de-99092d238245"
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+[09:11:23.999] [33mWARN[39m (31636): [36mRow not found[39m
+    [35mrequest_id[39m: "3c48b9e5-9f15-43e5-865d-62cbcf6ea091"
+    [35mx-request-id[39m: "3c48b9e5-9f15-43e5-865d-62cbcf6ea091"
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+[09:11:25.388] [33mWARN[39m (31636): [36mRow not found[39m
+    [35mrequest_id[39m: "4514b372-6ced-4e2a-9e73-13e0c5906f87"
+    [35mx-request-id[39m: "4514b372-6ced-4e2a-9e73-13e0c5906f87"
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+[09:11:25.616] [33mWARN[39m (31636): [36mRow not found[39m
+    [35mrequest_id[39m: "4fcabd7d-4f87-43ef-ad70-b0e6bb2fba3f"
+    [35mx-request-id[39m: "4fcabd7d-4f87-43ef-ad70-b0e6bb2fba3f"
+🔐 rol del usuario: encargado
+[09:11:25.799] [33mWARN[39m (31636): [36mRow not found[39m
+    [35mrequest_id[39m: "27d6d9f8-5fb3-4bd5-8a73-39651e1f034e"
+    [35mx-request-id[39m: "27d6d9f8-5fb3-4bd5-8a73-39651e1f034e"
+[09:11:25.979] [33mWARN[39m (31636): [36mRow not found[39m
+    [35mrequest_id[39m: "85812c55-a3b7-442d-9139-f577837b608e"
+    [35mx-request-id[39m: "85812c55-a3b7-442d-9139-f577837b608e"
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+[09:11:41.013] [33mWARN[39m (31636): [36mRow not found[39m
+    [35mrequest_id[39m: "34a79660-9268-4d08-9d92-9bdbae2cf3f7"
+    [35mx-request-id[39m: "34a79660-9268-4d08-9d92-9bdbae2cf3f7"
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: usuario
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🚀 Entró al store de reservas
+👤 Encargado encontrado: Usuario {
+  modelOptions: { connection: 'mysql' },
+  modelTrx: undefined,
+  transactionListener: [Function: bound listener],
+  fillInvoked: false,
+  cachedGetters: {},
+  forceUpdate: false,
+  '$columns': {},
+  '$attributes': {
+    idUsuario: 18,
+    idRol: 4,
+    idEstadoUsuario: 1,
+    nombre: 'Pablito',
+    correo: 'karenvidal1210@gmail.com',
+    password: '$scrypt$n=16384,r=8,p=1$PSW8Af5sFVTn/mFOCVAMeg$2SxRmHOzVrIjbYIov+oLaPABh9qwX2zJVdO2sQwh63JpcPpbGtPL9u1B8b92UWsrfg0aCdSipS7YXA0frbQtHg',
+    telefono: '3000000000',
+    fechaRegistro: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    createdAt: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    updatedAt: DateTime { ts: 2026-06-19T08:36:25.000+00:00, zone: UTC, locale: es-CO },
+    codigoRecuperacion: null,
+    codigoExpiracion: null,
+    puntosTotales: 0,
+    idAliado: 23,
+    apellido: null,
+    imagen: null
+  },
+  '$original': {
+    idUsuario: 18,
+    idRol: 4,
+    idEstadoUsuario: 1,
+    nombre: 'Pablito',
+    correo: 'karenvidal1210@gmail.com',
+    password: '$scrypt$n=16384,r=8,p=1$PSW8Af5sFVTn/mFOCVAMeg$2SxRmHOzVrIjbYIov+oLaPABh9qwX2zJVdO2sQwh63JpcPpbGtPL9u1B8b92UWsrfg0aCdSipS7YXA0frbQtHg',
+    telefono: '3000000000',
+    fechaRegistro: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    createdAt: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    updatedAt: DateTime { ts: 2026-06-19T08:36:25.000+00:00, zone: UTC, locale: es-CO },
+    codigoRecuperacion: null,
+    codigoExpiracion: null,
+    puntosTotales: 0,
+    idAliado: 23,
+    apellido: null,
+    imagen: null
+  },
+  '$preloaded': {},
+  '$extras': {},
+  '$sideloaded': {},
+  '$isPersisted': true,
+  '$isDeleted': false,
+  '$isLocal': false
+}
+📤 Voy a emitir socket al encargado 18
+📤 Emitiendo notificacion a encargado_18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🚀 Entró al store de reservas
+👤 Encargado encontrado: Usuario {
+  modelOptions: { connection: 'mysql' },
+  modelTrx: undefined,
+  transactionListener: [Function: bound listener],
+  fillInvoked: false,
+  cachedGetters: {},
+  forceUpdate: false,
+  '$columns': {},
+  '$attributes': {
+    idUsuario: 18,
+    idRol: 4,
+    idEstadoUsuario: 1,
+    nombre: 'Pablito',
+    correo: 'karenvidal1210@gmail.com',
+    password: '$scrypt$n=16384,r=8,p=1$PSW8Af5sFVTn/mFOCVAMeg$2SxRmHOzVrIjbYIov+oLaPABh9qwX2zJVdO2sQwh63JpcPpbGtPL9u1B8b92UWsrfg0aCdSipS7YXA0frbQtHg',
+    telefono: '3000000000',
+    fechaRegistro: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    createdAt: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    updatedAt: DateTime { ts: 2026-06-19T08:36:25.000+00:00, zone: UTC, locale: es-CO },
+    codigoRecuperacion: null,
+    codigoExpiracion: null,
+    puntosTotales: 0,
+    idAliado: 23,
+    apellido: null,
+    imagen: null
+  },
+  '$original': {
+    idUsuario: 18,
+    idRol: 4,
+    idEstadoUsuario: 1,
+    nombre: 'Pablito',
+    correo: 'karenvidal1210@gmail.com',
+    password: '$scrypt$n=16384,r=8,p=1$PSW8Af5sFVTn/mFOCVAMeg$2SxRmHOzVrIjbYIov+oLaPABh9qwX2zJVdO2sQwh63JpcPpbGtPL9u1B8b92UWsrfg0aCdSipS7YXA0frbQtHg',
+    telefono: '3000000000',
+    fechaRegistro: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    createdAt: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    updatedAt: DateTime { ts: 2026-06-19T08:36:25.000+00:00, zone: UTC, locale: es-CO },
+    codigoRecuperacion: null,
+    codigoExpiracion: null,
+    puntosTotales: 0,
+    idAliado: 23,
+    apellido: null,
+    imagen: null
+  },
+  '$preloaded': {},
+  '$extras': {},
+  '$sideloaded': {},
+  '$isPersisted': true,
+  '$isDeleted': false,
+  '$isLocal': false
+}
+📤 Voy a emitir socket al encargado 18
+📤 Emitiendo notificacion a encargado_18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🚀 Entró al store de reservas
+👤 Encargado encontrado: Usuario {
+  modelOptions: { connection: 'mysql' },
+  modelTrx: undefined,
+  transactionListener: [Function: bound listener],
+  fillInvoked: false,
+  cachedGetters: {},
+  forceUpdate: false,
+  '$columns': {},
+  '$attributes': {
+    idUsuario: 18,
+    idRol: 4,
+    idEstadoUsuario: 1,
+    nombre: 'Pablito',
+    correo: 'karenvidal1210@gmail.com',
+    password: '$scrypt$n=16384,r=8,p=1$PSW8Af5sFVTn/mFOCVAMeg$2SxRmHOzVrIjbYIov+oLaPABh9qwX2zJVdO2sQwh63JpcPpbGtPL9u1B8b92UWsrfg0aCdSipS7YXA0frbQtHg',
+    telefono: '3000000000',
+    fechaRegistro: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    createdAt: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    updatedAt: DateTime { ts: 2026-06-19T08:36:25.000+00:00, zone: UTC, locale: es-CO },
+    codigoRecuperacion: null,
+    codigoExpiracion: null,
+    puntosTotales: 0,
+    idAliado: 23,
+    apellido: null,
+    imagen: null
+  },
+  '$original': {
+    idUsuario: 18,
+    idRol: 4,
+    idEstadoUsuario: 1,
+    nombre: 'Pablito',
+    correo: 'karenvidal1210@gmail.com',
+    password: '$scrypt$n=16384,r=8,p=1$PSW8Af5sFVTn/mFOCVAMeg$2SxRmHOzVrIjbYIov+oLaPABh9qwX2zJVdO2sQwh63JpcPpbGtPL9u1B8b92UWsrfg0aCdSipS7YXA0frbQtHg',
+    telefono: '3000000000',
+    fechaRegistro: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    createdAt: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    updatedAt: DateTime { ts: 2026-06-19T08:36:25.000+00:00, zone: UTC, locale: es-CO },
+    codigoRecuperacion: null,
+    codigoExpiracion: null,
+    puntosTotales: 0,
+    idAliado: 23,
+    apellido: null,
+    imagen: null
+  },
+  '$preloaded': {},
+  '$extras': {},
+  '$sideloaded': {},
+  '$isPersisted': true,
+  '$isDeleted': false,
+  '$isLocal': false
+}
+📤 Voy a emitir socket al encargado 18
+📤 Emitiendo notificacion a encargado_18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🚀 Entró al store de reservas
+👤 Encargado encontrado: Usuario {
+  modelOptions: { connection: 'mysql' },
+  modelTrx: undefined,
+  transactionListener: [Function: bound listener],
+  fillInvoked: false,
+  cachedGetters: {},
+  forceUpdate: false,
+  '$columns': {},
+  '$attributes': {
+    idUsuario: 18,
+    idRol: 4,
+    idEstadoUsuario: 1,
+    nombre: 'Pablito',
+    correo: 'karenvidal1210@gmail.com',
+    password: '$scrypt$n=16384,r=8,p=1$PSW8Af5sFVTn/mFOCVAMeg$2SxRmHOzVrIjbYIov+oLaPABh9qwX2zJVdO2sQwh63JpcPpbGtPL9u1B8b92UWsrfg0aCdSipS7YXA0frbQtHg',
+    telefono: '3000000000',
+    fechaRegistro: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    createdAt: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    updatedAt: DateTime { ts: 2026-06-19T08:36:25.000+00:00, zone: UTC, locale: es-CO },
+    codigoRecuperacion: null,
+    codigoExpiracion: null,
+    puntosTotales: 0,
+    idAliado: 23,
+    apellido: null,
+    imagen: null
+  },
+  '$original': {
+    idUsuario: 18,
+    idRol: 4,
+    idEstadoUsuario: 1,
+    nombre: 'Pablito',
+    correo: 'karenvidal1210@gmail.com',
+    password: '$scrypt$n=16384,r=8,p=1$PSW8Af5sFVTn/mFOCVAMeg$2SxRmHOzVrIjbYIov+oLaPABh9qwX2zJVdO2sQwh63JpcPpbGtPL9u1B8b92UWsrfg0aCdSipS7YXA0frbQtHg',
+    telefono: '3000000000',
+    fechaRegistro: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    createdAt: DateTime { ts: 2026-06-19T08:35:55.000+00:00, zone: UTC, locale: es-CO },
+    updatedAt: DateTime { ts: 2026-06-19T08:36:25.000+00:00, zone: UTC, locale: es-CO },
+    codigoRecuperacion: null,
+    codigoExpiracion: null,
+    puntosTotales: 0,
+    idAliado: 23,
+    apellido: null,
+    imagen: null
+  },
+  '$preloaded': {},
+  '$extras': {},
+  '$sideloaded': {},
+  '$isPersisted': true,
+  '$isDeleted': false,
+  '$isLocal': false
+}
+📤 Voy a emitir socket al encargado 18
+📤 Emitiendo notificacion a encargado_18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: usuario
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 14
+🔐 rol del usuario: usuario
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+[10:35:20.457] [31mERROR[39m (31636): [36mselect * from `api_tokens` where `id` = '125' and `type` = 'auth_token' limit 1 - read ECONNRESET[39m
+    [35mrequest_id[39m: "06325921-0a8c-45b5-8e85-368bb3bcc556"
+    [35mx-request-id[39m: "06325921-0a8c-45b5-8e85-368bb3bcc556"
+    err: {
+      "type": "Error",
+      "message": "select * from `api_tokens` where `id` = '125' and `type` = 'auth_token' limit 1 - read ECONNRESET",
+      "stack":
+          Error: read ECONNRESET
+              at TCP.onStreamRead (node:internal/stream_base_commons:216:20)
+      "errno": -4077,
+      "code": "ECONNRESET",
+      "syscall": "read",
+      "fatal": true,
+      "status": 500
+    }
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 18
+🔐 rol del usuario: encargado
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 18
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 2
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 2
+🔐 rol del usuario: superadmin
+🔐 rol del usuario: superadmin
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 2
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 2
+🔐 rol del usuario: superadmin
+🔐 rol del usuario: superadmin
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 2
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 2
+🔐 rol del usuario: superadmin
+🔐 rol del usuario: superadmin
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 rol del usuario: admin
+🔐 rol del usuario: admin
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 rol del usuario: admin
+🔐 rol del usuario: admin
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 rol del usuario: admin
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 rol del usuario: admin
+🔐 rol del usuario: admin
+🔐 rol del usuario: admin
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 rol del usuario: admin
+🔐 rol del usuario: admin
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 rol del usuario: admin
+🔐 rol del usuario: admin
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 rol del usuario: admin
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 rol del usuario: admin
+🔐 rol del usuario: admin
+🔐 verificar_rol — roles requeridos: [ 'admin', 'superadmin' ]
+🔐 usuario autenticado: 7
+🔐 rol del usuario: admin
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 7
+🔐 rol del usuario: admin
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 7
+🔐 rol del usuario: admin
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 7
+🔐 verificar_rol — roles requeridos: [ 'usuario' ]
+🔐 usuario autenticado: 7
+🔐 rol del usuario: admin
+🔐 verificar_rol — roles requeridos: [ 'encargado' ]
+🔐 usuario autenticado: 7
+🔐 rol del usuario: admin
+✅ Llegó al controlador de reservas encargado
+👤 Usuario: 7

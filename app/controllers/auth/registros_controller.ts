@@ -6,6 +6,7 @@ export default class RegistrosController {
   async registrarse({ request, response }: HttpContext) {
     const datos = request.only([
       'nombre',
+      'apellido',
       'correo',
       'password',
       'telefono',
@@ -22,6 +23,7 @@ export default class RegistrosController {
       idRol: 3,             // rol: usuario
       idEstadoUsuario: 1,   // estado: activo
       nombre: datos.nombre,
+      apellido: datos.apellido ?? null,
       correo: datos.correo,
       password: datos.password,
       telefono: datos.telefono ?? null,
@@ -38,6 +40,7 @@ export default class RegistrosController {
       usuario: {
         idUsuario: usuario.idUsuario,
         nombre: usuario.nombre,
+        apellido: usuario.apellido,
         correo: usuario.correo,
         telefono: usuario.telefono,
         rol: usuario.rol.nombre,

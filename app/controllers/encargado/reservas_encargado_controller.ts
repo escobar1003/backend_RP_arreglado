@@ -113,12 +113,14 @@ export default class ReservasEncargadoController {
     await reserva.load('usuario', (q) => q.select('id_usuario', 'nombre', 'correo', 'telefono'))
 
     if (estado) {
+      const estadoLabel: Record<string, string> = { confirmada: 'aceptada', cancelada: 'rechazada' }
       await Notificacion.create({
-        idUsuario: encargado.idUsuario,
-        titulo: 'Nueva reserva',
-        mensaje: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
+        idUsuario: reserva.idUsuario,
+        titulo: `Reserva ${estadoLabel[estado] || estado}`,
+        mensaje: `Tu reserva en ${punto.nombre} para el ${reserva.fecha} a las ${reserva.hora} fue ${estadoLabel[estado] || estado}.`,
         leida: false,
         tipo: 'reserva',
+        idReferencia: reserva.idReserva,
       })
     }
 

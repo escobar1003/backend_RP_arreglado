@@ -87,12 +87,12 @@ export default class ReservasUsuarioController {
       console.log("📤 Voy a emitir socket al encargado", encargado.idUsuario)
       await Notificacion.create({ //Guarda una notificación permanente en la base de datos.
         idUsuario: encargado.idUsuario,
-        tipo: 'nueva_reserva',
+        tipo: 'reserva',
         titulo: 'Nueva reserva',
         mensaje: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
         leida: false,
+        idReferencia: reserva.idReserva,
       })
-      // idReferencia: reserva.idReserva,
 
       WsService.emitToEncargado(encargado.idUsuario, 'notificacion', { //Envía una notificación mediante WebSocket.
         tipo: 'nueva_reserva',

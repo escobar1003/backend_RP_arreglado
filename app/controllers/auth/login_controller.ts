@@ -2,8 +2,22 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Usuario from '#models/usuario'
 import hash from '@adonisjs/core/services/hash'
 import { loginValidator } from '#validators/auth/login'
+import { ApiBody, ApiResponse } from '@foadonis/openapi/decorators'
 
 export default class LoginController {
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        correo: { type: 'string', format: 'email', description: 'Correo electrónico del usuario' },
+        password: { type: 'string', minLength: 6, description: 'Contraseña del usuario' },
+      },
+      required: ['correo', 'password'],
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Inicio de sesión exitoso', schema: { type: 'object', properties: { mensaje: { type: 'string' }, token: { type: 'string' }, usuario: { type: 'object' } } } })
+  @ApiResponse({ status: 401, description: 'Credenciales inválidas' })
+  @ApiResponse({ status: 422, description: 'Error de validación' })
   async iniciarSesion({ request, response }: HttpContext) {
     const { correo, password } = await request.validateUsing(loginValidator)
 
@@ -45,7 +59,9 @@ export default class LoginController {
       token: token.value!.release(),
       usuario: {
         idUsuario: usuario.idUsuario,
+        idRol: usuario.idRol,
         nombre: usuario.nombre,
+        apellido: usuario.apellido,
         correo: usuario.correo,
         telefono: usuario.telefono,
         imagen: usuario.imagen,

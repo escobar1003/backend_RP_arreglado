@@ -16,7 +16,7 @@ export default class UsuariosController {
     }
 
     const usuarios = await Usuario.query()
-      .where('id_rol', 1)
+      .where('id_rol', 3)
       .where((query) => {
         query.where('nombre', 'LIKE', `%${q}%`)
           .orWhere('correo', 'LIKE', `%${q}%`)

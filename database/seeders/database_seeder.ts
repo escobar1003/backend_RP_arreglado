@@ -14,7 +14,7 @@ export default class DatabaseSeeder extends BaseSeeder {
       { nombre: 'aliado', descripcion: 'Punto de reciclaje en supermercado aliado' },
       { nombre: 'usuario', descripcion: 'Usuario que recicla y acumula puntos' },
       { nombre: 'encargado', descripcion: 'Persona que recibe material,asigna puntos a Usuarios ' },
-      { nombre: 'superadmin', descripcion: 'Super administrador del sistema' },  // ← AGREGAR
+      { nombre: 'superadmin', descripcion: 'Super Administrador del sistema' },
     ])
 
 
@@ -221,6 +221,19 @@ if (!superadminExiste) {
       updated_at: new Date(),
     })
     
+
+    // ASIGNAR MATERIALES AL PUNTO DE RECICLAJE
+    const materiales = await db.from('materiales').select('id_material')
+    const materialIds = materiales.map((m: { id_material: number }) => m.id_material)
+    if (materialIds.length > 0) {
+      await db.table('punto_material').multiInsert(
+        materialIds.map((id_material: number) => ({
+          id_punto: idPunto,
+          id_material,
+        }))
+      )
+      console.log(`Materiales asignados al punto: ${materialIds.join(', ')}`)
+    }
 
     console.log(`Punto creado (id: ${idPunto}) → encargado (id: ${idEncargado})`)
   }

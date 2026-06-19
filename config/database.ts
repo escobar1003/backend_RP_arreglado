@@ -15,10 +15,10 @@ const dbConfig = defineConfig({
         database: env.get('DB_DATABASE'),
       },
       pool: {
-        min: 0,
-        max: 5,
-        acquireTimeoutMillis: 30000,
-        idleTimeoutMillis: 30000,
+        min: 1,
+        max: 2,
+        acquireTimeoutMillis: 10000,
+        idleTimeoutMillis: 5000,
         reapIntervalMillis: 1000,
         afterCreate: (conn: any, done: any) => {
           conn.query('SELECT 1', (err: any) => {

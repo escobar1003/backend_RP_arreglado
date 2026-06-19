@@ -77,7 +77,7 @@ export default class ReservasUsuarioController {
 
     const encargado = await Usuario.query()
       .where('id_aliado', punto.idAliado)
-      .where('id_rol', 2)
+      .where('id_rol', 4)
       .first()
 
       console.log("👤 Encargado encontrado:", encargado)
@@ -90,6 +90,7 @@ export default class ReservasUsuarioController {
         mensaje: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
         leida: false,
         tipo: 'reserva',
+        idReferencia: reserva.idReserva,
       })
       
 
@@ -149,6 +150,7 @@ export default class ReservasUsuarioController {
         titulo: 'Reserva cancelada',
         mensaje: `El usuario canceló la reserva #${reserva.idReserva}`,
         leida: false,
+        idReferencia: reserva.idReserva,
       })
 
       WsService.emitToEncargado(encargado.idUsuario, 'notificacion', {
