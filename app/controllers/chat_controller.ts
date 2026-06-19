@@ -28,7 +28,7 @@ export default class ChatController {
 
       // 4. Llamar al modelo de Gemini (usamos gemini-2.5-flash por ser el más rápido y óptimo para chat)
       const aiResponse = await ai.models.generateContent({
-        model: 'gemini-1.5-flash',
+        model: 'gemini-2.0-flash',
         contents: mensaje,
         config: {
           systemInstruction: systemInstruction,
