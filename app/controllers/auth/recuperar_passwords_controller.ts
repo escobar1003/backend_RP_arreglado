@@ -33,13 +33,12 @@ export default class RecuperarPasswordsController {
     // En producción: aquí se enviaría el código por correo (SMTP / Mailgun / etc.)
     // Por ahora se retorna en la respuesta para facilitar el desarrollo y las pruebas
 
-    setImmediate(async () => {
-      try {
-        await mail.send((message) => {
-          message
-            .to(correo)
-            .from(process.env.MAIL_FROM_ADDRESS!)
-            .subject('Recycling Points - Código de recuperación').html(`
+    mail
+      .send((message) => {
+        message
+          .to(correo)
+          .from(process.env.MAIL_FROM_ADDRESS!)
+          .subject('Recycling Points - Código de recuperación').html(`
               <h2>Hola ${usuario.nombre},</h2>
               <p>Recibimos una solicitud para restablecer tu contraseña.</p>
               <p>Tu código de recuperación es:</p>
@@ -49,11 +48,8 @@ export default class RecuperarPasswordsController {
               <br/>
               <p>Equipo Recycling Points</p>
             `)
-        })
-      } catch (error) {
-        console.error('Error enviando correo:', (error as Error).message)
-      }
-    })
+      })
+      .catch((error) => console.error('Error enviando correo:', error.message))
 
     return response.ok({
       mensaje: 'Si el correo existe, recibirás un código de recuperación',
