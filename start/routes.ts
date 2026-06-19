@@ -271,20 +271,6 @@ router
       () => import('#controllers/admin/estados_canjes_controller'),
       'destroy',
     ])
-  // Estados Aliados
-  router.get('/estados-aliados', [() => import('#controllers/admin/estados_aliados_controller'), 'index'])
-  router.get('/estados-aliados/:id', [() => import('#controllers/admin/estados_aliados_controller'), 'show'])
-  router.post('/estados-aliados', [() => import('#controllers/admin/estados_aliados_controller'), 'store'])
-  router.put('/estados-aliados/:id', [() => import('#controllers/admin/estados_aliados_controller'), 'update'])
-  router.delete('/estados-aliados/:id', [() => import('#controllers/admin/estados_aliados_controller'), 'destroy'])
-
-  // Estados Canjes
-  router.get('/estados-canjes', [() => import('#controllers/admin/estados_canjes_controller'), 'index'])
-  router.get('/estados-canjes/:id', [() => import('#controllers/admin/estados_canjes_controller'), 'show'])
-  router.post('/estados-canjes', [() => import('#controllers/admin/estados_canjes_controller'), 'store'])
-  router.put('/estados-canjes/:id', [() => import('#controllers/admin/estados_canjes_controller'), 'update'])
-  router.delete('/estados-canjes/:id', [() => import('#controllers/admin/estados_canjes_controller'), 'destroy'])
-
   // Estados Usuarios
   router.get('/estados-usuarios', [() => import('#controllers/admin/estados_usuarios_controller'), 'index'])
   router.get('/estados-usuarios/:id', [() => import('#controllers/admin/estados_usuarios_controller'), 'show'])
