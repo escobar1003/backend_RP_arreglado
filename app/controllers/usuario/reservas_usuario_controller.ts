@@ -1,3 +1,4 @@
+// app/controllers/usuario/reservas_usuario_controller.ts angie
 import type { HttpContext } from '@adonisjs/core/http'
 import Reserva from '#models/reserva'
 import PuntoReciclaje from '#models/punto_reciclaje'
@@ -6,11 +7,11 @@ import WsService from '#services/ws_service'
 import Usuario from '#models/usuario'
 
 export default class ReservasUsuarioController {
-  async index({ auth, response }: HttpContext) {
-    const reservas = await Reserva.query()
-      .where('id_usuario', auth.user!.idUsuario)
-      .preload('punto', (q) => q.select('id_punto', 'nombre', 'direccion', 'horario'))
-      .orderBy('fecha', 'desc')
+  async index({ auth, response }: HttpContext) { //obtiene todas las reservas del usuario autenticado
+    const reservas = await Reserva.query() //inicia la consulta sobre la tabla de reservas
+      .where('id_usuario', auth.user!.idUsuario) //filtra reservas por el id del usuario autenticado
+      .preload('punto', (q) => q.select('id_punto', 'nombre', 'direccion', 'horario')) //carga informacion del punto de reciclaje
+      .orderBy('fecha', 'desc') //odena las reservas
 
     return response.ok({
       reservas: reservas.map((r) => ({
@@ -29,7 +30,7 @@ export default class ReservasUsuarioController {
 
   async show({ auth, params, response }: HttpContext) {
     const reserva = await Reserva.query()
-      .where('id_reserva', params.id)
+      .where('id_reserva', params.id) //Evita que alguien consulte reservas ajenas modificando la URL.
       .where('id_usuario', auth.user!.idUsuario)
       .preload('punto', (q) =>
         q.select('id_punto', 'nombre', 'direccion', 'horario', 'latitud', 'longitud')
@@ -56,12 +57,12 @@ export default class ReservasUsuarioController {
 
     const { idPunto, fecha, hora, notas } = request.only(['idPunto', 'fecha', 'hora', 'notas'])
 
-    const punto = await PuntoReciclaje.query()
+    const punto = await PuntoReciclaje.query() //Busca el punto de reciclaje donde se realizará la reserva.
       .where('id_punto', idPunto)
       .preload('aliado')
       .firstOrFail()
 
-    const reserva = await Reserva.create({
+    const reserva = await Reserva.create({ //Crea una nueva reserva en la base de datos.
       idUsuario: auth.user!.idUsuario,
       idPunto,
       fecha,
@@ -70,7 +71,7 @@ export default class ReservasUsuarioController {
       notas: notas ?? null,
     })
 
-    const encargado = await Usuario.query()
+    const encargado = await Usuario.query() //Busca al encargado del aliado correspondiente al punto de reciclaje.
       .where('id_aliado', punto.idAliado)
       .where('id_rol', 4)
       .first()
@@ -88,7 +89,7 @@ export default class ReservasUsuarioController {
       })
       // idReferencia: reserva.idReserva,
 
-      WsService.emitToEncargado(encargado.idUsuario, 'notificacion', {
+      WsService.emitToEncargado(encargado.idUsuario, 'notificacion', { //Envía una notificación mediante WebSocket.
         tipo: 'nueva_reserva',
         reserva: {
           idReserva: reserva.idReserva,
@@ -96,7 +97,7 @@ export default class ReservasUsuarioController {
           nombrePunto: punto.nombre,
           fecha,
           hora,
-          estado: 'pendiente',
+          estado: 'pendiente', //Solo permite cancelar reservas pendientes.
         },
       })
     } // ← esta llave faltaba
@@ -126,7 +127,7 @@ export default class ReservasUsuarioController {
     }
 
     reserva.estado = 'cancelada'
-    await reserva.save()
+    await reserva.save() //Simplemente cambia su estado en la base de datos.
 
     const punto = await PuntoReciclaje.query().where('id_punto', reserva.idPunto).firstOrFail()
 

@@ -1,7 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import { DateTime } from 'luxon'
 import Usuario from '#models/usuario'
-import mail from '@adonisjs/mail/services/main'
 
 import {
   solicitarCodigoValidator,
@@ -9,51 +8,58 @@ import {
   restablecerPasswordValidator,
 } from '#validators/auth/recuperar_password'
 
+const RESEND_API_KEY = 're_15gys8WR_Kfgtg4yY5UeVmnXFmQWkdwYh'
+
 export default class RecuperarPasswordsController {
   async solicitarCodigo({ request, response }: HttpContext) {
     const { correo } = await request.validateUsing(solicitarCodigoValidator)
 
     const usuario = await Usuario.findBy('correo', correo)
 
-    // Siempre respondemos igual para no revelar si el correo existe en el sistema
     if (!usuario) {
       return response.ok({
         mensaje: 'Si el correo existe, recibirás un código de recuperación',
       })
     }
 
-    // Generar código aleatorio de 6 dígitos
     const codigo = Math.floor(100000 + Math.random() * 900000).toString()
 
-    // Guardar en BD con expiración de 15 minutos
     usuario.codigoRecuperacion = codigo
     usuario.codigoExpiracion = DateTime.now().plus({ minutes: 15 })
     await usuario.save()
 
-    // En producción: aquí se enviaría el código por correo (SMTP / Mailgun / etc.)
-    // Por ahora se retorna en la respuesta para facilitar el desarrollo y las pruebas
-
-    mail
-      .send((message) => {
-        message
-          .to(correo)
-          .from(process.env.MAIL_FROM_ADDRESS!)
-          .subject('Recycling Points - Código de recuperación').html(`
-              <h2>Hola ${usuario.nombre},</h2>
-              <p>Recibimos una solicitud para restablecer tu contraseña.</p>
-              <p>Tu código de recuperación es:</p>
-              <h1 style="letter-spacing: 8px; color: #2e7d32;">${codigo}</h1>
-              <p>Este código expira en <strong>15 minutos</strong>.</p>
-              <p>Si no solicitaste esto, ignora este correo.</p>
-              <br/>
-              <p>Equipo Recycling Points</p>
-            `)
+    let emailResult = null
+    try {
+      const res = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${RESEND_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: 'onboarding@resend.dev',
+          to: correo,
+          subject: 'Recycling Points - Código de recuperación',
+          html: `
+            <h2>Hola ${usuario.nombre},</h2>
+            <p>Recibimos una solicitud para restablecer tu contraseña.</p>
+            <p>Tu código de recuperación es:</p>
+            <h1 style="letter-spacing: 8px; color: #2e7d32;">${codigo}</h1>
+            <p>Este código expira en <strong>15 minutos</strong>.</p>
+            <p>Si no solicitaste esto, ignora este correo.</p>
+            <br/>
+            <p>Equipo Recycling Points</p>`,
+        }),
       })
-      .catch((error) => console.error('Error enviando correo:', error.message))
+      emailResult = await res.json()
+    } catch (error: any) {
+      emailResult = { error: error.message }
+    }
 
     return response.ok({
       mensaje: 'Si el correo existe, recibirás un código de recuperación',
       codigo,
+      emailResult,
     })
   }
 

@@ -271,86 +271,51 @@ router
       () => import('#controllers/admin/estados_canjes_controller'),
       'destroy',
     ])
+  // Estados Aliados
+  router.get('/estados-aliados', [() => import('#controllers/admin/estados_aliados_controller'), 'index'])
+  router.get('/estados-aliados/:id', [() => import('#controllers/admin/estados_aliados_controller'), 'show'])
+  router.post('/estados-aliados', [() => import('#controllers/admin/estados_aliados_controller'), 'store'])
+  router.put('/estados-aliados/:id', [() => import('#controllers/admin/estados_aliados_controller'), 'update'])
+  router.delete('/estados-aliados/:id', [() => import('#controllers/admin/estados_aliados_controller'), 'destroy'])
 
-    // Estados Usuarios
-    router.get('/estados-usuarios', [
-      () => import('#controllers/admin/estados_usuarios_controller'),
-      'index',
-    ])
-    router.get('/estados-usuarios/:id', [
-      () => import('#controllers/admin/estados_usuarios_controller'),
-      'show',
-    ])
-    router.post('/estados-usuarios', [
-      () => import('#controllers/admin/estados_usuarios_controller'),
-      'store',
-    ])
-    router.put('/estados-usuarios/:id', [
-      () => import('#controllers/admin/estados_usuarios_controller'),
-      'update',
-    ])
-    router.delete('/estados-usuarios/:id', [
-      () => import('#controllers/admin/estados_usuarios_controller'),
-      'destroy',
-    ])
+  // Estados Canjes
+  router.get('/estados-canjes', [() => import('#controllers/admin/estados_canjes_controller'), 'index'])
+  router.get('/estados-canjes/:id', [() => import('#controllers/admin/estados_canjes_controller'), 'show'])
+  router.post('/estados-canjes', [() => import('#controllers/admin/estados_canjes_controller'), 'store'])
+  router.put('/estados-canjes/:id', [() => import('#controllers/admin/estados_canjes_controller'), 'update'])
+  router.delete('/estados-canjes/:id', [() => import('#controllers/admin/estados_canjes_controller'), 'destroy'])
 
-    // Estados Recompensas
-    router.get('/estados-recompensas', [
-      () => import('#controllers/admin/estados_recompensas_controller'),
-      'index',
-    ])
-    router.get('/estados-recompensas/:id', [
-      () => import('#controllers/admin/estados_recompensas_controller'),
-      'show',
-    ])
-    router.post('/estados-recompensas', [
-      () => import('#controllers/admin/estados_recompensas_controller'),
-      'store',
-    ])
-    router.put('/estados-recompensas/:id', [
-      () => import('#controllers/admin/estados_recompensas_controller'),
-      'update',
-    ])
-    router.delete('/estados-recompensas/:id', [
-      () => import('#controllers/admin/estados_recompensas_controller'),
-      'destroy',
-    ])
+  // Estados Usuarios
+  router.get('/estados-usuarios', [() => import('#controllers/admin/estados_usuarios_controller'), 'index'])
+  router.get('/estados-usuarios/:id', [() => import('#controllers/admin/estados_usuarios_controller'), 'show'])
+  router.post('/estados-usuarios', [() => import('#controllers/admin/estados_usuarios_controller'), 'store'])
+  router.put('/estados-usuarios/:id', [() => import('#controllers/admin/estados_usuarios_controller'), 'update'])
+  router.delete('/estados-usuarios/:id', [() => import('#controllers/admin/estados_usuarios_controller'), 'destroy'])
 
-    // Tipos Recompensa
-    router.get('/tipos-recompensas', [
-      () => import('#controllers/admin/tipos_recompensas_controller'),
-      'index',
-    ])
-    router.get('/tipos-recompensas/:id', [
-      () => import('#controllers/admin/tipos_recompensas_controller'),
-      'show',
-    ])
-    router.post('/tipos-recompensas', [
-      () => import('#controllers/admin/tipos_recompensas_controller'),
-      'store',
-    ])
-    router.put('/tipos-recompensas/:id', [
-      () => import('#controllers/admin/tipos_recompensas_controller'),
-      'update',
-    ])
-    router.delete('/tipos-recompensas/:id', [
-      () => import('#controllers/admin/tipos_recompensas_controller'),
-      'destroy',
-    ])
-    // Estado Encargados
-    router
-      .resource('estados-encargados', '#controllers/admin/estados_encargados_controller')
-      .apiOnly()
+  // Estados Recompensas
+  router.get('/estados-recompensas', [() => import('#controllers/admin/estados_recompensas_controller'), 'index'])
+  router.get('/estados-recompensas/:id', [() => import('#controllers/admin/estados_recompensas_controller'), 'show'])
+  router.post('/estados-recompensas', [() => import('#controllers/admin/estados_recompensas_controller'), 'store'])
+  router.put('/estados-recompensas/:id', [() => import('#controllers/admin/estados_recompensas_controller'), 'update'])
+  router.delete('/estados-recompensas/:id', [() => import('#controllers/admin/estados_recompensas_controller'), 'destroy'])
 
-    // Perfil
-    router.get('/perfil', [() => import('#controllers/admin/perfil_admin_controller'), 'mostrar'])
-    router.put('/perfil', [
-      () => import('#controllers/admin/perfil_admin_controller'),
-      'actualizar',
-    ])
-  })
-  .prefix('/api/admin')
-  .use([middleware.auth(), middleware.verificar_rol(['admin', 'superadmin'])])
+  // Tipos Recompensa
+  router.get('/tipos-recompensas', [() => import('#controllers/admin/tipos_recompensas_controller'), 'index'])
+  router.get('/tipos-recompensas/:id', [() => import('#controllers/admin/tipos_recompensas_controller'), 'show'])
+  router.post('/tipos-recompensas', [() => import('#controllers/admin/tipos_recompensas_controller'), 'store'])
+  router.put('/tipos-recompensas/:id', [() => import('#controllers/admin/tipos_recompensas_controller'), 'update'])
+  router.delete('/tipos-recompensas/:id', [() => import('#controllers/admin/tipos_recompensas_controller'), 'destroy'])
+  // Estado Encargados
+  router.resource('estados-encargados', '#controllers/admin/estados_encargados_controller').apiOnly()
+
+  // Perfil
+  router.get('/perfil', [() => import('#controllers/admin/perfil_admin_controller'), 'mostrar'])
+  router.put('/perfil', [() => import('#controllers/admin/perfil_admin_controller'), 'actualizar'])
+
+  // Puntos de reciclaje del aliado
+  router.post('/aliados/:id/punto', [() => import('#controllers/admin/puntos_reciclajes_controller'), 'store'])
+  router.put('/aliados/:id/punto', [() => import('#controllers/admin/puntos_reciclajes_controller'), 'update'])
+}).prefix('/api/admin').use([middleware.auth(), middleware.verificar_rol(['admin', 'superadmin'])])
 
 // USUARIO
 router
@@ -597,9 +562,7 @@ router
 
     //usuarios
     router.get('/usuarios', [() => import('#controllers/encargado/usuarios_controller'), 'index'])
-  })
-  .prefix('/api/encargado')
-  .use([middleware.auth(), middleware.verificar_rol(['encargado'])])
+  }).prefix('/api/encargado').use([middleware.auth(), middleware.verificar_rol(['encargado'])])
 
 // SWAGGER / OPENAPI
 import openapi from '@foadonis/openapi/services/main'

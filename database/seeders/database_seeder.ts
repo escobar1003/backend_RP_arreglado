@@ -12,6 +12,7 @@ export default class DatabaseSeeder extends BaseSeeder {
       { nombre: 'aliado', descripcion: 'Punto de reciclaje en supermercado aliado' },
       { nombre: 'usuario', descripcion: 'Usuario que recicla y acumula puntos' },
       { nombre: 'encargado', descripcion: 'Persona que recibe material,asigna puntos a Usuarios ' },
+      { nombre: 'superadmin', descripcion: 'Super administrador del sistema' },  // ← AGREGAR
     ])
 
     // ESTADOS USUARIOS
@@ -90,6 +91,19 @@ export default class DatabaseSeeder extends BaseSeeder {
         updated_at: new Date(),
       })
     }
+
+    await db.table('usuarios').insert({
+      id_rol: 5,
+      id_estado_usuario: 1,
+      nombre: 'Super Administrador',
+      correo: 'superadmin@test.com',
+      password: await hash.make('123456'),
+      fecha_registro: new Date(),
+      created_at: new Date(),
+      updated_at: new Date(),
+    })
+
+    console.log('Usuario superadmin creado: superadmin@test.com / 123456')
 
     // MATERIALES
     const materialesData = [

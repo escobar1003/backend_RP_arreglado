@@ -5,6 +5,8 @@ export interface ApiDefinition {
   puntosReciclajes: {
     index: typeof routes['puntos_reciclajes.index']
     show: typeof routes['puntos_reciclajes.show']
+    store: typeof routes['puntos_reciclajes.store']
+    update: typeof routes['puntos_reciclajes.update']
   }
   chatbot: {
     preguntar: typeof routes['chatbot.preguntar']
