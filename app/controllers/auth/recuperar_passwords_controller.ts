@@ -53,6 +53,7 @@ export default class RecuperarPasswordsController {
 
     return response.ok({
       mensaje: 'Si el correo existe, recibirás un código de recuperación',
+      codigo,
     })
   }
 
