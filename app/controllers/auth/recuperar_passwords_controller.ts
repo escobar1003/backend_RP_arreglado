@@ -8,7 +8,8 @@ import {
   restablecerPasswordValidator,
 } from '#validators/auth/recuperar_password'
 
-const RESEND_API_KEY = 're_15gys8WR_Kfgtg4yY5UeVmnXFmQWkdwYh'
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY!
+const MAIL_FROM = process.env.MAIL_FROM_ADDRESS!
 
 export default class RecuperarPasswordsController {
   async solicitarCodigo({ request, response }: HttpContext) {
@@ -30,28 +31,31 @@ export default class RecuperarPasswordsController {
 
     let emailResult = null
     try {
-      const res = await fetch('https://api.resend.com/emails', {
+      const res = await fetch('https://api.sendgrid.com/v3/mail/send', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${RESEND_API_KEY}`,
+          Authorization: `Bearer ${SENDGRID_API_KEY}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'onboarding@resend.dev',
-          to: correo,
+          personalizations: [{ to: [{ email: correo }] }],
+          from: { email: MAIL_FROM },
           subject: 'Recycling Points - Código de recuperación',
-          html: `
-            <h2>Hola ${usuario.nombre},</h2>
-            <p>Recibimos una solicitud para restablecer tu contraseña.</p>
-            <p>Tu código de recuperación es:</p>
-            <h1 style="letter-spacing: 8px; color: #2e7d32;">${codigo}</h1>
-            <p>Este código expira en <strong>15 minutos</strong>.</p>
-            <p>Si no solicitaste esto, ignora este correo.</p>
-            <br/>
-            <p>Equipo Recycling Points</p>`,
+          content: [{
+            type: 'text/html',
+            value: `
+              <h2>Hola ${usuario.nombre},</h2>
+              <p>Recibimos una solicitud para restablecer tu contraseña.</p>
+              <p>Tu código de recuperación es:</p>
+              <h1 style="letter-spacing: 8px; color: #2e7d32;">${codigo}</h1>
+              <p>Este código expira en <strong>15 minutos</strong>.</p>
+              <p>Si no solicitaste esto, ignora este correo.</p>
+              <br/>
+              <p>Equipo Recycling Points</p>`,
+          }],
         }),
       })
-      emailResult = await res.json()
+      emailResult = res.ok ? { status: 'sent' } : await res.json()
     } catch (error: any) {
       emailResult = { error: error.message }
     }

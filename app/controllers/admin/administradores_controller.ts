@@ -2,7 +2,8 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Usuario from '#models/usuario'
 import { DateTime } from 'luxon'
 
-const RESEND_API_KEY = 're_15gys8WR_Kfgtg4yY5UeVmnXFmQWkdwYh'
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY!
+const MAIL_FROM = process.env.MAIL_FROM_ADDRESS!
 
 export default class AdministradoresController {
   async index({ auth, response }: HttpContext) {
@@ -42,24 +43,27 @@ export default class AdministradoresController {
       fechaRegistro: DateTime.now(),
     })
 
-    fetch('https://api.resend.com/emails', {
+    fetch('https://api.sendgrid.com/v3/mail/send', {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${RESEND_API_KEY}`,
+        Authorization: `Bearer ${SENDGRID_API_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'onboarding@resend.dev',
-        to: datos.correo,
+        personalizations: [{ to: [{ email: datos.correo }] }],
+        from: { email: MAIL_FROM },
         subject: 'Recycling Points - Credenciales de administrador',
-        html: `
-          <h2>Hola ${datos.nombre},</h2>
-          <p>Has sido registrado como <strong>administrador</strong> en Recycling Points.</p>
-          <p><strong>Correo:</strong> ${datos.correo}</p>
-          <p><strong>Contraseña temporal:</strong> ${passwordTemporal}</p>
-          <p>Te recomendamos cambiar tu contraseña después de iniciar sesión.</p>
-          <br>
-          <p>Saludos,<br>Equipo Recycling Points</p>`,
+        content: [{
+          type: 'text/html',
+          value: `
+            <h2>Hola ${datos.nombre},</h2>
+            <p>Has sido registrado como <strong>administrador</strong> en Recycling Points.</p>
+            <p><strong>Correo:</strong> ${datos.correo}</p>
+            <p><strong>Contraseña temporal:</strong> ${passwordTemporal}</p>
+            <p>Te recomendamos cambiar tu contraseña después de iniciar sesión.</p>
+            <br>
+            <p>Saludos,<br>Equipo Recycling Points</p>`,
+        }],
       }),
     }).catch((error) => console.error('Error enviando correo:', error.message))
 
