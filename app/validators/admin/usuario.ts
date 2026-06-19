@@ -8,6 +8,7 @@ export const actualizarUsuarioValidator = vine.compile(
     imagen: vine.string().maxLength(255).optional(),
     idRol: vine.number().positive().optional(),
     idEstadoUsuario: vine.number().positive().optional(),
+    idAliado: vine.number().positive().optional(),
   })
 )
 export const crearUsuarioValidator = vine.compile(

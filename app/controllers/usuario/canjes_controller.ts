@@ -4,6 +4,7 @@ import Notificacion from '#models/notificacion'
 import Recompensa from '#models/recompensa'
 import MovimientoPunto from '#models/movimiento_punto'
 import MovimientoPuntoModel from '#models/movimiento_punto'
+import Usuario from '#models/usuario'
 import { DateTime } from 'luxon'
 
 export default class CanjesController {
@@ -94,6 +95,11 @@ export default class CanjesController {
       descripcion: `Canje de recompensa: ${recompensa.nombre}`,
       fechaMovimiento: DateTime.now(),
     })
+
+    // Actualizar saldo del usuario
+    const usuario = await Usuario.findOrFail(auth.user!.idUsuario)
+    usuario.puntosTotales = Math.max(0, (usuario.puntosTotales ?? 0) - recompensa.puntosRequeridos)
+    await usuario.save()
 
     // Reducir stock si aplica
     if (recompensa.stock !== null) {

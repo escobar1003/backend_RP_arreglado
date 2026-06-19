@@ -21,6 +21,10 @@ export default class PuntosController {
       fechaMovimiento: DateTime.now(),
     })
 
+    // Actualizar saldo del usuario
+    usuario.puntosTotales = (usuario.puntosTotales ?? 0) + puntos
+    await usuario.save()
+
     // Generar notificación al usuario
     await Notificacion.create({
       idUsuario: usuario.idUsuario,

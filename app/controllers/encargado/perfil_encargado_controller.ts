@@ -28,6 +28,7 @@ export default class PerfilEncargadoController {
       usuario:{
         idUsuario: usuario.idUsuario,
         nombre: usuario.nombre,
+        apellido: usuario.apellido,
         correo: usuario.correo,
         telefono: usuario.telefono,
         imagen: usuario.imagen,
@@ -46,9 +47,8 @@ export default class PerfilEncargadoController {
 
   async actualizar({ auth, request, response }: HttpContext) {
     const usuario = await Usuario.findOrFail(auth.user!.idUsuario)
-    const { nombre, telefono } = request.only(['nombre', 'telefono'])
-
-    usuario.merge({ nombre, telefono })
+    const datos = request.only(['nombre', 'apellido', 'telefono', 'imagen'])
+    usuario.merge(datos)
     await usuario.save()
 
     return response.ok({
@@ -56,6 +56,7 @@ export default class PerfilEncargadoController {
        usuario:{
         idUsuario: usuario.idUsuario,
         nombre: usuario.nombre,
+        apellido: usuario.apellido,
         correo: usuario.correo,
         telefono: usuario.telefono,
         imagen: usuario.imagen,

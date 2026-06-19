@@ -24,8 +24,8 @@ export default class Notificacion extends BaseModel {
   @column()
   declare tipo: string
 
-  // @column()
-  // declare idReferencia: number | null
+  @column()
+  declare idReferencia: number | null
 
   // @column()
   // declare idEncargado: number | null

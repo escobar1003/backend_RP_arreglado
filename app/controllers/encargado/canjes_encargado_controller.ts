@@ -4,6 +4,7 @@ import Recompensa from '#models/recompensa'
 import MovimientoPunto from '#models/movimiento_punto'
 import { asegurarPuntoEncargado } from '#services/encargado_punto'
 import Notificacion from '#models/notificacion'
+import Usuario from '#models/usuario'
 import { DateTime } from 'luxon'
 
 export default class CanjesEncargadoController {
@@ -92,6 +93,8 @@ export default class CanjesEncargadoController {
       return response.notFound({ mensaje })
     }
 
+    const { idUsuario, idRecompensa, fechaVencimiento } = request.only(['idUsuario', 'idRecompensa', 'fechaVencimiento'])
+
     const recompensa = await Recompensa.findOrFail(idRecompensa)
 
     if (recompensa.idEstadoRecompensa !== 1) {
@@ -145,6 +148,10 @@ export default class CanjesEncargadoController {
       descripcion: `Canje de recompensa: ${recompensa.nombre}`,
       fechaMovimiento: DateTime.now(),
     })
+
+    const usuarioObj = await Usuario.findOrFail(idUsuario)
+    usuarioObj.puntosTotales = (usuarioObj.puntosTotales ?? 0) - recompensa.puntosRequeridos
+    await usuarioObj.save()
 
     if (recompensa.stock !== null) {
       recompensa.stock -= 1

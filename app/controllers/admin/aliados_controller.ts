@@ -2,6 +2,8 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Aliado from '#models/aliado'
 import PuntoReciclaje from '#models/punto_reciclaje'
 import { crearAliadoValidator, actualizarAliadoValidator } from '#validators/admin/aliado'
+import { ApiBody, ApiResponse, ApiParam } from '@foadonis/openapi/decorators'
+import { appendFileSync } from 'node:fs'
 
 export default class AliadosController {
   async index({ auth, response }: HttpContext) {
@@ -35,17 +37,63 @@ export default class AliadosController {
     return response.ok({ aliado })
   }
 
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        nombre: { type: 'string', minLength: 2, maxLength: 100, description: 'Nombre del supermercado' },
+        tipoNegocio: { type: 'string', maxLength: 50, description: 'Tipo de negocio' },
+        descripcion: { type: 'string', maxLength: 255, description: 'Descripción' },
+        direccion: { type: 'string', maxLength: 150, description: 'Dirección' },
+        telefono: { type: 'string', maxLength: 20, description: 'Teléfono' },
+        correo: { type: 'string', format: 'email', description: 'Correo de contacto' },
+        comision: { type: 'number', minimum: 0, maximum: 100, description: 'Comisión %' },
+        latitud: { type: 'number', description: 'Latitud (-90 a 90)' },
+        longitud: { type: 'number', description: 'Longitud (-180 a 180)' },
+        materiales: { type: 'array', items: { type: 'number' }, description: 'IDs de materiales: 1=Plástico, 2=Papel, 3=Cartón, 4=Vidrio' },
+      },
+      required: ['nombre'],
+    },
+  })
+  @ApiResponse({ status: 201, description: 'Aliado creado correctamente' })
+  @ApiResponse({ status: 422, description: 'Error de validación' })
   async store({ request, response }: HttpContext) {
     const datos = await request.validateUsing(crearAliadoValidator)
-    const aliado = await Aliado.create({ ...datos, idEstadoAliado: 1 })
+    appendFileSync('C:\\Users\\kevin\\downloads\\backend_RP_arreglado\\debug_aliado.log', JSON.stringify({ latitud: datos.latitud, longitud: datos.longitud, tipo: typeof datos.latitud }) + '\n')
+    const { latitud, longitud, ...datosAliado } = datos
+    const aliado = await Aliado.create({ ...datosAliado, idEstadoAliado: 1 })
+
+    const { materiales: materialIds } = request.only(['materiales'])
+    if (materialIds && Array.isArray(materialIds) && materialIds.length > 0) {
+      const punto = await PuntoReciclaje.create({
+        idAliado: aliado.idAliado,
+        idEstadoPunto: 1,
+        nombre: `Punto principal - ${aliado.nombre}`,
+        latitud: latitud ?? null,
+        longitud: longitud ?? null,
+      })
+      await punto.related('materiales').sync(materialIds)
+    }
+
     return response.created({ mensaje: 'Aliado creado correctamente', aliado })
   }
 
   async update({ params, request, response }: HttpContext) {
     const aliado = await Aliado.findOrFail(params.id)
     const datos = await request.validateUsing(actualizarAliadoValidator)
-    aliado.merge(datos)
+    const { latitud, longitud } = datos
+    const { latitud: _l, longitud: _ll, ...datosAliado } = datos
+    aliado.merge(datosAliado)
     await aliado.save()
+    if (latitud !== undefined || longitud !== undefined) {
+      await aliado.load('puntosReciclaje')
+      const punto = aliado.puntosReciclaje[0]
+      if (punto) {
+        punto.latitud = latitud ?? punto.latitud
+        punto.longitud = longitud ?? punto.longitud
+        await punto.save()
+      }
+    }
     return response.ok({ mensaje: 'Aliado actualizado correctamente', aliado })
   }
 
@@ -69,6 +117,17 @@ export default class AliadosController {
     return response.ok({ materiales })
   }
 
+  @ApiParam({ name: 'id', schema: { type: 'number' }, description: 'ID del aliado' })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      required: ['materiales'],
+      properties: {
+        materiales: { type: 'array', items: { type: 'number' }, description: 'IDs de materiales: 1=Plástico, 2=Papel, 3=Cartón, 4=Vidrio' },
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Materiales sincronizados correctamente' })
   async sincronizarMateriales({ params, request, response }: HttpContext) {
     const { materiales: materialIds } = request.only(['materiales'])
     const aliado = await Aliado.findOrFail(params.id)
