@@ -5,7 +5,7 @@ import FormData from 'form-data'
 import fs from 'fs'
 
 export default class DeteccionController {
-  
+
   public async procesarCamara({ request, response }: HttpContext) {
     // 1. Recibir la foto de la app móvil
     const imagenMobile = request.file('image', {
@@ -14,15 +14,19 @@ export default class DeteccionController {
     })
 
     if (!imagenMobile) {
-      return response.badRequest({ 
-        status: 'error', 
-        message: 'No se recibió ninguna imagen de la cámara.' 
+      return response.badRequest({
+        status: 'error',
+        message: 'No se recibió ninguna imagen de la cámara.',
       })
     }
 
     // 2. Mover la foto a la carpeta temporal
     await imagenMobile.move(app.tmpPath('uploads'))
     const filePath = `${app.tmpPath('uploads')}/${imagenMobile.fileName}`
+
+    const cleanup = () => {
+      if (fs.existsSync(filePath)) fs.unlinkSync(filePath)
+    }
 
     try {
       // 3. Preparar el formulario
