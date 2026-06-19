@@ -7,16 +7,10 @@ import Notificacion from '#models/notificacion'
 import { DateTime } from 'luxon'
 
 export default class CanjesEncargadoController {
-  /**
-   * GET /api/encargado/canjes
-   */
   async index({ auth, request, response }: HttpContext) {
     const usuario = auth.user!
-
     const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
-    if (!punto) {
-      return response.notFound({ mensaje })
-    }
+    if (!punto) return response.notFound({ mensaje })
 
     const { estado, usuario_id } = request.qs()
 
@@ -62,9 +56,6 @@ export default class CanjesEncargadoController {
     return response.ok({ total: result.length, canjes: result })
   }
 
-  /**
-   * GET /api/encargado/canjes/:id
-   */
   async show({ params, response }: HttpContext) {
     const canje = await Canje.query()
       .where('id_canje', params.id)
@@ -76,71 +67,10 @@ export default class CanjesEncargadoController {
     return response.ok({ canje })
   }
 
-  /**
-   * PUT /api/encargado/canjes/:id/estado
-   * El encargado actualiza el estado de un canje
-   */
-  async actualizarEstado({ params, request, response }: HttpContext) {
-    const canje = await Canje.findOrFail(params.id)
-    const { idEstadoCanje } = request.only(['idEstadoCanje'])
-    canje.idEstadoCanje = idEstadoCanje
-    await canje.save()
-    return response.ok({ mensaje: 'Estado actualizado', canje })
-  }
-
-  /**
-   * PUT /api/encargado/canjes/:id/validar
-   * El encargado valida (aprueba o rechaza) un canje por código físico
-   * Body: { idEstadoCanje: 2 (canjeado) | 3 (vencido), codigoCanje }
-   */
-  async validar({ auth, params, request, response }: HttpContext) {
-    const usuario = auth.user!
-
-    const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
-    if (!punto) {
-      return response.notFound({ mensaje })
-    }
-
-    const canje = await Canje.query()
-      .where('id_canje', params.id)
-      .preload('recompensa')
-      .firstOrFail()
-
-    const { idEstadoCanje, codigoCanje } = request.only(['idEstadoCanje', 'codigoCanje'])
-
-    if (codigoCanje && canje.codigoCanje !== codigoCanje) {
-      return response.badRequest({ mensaje: 'El código de canje no coincide' })
-    }
-
-    const estadosValidos = [2, 3]
-    if (!estadosValidos.includes(idEstadoCanje)) {
-      return response.badRequest({ mensaje: 'Estado inválido. Use 2 (canjeado) o 3 (vencido)' })
-    }
-
-    canje.idEstadoCanje = idEstadoCanje
-    await canje.save()
-
-    await Notificacion.create({
-      idUsuario: canje.idUsuario,
-      titulo: 'Tu canje fue procesado',
-      mensaje: `Tu canje de "${canje.recompensa.nombre}" fue ${idEstadoCanje === 2 ? 'canjeado exitosamente' : 'marcado como vencido'}.`,
-      leida: false,
-      tipo: 'canje',
-    })
-
-    return response.ok({ mensaje: 'Canje actualizado correctamente', canje })
-  }
-
-  /**
-   * POST /api/encargado/canjes
-   */
   async store({ auth, request, response }: HttpContext) {
     const usuario = auth.user!
-
     const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
-    if (!punto) {
-      return response.notFound({ mensaje })
-    }
+    if (!punto) return response.notFound({ mensaje })
 
     const { idUsuario, idRecompensa, fechaVencimiento } = request.only([
       'idUsuario', 'idRecompensa', 'fechaVencimiento',
@@ -148,17 +78,14 @@ export default class CanjesEncargadoController {
 
     const recompensa = await Recompensa.findOrFail(idRecompensa)
 
-    if (recompensa.idEstadoRecompensa !== 1) {
+    if (recompensa.idEstadoRecompensa !== 1)
       return response.badRequest({ mensaje: 'Esta recompensa no está disponible' })
-    }
 
-    if (recompensa.stock !== null && recompensa.stock <= 0) {
+    if (recompensa.stock !== null && recompensa.stock <= 0)
       return response.badRequest({ mensaje: 'Esta recompensa está agotada' })
-    }
 
-    if (recompensa.fechaFin && DateTime.now() > DateTime.fromISO(recompensa.fechaFin)) {
+    if (recompensa.fechaFin && DateTime.now() > DateTime.fromISO(recompensa.fechaFin))
       return response.badRequest({ mensaje: 'Esta recompensa ha expirado' })
-    }
 
     const ahora = DateTime.now()
     const movimientos = await MovimientoPunto.query().where('id_usuario', idUsuario)
@@ -173,11 +100,10 @@ export default class CanjesEncargadoController {
       .reduce((s, m) => s + m.puntos, 0)
     const saldo = ganados - descontados + ajuste
 
-    if (saldo < recompensa.puntosRequeridos) {
+    if (saldo < recompensa.puntosRequeridos)
       return response.badRequest({
         mensaje: `Puntos insuficientes. Necesitas ${recompensa.puntosRequeridos} y tienes ${saldo}`,
       })
-    }
 
     const codigoCanje = `CJ-${Date.now()}-${idUsuario}`
 
@@ -216,16 +142,10 @@ export default class CanjesEncargadoController {
     return response.ok({ mensaje: 'Canje registrado correctamente', canje })
   }
 
-  /**
-   * PUT /api/encargado/canjes/:id/validar
-   */
   async validar({ auth, params, request, response }: HttpContext) {
     const usuario = auth.user!
-
     const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
-    if (!punto) {
-      return response.notFound({ mensaje })
-    }
+    if (!punto) return response.notFound({ mensaje })
 
     const canje = await Canje.query()
       .where('id_canje', params.id)
@@ -234,14 +154,12 @@ export default class CanjesEncargadoController {
 
     const { idEstadoCanje, codigoCanje } = request.only(['idEstadoCanje', 'codigoCanje'])
 
-    if (codigoCanje && canje.codigoCanje !== codigoCanje) {
+    if (codigoCanje && canje.codigoCanje !== codigoCanje)
       return response.badRequest({ mensaje: 'El código de canje no coincide' })
-    }
 
     const estadosValidos = [2, 3]
-    if (!estadosValidos.includes(idEstadoCanje)) {
+    if (!estadosValidos.includes(idEstadoCanje))
       return response.badRequest({ mensaje: 'Estado inválido. Use 2 (canjeado) o 3 (vencido)' })
-    }
 
     canje.idEstadoCanje = idEstadoCanje
     await canje.save()
@@ -257,23 +175,16 @@ export default class CanjesEncargadoController {
     return response.ok({ mensaje: 'Canje actualizado correctamente', canje })
   }
 
-  /**
-   * PUT /api/encargado/canjes/:id/estado
-   */
   async actualizarEstado({ auth, params, request, response }: HttpContext) {
     const usuario = auth.user!
-
     const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
-    if (!punto) {
-      return response.notFound({ mensaje })
-    }
+    if (!punto) return response.notFound({ mensaje })
 
     const canje = await Canje.findOrFail(params.id)
     const { idEstadoCanje } = request.only(['idEstadoCanje'])
 
-    if (!idEstadoCanje) {
+    if (!idEstadoCanje)
       return response.badRequest({ mensaje: 'Debes enviar idEstadoCanje' })
-    }
 
     canje.idEstadoCanje = idEstadoCanje
     await canje.save()
