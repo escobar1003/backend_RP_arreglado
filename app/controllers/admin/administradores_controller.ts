@@ -1,7 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Usuario from '#models/usuario'
-import mail from '@adonisjs/mail/services/main'
 import { DateTime } from 'luxon'
+
+const RESEND_API_KEY = 're_15gys8WR_Kfgtg4yY5UeVmnXFmQWkdwYh'
 
 export default class AdministradoresController {
   async index({ auth, response }: HttpContext) {
@@ -41,20 +42,26 @@ export default class AdministradoresController {
       fechaRegistro: DateTime.now(),
     })
 
-    await mail.send((message) => {
-      message
-        .to(datos.correo)
-        .from(process.env.SMTP_USERNAME!)
-        .subject('Recycling Points - Credenciales de administrador').html(`
+    fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'onboarding@resend.dev',
+        to: datos.correo,
+        subject: 'Recycling Points - Credenciales de administrador',
+        html: `
           <h2>Hola ${datos.nombre},</h2>
           <p>Has sido registrado como <strong>administrador</strong> en Recycling Points.</p>
           <p><strong>Correo:</strong> ${datos.correo}</p>
           <p><strong>Contraseña temporal:</strong> ${passwordTemporal}</p>
           <p>Te recomendamos cambiar tu contraseña después de iniciar sesión.</p>
           <br>
-          <p>Saludos,<br>Equipo Recycling Points</p>
-        `)
-    })
+          <p>Saludos,<br>Equipo Recycling Points</p>`,
+      }),
+    }).catch((error) => console.error('Error enviando correo:', error.message))
 
     return response.created({
       mensaje: 'Administrador creado correctamente. Se enviaron las credenciales al correo.',
