@@ -19,6 +19,7 @@ export const controllers = {
     Materiales: () => import('#controllers/admin/materiales_controller'),
     PerfilAdmin: () => import('#controllers/admin/perfil_admin_controller'),
     Puntos: () => import('#controllers/admin/puntos_controller'),
+    PuntosReciclajes: () => import('#controllers/admin/puntos_reciclajes_controller'),
     Recompensas: () => import('#controllers/admin/recompensas_controller'),
     Roles: () => import('#controllers/admin/roles_controller'),
     TiposRecompensas: () => import('#controllers/admin/tipos_recompensas_controller'),

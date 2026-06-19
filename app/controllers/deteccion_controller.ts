@@ -5,7 +5,7 @@ import FormData from 'form-data'
 import fs from 'fs'
 
 export default class DeteccionController {
-  
+
   public async procesarCamara({ request, response }: HttpContext) {
     // 1. Recibir la foto de la app móvil
     const imagenMobile = request.file('image', {
@@ -14,9 +14,9 @@ export default class DeteccionController {
     })
 
     if (!imagenMobile) {
-      return response.badRequest({ 
-        status: 'error', 
-        message: 'No se recibió ninguna imagen de la cámara.' 
+      return response.badRequest({
+        status: 'error',
+        message: 'No se recibió ninguna imagen de la cámara.',
       })
     }
 
@@ -24,15 +24,21 @@ export default class DeteccionController {
     await imagenMobile.move(app.tmpPath('uploads'))
     const filePath = `${app.tmpPath('uploads')}/${imagenMobile.fileName}`
 
+    const cleanup = () => {
+      if (fs.existsSync(filePath)) fs.unlinkSync(filePath)
+    }
+
     try {
       // 3. Preparar el formulario
       const formData = new FormData()
       formData.append('image', fs.createReadStream(filePath))
 
-      // 4. Petición al servicio de IA (usando variable de entorno)
+      // 4. Petición al servicio de IA
       const iaUrl = process.env.IA_SERVICE_URL || 'http://localhost:5000'
+      
       const apiResponse = await axios.post(`${iaUrl}/predict`, formData, {
-        headers: formData.getHeaders(),
+        headers: { ...formData.getHeaders() },
+        timeout: 120000,
       })
 
       // 5. Responder a Flutter

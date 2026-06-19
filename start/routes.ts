@@ -154,6 +154,10 @@ router.group(() => {
   // Perfil
   router.get('/perfil', [() => import('#controllers/admin/perfil_admin_controller'), 'mostrar'])
   router.put('/perfil', [() => import('#controllers/admin/perfil_admin_controller'), 'actualizar'])
+  
+    // Puntos de reciclaje del aliado
+  router.post('/aliados/:id/punto', [() => import('#controllers/admin/puntos_reciclajes_controller'), 'store'])
+  router.put('/aliados/:id/punto', [() => import('#controllers/admin/puntos_reciclajes_controller'), 'update'])
 }).prefix('/api/admin').use([middleware.auth(), middleware.verificar_rol(['admin', 'superadmin'])])
 
 
@@ -276,6 +280,10 @@ router.group(() => {
 
   //usuarios
   router.get('/usuarios', [() => import('#controllers/encargado/usuarios_controller'), 'index'])
+
+    // Puntos de reciclaje del aliado
+  router.post('/aliados/:id/punto', [() => import('#controllers/admin/puntos_reciclajes_controller'), 'store'])
+  router.put('/aliados/:id/punto', [() => import('#controllers/admin/puntos_reciclajes_controller'), 'update'])
 
 }).prefix('/api/encargado').use([middleware.auth(), middleware.verificar_rol(['encargado'])])
 

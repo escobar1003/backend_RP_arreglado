@@ -58,22 +58,23 @@ export default class AliadosController {
   @ApiResponse({ status: 201, description: 'Aliado creado correctamente' })
   @ApiResponse({ status: 422, description: 'Error de validación' })
   async store({ request, response }: HttpContext) {
+    console.log('=== DATOS CRUDOS ===', request.all())
     const datos = await request.validateUsing(crearAliadoValidator)
-    appendFileSync('C:\\Users\\kevin\\downloads\\backend_RP_arreglado\\debug_aliado.log', JSON.stringify({ latitud: datos.latitud, longitud: datos.longitud, tipo: typeof datos.latitud }) + '\n')
-    const { latitud, longitud, ...datosAliado } = datos
-    const aliado = await Aliado.create({ ...datosAliado, idEstadoAliado: 1 })
+    console.log('=== DATOS VALIDADOS ===', datos)
 
-    const { materiales: materialIds } = request.only(['materiales'])
-    if (materialIds && Array.isArray(materialIds) && materialIds.length > 0) {
-      const punto = await PuntoReciclaje.create({
-        idAliado: aliado.idAliado,
-        idEstadoPunto: 1,
-        nombre: `Punto principal - ${aliado.nombre}`,
-        latitud: latitud ?? null,
-        longitud: longitud ?? null,
-      })
-      await punto.related('materiales').sync(materialIds)
-    }
+    const { latitud, longitud, ubicacionDireccion, ...datosSinCoordenadas } = datos as any
+    console.log('=== COORDENADAS ===', { latitud, longitud, ubicacionDireccion })
+
+    const aliado = await Aliado.create({ ...datosSinCoordenadas, idEstadoAliado: 1 })
+
+    await PuntoReciclaje.create({
+      idAliado: aliado.idAliado,
+      idEstadoPunto: 1,
+      nombre: `Punto principal - ${aliado.nombre}`,
+      direccion: ubicacionDireccion ?? null,
+      latitud: latitud ?? null,
+      longitud: longitud ?? null,
+    })
 
     return response.created({ mensaje: 'Aliado creado correctamente', aliado })
   }
@@ -133,13 +134,7 @@ export default class AliadosController {
     const aliado = await Aliado.findOrFail(params.id)
     await aliado.load('puntosReciclaje')
     let punto = aliado.puntosReciclaje[0]
-    if (!punto) {
-      punto = await PuntoReciclaje.create({
-        idAliado: aliado.idAliado,
-        idEstadoPunto: 1,
-        nombre: `Punto principal - ${aliado.nombre}`,
-      })
-    }
+    if (!punto) return response.notFound({ mensaje: 'Punto de reciclaje no encontrado' })
     await punto.related('materiales').sync(materialIds ?? [])
     return response.ok({ mensaje: 'Materiales sincronizados correctamente' })
   }

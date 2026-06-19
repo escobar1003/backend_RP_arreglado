@@ -564,6 +564,18 @@ const routes = {
     tokens: [{"old":"/api/admin/perfil","type":0,"val":"api","end":""},{"old":"/api/admin/perfil","type":0,"val":"admin","end":""},{"old":"/api/admin/perfil","type":0,"val":"perfil","end":""}],
     types: placeholder as Registry['perfil_admin.actualizar']['types'],
   },
+  'puntos_reciclajes.store': {
+    methods: ["POST"],
+    pattern: '/api/admin/aliados/:id/punto',
+    tokens: [{"old":"/api/admin/aliados/:id/punto","type":0,"val":"api","end":""},{"old":"/api/admin/aliados/:id/punto","type":0,"val":"admin","end":""},{"old":"/api/admin/aliados/:id/punto","type":0,"val":"aliados","end":""},{"old":"/api/admin/aliados/:id/punto","type":1,"val":"id","end":""},{"old":"/api/admin/aliados/:id/punto","type":0,"val":"punto","end":""}],
+    types: placeholder as Registry['puntos_reciclajes.store']['types'],
+  },
+  'puntos_reciclajes.update': {
+    methods: ["PUT"],
+    pattern: '/api/admin/aliados/:id/punto',
+    tokens: [{"old":"/api/admin/aliados/:id/punto","type":0,"val":"api","end":""},{"old":"/api/admin/aliados/:id/punto","type":0,"val":"admin","end":""},{"old":"/api/admin/aliados/:id/punto","type":0,"val":"aliados","end":""},{"old":"/api/admin/aliados/:id/punto","type":1,"val":"id","end":""},{"old":"/api/admin/aliados/:id/punto","type":0,"val":"punto","end":""}],
+    types: placeholder as Registry['puntos_reciclajes.update']['types'],
+  },
   'perfil.mostrar': {
     methods: ["GET","HEAD"],
     pattern: '/api/usuario/perfil',
@@ -893,6 +905,18 @@ const routes = {
     pattern: '/api/encargado/usuarios',
     tokens: [{"old":"/api/encargado/usuarios","type":0,"val":"api","end":""},{"old":"/api/encargado/usuarios","type":0,"val":"encargado","end":""},{"old":"/api/encargado/usuarios","type":0,"val":"usuarios","end":""}],
     types: placeholder as Registry['usuarios.index']['types'],
+  },
+  'puntos_reciclajes.store': {
+    methods: ["POST"],
+    pattern: '/api/encargado/aliados/:id/punto',
+    tokens: [{"old":"/api/encargado/aliados/:id/punto","type":0,"val":"api","end":""},{"old":"/api/encargado/aliados/:id/punto","type":0,"val":"encargado","end":""},{"old":"/api/encargado/aliados/:id/punto","type":0,"val":"aliados","end":""},{"old":"/api/encargado/aliados/:id/punto","type":1,"val":"id","end":""},{"old":"/api/encargado/aliados/:id/punto","type":0,"val":"punto","end":""}],
+    types: placeholder as Registry['puntos_reciclajes.store']['types'],
+  },
+  'puntos_reciclajes.update': {
+    methods: ["PUT"],
+    pattern: '/api/encargado/aliados/:id/punto',
+    tokens: [{"old":"/api/encargado/aliados/:id/punto","type":0,"val":"api","end":""},{"old":"/api/encargado/aliados/:id/punto","type":0,"val":"encargado","end":""},{"old":"/api/encargado/aliados/:id/punto","type":0,"val":"aliados","end":""},{"old":"/api/encargado/aliados/:id/punto","type":1,"val":"id","end":""},{"old":"/api/encargado/aliados/:id/punto","type":0,"val":"punto","end":""}],
+    types: placeholder as Registry['puntos_reciclajes.update']['types'],
   },
   'openapi.html': {
     methods: ["GET","HEAD"],
