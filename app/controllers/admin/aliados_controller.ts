@@ -36,25 +36,26 @@ export default class AliadosController {
   }
 
   async store({ request, response }: HttpContext) {
-  const datos = await request.validateUsing(crearAliadoValidator)
-  
-  // Extraer coordenadas antes de crear el aliado
-  const { latitud, longitud, ubicacionDireccion, ...datosSinCoordenadas } = datos as any
-  
-  const aliado = await Aliado.create({ ...datosSinCoordenadas, idEstadoAliado: 1 })
-  
-  // Crear el punto de reciclaje con coordenadas desde el inicio
-  await PuntoReciclaje.create({
-    idAliado: aliado.idAliado,
-    idEstadoPunto: 1,
-    nombre: `Punto principal - ${aliado.nombre}`,
-    direccion: ubicacionDireccion ?? null,
-    latitud: latitud ?? null,
-    longitud: longitud ?? null,
-  })
-  
-  return response.created({ mensaje: 'Aliado creado correctamente', aliado })
-}
+    console.log('=== DATOS CRUDOS ===', request.all())
+    const datos = await request.validateUsing(crearAliadoValidator)
+    console.log('=== DATOS VALIDADOS ===', datos)
+
+    const { latitud, longitud, ubicacionDireccion, ...datosSinCoordenadas } = datos as any
+    console.log('=== COORDENADAS ===', { latitud, longitud, ubicacionDireccion })
+
+    const aliado = await Aliado.create({ ...datosSinCoordenadas, idEstadoAliado: 1 })
+
+    await PuntoReciclaje.create({
+      idAliado: aliado.idAliado,
+      idEstadoPunto: 1,
+      nombre: `Punto principal - ${aliado.nombre}`,
+      direccion: ubicacionDireccion ?? null,
+      latitud: latitud ?? null,
+      longitud: longitud ?? null,
+    })
+
+    return response.created({ mensaje: 'Aliado creado correctamente', aliado })
+  }
 
   async update({ params, request, response }: HttpContext) {
     const aliado = await Aliado.findOrFail(params.id)
@@ -89,7 +90,6 @@ export default class AliadosController {
     const aliado = await Aliado.findOrFail(params.id)
     await aliado.load('puntosReciclaje')
     let punto = aliado.puntosReciclaje[0]
-    // No crear punto aquí — ya se crea con coordenadas en store()
     if (!punto) return response.notFound({ mensaje: 'Punto de reciclaje no encontrado' })
     await punto.related('materiales').sync(materialIds ?? [])
     return response.ok({ mensaje: 'Materiales sincronizados correctamente' })
