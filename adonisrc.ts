@@ -28,7 +28,7 @@ export default defineConfig({
     () => import('@adonisjs/core/commands'),
     () => import('@adonisjs/lucid/commands'),
     () => import('@adonisjs/session/commands'),
-    () => import('@adonisjs/mail/commands')
+    () => import('@adonisjs/mail/commands'),
   ],
 
   /*
@@ -68,11 +68,11 @@ export default defineConfig({
   |
   */
   preloads: [
-  () => import('#start/routes'),
-  () => import('#start/kernel'),
-  () => import('#start/validator'),
-  () => import('#start/ws'),   // ← esto es lo único nuevo
-],
+    () => import('#start/routes'),
+    () => import('#start/kernel'),
+    () => import('#start/validator'),
+    () => import('#start/ws'), // ← esto es lo único nuevo
+  ],
 
   /*
   |--------------------------------------------------------------------------
@@ -108,10 +108,12 @@ export default defineConfig({
   | the production build.
   |
   */
-  metaFiles: [{
-    pattern: 'public/**',
-    reloadServer: false,
-  }],
+  metaFiles: [
+    {
+      pattern: 'public/**',
+      reloadServer: false,
+    },
+  ],
 
   hooks: {
     init: [

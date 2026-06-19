@@ -4,7 +4,13 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id_aliado')
-      table.integer('id_estado_aliado').unsigned().notNullable().references('id_estado_aliado').inTable('estados_aliados').onDelete('RESTRICT')
+      table
+        .integer('id_estado_aliado')
+        .unsigned()
+        .notNullable()
+        .references('id_estado_aliado')
+        .inTable('estados_aliados')
+        .onDelete('RESTRICT')
       table.string('nombre', 100).notNullable()
       table.string('tipo_negocio', 50).nullable()
       table.string('descripcion', 255).nullable()
@@ -15,5 +21,7 @@ export default class extends BaseSchema {
       table.datetime('updated_at').nullable()
     })
   }
-  async down() { this.schema.dropTable(this.tableName) }
+  async down() {
+    this.schema.dropTable(this.tableName)
+  }
 }

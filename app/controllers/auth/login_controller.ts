@@ -34,7 +34,6 @@ export default class LoginController {
         mensaje: 'Tu cuenta está inactiva o suspendida',
       })
     }
-    
 
     const token = await Usuario.accessTokens.create(usuario)
 

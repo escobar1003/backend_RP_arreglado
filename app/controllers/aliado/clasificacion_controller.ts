@@ -7,9 +7,10 @@ export default class ClasificacionController {
   async index({ auth, response }: HttpContext) {
     const usuario = auth.user!
 
-    const aliado = usuario.idRol === 1
-      ? null
-      : await Aliado.query().where('correo', usuario.correo).firstOrFail()
+    const aliado =
+      usuario.idRol === 1
+        ? null
+        : await Aliado.query().where('correo', usuario.correo).firstOrFail()
 
     // Ver clasificaciones de los usuarios en los puntos de este aliado
     const clasificaciones = await ClasificacionIa.query()

@@ -10,7 +10,9 @@ export default class PuntosController {
       .orderBy('fecha_movimiento', 'desc')
 
     const ganados = movimientos
-      .filter((m) => m.tipoMovimiento === 'ganados' && (!m.fechaCaducidad || m.fechaCaducidad > ahora))
+      .filter(
+        (m) => m.tipoMovimiento === 'ganados' && (!m.fechaCaducidad || m.fechaCaducidad > ahora)
+      )
       .reduce((sum, m) => sum + m.puntos, 0)
 
     const descontados = movimientos
@@ -18,7 +20,9 @@ export default class PuntosController {
       .reduce((sum, m) => sum + m.puntos, 0)
 
     const ajuste = movimientos
-      .filter((m) => m.tipoMovimiento === 'ajuste' && (!m.fechaCaducidad || m.fechaCaducidad > ahora))
+      .filter(
+        (m) => m.tipoMovimiento === 'ajuste' && (!m.fechaCaducidad || m.fechaCaducidad > ahora)
+      )
       .reduce((sum, m) => sum + m.puntos, 0)
 
     const saldo = ganados - descontados + ajuste
@@ -46,7 +50,8 @@ export default class PuntosController {
       const data = request.only(['id_usuario', 'puntos', 'tipo_movimiento', 'motivo'])
       const movimiento = await MovimientoPunto.create(data)
       return response.created({ movimiento })
-    } catch (error: any) { // El ": any" soluciona el fallo de TypeScript en producción
+    } catch (error: any) {
+      // El ": any" soluciona el fallo de TypeScript en producción
       return response.internalServerError({
         message: 'Error al procesar los puntos',
         error: error.message,

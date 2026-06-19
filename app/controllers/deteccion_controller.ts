@@ -5,7 +5,6 @@ import FormData from 'form-data'
 import fs from 'fs'
 
 export default class DeteccionController {
-  
   public async procesarCamara({ request, response }: HttpContext) {
     // 1. Recibir la foto de la app móvil
     const imagenMobile = request.file('image', {
@@ -14,9 +13,9 @@ export default class DeteccionController {
     })
 
     if (!imagenMobile) {
-      return response.badRequest({ 
-        status: 'error', 
-        message: 'No se recibió ninguna imagen de la cámara.' 
+      return response.badRequest({
+        status: 'error',
+        message: 'No se recibió ninguna imagen de la cámara.',
       })
     }
 
@@ -31,7 +30,7 @@ export default class DeteccionController {
 
       // 4. Petición al servicio de IA
       const iaUrl = process.env.IA_SERVICE_URL || 'http://localhost:5000'
-      
+
       const apiResponse = await axios.post(`${iaUrl}/predict`, formData, {
         headers: { ...formData.getHeaders() },
         timeout: 120000,
@@ -39,12 +38,11 @@ export default class DeteccionController {
 
       // 5. Responder a Flutter
       return response.ok(apiResponse.data)
-
     } catch (error: any) {
-      return response.internalServerError({ 
-        status: 'error', 
+      return response.internalServerError({
+        status: 'error',
         message: 'Error de conexión con el motor de IA.',
-        error: error.message 
+        error: error.message,
       })
     } finally {
       // 6. Limpieza segura del archivo temporal

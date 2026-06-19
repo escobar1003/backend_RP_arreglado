@@ -4,9 +4,27 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id_clasificacion')
-      table.integer('id_usuario').unsigned().notNullable().references('id_usuario').inTable('usuarios').onDelete('CASCADE')
-      table.integer('id_material').unsigned().notNullable().references('id_material').inTable('materiales').onDelete('RESTRICT')
-      table.integer('id_entrega').unsigned().nullable().references('id_entrega').inTable('entregas').onDelete('SET NULL')
+      table
+        .integer('id_usuario')
+        .unsigned()
+        .notNullable()
+        .references('id_usuario')
+        .inTable('usuarios')
+        .onDelete('CASCADE')
+      table
+        .integer('id_material')
+        .unsigned()
+        .notNullable()
+        .references('id_material')
+        .inTable('materiales')
+        .onDelete('RESTRICT')
+      table
+        .integer('id_entrega')
+        .unsigned()
+        .nullable()
+        .references('id_entrega')
+        .inTable('entregas')
+        .onDelete('SET NULL')
       table.string('imagen', 255).nullable()
       table.decimal('confianza', 5, 2).nullable()
       table.string('caneca_recomendada', 50).nullable()
@@ -15,5 +33,7 @@ export default class extends BaseSchema {
       table.datetime('created_at').nullable()
     })
   }
-  async down() { this.schema.dropTable(this.tableName) }
+  async down() {
+    this.schema.dropTable(this.tableName)
+  }
 }

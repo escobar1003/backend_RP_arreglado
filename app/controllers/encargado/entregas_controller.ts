@@ -4,7 +4,6 @@ import Notificacion from '#models/notificacion'
 import DetalleEntrega from '#models/detalle_entrega'
 import MovimientoPunto from '#models/movimiento_punto'
 import Material from '#models/material'
-import PuntoReciclaje from '#models/punto_reciclaje'
 import Usuario from '#models/usuario'
 import { DateTime } from 'luxon'
 import { asegurarPuntoEncargado } from '#services/encargado_punto'
@@ -94,7 +93,12 @@ export default class EntregasController {
       return response.notFound({ mensaje })
     }
 
-    const { idUsuario, materiales, observacion, fechaVencimientoPuntos } = request.only(['idUsuario', 'materiales', 'observacion', 'fechaVencimientoPuntos'])
+    const { idUsuario, materiales, observacion, fechaVencimientoPuntos } = request.only([
+      'idUsuario',
+      'materiales',
+      'observacion',
+      'fechaVencimientoPuntos',
+    ])
 
     if (!materiales || !Array.isArray(materiales) || materiales.length === 0) {
       return response.badRequest({ mensaje: 'Debes incluir al menos un material' })

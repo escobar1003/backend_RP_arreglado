@@ -3,20 +3,20 @@ import Notificacion from '#models/notificacion'
 
 export default class NotificacionesController {
   // SCRUM-580: GET /notificaciones
-async index({ auth, response }: HttpContext) {
-  const usuario = auth.user!
-  const notificaciones = await Notificacion.query()
-    .where('id_usuario', usuario.idUsuario)
-    .orderBy('created_at', 'desc')
+  async index({ auth, response }: HttpContext) {
+    const usuario = auth.user!
+    const notificaciones = await Notificacion.query()
+      .where('id_usuario', usuario.idUsuario)
+      .orderBy('created_at', 'desc')
 
-  const noLeidas = notificaciones.filter(n => !n.leida).length
+    const noLeidas = notificaciones.filter((n) => !n.leida).length
 
-  return response.ok({ 
-    total: notificaciones.length,
-    noLeidas,
-    notificaciones 
-  })
-}
+    return response.ok({
+      total: notificaciones.length,
+      noLeidas,
+      notificaciones,
+    })
+  }
 
   // SCRUM-581: PUT /notificaciones/:id/leer
   async marcarLeida({ auth, params, response }: HttpContext) {

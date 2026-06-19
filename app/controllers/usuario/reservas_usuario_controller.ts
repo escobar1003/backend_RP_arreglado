@@ -13,7 +13,7 @@ export default class ReservasUsuarioController {
       .orderBy('fecha', 'desc')
 
     return response.ok({
-      reservas: reservas.map(r => ({
+      reservas: reservas.map((r) => ({
         idReserva: r.idReserva,
         estado: r.estado,
         fecha: r.fecha,
@@ -22,8 +22,8 @@ export default class ReservasUsuarioController {
         puntoReciclaje: {
           nombre: r.punto.nombre,
           direccion: r.punto.direccion,
-        }
-      }))
+        },
+      })),
     })
   }
 
@@ -31,7 +31,9 @@ export default class ReservasUsuarioController {
     const reserva = await Reserva.query()
       .where('id_reserva', params.id)
       .where('id_usuario', auth.user!.idUsuario)
-      .preload('punto', (q) => q.select('id_punto', 'nombre', 'direccion', 'horario', 'latitud', 'longitud'))
+      .preload('punto', (q) =>
+        q.select('id_punto', 'nombre', 'direccion', 'horario', 'latitud', 'longitud')
+      )
       .firstOrFail()
 
     return response.ok({
@@ -45,21 +47,14 @@ export default class ReservasUsuarioController {
         direccion: reserva.punto.direccion,
         latitud: reserva.punto.latitud,
         longitud: reserva.punto.longitud,
-      }
+      },
     })
   }
 
   async store({ auth, request, response }: HttpContext) {
-  console.log("🚀 Entró al store de reservas")
+    console.log('🚀 Entró al store de reservas')
 
-  const { idPunto, fecha, hora, notas } = request.only([
-    'idPunto',
-    'fecha',
-    'hora',
-    'notas',
-  ])
-
-
+    const { idPunto, fecha, hora, notas } = request.only(['idPunto', 'fecha', 'hora', 'notas'])
 
     const punto = await PuntoReciclaje.query()
       .where('id_punto', idPunto)
@@ -80,10 +75,10 @@ export default class ReservasUsuarioController {
       .where('id_rol', 4)
       .first()
 
-      console.log("👤 Encargado encontrado:", encargado)
+    console.log('👤 Encargado encontrado:', encargado)
 
     if (encargado) {
-      console.log("📤 Voy a emitir socket al encargado", encargado.idUsuario)
+      console.log('📤 Voy a emitir socket al encargado', encargado.idUsuario)
       await Notificacion.create({
         idUsuario: encargado.idUsuario,
         tipo: 'nueva_reserva',
@@ -104,7 +99,7 @@ export default class ReservasUsuarioController {
           estado: 'pendiente',
         },
       })
-    }  // ← esta llave faltaba
+    } // ← esta llave faltaba
 
     return response.created({
       mensaje: 'Reserva registrada correctamente',
@@ -133,9 +128,7 @@ export default class ReservasUsuarioController {
     reserva.estado = 'cancelada'
     await reserva.save()
 
-    const punto = await PuntoReciclaje.query()
-      .where('id_punto', reserva.idPunto)
-      .firstOrFail()
+    const punto = await PuntoReciclaje.query().where('id_punto', reserva.idPunto).firstOrFail()
 
     const encargado = await Usuario.query()
       .where('id_aliado', punto.idAliado)

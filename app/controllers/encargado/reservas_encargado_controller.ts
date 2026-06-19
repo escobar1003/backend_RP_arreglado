@@ -114,9 +114,9 @@ export default class ReservasEncargadoController {
 
     if (estado) {
       await Notificacion.create({
-        idUsuario: encargado.idUsuario,
-        titulo: 'Nueva reserva',
-        mensaje: `El usuario ${auth.user!.nombre} ha reservado en ${punto.nombre} para el ${fecha} a las ${hora}.`,
+        idUsuario: reserva.idUsuario,
+        titulo: 'Estado de reserva actualizado',
+        mensaje: `Tu reserva en ${punto.nombre} cambió a estado: ${estado}.`,
         leida: false,
         tipo: 'reserva',
       })

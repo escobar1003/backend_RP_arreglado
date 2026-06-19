@@ -5,11 +5,13 @@ export const crearEntregaValidator = vine.compile(
     idPunto: vine.number().positive(),
     fechaEntrega: vine.string(),
     observacion: vine.string().maxLength(255).optional(),
-    detalles: vine.array(
-      vine.object({
-        idMaterial: vine.number().positive(),
-        peso: vine.number().min(0.01),
-      })
-    ).minLength(1),
+    detalles: vine
+      .array(
+        vine.object({
+          idMaterial: vine.number().positive(),
+          peso: vine.number().min(0.01),
+        })
+      )
+      .minLength(1),
   })
 )

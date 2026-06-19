@@ -7,5 +7,7 @@ export default class extends BaseSchema {
       table.string('nombre', 50).notNullable()
     })
   }
-  async down() { this.schema.dropTable(this.tableName) }
+  async down() {
+    this.schema.dropTable(this.tableName)
+  }
 }

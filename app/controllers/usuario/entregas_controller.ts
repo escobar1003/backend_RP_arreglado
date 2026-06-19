@@ -97,7 +97,7 @@ export default class EntregasController {
       fechaCaducidad: fechaVencimientoPuntos ? DateTime.fromISO(fechaVencimientoPuntos) : null,
     })
 
-        // SCRUM-582: Generar notificación al registrar entrega
+    // SCRUM-582: Generar notificación al registrar entrega
     await Notificacion.create({
       idUsuario: auth.user!.idUsuario,
       titulo: 'Entrega registrada',
