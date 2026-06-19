@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import MovimientoPunto from '#models/movimiento_punto'
 import { DateTime } from 'luxon'
 
+
 export default class PuntosController {
   async resumen({ auth, response }: HttpContext) {
     const ahora = DateTime.now()
@@ -24,6 +25,7 @@ export default class PuntosController {
     const saldo = ganados - descontados + ajuste
 
     return response.ok({
+      puntos: saldo,
       saldo,
       ganados,
       descontados,
