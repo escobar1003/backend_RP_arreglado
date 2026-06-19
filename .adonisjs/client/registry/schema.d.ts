@@ -1123,6 +1123,30 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/perfil_admin_controller').default['actualizar']>>>
     }
   }
+  'puntos_reciclajes.store': {
+    methods: ["POST"]
+    pattern: '/api/admin/aliados/:id/punto'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/puntos_reciclajes_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/puntos_reciclajes_controller').default['store']>>>
+    }
+  }
+  'puntos_reciclajes.update': {
+    methods: ["PUT"]
+    pattern: '/api/admin/aliados/:id/punto'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/puntos_reciclajes_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/puntos_reciclajes_controller').default['update']>>>
+    }
+  }
   'perfil.mostrar': {
     methods: ["GET","HEAD"]
     pattern: '/api/usuario/perfil'
@@ -1781,6 +1805,30 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/usuarios_controller').default['index']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/usuarios_controller').default['index']>>>
+    }
+  }
+  'puntos_reciclajes.store': {
+    methods: ["POST"]
+    pattern: '/api/encargado/aliados/:id/punto'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/puntos_reciclajes_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/puntos_reciclajes_controller').default['store']>>>
+    }
+  }
+  'puntos_reciclajes.update': {
+    methods: ["PUT"]
+    pattern: '/api/encargado/aliados/:id/punto'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/puntos_reciclajes_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/puntos_reciclajes_controller').default['update']>>>
     }
   }
   'openapi.html': {
