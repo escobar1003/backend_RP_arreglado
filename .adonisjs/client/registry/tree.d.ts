@@ -175,6 +175,9 @@ export interface ApiDefinition {
     cancelar: typeof routes['reservas_usuario.cancelar']
     destroy: typeof routes['reservas_usuario.destroy']
   }
+  reservaImagenes: {
+    store: typeof routes['reserva_imagenes.store']
+  }
   notificacionesUsuario: {
     index: typeof routes['notificaciones_usuario.index']
     marcarLeida: typeof routes['notificaciones_usuario.marcar_leida']

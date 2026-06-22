@@ -1375,6 +1375,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['destroy']>>>
     }
   }
+  'reserva_imagenes.store': {
+    methods: ["POST"]
+    pattern: '/api/usuario/reservas/:id/imagenes'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/reserva_imagenes_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reserva_imagenes_controller').default['store']>>>
+    }
+  }
   'notificaciones_usuario.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/usuario/notificaciones'
