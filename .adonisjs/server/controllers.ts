@@ -24,6 +24,8 @@ export const controllers = {
     Roles: () => import('#controllers/admin/roles_controller'),
     TiposRecompensas: () => import('#controllers/admin/tipos_recompensas_controller'),
     Usuarios: () => import('#controllers/admin/usuarios_controller'),
+    Entregas: () => import('#controllers/admin/entregas_controller'),
+    Estadisticas: () => import('#controllers/admin/estadisticas_controller'),
   },
   aliado: {
     Clasificacion: () => import('#controllers/aliado/clasificacion_controller'),
