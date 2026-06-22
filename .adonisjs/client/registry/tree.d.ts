@@ -20,6 +20,7 @@ export interface ApiDefinition {
   }
   recuperarPasswords: {
     solicitarCodigo: typeof routes['recuperar_passwords.solicitar_codigo']
+    verificarCodigo: typeof routes['recuperar_passwords.verificar_codigo']
     restablecerPassword: typeof routes['recuperar_passwords.restablecer_password']
   }
   administradores: {

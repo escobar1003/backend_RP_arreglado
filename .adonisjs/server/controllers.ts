@@ -59,8 +59,8 @@ export const controllers = {
     Perfil: () => import('#controllers/usuario/perfil_controller'),
     Puntos: () => import('#controllers/usuario/puntos_controller'),
     Recompensas: () => import('#controllers/usuario/recompensas_controller'),
+    ReservaImagenes: () => import('#controllers/usuario/reserva_imagenes_controller'),
     ReservasUsuario: () => import('#controllers/usuario/reservas_usuario_controller'),
     ReservasUsuarios: () => import('#controllers/usuario/reservas_usuarios_controller'),
-    ReservaImagenes: () => import('#controllers/usuario/reserva_imagenes_controller'),
   },
 }
