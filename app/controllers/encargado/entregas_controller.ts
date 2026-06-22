@@ -8,6 +8,7 @@ import PuntoReciclaje from '#models/punto_reciclaje'
 import Usuario from '#models/usuario'
 import { DateTime } from 'luxon'
 import { asegurarPuntoEncargado } from '#services/encargado_punto'
+import WsService from '#services/ws_service'
 
 export default class EntregasController {
   async index({ auth, request, response }: HttpContext) {
@@ -150,6 +151,16 @@ export default class EntregasController {
       mensaje: `Tu entrega #${entrega.idEntrega} fue registrada. Peso: ${pesoTotal}kg, Puntos: ${puntosTotales}pts.`,
       leida: false,
       tipo: 'entrega',
+    })
+
+    WsService.emitToUsuario(idUsuario, 'nueva_entrega', {
+      idEntrega: entrega.idEntrega,
+      pesoTotal,
+      puntosTotales,
+    })
+
+    WsService.emitToUsuario(idUsuario, 'puntos_actualizados', {
+      puntosTotales: usuarioObj.puntosTotales,
     })
 
     return response.created({
