@@ -90,7 +90,7 @@ export default class DatabaseSeeder extends BaseSeeder {
       { nombre: 'vencido' },
     ])
 
-    console.log('Seeders ejecutados correctamente')
+
     const adminExiste = await db.from('usuarios').where('correo', 'admin@test.com').first()
     if (!adminExiste) {
       await db.table('usuarios').insert({
@@ -117,20 +117,6 @@ if (!superadminExiste) {
     fecha_registro: new Date(), created_at: new Date(), updated_at: new Date(),
   })
 }
-
-    await db.table('usuarios').insert({                                              // ← AGREGAR
-      id_rol: 5,                                                                     // ← AGREGAR
-      id_estado_usuario: 1,                                                          // ← AGREGAR
-      nombre: 'Super Administrador',                                                 // ← AGREGAR
-      correo: 'superadmin@test.com',                                                 // ← AGREGAR
-      password: await hash.make('123456'),                                           // ← AGREGAR
-      fecha_registro: new Date(),                                                    // ← AGREGAR
-      created_at: new Date(),                                                        // ← AGREGAR
-      updated_at: new Date(),                                                        // ← AGREGAR
-    })                                                                               // ← AGREGAR
-
-    console.log('Usuario superadmin creado: superadmin@test.com / 123456')           // ← AGREGAR
-
 // MATERIALES
     const materialesData = [
       {
@@ -176,7 +162,6 @@ if (!superadminExiste) {
 
     // ALIADO
     const [idAliado] = await db.table('aliados').insert({
-      id_rol: 2,
       id_estado_aliado: 1,
       nombre: 'Supermercado Test',
       tipo_negocio: 'Supermercado',
@@ -237,5 +222,7 @@ if (!superadminExiste) {
     }
 
     console.log(`Punto creado (id: ${idPunto}) → encargado (id: ${idEncargado})`)
+
+    console.log('Seeders ejecutados correctamente')
   }
 }

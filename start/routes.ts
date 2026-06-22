@@ -14,7 +14,7 @@ router.get('/api/puntos-reciclaje', [() => import('#controllers/puntos_reciclaje
 router.get('/api/puntos-reciclaje/:id', [() => import('#controllers/puntos_reciclajes_controller'), 'show'])
 
 
-// CHATBOT (público)
+// CHATBOT (público)  
 router.post('/api/chatbot', [() => import('#controllers/chatbot_controller'), 'preguntar'])
 
 // AUTH (públicas)
@@ -112,6 +112,16 @@ router.group(() => {
   router.post('/estados-entregas', [() => import('#controllers/admin/estados_entregas_controller'), 'store'])
   router.put('/estados-entregas/:id', [() => import('#controllers/admin/estados_entregas_controller'), 'update'])
   router.delete('/estados-entregas/:id', [() => import('#controllers/admin/estados_entregas_controller'), 'destroy'])
+
+  //entregas
+
+  // Entregas
+router.get('/entregas', [() => import('#controllers/admin/entregas_controller'), 'index'])
+router.get('/entregas/:id', [() => import('#controllers/admin/entregas_controller'), 'show'])
+router.put('/entregas/:id/estado', [() => import('#controllers/admin/entregas_controller'), 'actualizarEstado'])
+
+// Estadísticas para dashboard
+router.get('/estadisticas', [() => import('#controllers/admin/estadisticas_controller'), 'index'])
 
   // Estados Aliados
   router.get('/estados-aliados', [() => import('#controllers/admin/estados_aliados_controller'), 'index'])

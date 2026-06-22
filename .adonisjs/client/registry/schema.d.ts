@@ -79,6 +79,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/recuperar_passwords_controller').default['solicitarCodigo']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'recuperar_passwords.verificar_codigo': {
+    methods: ["POST"]
+    pattern: '/api/auth/recuperar-password/verificar'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/auth/recuperar_password').verificarCodigoValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/auth/recuperar_password').verificarCodigoValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/recuperar_passwords_controller').default['verificarCodigo']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/recuperar_passwords_controller').default['verificarCodigo']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'recuperar_passwords.restablecer_password': {
     methods: ["POST"]
     pattern: '/api/auth/recuperar-password/restablecer'

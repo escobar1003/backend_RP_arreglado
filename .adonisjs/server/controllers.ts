@@ -24,6 +24,8 @@ export const controllers = {
     Roles: () => import('#controllers/admin/roles_controller'),
     TiposRecompensas: () => import('#controllers/admin/tipos_recompensas_controller'),
     Usuarios: () => import('#controllers/admin/usuarios_controller'),
+    Entregas: () => import('#controllers/admin/entregas_controller'),
+    Estadisticas: () => import('#controllers/admin/estadisticas_controller'),
   },
   aliado: {
     Clasificacion: () => import('#controllers/aliado/clasificacion_controller'),
@@ -47,6 +49,7 @@ export const controllers = {
     Recompensas: () => import('#controllers/encargado/recompensas_controller'),
     ReservasEncargado: () => import('#controllers/encargado/reservas_encargado_controller'),
     Usuarios: () => import('#controllers/encargado/usuarios_controller'),
+    Reportes: () => import('#controllers/encargado/reportes_controller'),
   },
   Puntos: () => import('#controllers/puntos_controller'),
   PuntosReciclajes: () => import('#controllers/puntos_reciclajes_controller'),
@@ -59,8 +62,8 @@ export const controllers = {
     Perfil: () => import('#controllers/usuario/perfil_controller'),
     Puntos: () => import('#controllers/usuario/puntos_controller'),
     Recompensas: () => import('#controllers/usuario/recompensas_controller'),
+    ReservaImagenes: () => import('#controllers/usuario/reserva_imagenes_controller'),
     ReservasUsuario: () => import('#controllers/usuario/reservas_usuario_controller'),
     ReservasUsuarios: () => import('#controllers/usuario/reservas_usuarios_controller'),
-    ReservaImagenes: () => import('#controllers/usuario/reserva_imagenes_controller'),
   },
 }

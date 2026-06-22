@@ -42,6 +42,12 @@ const routes = {
     tokens: [{"old":"/api/auth/recuperar-password/solicitar","type":0,"val":"api","end":""},{"old":"/api/auth/recuperar-password/solicitar","type":0,"val":"auth","end":""},{"old":"/api/auth/recuperar-password/solicitar","type":0,"val":"recuperar-password","end":""},{"old":"/api/auth/recuperar-password/solicitar","type":0,"val":"solicitar","end":""}],
     types: placeholder as Registry['recuperar_passwords.solicitar_codigo']['types'],
   },
+  'recuperar_passwords.verificar_codigo': {
+    methods: ["POST"],
+    pattern: '/api/auth/recuperar-password/verificar',
+    tokens: [{"old":"/api/auth/recuperar-password/verificar","type":0,"val":"api","end":""},{"old":"/api/auth/recuperar-password/verificar","type":0,"val":"auth","end":""},{"old":"/api/auth/recuperar-password/verificar","type":0,"val":"recuperar-password","end":""},{"old":"/api/auth/recuperar-password/verificar","type":0,"val":"verificar","end":""}],
+    types: placeholder as Registry['recuperar_passwords.verificar_codigo']['types'],
+  },
   'recuperar_passwords.restablecer_password': {
     methods: ["POST"],
     pattern: '/api/auth/recuperar-password/restablecer',
