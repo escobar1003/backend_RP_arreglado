@@ -9,7 +9,7 @@ import Role from './role.js'
 import EstadoUsuario from './estado_usuario.js'
 import Aliado from './aliado.js'
 import PuntoReciclaje from './punto_reciclaje.js'
-import EstadoEncargado from './estado_encargado.ts'
+import EstadoEncargado from './estado_encargado.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['correo'],
