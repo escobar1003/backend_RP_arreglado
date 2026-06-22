@@ -32,6 +32,9 @@ export default class Aliado extends BaseModel {
   declare correo: string | null
 
   @column()
+  declare zona: string | null
+
+  @column()
   declare comision: number
 
   @column.dateTime({ autoCreate: true })
