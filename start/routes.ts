@@ -1,6 +1,5 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
-import PuntosController from '#controllers/puntos_controller'
 import './seed.js'
 
 
@@ -23,6 +22,7 @@ router.group(() => {
   router.post('/iniciar-sesion', [() => import('#controllers/auth/login_controller'), 'iniciarSesion'])
   router.post('/registrarse', [() => import('#controllers/auth/registros_controller'), 'registrarse'])
   router.post('/recuperar-password/solicitar', [() => import('#controllers/auth/recuperar_passwords_controller'), 'solicitarCodigo'])
+  router.post('/recuperar-password/verificar', [() => import('#controllers/auth/recuperar_passwords_controller'), 'verificarCodigo'])
   router.post('/recuperar-password/restablecer', [() => import('#controllers/auth/recuperar_passwords_controller'), 'restablecerPassword'])
 }).prefix('/api/auth')
 
