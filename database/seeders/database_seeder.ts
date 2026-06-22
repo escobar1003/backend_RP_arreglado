@@ -176,6 +176,7 @@ if (!superadminExiste) {
 
     // ALIADO
     const [idAliado] = await db.table('aliados').insert({
+      id_rol: 2,
       id_estado_aliado: 1,
       nombre: 'Supermercado Test',
       tipo_negocio: 'Supermercado',
