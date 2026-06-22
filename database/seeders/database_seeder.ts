@@ -90,6 +90,24 @@ export default class DatabaseSeeder extends BaseSeeder {
       { nombre: 'vencido' },
     ])
 
+    // ZONAS
+    const zonasExistentes = await db.from('zonas').select('id_zona').first()
+    if (!zonasExistentes) {
+      await db.table('zonas').multiInsert([
+        { nombre: 'Zona Norte', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Zona Sur', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Zona Centro', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Zona Oriente', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Zona Occidente', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Zona Chapinero', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Zona Suba', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Zona Kennedy', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Zona Usaquén', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Zona Engativá', created_at: new Date(), updated_at: new Date() },
+      ])
+      console.log('Zonas creadas')
+    }
+
     console.log('Seeders ejecutados correctamente')
     const adminExiste = await db.from('usuarios').where('correo', 'admin@test.com').first()
     if (!adminExiste) {

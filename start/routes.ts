@@ -147,6 +147,9 @@ router.group(() => {
   router.post('/tipos-recompensas', [() => import('#controllers/admin/tipos_recompensas_controller'), 'store'])
   router.put('/tipos-recompensas/:id', [() => import('#controllers/admin/tipos_recompensas_controller'), 'update'])
   router.delete('/tipos-recompensas/:id', [() => import('#controllers/admin/tipos_recompensas_controller'), 'destroy'])
+  // Zonas
+  router.get('/zonas', [() => import('#controllers/admin/zonas_controller'), 'index'])
+
   // Estado Encargados
   router.resource('estados-encargados', '#controllers/admin/estados_encargados_controller').apiOnly()
 
