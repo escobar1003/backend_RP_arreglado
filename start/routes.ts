@@ -197,6 +197,7 @@ router.group(() => {
   router.post('/reservas',       [() => import('#controllers/usuario/reservas_usuario_controller'), 'store'])
   router.put('/reservas/:id/cancelar', [() => import('#controllers/usuario/reservas_usuario_controller'), 'cancelar']) //para cancelar una cita
   router.delete('/reservas/:id', [() => import('#controllers/usuario/reservas_usuario_controller'), 'destroy'])
+  router.post('/reservas/:id/imagenes', [() => import('#controllers/usuario/reserva_imagenes_controller'), 'store'])
 
   // Notificaciones
   router.get('/notificaciones', [() => import('#controllers/usuario/notificaciones_usuario_controller'), 'index'])
