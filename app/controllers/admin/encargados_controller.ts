@@ -85,8 +85,8 @@ export default class EncargadosController {
         created_at: new Date(),
         updated_at: new Date(),
       })
-      encargado = await Usuario.find(id)!
-      encargado!.idAliado = idAliado
+      encargado = (await Usuario.find(id))!
+      encargado.idAliado = idAliado
     }
 
     await mail.send((message) => {
