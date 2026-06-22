@@ -49,6 +49,7 @@ export const controllers = {
     Recompensas: () => import('#controllers/encargado/recompensas_controller'),
     ReservasEncargado: () => import('#controllers/encargado/reservas_encargado_controller'),
     Usuarios: () => import('#controllers/encargado/usuarios_controller'),
+    Reportes: () => import('#controllers/encargado/reportes_controller'),
   },
   Puntos: () => import('#controllers/puntos_controller'),
   PuntosReciclajes: () => import('#controllers/puntos_reciclajes_controller'),
