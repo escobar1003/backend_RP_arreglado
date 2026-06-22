@@ -42,6 +42,12 @@ const routes = {
     tokens: [{"old":"/api/auth/recuperar-password/solicitar","type":0,"val":"api","end":""},{"old":"/api/auth/recuperar-password/solicitar","type":0,"val":"auth","end":""},{"old":"/api/auth/recuperar-password/solicitar","type":0,"val":"recuperar-password","end":""},{"old":"/api/auth/recuperar-password/solicitar","type":0,"val":"solicitar","end":""}],
     types: placeholder as Registry['recuperar_passwords.solicitar_codigo']['types'],
   },
+  'recuperar_passwords.verificar_codigo': {
+    methods: ["POST"],
+    pattern: '/api/auth/recuperar-password/verificar',
+    tokens: [{"old":"/api/auth/recuperar-password/verificar","type":0,"val":"api","end":""},{"old":"/api/auth/recuperar-password/verificar","type":0,"val":"auth","end":""},{"old":"/api/auth/recuperar-password/verificar","type":0,"val":"recuperar-password","end":""},{"old":"/api/auth/recuperar-password/verificar","type":0,"val":"verificar","end":""}],
+    types: placeholder as Registry['recuperar_passwords.verificar_codigo']['types'],
+  },
   'recuperar_passwords.restablecer_password': {
     methods: ["POST"],
     pattern: '/api/auth/recuperar-password/restablecer',
@@ -689,6 +695,12 @@ const routes = {
     pattern: '/api/usuario/reservas/:id',
     tokens: [{"old":"/api/usuario/reservas/:id","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas/:id","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas/:id","type":0,"val":"reservas","end":""},{"old":"/api/usuario/reservas/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['reservas_usuario.destroy']['types'],
+  },
+  'reserva_imagenes.store': {
+    methods: ["POST"],
+    pattern: '/api/usuario/reservas/:id/imagenes',
+    tokens: [{"old":"/api/usuario/reservas/:id/imagenes","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas/:id/imagenes","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas/:id/imagenes","type":0,"val":"reservas","end":""},{"old":"/api/usuario/reservas/:id/imagenes","type":1,"val":"id","end":""},{"old":"/api/usuario/reservas/:id/imagenes","type":0,"val":"imagenes","end":""}],
+    types: placeholder as Registry['reserva_imagenes.store']['types'],
   },
   'notificaciones_usuario.index': {
     methods: ["GET","HEAD"],

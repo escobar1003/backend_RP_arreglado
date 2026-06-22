@@ -241,5 +241,7 @@ if (!superadminExiste) {
     }
 
     console.log(`Punto creado (id: ${idPunto}) → encargado (id: ${idEncargado})`)
+
+    console.log('Seeders ejecutados correctamente')
   }
 }

@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Reserva from '#models/reserva'
 import { asegurarPuntoEncargado } from '#services/encargado_punto'
 import Notificacion from '#models/notificacion'
+import Ws from '#services/ws_service'
 
 export default class ReservasEncargadoController {
   async index({ auth, request, response }: HttpContext) {
@@ -121,6 +122,14 @@ export default class ReservasEncargadoController {
         leida: false,
         tipo: 'reserva',
         idReferencia: reserva.idReserva,
+      })
+
+      const evento = estado === 'confirmada' ? 'reserva_aceptada' : 'reserva_rechazada'
+      Ws.emitToUsuario(reserva.idUsuario, evento, {
+        idReserva: reserva.idReserva,
+        estado,
+        titulo: `Reserva ${estadoLabel[estado]}`,
+        mensaje: `Tu reserva en ${punto.nombre} para el ${reserva.fecha} a las ${reserva.hora} fue ${estadoLabel[estado]}.`,
       })
     }
 

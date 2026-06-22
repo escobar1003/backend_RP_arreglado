@@ -1,7 +1,6 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
-import PuntosController from '#controllers/puntos_controller'
-import './seed.js'
+
 
 
 
@@ -15,7 +14,7 @@ router.get('/api/puntos-reciclaje', [() => import('#controllers/puntos_reciclaje
 router.get('/api/puntos-reciclaje/:id', [() => import('#controllers/puntos_reciclajes_controller'), 'show'])
 
 
-// CHATBOT (público)
+// CHATBOT (público)  
 router.post('/api/chatbot', [() => import('#controllers/chatbot_controller'), 'preguntar'])
 
 // AUTH (públicas)
@@ -23,6 +22,7 @@ router.group(() => {
   router.post('/iniciar-sesion', [() => import('#controllers/auth/login_controller'), 'iniciarSesion'])
   router.post('/registrarse', [() => import('#controllers/auth/registros_controller'), 'registrarse'])
   router.post('/recuperar-password/solicitar', [() => import('#controllers/auth/recuperar_passwords_controller'), 'solicitarCodigo'])
+  router.post('/recuperar-password/verificar', [() => import('#controllers/auth/recuperar_passwords_controller'), 'verificarCodigo'])
   router.post('/recuperar-password/restablecer', [() => import('#controllers/auth/recuperar_passwords_controller'), 'restablecerPassword'])
 }).prefix('/api/auth')
 
@@ -113,6 +113,16 @@ router.group(() => {
   router.put('/estados-entregas/:id', [() => import('#controllers/admin/estados_entregas_controller'), 'update'])
   router.delete('/estados-entregas/:id', [() => import('#controllers/admin/estados_entregas_controller'), 'destroy'])
 
+  //entregas
+
+  // Entregas
+router.get('/entregas', [() => import('#controllers/admin/entregas_controller'), 'index'])
+router.get('/entregas/:id', [() => import('#controllers/admin/entregas_controller'), 'show'])
+router.put('/entregas/:id/estado', [() => import('#controllers/admin/entregas_controller'), 'actualizarEstado'])
+
+// Estadísticas para dashboard
+router.get('/estadisticas', [() => import('#controllers/admin/estadisticas_controller'), 'index'])
+
   // Estados Aliados
   router.get('/estados-aliados', [() => import('#controllers/admin/estados_aliados_controller'), 'index'])
   router.get('/estados-aliados/:id', [() => import('#controllers/admin/estados_aliados_controller'), 'show'])
@@ -200,6 +210,7 @@ router.group(() => {
   router.post('/reservas',       [() => import('#controllers/usuario/reservas_usuario_controller'), 'store'])
   router.put('/reservas/:id/cancelar', [() => import('#controllers/usuario/reservas_usuario_controller'), 'cancelar']) //para cancelar una cita
   router.delete('/reservas/:id', [() => import('#controllers/usuario/reservas_usuario_controller'), 'destroy'])
+  router.post('/reservas/:id/imagenes', [() => import('#controllers/usuario/reserva_imagenes_controller'), 'store'])
 
   // Notificaciones
   router.get('/notificaciones', [() => import('#controllers/usuario/notificaciones_usuario_controller'), 'index'])

@@ -20,6 +20,7 @@ export interface ApiDefinition {
   }
   recuperarPasswords: {
     solicitarCodigo: typeof routes['recuperar_passwords.solicitar_codigo']
+    verificarCodigo: typeof routes['recuperar_passwords.verificar_codigo']
     restablecerPassword: typeof routes['recuperar_passwords.restablecer_password']
   }
   administradores: {
@@ -174,6 +175,9 @@ export interface ApiDefinition {
     store: typeof routes['reservas_usuario.store']
     cancelar: typeof routes['reservas_usuario.cancelar']
     destroy: typeof routes['reservas_usuario.destroy']
+  }
+  reservaImagenes: {
+    store: typeof routes['reserva_imagenes.store']
   }
   notificacionesUsuario: {
     index: typeof routes['notificaciones_usuario.index']

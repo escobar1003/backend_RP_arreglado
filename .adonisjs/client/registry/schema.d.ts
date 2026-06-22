@@ -79,6 +79,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/recuperar_passwords_controller').default['solicitarCodigo']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
+  'recuperar_passwords.verificar_codigo': {
+    methods: ["POST"]
+    pattern: '/api/auth/recuperar-password/verificar'
+    types: {
+      body: ExtractBody<InferInput<(typeof import('#validators/auth/recuperar_password').verificarCodigoValidator)>>
+      paramsTuple: []
+      params: {}
+      query: ExtractQuery<InferInput<(typeof import('#validators/auth/recuperar_password').verificarCodigoValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/recuperar_passwords_controller').default['verificarCodigo']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/recuperar_passwords_controller').default['verificarCodigo']>>> | { status: 422; response: { errors: SimpleError[] } }
+    }
+  }
   'recuperar_passwords.restablecer_password': {
     methods: ["POST"]
     pattern: '/api/auth/recuperar-password/restablecer'
@@ -1373,6 +1385,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['destroy']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reservas_usuario_controller').default['destroy']>>>
+    }
+  }
+  'reserva_imagenes.store': {
+    methods: ["POST"]
+    pattern: '/api/usuario/reservas/:id/imagenes'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/reserva_imagenes_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reserva_imagenes_controller').default['store']>>>
     }
   }
   'notificaciones_usuario.index': {
