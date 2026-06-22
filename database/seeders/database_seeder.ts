@@ -94,18 +94,18 @@ export default class DatabaseSeeder extends BaseSeeder {
     const zonasExistentes = await db.from('zonas').select('id_zona').first()
     if (!zonasExistentes) {
       await db.table('zonas').multiInsert([
-        { nombre: 'Zona Norte', created_at: new Date(), updated_at: new Date() },
-        { nombre: 'Zona Sur', created_at: new Date(), updated_at: new Date() },
-        { nombre: 'Zona Centro', created_at: new Date(), updated_at: new Date() },
-        { nombre: 'Zona Oriente', created_at: new Date(), updated_at: new Date() },
-        { nombre: 'Zona Occidente', created_at: new Date(), updated_at: new Date() },
-        { nombre: 'Zona Chapinero', created_at: new Date(), updated_at: new Date() },
-        { nombre: 'Zona Suba', created_at: new Date(), updated_at: new Date() },
-        { nombre: 'Zona Kennedy', created_at: new Date(), updated_at: new Date() },
-        { nombre: 'Zona Usaquén', created_at: new Date(), updated_at: new Date() },
-        { nombre: 'Zona Engativá', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Centro', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Norte', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Sur', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Oriente', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Occidente', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Belén', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Modelo', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Bolívar', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'El Recuerdo', created_at: new Date(), updated_at: new Date() },
+        { nombre: 'Santa Fe', created_at: new Date(), updated_at: new Date() },
       ])
-      console.log('Zonas creadas')
+      console.log('Zonas de Popayán creadas')
     }
 
     console.log('Seeders ejecutados correctamente')
@@ -135,19 +135,6 @@ if (!superadminExiste) {
     fecha_registro: new Date(), created_at: new Date(), updated_at: new Date(),
   })
 }
-
-    await db.table('usuarios').insert({                                              // ← AGREGAR
-      id_rol: 5,                                                                     // ← AGREGAR
-      id_estado_usuario: 1,                                                          // ← AGREGAR
-      nombre: 'Super Administrador',                                                 // ← AGREGAR
-      correo: 'superadmin@test.com',                                                 // ← AGREGAR
-      password: await hash.make('123456'),                                           // ← AGREGAR
-      fecha_registro: new Date(),                                                    // ← AGREGAR
-      created_at: new Date(),                                                        // ← AGREGAR
-      updated_at: new Date(),                                                        // ← AGREGAR
-    })                                                                               // ← AGREGAR
-
-    console.log('Usuario superadmin creado: superadmin@test.com / 123456')           // ← AGREGAR
 
 // MATERIALES
     const materialesData = [
