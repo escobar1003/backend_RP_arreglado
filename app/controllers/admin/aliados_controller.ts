@@ -80,6 +80,8 @@ export default class AliadosController {
     if (materiales && materiales.length > 0) {
       await punto.related('materiales').sync(materiales)
     }
+    console.log('=== MATERIALES RECIBIDOS ===', materiales)
+    console.log('=== PUNTO CREADO ID ===', punto.idPunto)
 
     return response.created({ mensaje: 'Aliado creado correctamente', aliado })
   }
