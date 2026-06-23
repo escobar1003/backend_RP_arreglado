@@ -77,8 +77,6 @@ export default class CanjesEncargadoController {
       'idUsuario', 'idRecompensa', 'fechaVencimiento',
     ])
 
-    const { idUsuario, idRecompensa, fechaVencimiento } = request.only(['idUsuario', 'idRecompensa', 'fechaVencimiento'])
-
     const recompensa = await Recompensa.findOrFail(idRecompensa)
 
     if (recompensa.idEstadoRecompensa !== 1)
