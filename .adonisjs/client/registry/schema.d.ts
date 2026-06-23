@@ -1903,42 +1903,6 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/puntos_reciclajes_controller').default['update']>>>
     }
   }
-  'openapi.html': {
-    methods: ["GET","HEAD"]
-    pattern: '/swagger'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: unknown
-      errorResponse: unknown
-    }
-  }
-  'openapi.json': {
-    methods: ["GET","HEAD"]
-    pattern: '/swagger.json'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: unknown
-      errorResponse: unknown
-    }
-  }
-  'openapi.yaml': {
-    methods: ["GET","HEAD"]
-    pattern: '/swagger.yaml'
-    types: {
-      body: {}
-      paramsTuple: []
-      params: {}
-      query: {}
-      response: unknown
-      errorResponse: unknown
-    }
-  }
   'deteccion.procesar_camara': {
     methods: ["POST"]
     pattern: '/api/detectar-material'

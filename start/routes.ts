@@ -2,8 +2,6 @@ import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 
 
-
-
 // PUNTOS DE RECICLAJE (públicas)
 router.get('/api/puntos-reciclaje', [() => import('#controllers/puntos_reciclajes_controller'), 'index'])
 router.get('/api/puntos-reciclaje/:id', [() => import('#controllers/puntos_reciclajes_controller'), 'show'])
@@ -297,23 +295,8 @@ router.group(() => {
 // SWAGGER / OPENAPI
 
 
-router.get('/swagger', ({ response }) => {
-  return response.redirect('https://petstore.swagger.io/?url=https://backend-rp-arreglado-n8p8.onrender.com/openapi.json')
-})
-
-router.get('/openapi.json', ({ response }) => {
-  return response.json({
-    openapi: '3.0.0',
-    info: {
-      title: 'Recycling Points API',
-      version: '1.0.0',
-    },
-    servers: [
-      { url: 'https://backend-rp-arreglado-n8p8.onrender.com' }
-    ],
-    paths: {}
-  })
-})
+import openapi from '@foadonis/openapi/services/main'
+openapi.registerRoutes('/swagger')
 
 router.post('/api/detectar-material', '#controllers/deteccion_controller.procesarCamara')
 router.post('/api/chat', '#controllers/chat_controller.preguntar')
