@@ -25,7 +25,7 @@ export default class EstadisticasController {
       .join('detalle_entregas', 'entregas.id_entrega', 'detalle_entregas.id_entrega')
       .where('entregas.fecha_entrega', '>=', hace7dias)
       .groupByRaw('DATE(entregas.fecha_entrega)')
-      .selectRaw('DATE(entregas.fecha_entrega) as fecha, SUM(detalle_entregas.peso) as kg')
+      .select(db.raw('DATE(entregas.fecha_entrega) as fecha, SUM(detalle_entregas.peso) as kg'))
       .orderBy('fecha', 'asc')
 
     // Usuarios nuevos vs recurrentes (nuevos = registrados este mes)

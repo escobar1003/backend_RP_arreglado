@@ -24,9 +24,6 @@ export default class DeteccionController {
     await imagenMobile.move(app.tmpPath('uploads'))
     const filePath = `${app.tmpPath('uploads')}/${imagenMobile.fileName}`
 
-    const cleanup = () => {
-      if (fs.existsSync(filePath)) fs.unlinkSync(filePath)
-    }
 
     try {
       // 3. Preparar el formulario

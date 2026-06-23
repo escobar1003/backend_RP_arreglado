@@ -3,7 +3,6 @@ import Aliado from '#models/aliado'
 import PuntoReciclaje from '#models/punto_reciclaje'
 import { crearAliadoValidator, actualizarAliadoValidator } from '#validators/admin/aliado'
 import { ApiBody, ApiResponse, ApiParam } from '@foadonis/openapi/decorators'
-import { appendFileSync } from 'node:fs'
 
 export default class AliadosController {
   async index({ auth, response }: HttpContext) {
