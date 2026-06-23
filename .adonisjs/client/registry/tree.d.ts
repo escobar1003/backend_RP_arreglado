@@ -225,11 +225,6 @@ export interface ApiDefinition {
     actualizarEstado: typeof routes['canjes_encargado.actualizar_estado']
     validar: typeof routes['canjes_encargado.validar']
   }
-  openapi: {
-    html: typeof routes['openapi.html']
-    json: typeof routes['openapi.json']
-    yaml: typeof routes['openapi.yaml']
-  }
   deteccion: {
     procesarCamara: typeof routes['deteccion.procesar_camara']
   }
