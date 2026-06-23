@@ -100,6 +100,16 @@ export interface ApiDefinition {
     update: typeof routes['estados_entregas.update']
     destroy: typeof routes['estados_entregas.destroy']
   }
+  entregas: {
+    index: typeof routes['entregas.index']
+    show: typeof routes['entregas.show']
+    actualizarEstado: typeof routes['entregas.actualizar_estado']
+    store: typeof routes['entregas.store']
+    comprobante: typeof routes['entregas.comprobante']
+  }
+  estadisticas: {
+    index: typeof routes['estadisticas.index']
+  }
   estadosAliados: {
     index: typeof routes['estados_aliados.index']
     show: typeof routes['estados_aliados.show']
@@ -153,13 +163,6 @@ export interface ApiDefinition {
   }
   fotoPerfils: {
     store: typeof routes['foto_perfils.store']
-  }
-  entregas: {
-    index: typeof routes['entregas.index']
-    show: typeof routes['entregas.show']
-    store: typeof routes['entregas.store']
-    actualizarEstado: typeof routes['entregas.actualizar_estado']
-    comprobante: typeof routes['entregas.comprobante']
   }
   canjes: {
     index: typeof routes['canjes.index']

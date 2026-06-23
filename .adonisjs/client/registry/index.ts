@@ -378,6 +378,30 @@ const routes = {
     tokens: [{"old":"/api/admin/estados-entregas/:id","type":0,"val":"api","end":""},{"old":"/api/admin/estados-entregas/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/estados-entregas/:id","type":0,"val":"estados-entregas","end":""},{"old":"/api/admin/estados-entregas/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['estados_entregas.destroy']['types'],
   },
+  'entregas.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/entregas',
+    tokens: [{"old":"/api/admin/entregas","type":0,"val":"api","end":""},{"old":"/api/admin/entregas","type":0,"val":"admin","end":""},{"old":"/api/admin/entregas","type":0,"val":"entregas","end":""}],
+    types: placeholder as Registry['entregas.index']['types'],
+  },
+  'entregas.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/entregas/:id',
+    tokens: [{"old":"/api/admin/entregas/:id","type":0,"val":"api","end":""},{"old":"/api/admin/entregas/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/entregas/:id","type":0,"val":"entregas","end":""},{"old":"/api/admin/entregas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['entregas.show']['types'],
+  },
+  'entregas.actualizar_estado': {
+    methods: ["PUT"],
+    pattern: '/api/admin/entregas/:id/estado',
+    tokens: [{"old":"/api/admin/entregas/:id/estado","type":0,"val":"api","end":""},{"old":"/api/admin/entregas/:id/estado","type":0,"val":"admin","end":""},{"old":"/api/admin/entregas/:id/estado","type":0,"val":"entregas","end":""},{"old":"/api/admin/entregas/:id/estado","type":1,"val":"id","end":""},{"old":"/api/admin/entregas/:id/estado","type":0,"val":"estado","end":""}],
+    types: placeholder as Registry['entregas.actualizar_estado']['types'],
+  },
+  'estadisticas.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/estadisticas',
+    tokens: [{"old":"/api/admin/estadisticas","type":0,"val":"api","end":""},{"old":"/api/admin/estadisticas","type":0,"val":"admin","end":""},{"old":"/api/admin/estadisticas","type":0,"val":"estadisticas","end":""}],
+    types: placeholder as Registry['estadisticas.index']['types'],
+  },
   'estados_aliados.index': {
     methods: ["GET","HEAD"],
     pattern: '/api/admin/estados-aliados',

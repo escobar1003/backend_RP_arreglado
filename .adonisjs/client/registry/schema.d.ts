@@ -751,6 +751,54 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/estados_entregas_controller').default['destroy']>>>
     }
   }
+  'entregas.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/entregas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['index']>>>
+    }
+  }
+  'entregas.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/entregas/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['show']>>>
+    }
+  }
+  'entregas.actualizar_estado': {
+    methods: ["PUT"]
+    pattern: '/api/admin/entregas/:id/estado'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['actualizarEstado']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['actualizarEstado']>>>
+    }
+  }
+  'estadisticas.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/estadisticas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/estadisticas_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/estadisticas_controller').default['index']>>>
+    }
+  }
   'estados_aliados.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/admin/estados-aliados'
