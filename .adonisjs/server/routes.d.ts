@@ -9,16 +9,25 @@ export type ScannedRoutes = {
     'estados_encargados.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'estados_encargados.update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
     'estados_encargados.destroy': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'openapi.html': { paramsTuple?: []; params?: {} }
+    'openapi.json': { paramsTuple?: []; params?: {} }
+    'openapi.yaml': { paramsTuple?: []; params?: {} }
     'deteccion.procesar_camara': { paramsTuple?: []; params?: {} }
     'chat.preguntar': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'estados_encargados.index': { paramsTuple?: []; params?: {} }
     'estados_encargados.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'openapi.html': { paramsTuple?: []; params?: {} }
+    'openapi.json': { paramsTuple?: []; params?: {} }
+    'openapi.yaml': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
     'estados_encargados.index': { paramsTuple?: []; params?: {} }
     'estados_encargados.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'openapi.html': { paramsTuple?: []; params?: {} }
+    'openapi.json': { paramsTuple?: []; params?: {} }
+    'openapi.yaml': { paramsTuple?: []; params?: {} }
   }
   POST: {
     'estados_encargados.store': { paramsTuple?: []; params?: {} }

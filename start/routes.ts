@@ -1,6 +1,9 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
 
+router.get('/', ({ response }) => {
+  return response.ok({ mensaje: 'Backend funcionando correctamente' })
+})
 
 // PUNTOS DE RECICLAJE (públicas)
 router.get('/api/puntos-reciclaje', [() => import('#controllers/puntos_reciclajes_controller'), 'index'])
