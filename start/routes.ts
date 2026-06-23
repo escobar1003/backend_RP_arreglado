@@ -1,11 +1,6 @@
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
-//borre el seed importado porque dificultaba las conexiones
 
-
-
-
-// RUTA PARA ASIGNACIÓN DE PUNTOS (SCRUM-506)
 
 
 
@@ -300,8 +295,25 @@ router.group(() => {
 
 
 // SWAGGER / OPENAPI
-import openapi from '@foadonis/openapi/services/main'
-openapi.registerRoutes('/swagger')
+
+
+router.get('/swagger', ({ response }) => {
+  return response.redirect('https://petstore.swagger.io/?url=https://backend-rp-arreglado-n8p8.onrender.com/openapi.json')
+})
+
+router.get('/openapi.json', ({ response }) => {
+  return response.json({
+    openapi: '3.0.0',
+    info: {
+      title: 'Recycling Points API',
+      version: '1.0.0',
+    },
+    servers: [
+      { url: 'https://backend-rp-arreglado-n8p8.onrender.com' }
+    ],
+    paths: {}
+  })
+})
 
 router.post('/api/detectar-material', '#controllers/deteccion_controller.procesarCamara')
 router.post('/api/chat', '#controllers/chat_controller.preguntar')
