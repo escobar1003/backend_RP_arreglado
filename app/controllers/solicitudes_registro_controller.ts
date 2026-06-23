@@ -2,6 +2,8 @@ import type { HttpContext } from '@adonisjs/core/http'
 import SolicitudRegistro from '#models/solicitud_registro'
 import Usuario from '#models/usuario'
 import Aliado from '#models/aliado'
+import Notificacion from '#models/notificacion'
+import Role from '#models/role'
 import hash from '@adonisjs/core/services/hash'
 import mail from '@adonisjs/mail/services/main'
 import { DateTime } from 'luxon'
@@ -54,6 +56,27 @@ export default class SolicitudesRegistroController {
 
     const aliadoNombre = solicitud.aliado?.nombre ?? 'No especificado'
 
+    // Notificar a todos los superadmins
+    try {
+      const rolSuperadmin = await Role.query().where('nombre', 'superadmin').first()
+      if (rolSuperadmin) {
+        const superadmins = await Usuario.query().where('idRol', rolSuperadmin.idRol)
+        const notificaciones = superadmins.map(admin => ({
+          idUsuario: admin.idUsuario as number,
+          titulo: `Nueva solicitud de ${datos.rolSolicitado}`,
+          mensaje: `${datos.nombre} solicita ser ${datos.rolSolicitado === 'admin' ? 'administrador' : 'encargado'}`,
+          tipo: 'nueva_solicitud',
+          leida: false,
+          idReferencia: solicitud.idSolicitud as number,
+        }))
+        if (notificaciones.length > 0) {
+          await Notificacion.createMany(notificaciones)
+        }
+      }
+    } catch (err) {
+      console.error('Error al notificar superadmins:', err)
+    }
+
     await mail.send((message) => {
       message
         .to('recyclingpointss@gmail.com')
@@ -77,6 +100,11 @@ export default class SolicitudesRegistroController {
     return response.created({
       mensaje: 'Solicitud enviada correctamente. Recibirás una respuesta al correo una vez sea revisada.',
     })
+  }
+
+  async pendientesCount({ response }: HttpContext) {
+    const count = await SolicitudRegistro.query().where('estado', 'pendiente').count('* as total')
+    return response.ok({ pendientes: Number(count[0].$extras.total) })
   }
 
   async listar({ auth, response }: HttpContext) {
@@ -115,6 +143,9 @@ export default class SolicitudesRegistroController {
 
     const idRol = solicitud.rolSolicitado === 'admin' ? 1 : 4
 
+    const passwordTemporal = Math.random().toString(36).slice(-8) + 'A1*'
+    const hashedPassword = await hash.make(passwordTemporal)
+
     const aliado = solicitud.idAliado ? await Aliado.find(solicitud.idAliado) : null
 
     const nuevoUsuario = await Usuario.create({
@@ -122,7 +153,7 @@ export default class SolicitudesRegistroController {
       idEstadoUsuario: 1,
       nombre: solicitud.nombre,
       correo: solicitud.correo,
-      password: solicitud.passwordHash,
+      password: hashedPassword,
       telefono: solicitud.telefono ?? null,
       idAliado: solicitud.idAliado || null,
       zona: aliado?.zona || null,
@@ -143,15 +174,17 @@ export default class SolicitudesRegistroController {
           <h2>¡Solicitud aprobada!</h2>
           <p>Hola ${solicitud.nombre},</p>
           <p>Tu solicitud para ser <strong>${rolLabel}</strong> ha sido <strong style="color:green">aprobada</strong>.</p>
-          <p>Ya puedes iniciar sesión con tu correo y la contraseña que registraste.</p>
+          <p>Ya puedes iniciar sesión con las siguientes credenciales:</p>
           <p><strong>Correo:</strong> ${solicitud.correo}</p>
+          <p><strong>Contraseña temporal:</strong> ${passwordTemporal}</p>
+          <p>Te recomendamos cambiar tu contraseña después de iniciar sesión.</p>
           <br/>
           <p>Saludos,<br>Equipo Recycling Points</p>
         `)
     }).catch(err => console.error('Error al enviar correo de aprobación:', err))
 
     return response.ok({
-      mensaje: `Solicitud aprobada. ${rolLabel} creado correctamente.`,
+      mensaje: `Solicitud aprobada. Se enviaron las credenciales al correo de ${solicitud.nombre}.`,
       usuario: nuevoUsuario,
     })
   }

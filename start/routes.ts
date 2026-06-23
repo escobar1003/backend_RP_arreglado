@@ -42,6 +42,7 @@ router.group(() => {
 
   // Solicitudes de registro
   router.get('/solicitudes-registro', [() => import('#controllers/solicitudes_registro_controller'), 'listar'])
+  router.get('/solicitudes-registro/pendientes-count', [() => import('#controllers/solicitudes_registro_controller'), 'pendientesCount'])
   router.put('/solicitudes-registro/:id/aprobar', [() => import('#controllers/solicitudes_registro_controller'), 'aprobar'])
   router.put('/solicitudes-registro/:id/rechazar', [() => import('#controllers/solicitudes_registro_controller'), 'rechazar'])
 

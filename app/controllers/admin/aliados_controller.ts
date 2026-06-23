@@ -81,16 +81,17 @@ export default class AliadosController {
   async update({ params, request, response }: HttpContext) {
     const aliado = await Aliado.findOrFail(params.id)
     const datos = await request.validateUsing(actualizarAliadoValidator)
-    const { latitud, longitud } = datos
-    const { latitud: _l, longitud: _ll, ...datosAliado } = datos
+    const { latitud, longitud, ubicacionDireccion } = datos
+    const { latitud: _l, longitud: _ll, ubicacionDireccion: _ud, ...datosAliado } = datos
     aliado.merge(datosAliado)
     await aliado.save()
-    if (latitud !== undefined || longitud !== undefined) {
+    if (latitud !== undefined || longitud !== undefined || ubicacionDireccion !== undefined) {
       await aliado.load('puntosReciclaje')
       const punto = aliado.puntosReciclaje[0]
       if (punto) {
         punto.latitud = latitud ?? punto.latitud
         punto.longitud = longitud ?? punto.longitud
+        punto.direccion = ubicacionDireccion ?? punto.direccion
         await punto.save()
       }
     }

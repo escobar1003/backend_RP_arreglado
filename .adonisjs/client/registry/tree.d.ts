@@ -31,6 +31,7 @@ export interface ApiDefinition {
   solicitudesRegistro: {
     solicitar: typeof routes['solicitudes_registro.solicitar']
     listar: typeof routes['solicitudes_registro.listar']
+    pendientesCount: typeof routes['solicitudes_registro.pendientes_count']
     aprobar: typeof routes['solicitudes_registro.aprobar']
     rechazar: typeof routes['solicitudes_registro.rechazar']
   }

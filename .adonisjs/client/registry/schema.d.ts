@@ -151,6 +151,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['listar']>>>
     }
   }
+  'solicitudes_registro.pendientes_count': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/solicitudes-registro/pendientes-count'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['pendientesCount']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['pendientesCount']>>>
+    }
+  }
   'solicitudes_registro.aprobar': {
     methods: ["PUT"]
     pattern: '/api/admin/solicitudes-registro/:id/aprobar'

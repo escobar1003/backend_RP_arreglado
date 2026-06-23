@@ -78,6 +78,12 @@ const routes = {
     tokens: [{"old":"/api/admin/solicitudes-registro","type":0,"val":"api","end":""},{"old":"/api/admin/solicitudes-registro","type":0,"val":"admin","end":""},{"old":"/api/admin/solicitudes-registro","type":0,"val":"solicitudes-registro","end":""}],
     types: placeholder as Registry['solicitudes_registro.listar']['types'],
   },
+  'solicitudes_registro.pendientes_count': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/solicitudes-registro/pendientes-count',
+    tokens: [{"old":"/api/admin/solicitudes-registro/pendientes-count","type":0,"val":"api","end":""},{"old":"/api/admin/solicitudes-registro/pendientes-count","type":0,"val":"admin","end":""},{"old":"/api/admin/solicitudes-registro/pendientes-count","type":0,"val":"solicitudes-registro","end":""},{"old":"/api/admin/solicitudes-registro/pendientes-count","type":0,"val":"pendientes-count","end":""}],
+    types: placeholder as Registry['solicitudes_registro.pendientes_count']['types'],
+  },
   'solicitudes_registro.aprobar': {
     methods: ["PUT"],
     pattern: '/api/admin/solicitudes-registro/:id/aprobar',

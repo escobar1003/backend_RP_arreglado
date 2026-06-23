@@ -9,7 +9,7 @@ export const crearRecompensaValidator = vine.compile(
     puntosRequeridos: vine.number().positive(),
     fechaInicio: vine.string().optional(),
     fechaFin: vine.string().optional(),
-    stock: vine.number().positive().optional(),
+    stock: vine.number().min(0).optional(),
   })
 )
 
@@ -23,6 +23,6 @@ export const actualizarRecompensaValidator = vine.compile(
     puntosRequeridos: vine.number().positive().optional(),
     fechaInicio: vine.string().optional(),
     fechaFin: vine.string().optional(),
-    stock: vine.number().positive().optional(),
+    stock: vine.number().min(0).optional(),
   })
 )
