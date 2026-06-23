@@ -24,6 +24,12 @@ const routes = {
     tokens: [{"old":"/api/chatbot","type":0,"val":"api","end":""},{"old":"/api/chatbot","type":0,"val":"chatbot","end":""}],
     types: placeholder as Registry['chatbot.preguntar']['types'],
   },
+  'aliados.lista_publica': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/aliados-lista',
+    tokens: [{"old":"/api/aliados-lista","type":0,"val":"api","end":""},{"old":"/api/aliados-lista","type":0,"val":"aliados-lista","end":""}],
+    types: placeholder as Registry['aliados.lista_publica']['types'],
+  },
   'login.iniciar_sesion': {
     methods: ["POST"],
     pattern: '/api/auth/iniciar-sesion',
@@ -35,6 +41,12 @@ const routes = {
     pattern: '/api/auth/registrarse',
     tokens: [{"old":"/api/auth/registrarse","type":0,"val":"api","end":""},{"old":"/api/auth/registrarse","type":0,"val":"auth","end":""},{"old":"/api/auth/registrarse","type":0,"val":"registrarse","end":""}],
     types: placeholder as Registry['registros.registrarse']['types'],
+  },
+  'solicitudes_registro.solicitar': {
+    methods: ["POST"],
+    pattern: '/api/auth/solicitar-registro',
+    tokens: [{"old":"/api/auth/solicitar-registro","type":0,"val":"api","end":""},{"old":"/api/auth/solicitar-registro","type":0,"val":"auth","end":""},{"old":"/api/auth/solicitar-registro","type":0,"val":"solicitar-registro","end":""}],
+    types: placeholder as Registry['solicitudes_registro.solicitar']['types'],
   },
   'recuperar_passwords.solicitar_codigo': {
     methods: ["POST"],
@@ -59,6 +71,24 @@ const routes = {
     pattern: '/api/auth/cerrar-sesion',
     tokens: [{"old":"/api/auth/cerrar-sesion","type":0,"val":"api","end":""},{"old":"/api/auth/cerrar-sesion","type":0,"val":"auth","end":""},{"old":"/api/auth/cerrar-sesion","type":0,"val":"cerrar-sesion","end":""}],
     types: placeholder as Registry['login.cerrar_sesion']['types'],
+  },
+  'solicitudes_registro.listar': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/solicitudes-registro',
+    tokens: [{"old":"/api/admin/solicitudes-registro","type":0,"val":"api","end":""},{"old":"/api/admin/solicitudes-registro","type":0,"val":"admin","end":""},{"old":"/api/admin/solicitudes-registro","type":0,"val":"solicitudes-registro","end":""}],
+    types: placeholder as Registry['solicitudes_registro.listar']['types'],
+  },
+  'solicitudes_registro.aprobar': {
+    methods: ["PUT"],
+    pattern: '/api/admin/solicitudes-registro/:id/aprobar',
+    tokens: [{"old":"/api/admin/solicitudes-registro/:id/aprobar","type":0,"val":"api","end":""},{"old":"/api/admin/solicitudes-registro/:id/aprobar","type":0,"val":"admin","end":""},{"old":"/api/admin/solicitudes-registro/:id/aprobar","type":0,"val":"solicitudes-registro","end":""},{"old":"/api/admin/solicitudes-registro/:id/aprobar","type":1,"val":"id","end":""},{"old":"/api/admin/solicitudes-registro/:id/aprobar","type":0,"val":"aprobar","end":""}],
+    types: placeholder as Registry['solicitudes_registro.aprobar']['types'],
+  },
+  'solicitudes_registro.rechazar': {
+    methods: ["PUT"],
+    pattern: '/api/admin/solicitudes-registro/:id/rechazar',
+    tokens: [{"old":"/api/admin/solicitudes-registro/:id/rechazar","type":0,"val":"api","end":""},{"old":"/api/admin/solicitudes-registro/:id/rechazar","type":0,"val":"admin","end":""},{"old":"/api/admin/solicitudes-registro/:id/rechazar","type":0,"val":"solicitudes-registro","end":""},{"old":"/api/admin/solicitudes-registro/:id/rechazar","type":1,"val":"id","end":""},{"old":"/api/admin/solicitudes-registro/:id/rechazar","type":0,"val":"rechazar","end":""}],
+    types: placeholder as Registry['solicitudes_registro.rechazar']['types'],
   },
   'administradores.index': {
     methods: ["GET","HEAD"],
@@ -378,6 +408,30 @@ const routes = {
     tokens: [{"old":"/api/admin/estados-entregas/:id","type":0,"val":"api","end":""},{"old":"/api/admin/estados-entregas/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/estados-entregas/:id","type":0,"val":"estados-entregas","end":""},{"old":"/api/admin/estados-entregas/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['estados_entregas.destroy']['types'],
   },
+  'entregas.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/entregas',
+    tokens: [{"old":"/api/admin/entregas","type":0,"val":"api","end":""},{"old":"/api/admin/entregas","type":0,"val":"admin","end":""},{"old":"/api/admin/entregas","type":0,"val":"entregas","end":""}],
+    types: placeholder as Registry['entregas.index']['types'],
+  },
+  'entregas.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/entregas/:id',
+    tokens: [{"old":"/api/admin/entregas/:id","type":0,"val":"api","end":""},{"old":"/api/admin/entregas/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/entregas/:id","type":0,"val":"entregas","end":""},{"old":"/api/admin/entregas/:id","type":1,"val":"id","end":""}],
+    types: placeholder as Registry['entregas.show']['types'],
+  },
+  'entregas.actualizar_estado': {
+    methods: ["PUT"],
+    pattern: '/api/admin/entregas/:id/estado',
+    tokens: [{"old":"/api/admin/entregas/:id/estado","type":0,"val":"api","end":""},{"old":"/api/admin/entregas/:id/estado","type":0,"val":"admin","end":""},{"old":"/api/admin/entregas/:id/estado","type":0,"val":"entregas","end":""},{"old":"/api/admin/entregas/:id/estado","type":1,"val":"id","end":""},{"old":"/api/admin/entregas/:id/estado","type":0,"val":"estado","end":""}],
+    types: placeholder as Registry['entregas.actualizar_estado']['types'],
+  },
+  'estadisticas.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/estadisticas',
+    tokens: [{"old":"/api/admin/estadisticas","type":0,"val":"api","end":""},{"old":"/api/admin/estadisticas","type":0,"val":"admin","end":""},{"old":"/api/admin/estadisticas","type":0,"val":"estadisticas","end":""}],
+    types: placeholder as Registry['estadisticas.index']['types'],
+  },
   'estados_aliados.index': {
     methods: ["GET","HEAD"],
     pattern: '/api/admin/estados-aliados',
@@ -527,6 +581,12 @@ const routes = {
     pattern: '/api/admin/tipos-recompensas/:id',
     tokens: [{"old":"/api/admin/tipos-recompensas/:id","type":0,"val":"api","end":""},{"old":"/api/admin/tipos-recompensas/:id","type":0,"val":"admin","end":""},{"old":"/api/admin/tipos-recompensas/:id","type":0,"val":"tipos-recompensas","end":""},{"old":"/api/admin/tipos-recompensas/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['tipos_recompensas.destroy']['types'],
+  },
+  'zonas.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/admin/zonas',
+    tokens: [{"old":"/api/admin/zonas","type":0,"val":"api","end":""},{"old":"/api/admin/zonas","type":0,"val":"admin","end":""},{"old":"/api/admin/zonas","type":0,"val":"zonas","end":""}],
+    types: placeholder as Registry['zonas.index']['types'],
   },
   'estados_encargados.index': {
     methods: ["GET","HEAD"],

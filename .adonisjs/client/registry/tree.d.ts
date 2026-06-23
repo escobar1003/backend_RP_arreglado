@@ -11,12 +11,28 @@ export interface ApiDefinition {
   chatbot: {
     preguntar: typeof routes['chatbot.preguntar']
   }
+  aliados: {
+    listaPublica: typeof routes['aliados.lista_publica']
+    index: typeof routes['aliados.index']
+    show: typeof routes['aliados.show']
+    store: typeof routes['aliados.store']
+    update: typeof routes['aliados.update']
+    destroy: typeof routes['aliados.destroy']
+    materiales: typeof routes['aliados.materiales']
+    sincronizarMateriales: typeof routes['aliados.sincronizar_materiales']
+  }
   login: {
     iniciarSesion: typeof routes['login.iniciar_sesion']
     cerrarSesion: typeof routes['login.cerrar_sesion']
   }
   registros: {
     registrarse: typeof routes['registros.registrarse']
+  }
+  solicitudesRegistro: {
+    solicitar: typeof routes['solicitudes_registro.solicitar']
+    listar: typeof routes['solicitudes_registro.listar']
+    aprobar: typeof routes['solicitudes_registro.aprobar']
+    rechazar: typeof routes['solicitudes_registro.rechazar']
   }
   recuperarPasswords: {
     solicitarCodigo: typeof routes['recuperar_passwords.solicitar_codigo']
@@ -43,15 +59,6 @@ export interface ApiDefinition {
     store: typeof routes['usuarios.store']
     update: typeof routes['usuarios.update']
     destroy: typeof routes['usuarios.destroy']
-  }
-  aliados: {
-    index: typeof routes['aliados.index']
-    show: typeof routes['aliados.show']
-    store: typeof routes['aliados.store']
-    update: typeof routes['aliados.update']
-    destroy: typeof routes['aliados.destroy']
-    materiales: typeof routes['aliados.materiales']
-    sincronizarMateriales: typeof routes['aliados.sincronizar_materiales']
   }
   materiales: {
     index: typeof routes['materiales.index']
@@ -100,6 +107,16 @@ export interface ApiDefinition {
     update: typeof routes['estados_entregas.update']
     destroy: typeof routes['estados_entregas.destroy']
   }
+  entregas: {
+    index: typeof routes['entregas.index']
+    show: typeof routes['entregas.show']
+    actualizarEstado: typeof routes['entregas.actualizar_estado']
+    store: typeof routes['entregas.store']
+    comprobante: typeof routes['entregas.comprobante']
+  }
+  estadisticas: {
+    index: typeof routes['estadisticas.index']
+  }
   estadosAliados: {
     index: typeof routes['estados_aliados.index']
     show: typeof routes['estados_aliados.show']
@@ -135,6 +152,9 @@ export interface ApiDefinition {
     update: typeof routes['tipos_recompensas.update']
     destroy: typeof routes['tipos_recompensas.destroy']
   }
+  zonas: {
+    index: typeof routes['zonas.index']
+  }
   estadosEncargados: {
     index: typeof routes['estados_encargados.index']
     store: typeof routes['estados_encargados.store']
@@ -153,13 +173,6 @@ export interface ApiDefinition {
   }
   fotoPerfils: {
     store: typeof routes['foto_perfils.store']
-  }
-  entregas: {
-    index: typeof routes['entregas.index']
-    show: typeof routes['entregas.show']
-    store: typeof routes['entregas.store']
-    actualizarEstado: typeof routes['entregas.actualizar_estado']
-    comprobante: typeof routes['entregas.comprobante']
   }
   canjes: {
     index: typeof routes['canjes.index']

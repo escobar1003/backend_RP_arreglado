@@ -17,10 +17,14 @@ router.get('/api/puntos-reciclaje/:id', [() => import('#controllers/puntos_recic
 // CHATBOT (público)  
 router.post('/api/chatbot', [() => import('#controllers/chatbot_controller'), 'preguntar'])
 
+// ALIADOS (público - para formulario de registro)
+router.get('/api/aliados-lista', [() => import('#controllers/admin/aliados_controller'), 'listaPublica'])
+
 // AUTH (públicas)
 router.group(() => {
   router.post('/iniciar-sesion', [() => import('#controllers/auth/login_controller'), 'iniciarSesion'])
   router.post('/registrarse', [() => import('#controllers/auth/registros_controller'), 'registrarse'])
+  router.post('/solicitar-registro', [() => import('#controllers/solicitudes_registro_controller'), 'solicitar'])
   router.post('/recuperar-password/solicitar', [() => import('#controllers/auth/recuperar_passwords_controller'), 'solicitarCodigo'])
   router.post('/recuperar-password/verificar', [() => import('#controllers/auth/recuperar_passwords_controller'), 'verificarCodigo'])
   router.post('/recuperar-password/restablecer', [() => import('#controllers/auth/recuperar_passwords_controller'), 'restablecerPassword'])
@@ -35,6 +39,11 @@ router.group(() => {
 
 // ADMIN
 router.group(() => {
+
+  // Solicitudes de registro
+  router.get('/solicitudes-registro', [() => import('#controllers/solicitudes_registro_controller'), 'listar'])
+  router.put('/solicitudes-registro/:id/aprobar', [() => import('#controllers/solicitudes_registro_controller'), 'aprobar'])
+  router.put('/solicitudes-registro/:id/rechazar', [() => import('#controllers/solicitudes_registro_controller'), 'rechazar'])
 
   // Administradores
   router.get('/admins', [() => import('#controllers/admin/administradores_controller'), 'index'])

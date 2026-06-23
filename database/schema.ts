@@ -8,7 +8,7 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class AliadoSchema extends BaseModel {
-  static $columns = ['correo', 'createdAt', 'descripcion', 'direccion', 'idAliado', 'idEstadoAliado', 'nombre', 'telefono', 'tipoNegocio', 'updatedAt'] as const
+  static $columns = ['correo', 'createdAt', 'descripcion', 'direccion', 'idAliado', 'idEstadoAliado', 'nombre', 'telefono', 'tipoNegocio', 'updatedAt', 'zona'] as const
   $columns = AliadoSchema.$columns
   @column()
   declare correo: string | null
@@ -30,6 +30,8 @@ export class AliadoSchema extends BaseModel {
   declare tipoNegocio: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+  @column()
+  declare zona: string | null
 }
 
 export class ApiTokenSchema extends BaseModel {
@@ -407,8 +409,10 @@ export class ReservaImageneSchema extends BaseModel {
 }
 
 export class ReservaSchema extends BaseModel {
-  static $columns = ['createdAt', 'estado', 'fecha', 'hora', 'idPunto', 'idReserva', 'idUsuario', 'notas', 'updatedAt'] as const
+  static $columns = ['aiResultado', 'createdAt', 'estado', 'fecha', 'hora', 'idPunto', 'idReserva', 'idUsuario', 'imagen', 'notas', 'updatedAt'] as const
   $columns = ReservaSchema.$columns
+  @column()
+  declare aiResultado: string | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
   @column()
@@ -424,6 +428,8 @@ export class ReservaSchema extends BaseModel {
   @column()
   declare idUsuario: number
   @column()
+  declare imagen: string | null
+  @column()
   declare notas: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
@@ -438,6 +444,33 @@ export class RoleSchema extends BaseModel {
   declare idRol: number
   @column()
   declare nombre: string
+}
+
+export class SolicitudesRegistroSchema extends BaseModel {
+  static $columns = ['correo', 'createdAt', 'estado', 'idAliado', 'idSolicitud', 'mensaje', 'nombre', 'passwordHash', 'rolSolicitado', 'telefono', 'updatedAt'] as const
+  $columns = SolicitudesRegistroSchema.$columns
+  @column()
+  declare correo: string
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare estado: string | null
+  @column()
+  declare idAliado: number | null
+  @column({ isPrimary: true })
+  declare idSolicitud: number
+  @column()
+  declare mensaje: string | null
+  @column()
+  declare nombre: string
+  @column()
+  declare passwordHash: string
+  @column()
+  declare rolSolicitado: string
+  @column()
+  declare telefono: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
 }
 
 export class TiposRecompensaSchema extends BaseModel {
@@ -471,7 +504,7 @@ export class TransaccionPuntoSchema extends BaseModel {
 }
 
 export class UsuarioSchema extends BaseModel {
-  static $columns = ['apellido', 'codigoExpiracion', 'codigoRecuperacion', 'correo', 'createdAt', 'fechaRegistro', 'idAliado', 'idEstadoUsuario', 'idRol', 'idUsuario', 'imagen', 'nombre', 'password', 'puntosTotales', 'telefono', 'updatedAt'] as const
+  static $columns = ['apellido', 'codigoExpiracion', 'codigoRecuperacion', 'correo', 'createdAt', 'fechaRegistro', 'idAliado', 'idEstadoUsuario', 'idRol', 'idUsuario', 'imagen', 'nombre', 'password', 'puntosTotales', 'telefono', 'updatedAt', 'zona'] as const
   $columns = UsuarioSchema.$columns
   @column()
   declare apellido: string | null
@@ -503,6 +536,21 @@ export class UsuarioSchema extends BaseModel {
   declare puntosTotales: number | null
   @column()
   declare telefono: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+  @column()
+  declare zona: string | null
+}
+
+export class ZonaSchema extends BaseModel {
+  static $columns = ['createdAt', 'idZona', 'nombre', 'updatedAt'] as const
+  $columns = ZonaSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare idZona: number
+  @column()
+  declare nombre: string
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 }

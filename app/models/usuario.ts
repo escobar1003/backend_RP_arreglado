@@ -82,6 +82,9 @@ export default class Usuario extends compose(BaseModel, AuthFinder) {
   declare estadoUsuario: BelongsTo<typeof EstadoUsuario>
 
   @column()
+  declare zona: string | null
+
+  @column()
   declare idAliado: number | null
 
   @belongsTo(() => Aliado, { foreignKey: 'idAliado' })

@@ -66,6 +66,7 @@ export default class EncargadosController {
         password: hashedPassword,
         nombre: datos.nombre || encargado.nombre,
         telefono: datos.telefono || encargado.telefono,
+        zona: datos.zona || null,
         updated_at: new Date(),
       })
       encargado.idRol = 4
@@ -81,6 +82,7 @@ export default class EncargadosController {
         password: hashedPassword,
         telefono: datos.telefono ?? null,
         id_aliado: idAliado,
+        zona: datos.zona || null,
         fecha_registro: new Date(),
         created_at: new Date(),
         updated_at: new Date(),
@@ -155,7 +157,7 @@ export default class EncargadosController {
     }
 
     const encargado = await query.firstOrFail()
-    const datos = request.only(['nombre', 'telefono', 'idEstadoUsuario', 'idAliado', 'correo'])
+    const datos = request.only(['nombre', 'telefono', 'idEstadoUsuario', 'idAliado', 'correo', 'zona'])
     encargado.merge(datos)
     if (request.input('password')) {
       encargado.password = await hash.make(request.input('password'))

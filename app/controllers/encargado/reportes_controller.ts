@@ -23,8 +23,8 @@ export default class ReportesController {
       desde = hasta.startOf('month')
     }
 
-    const desdeStr = desde.toISODate()
-    const hastaStr = hasta.toISODate()
+    const desdeStr = desde.toISODate()!
+    const hastaStr = hasta.toISODate()!
     const idPunto = punto.idPunto
 
     // KPIs principales
@@ -63,7 +63,7 @@ export default class ReportesController {
       .where('entregas.id_punto', idPunto)
       .where('entregas.fecha_entrega', '>=', DateTime.now().minus({ months: 5 }).toISODate())
       .groupByRaw('DATE_FORMAT(entregas.fecha_entrega, "%Y-%m")')
-      .selectRaw('DATE_FORMAT(entregas.fecha_entrega, "%b") as mes, SUM(detalle_entregas.peso) as kg')
+      .select(db.raw('DATE_FORMAT(entregas.fecha_entrega, "%b") as mes, SUM(detalle_entregas.peso) as kg'))
       .orderByRaw('MIN(entregas.fecha_entrega) asc')
 
     // Canjes por recompensa

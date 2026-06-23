@@ -3,7 +3,6 @@ import Aliado from '#models/aliado'
 import PuntoReciclaje from '#models/punto_reciclaje'
 import { crearAliadoValidator, actualizarAliadoValidator } from '#validators/admin/aliado'
 import { ApiBody, ApiResponse, ApiParam } from '@foadonis/openapi/decorators'
-import { appendFileSync } from 'node:fs'
 
 export default class AliadosController {
   async index({ auth, response }: HttpContext) {
@@ -137,5 +136,12 @@ export default class AliadosController {
     if (!punto) return response.notFound({ mensaje: 'Punto de reciclaje no encontrado' })
     await punto.related('materiales').sync(materialIds ?? [])
     return response.ok({ mensaje: 'Materiales sincronizados correctamente' })
+  }
+
+  async listaPublica({ response }: HttpContext) {
+    const aliados = await Aliado.query()
+      .preload('estadoAliado')
+      .orderBy('nombre', 'asc')
+    return response.ok({ aliados })
   }
 }

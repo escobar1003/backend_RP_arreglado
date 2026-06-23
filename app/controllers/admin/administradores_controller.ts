@@ -19,7 +19,7 @@ export default class AdministradoresController {
   }
 
   async store({ auth, request, response }: HttpContext) {
-    const datos = request.only(['nombre', 'correo', 'telefono', 'idAliado'])
+    const datos = request.only(['nombre', 'correo', 'telefono', 'zona', 'idAliado'])
     const usuario = auth.user!
     await usuario.load('rol')
 
@@ -37,6 +37,7 @@ export default class AdministradoresController {
       correo: datos.correo,
       password: passwordTemporal,
       telefono: datos.telefono ?? null,
+      zona: datos.zona || null,
       idAliado: datos.idAliado ?? (usuario.rol.nombre === 'admin' ? usuario.idAliado : null),
       fechaRegistro: DateTime.now(),
     })
@@ -71,7 +72,7 @@ export default class AdministradoresController {
     }
 
     const admin = await query.firstOrFail()
-    const datos = request.only(['nombre', 'telefono', 'imagen', 'idEstadoUsuario', 'correo', 'idAliado'])
+    const datos = request.only(['nombre', 'telefono', 'imagen', 'idEstadoUsuario', 'correo', 'idAliado', 'zona'])
     admin.merge(datos)
     await admin.save()
     return response.ok({ mensaje: 'Administrador actualizado correctamente', admin })

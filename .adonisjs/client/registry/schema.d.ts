@@ -43,6 +43,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/chatbot_controller').default['preguntar']>>>
     }
   }
+  'aliados.lista_publica': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/aliados-lista'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/aliados_controller').default['listaPublica']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/aliados_controller').default['listaPublica']>>>
+    }
+  }
   'login.iniciar_sesion': {
     methods: ["POST"]
     pattern: '/api/auth/iniciar-sesion'
@@ -65,6 +77,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/registros_controller').default['registrarse']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/registros_controller').default['registrarse']>>>
+    }
+  }
+  'solicitudes_registro.solicitar': {
+    methods: ["POST"]
+    pattern: '/api/auth/solicitar-registro'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['solicitar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['solicitar']>>>
     }
   }
   'recuperar_passwords.solicitar_codigo': {
@@ -113,6 +137,42 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/login_controller').default['cerrarSesion']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/login_controller').default['cerrarSesion']>>>
+    }
+  }
+  'solicitudes_registro.listar': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/solicitudes-registro'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['listar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['listar']>>>
+    }
+  }
+  'solicitudes_registro.aprobar': {
+    methods: ["PUT"]
+    pattern: '/api/admin/solicitudes-registro/:id/aprobar'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['aprobar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['aprobar']>>>
+    }
+  }
+  'solicitudes_registro.rechazar': {
+    methods: ["PUT"]
+    pattern: '/api/admin/solicitudes-registro/:id/rechazar'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['rechazar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['rechazar']>>>
     }
   }
   'administradores.index': {
@@ -751,6 +811,54 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/estados_entregas_controller').default['destroy']>>>
     }
   }
+  'entregas.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/entregas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['index']>>>
+    }
+  }
+  'entregas.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/entregas/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['show']>>>
+    }
+  }
+  'entregas.actualizar_estado': {
+    methods: ["PUT"]
+    pattern: '/api/admin/entregas/:id/estado'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['actualizarEstado']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/entregas_controller').default['actualizarEstado']>>>
+    }
+  }
+  'estadisticas.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/estadisticas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/estadisticas_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/estadisticas_controller').default['index']>>>
+    }
+  }
   'estados_aliados.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/admin/estados-aliados'
@@ -1049,6 +1157,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/tipos_recompensas_controller').default['destroy']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/tipos_recompensas_controller').default['destroy']>>>
+    }
+  }
+  'zonas.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/zonas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/zonas_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/zonas_controller').default['index']>>>
     }
   }
   'estados_encargados.index': {
