@@ -8,23 +8,32 @@ app.ready(() => {
 
   io.use((socket, next) => {
     const userId = socket.handshake.auth?.userId
+    const role = socket.handshake.auth?.role
 
-    if (!userId) {
-      return next(new Error('userId requerido'))
+    if (!userId || !role) {
+      return next(new Error('userId y role requeridos'))
     }
 
     socket.data.userId = userId
-    socket.data.role = 'encargado'
+    socket.data.role = role
     next()
   })
 
   io.on('connection', (socket) => {
     const userId = socket.data.userId
-    socket.join(`encargado_${userId}`)
-    console.log(`✅ Encargado ${userId} conectado — room: encargado_${userId}`)
+    const role = socket.data.role
+
+    if (role === 'encargado') {
+      socket.join(`encargado_${userId}`)
+      console.log(`✅ Encargado ${userId} conectado — room: encargado_${userId}`)
+    } else if (role === 'usuario') {
+      socket.join(`usuario_${userId}`)
+      console.log(`✅ Usuario ${userId} conectado — room: usuario_${userId}`)
+    }
 
     socket.on('disconnect', () => {
-      console.log(`❌ Encargado ${userId} desconectado`)
+      console.log(`❌ ${role} ${userId} desconectado`)
     })
   })
 })
+
