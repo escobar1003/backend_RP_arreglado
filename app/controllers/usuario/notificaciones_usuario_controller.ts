@@ -47,3 +47,4 @@ export default class NotificacionesUsuarioController {
     return response.ok({ mensaje: 'Todas las notificaciones marcadas como leídas' })
   }
 }
+//para consultar notiicaciones desde la app

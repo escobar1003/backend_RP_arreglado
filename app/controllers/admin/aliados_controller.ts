@@ -62,12 +62,13 @@ export default class AliadosController {
     const datos = await request.validateUsing(crearAliadoValidator)
     console.log('=== DATOS VALIDADOS ===', datos)
 
-    const { latitud, longitud, ubicacionDireccion, ...datosSinCoordenadas } = datos as any
+    const { latitud, longitud, ubicacionDireccion, materiales, ...datosSinCoordenadas } = datos as any
     console.log('=== COORDENADAS ===', { latitud, longitud, ubicacionDireccion })
 
     const aliado = await Aliado.create({ ...datosSinCoordenadas, idEstadoAliado: 1 })
 
-    await PuntoReciclaje.create({
+    const punto = await PuntoReciclaje.create({
+
       idAliado: aliado.idAliado,
       idEstadoPunto: 1,
       nombre: `Punto principal - ${aliado.nombre}`,
@@ -75,6 +76,10 @@ export default class AliadosController {
       latitud: latitud ?? null,
       longitud: longitud ?? null,
     })
+
+    if (materiales && materiales.length > 0) {
+      await punto.related('materiales').sync(materiales)
+    }
 
     return response.created({ mensaje: 'Aliado creado correctamente', aliado })
   }

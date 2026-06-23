@@ -25,3 +25,4 @@ class WsService { //Esta clase concentra toda la lógica relacionada con los Web
 }
 
 export default new WsService()
+//Exporta una instancia de la clase WsService para que pueda ser utilizada en otras partes de la aplicación.
