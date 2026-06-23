@@ -179,5 +179,3 @@ export default class ReservasUsuarioController {
     return response.ok({ mensaje: 'Reserva cancelada correctamente' })
   }
 }
-
-
