@@ -39,9 +39,9 @@ export default class ReportesController {
     const ptsResult = await db.from('movimientos_puntos')
       .join('entregas', 'movimientos_puntos.id_entrega', 'entregas.id_entrega')
       .where('entregas.id_punto', idPunto)
-      .where('movimientos_puntos.tipo', 'suma')
+      .where('movimientos_puntos.tipo_movimiento', 'ganados')
       .whereBetween('entregas.fecha_entrega', [desdeStr, hastaStr])
-      .sum('movimientos_puntos.cantidad as total')
+      .sum('movimientos_puntos.puntos as total')
       .first()
 
     const canjesResult = await db.from('canjes')
@@ -103,9 +103,9 @@ export default class ReportesController {
     const totalCanjeados = await db.from('movimientos_puntos')
       .join('entregas', 'movimientos_puntos.id_entrega', 'entregas.id_entrega')
       .where('entregas.id_punto', idPunto)
-      .where('movimientos_puntos.tipo', 'resta')
+      .where('movimientos_puntos.tipo_movimiento', 'descontados')
       .whereBetween('entregas.fecha_entrega', [desdeStr, hastaStr])
-      .sum('movimientos_puntos.cantidad as total')
+      .sum('movimientos_puntos.puntos as total')
       .first()
 
     const canjeados = Number(totalCanjeados?.total ?? 0)
