@@ -18,8 +18,8 @@ const dbConfig = defineConfig({
       pool: {
         min: 1,
         max: 2,
-        acquireTimeoutMillis: 10000,
-        idleTimeoutMillis: 5000,
+        acquireTimeoutMillis: 30000,
+        idleTimeoutMillis: 3000,
         reapIntervalMillis: 1000,
         afterCreate: (conn: any, done: any) => {
           conn.query('SELECT 1', (err: any) => {
