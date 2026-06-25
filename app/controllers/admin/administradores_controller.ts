@@ -44,7 +44,6 @@ export default class AdministradoresController {
     await mail.send((message) => {
       message
         .to(datos.correo)
-        .from(process.env.SMTP_USERNAME!)
         .subject('Recycling Points - Credenciales de administrador')
         .html(`
           <h2>Hola ${datos.nombre},</h2>

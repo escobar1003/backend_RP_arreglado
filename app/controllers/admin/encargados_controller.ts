@@ -92,7 +92,6 @@ export default class EncargadosController {
     await mail.send((message) => {
       message
         .to(datos.correo)
-        .from(process.env.SMTP_USERNAME!)
         .subject('Recycling Points - Credenciales de encargado')
         .html(`
           <h2>Hola ${encargado.nombre},</h2>
