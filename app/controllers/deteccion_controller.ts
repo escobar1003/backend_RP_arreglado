@@ -37,8 +37,20 @@ export default class DeteccionController {
         timeout: 120000,
       })
 
-      // 5. Responder a Flutter
-      return response.ok(apiResponse.data)
+      // Imprimimos en consola para depurar qué nos devuelve la IA
+      console.log('Respuesta cruda de la IA:', apiResponse.data)
+
+      // 5. Transformar la respuesta para Flutter
+      // Si tu IA devuelve algo diferente (ej: 'clase' en lugar de 'material'), 
+      // solo cámbialo aquí basándote en lo que veas en el console.log
+      const resultadoIA = apiResponse.data
+      const respuestaFinal = {
+        material: resultadoIA.material || resultadoIA.clase || 'desconocido',
+        total_objetos: resultadoIA.total_objetos || resultadoIA.conteo || 1,
+      }
+
+      // Responder a Flutter con el formato estandarizado
+      return response.ok(respuestaFinal)
 
     } catch (error: any) {
       return response.internalServerError({ 
