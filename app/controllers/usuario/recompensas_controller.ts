@@ -10,7 +10,7 @@ export default class RecompensasController {
       .orderBy('nombre', 'asc')
 
     return response.ok({
-      recompensas: recompensas.map(r => ({
+      recompensas: recompensas.map((r) => ({
         idRecompensa: r.idRecompensa,
         nombre: r.nombre,
         descripcion: r.descripcion,
@@ -20,7 +20,7 @@ export default class RecompensasController {
         fechaFin: r.fechaFin,
         tipoRecompensa: r.tipoRecompensa?.nombre ?? null,
         aliado: r.aliado?.nombre ?? null,
-      }))
+      })),
     })
   }
 }

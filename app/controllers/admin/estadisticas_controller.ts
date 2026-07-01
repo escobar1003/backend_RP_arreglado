@@ -5,23 +5,29 @@ import { DateTime } from 'luxon'
 export default class EstadisticasController {
   async index({ response }: HttpContext) {
     // Total usuarios (solo rol usuario = id_rol 3)
-    const [{ total: totalUsuarios }] = await db.from('usuarios').where('id_rol', 3).count('* as total')
+    const [{ total: totalUsuarios }] = await db
+      .from('usuarios')
+      .where('id_rol', 3)
+      .count('* as total')
 
     // Total entregas y kg
-    const entregas = await db.from('entregas')
+    const entregas = await db
+      .from('entregas')
       .join('detalle_entregas', 'entregas.id_entrega', 'detalle_entregas.id_entrega')
       .sum('detalle_entregas.peso as totalKg')
       .count('entregas.id_entrega as totalEntregas')
       .first()
 
     // Total puntos activos
-    const [{ total: totalPuntos }] = await db.from('movimientos_puntos')
+    const [{ total: totalPuntos }] = await db
+      .from('movimientos_puntos')
       .where('tipo', 'suma')
       .sum('cantidad as total')
 
     // Entregas últimos 7 días agrupadas por día
     const hace7dias = DateTime.now().minus({ days: 7 }).toISODate()
-    const porDia = await db.from('entregas')
+    const porDia = await db
+      .from('entregas')
       .join('detalle_entregas', 'entregas.id_entrega', 'detalle_entregas.id_entrega')
       .where('entregas.fecha_entrega', '>=', hace7dias)
       .groupByRaw('DATE(entregas.fecha_entrega)')
@@ -30,7 +36,8 @@ export default class EstadisticasController {
 
     // Usuarios nuevos vs recurrentes (nuevos = registrados este mes)
     const inicioMes = DateTime.now().startOf('month').toISODate()
-    const [{ total: nuevos }] = await db.from('usuarios')
+    const [{ total: nuevos }] = await db
+      .from('usuarios')
       .where('id_rol', 3)
       .where('fecha_registro', '>=', inicioMes)
       .count('* as total')

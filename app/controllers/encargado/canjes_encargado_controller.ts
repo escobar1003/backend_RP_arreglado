@@ -13,7 +13,7 @@ export default class CanjesEncargadoController {
     const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
     if (!punto) return response.notFound({ mensaje })
 
-    const { estado, usuario_id } = request.qs()
+    const { estado, usuarioId } = request.qs()
 
     const query = Canje.query()
       .whereIn('id_usuario', (subquery) => {
@@ -25,34 +25,36 @@ export default class CanjesEncargadoController {
       .orderBy('fecha_canje', 'desc')
 
     if (estado) query.where('id_estado_canje', estado)
-    if (usuario_id) query.where('id_usuario', usuario_id)
+    if (usuarioId) query.where('id_usuario', usuarioId)
 
     const ahora = DateTime.now()
     const canjes = await query
 
-    const result = await Promise.all(canjes.map(async (c) => {
-      let estadoCanje: any = c.estadoCanje
-      if (c.fechaVencimiento && c.fechaVencimiento < ahora && estadoCanje?.idEstadoCanje !== 3) {
-        c.idEstadoCanje = 3
-        await c.save()
-        estadoCanje = { idEstadoCanje: 3, nombre: 'vencido' } as any
-      }
-      return {
-        idCanje: c.idCanje,
-        usuario: c.usuario?.nombre ?? 'Desconocido',
-        recompensa: c.recompensa?.nombre ?? 'Desconocida',
-        puntosUsados: c.puntosUsados,
-        codigoCanje: c.codigoCanje,
-        fechaCanje: c.fechaCanje,
-        diasRestantes: c.fechaVencimiento
-          ? Math.ceil(c.fechaVencimiento.diff(ahora, 'days').days)
-          : null,
-        estadoCanje: {
-          idEstadoCanje: estadoCanje?.idEstadoCanje,
-          nombre: estadoCanje?.nombre ?? 'Pendiente',
-        },
-      }
-    }))
+    const result = await Promise.all(
+      canjes.map(async (c) => {
+        let estadoCanje: any = c.estadoCanje
+        if (c.fechaVencimiento && c.fechaVencimiento < ahora && estadoCanje?.idEstadoCanje !== 3) {
+          c.idEstadoCanje = 3
+          await c.save()
+          estadoCanje = { idEstadoCanje: 3, nombre: 'vencido' } as any
+        }
+        return {
+          idCanje: c.idCanje,
+          usuario: c.usuario?.nombre ?? 'Desconocido',
+          recompensa: c.recompensa?.nombre ?? 'Desconocida',
+          puntosUsados: c.puntosUsados,
+          codigoCanje: c.codigoCanje,
+          fechaCanje: c.fechaCanje,
+          diasRestantes: c.fechaVencimiento
+            ? Math.ceil(c.fechaVencimiento.diff(ahora, 'days').days)
+            : null,
+          estadoCanje: {
+            idEstadoCanje: estadoCanje?.idEstadoCanje,
+            nombre: estadoCanje?.nombre ?? 'Pendiente',
+          },
+        }
+      })
+    )
 
     return response.ok({ total: result.length, canjes: result })
   }
@@ -74,7 +76,9 @@ export default class CanjesEncargadoController {
     if (!punto) return response.notFound({ mensaje })
 
     const { idUsuario, idRecompensa, fechaVencimiento } = request.only([
-      'idUsuario', 'idRecompensa', 'fechaVencimiento',
+      'idUsuario',
+      'idRecompensa',
+      'fechaVencimiento',
     ])
 
     const recompensa = await Recompensa.findOrFail(idRecompensa)
@@ -91,13 +95,17 @@ export default class CanjesEncargadoController {
     const ahora = DateTime.now()
     const movimientos = await MovimientoPunto.query().where('id_usuario', idUsuario)
     const ganados = movimientos
-      .filter(m => m.tipoMovimiento === 'ganados' && (!m.fechaCaducidad || m.fechaCaducidad > ahora))
+      .filter(
+        (m) => m.tipoMovimiento === 'ganados' && (!m.fechaCaducidad || m.fechaCaducidad > ahora)
+      )
       .reduce((s, m) => s + m.puntos, 0)
     const descontados = movimientos
-      .filter(m => m.tipoMovimiento === 'descontados')
+      .filter((m) => m.tipoMovimiento === 'descontados')
       .reduce((s, m) => s + m.puntos, 0)
     const ajuste = movimientos
-      .filter(m => m.tipoMovimiento === 'ajuste' && (!m.fechaCaducidad || m.fechaCaducidad > ahora))
+      .filter(
+        (m) => m.tipoMovimiento === 'ajuste' && (!m.fechaCaducidad || m.fechaCaducidad > ahora)
+      )
       .reduce((s, m) => s + m.puntos, 0)
     const saldo = ganados - descontados + ajuste
 
@@ -188,8 +196,7 @@ export default class CanjesEncargadoController {
     const canje = await Canje.findOrFail(params.id)
     const { idEstadoCanje } = request.only(['idEstadoCanje'])
 
-    if (!idEstadoCanje)
-      return response.badRequest({ mensaje: 'Debes enviar idEstadoCanje' })
+    if (!idEstadoCanje) return response.badRequest({ mensaje: 'Debes enviar idEstadoCanje' })
 
     canje.idEstadoCanje = idEstadoCanje
     await canje.save()

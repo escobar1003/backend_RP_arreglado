@@ -1,4 +1,3 @@
-
 import { defineConfig } from '@adonisjs/cors'
 
 /**

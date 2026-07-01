@@ -4,7 +4,13 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id_material')
-      table.integer('id_estado_material').unsigned().notNullable().references('id_estado_material').inTable('estados_materiales').onDelete('RESTRICT')
+      table
+        .integer('id_estado_material')
+        .unsigned()
+        .notNullable()
+        .references('id_estado_material')
+        .inTable('estados_materiales')
+        .onDelete('RESTRICT')
       table.string('nombre', 50).notNullable()
       table.string('descripcion', 255).nullable()
       table.string('tipo_residuo', 50).nullable()
@@ -15,5 +21,7 @@ export default class extends BaseSchema {
       table.datetime('updated_at').nullable()
     })
   }
-  async down() { this.schema.dropTable(this.tableName) }
+  async down() {
+    this.schema.dropTable(this.tableName)
+  }
 }

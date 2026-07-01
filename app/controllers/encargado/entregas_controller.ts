@@ -26,19 +26,19 @@ export default class EntregasController {
       .preload('detalles', (q) => q.preload('material'))
       .orderBy('fecha_entrega', 'desc')
 
-    const { supermercado_id, usuario_id, encargado_id } = request.qs()
+    const { supermercadoId, usuarioId, encargadoId } = request.qs()
 
-    if (supermercado_id) {
+    if (supermercadoId) {
       query.whereHas('puntoReciclaje', (q) => {
-        q.where('id_aliado', supermercado_id)
+        q.where('id_aliado', supermercadoId)
       })
     }
 
-    if (usuario_id) {
-      query.where('id_usuario', usuario_id)
+    if (usuarioId) {
+      query.where('id_usuario', usuarioId)
     }
 
-    if (encargado_id) {
+    if (encargadoId) {
       query.whereHas('puntoReciclaje', (q) => {
         q.where('id_aliado', usuario.idAliado!)
       })
@@ -94,7 +94,12 @@ export default class EntregasController {
       return response.notFound({ mensaje })
     }
 
-    const { idUsuario, materiales, observacion, fechaVencimientoPuntos } = request.only(['idUsuario', 'materiales', 'observacion', 'fechaVencimientoPuntos'])
+    const { idUsuario, materiales, observacion, fechaVencimientoPuntos } = request.only([
+      'idUsuario',
+      'materiales',
+      'observacion',
+      'fechaVencimientoPuntos',
+    ])
 
     if (!materiales || !Array.isArray(materiales) || materiales.length === 0) {
       return response.badRequest({ mensaje: 'Debes incluir al menos un material' })

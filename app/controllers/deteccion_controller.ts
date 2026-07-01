@@ -2,10 +2,9 @@ import type { HttpContext } from '@adonisjs/core/http'
 import app from '@adonisjs/core/services/app'
 import axios from 'axios'
 import FormData from 'form-data'
-import fs from 'fs'
+import fs from 'node:fs'
 
 export default class DeteccionController {
-
   public async procesarCamara({ request, response }: HttpContext) {
     // 1. Recibir la foto de la app móvil
     const imagenMobile = request.file('image', {
@@ -24,7 +23,6 @@ export default class DeteccionController {
     await imagenMobile.move(app.tmpPath('uploads'))
     const filePath = `${app.tmpPath('uploads')}/${imagenMobile.fileName}`
 
-
     try {
       // 3. Preparar el formulario
       const formData = new FormData()
@@ -32,7 +30,7 @@ export default class DeteccionController {
 
       // 4. Petición al servicio de IA
       const iaUrl = process.env.IA_SERVICE_URL || 'http://localhost:5000'
-      
+
       const apiResponse = await axios.post(`${iaUrl}/predict`, formData, {
         headers: { ...formData.getHeaders() },
         timeout: 120000,
@@ -40,12 +38,11 @@ export default class DeteccionController {
 
       // 5. Responder a Flutter
       return response.ok(apiResponse.data)
-
     } catch (error: any) {
-      return response.internalServerError({ 
-        status: 'error', 
+      return response.internalServerError({
+        status: 'error',
         message: 'Error de conexión con el motor de IA.',
-        error: error.message 
+        error: error.message,
       })
     } finally {
       // 6. Limpieza segura del archivo temporal

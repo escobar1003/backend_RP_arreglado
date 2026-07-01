@@ -20,7 +20,9 @@ export default class MaterialesController {
       }
     }
 
-    const materiales = Array.from(materialesSet).map(m => JSON.parse(m) as Record<string, unknown>)
+    const materiales = Array.from(materialesSet).map(
+      (m) => JSON.parse(m) as Record<string, unknown>
+    )
     return response.ok({ materiales })
   }
 }

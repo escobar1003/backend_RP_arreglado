@@ -6,7 +6,7 @@ export default class EntregasAdminController {
     const entregas = await Entrega.query()
       .preload('usuario')
       .preload('estadoEntrega')
-      .preload('detalles', q => q.preload('material'))
+      .preload('detalles', (q) => q.preload('material'))
       .preload('puntoReciclaje')
       .orderBy('fecha_entrega', 'desc')
 
@@ -18,7 +18,7 @@ export default class EntregasAdminController {
       .where('id_entrega', params.id)
       .preload('usuario')
       .preload('estadoEntrega')
-      .preload('detalles', q => q.preload('material'))
+      .preload('detalles', (q) => q.preload('material'))
       .preload('puntoReciclaje')
       .firstOrFail()
 

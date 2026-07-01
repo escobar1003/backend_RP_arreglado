@@ -65,7 +65,11 @@ export default class ReservasEncargadoController {
       .preload('imagenes', (q) => q.orderBy('created_at', 'asc'))
       .firstOrFail()
 
-    return response.ok({ success: true, idReserva: reserva.idReserva, imagenes: reserva.imagenes.map(serializarImagenConAnalisis) })
+    return response.ok({
+      success: true,
+      idReserva: reserva.idReserva,
+      imagenes: reserva.imagenes.map(serializarImagenConAnalisis),
+    })
   }
 
   async store({ auth, request, response }: HttpContext) {

@@ -49,12 +49,13 @@ export default class CanjesController {
     }
 
     // Calcular saldo actual del usuario
-    const movimientos = await MovimientoPunto.query()
-      .where('id_usuario', auth.user!.idUsuario)
+    const movimientos = await MovimientoPunto.query().where('id_usuario', auth.user!.idUsuario)
 
     const ahora = DateTime.now()
     const ganados = movimientos
-      .filter((m) => m.tipoMovimiento === 'ganados' && (!m.fechaCaducidad || m.fechaCaducidad > ahora))
+      .filter(
+        (m) => m.tipoMovimiento === 'ganados' && (!m.fechaCaducidad || m.fechaCaducidad > ahora)
+      )
       .reduce((sum, m) => sum + m.puntos, 0)
 
     const descontados = movimientos
@@ -62,7 +63,9 @@ export default class CanjesController {
       .reduce((sum, m) => sum + m.puntos, 0)
 
     const ajuste = movimientos
-      .filter((m) => m.tipoMovimiento === 'ajuste' && (!m.fechaCaducidad || m.fechaCaducidad > ahora))
+      .filter(
+        (m) => m.tipoMovimiento === 'ajuste' && (!m.fechaCaducidad || m.fechaCaducidad > ahora)
+      )
       .reduce((sum, m) => sum + m.puntos, 0)
 
     const saldo = ganados - descontados + ajuste
@@ -107,7 +110,7 @@ export default class CanjesController {
       await recompensa.save()
     }
 
-        // SCRUM-583: Generar notificación al aprobar canje
+    // SCRUM-583: Generar notificación al aprobar canje
     await Notificacion.create({
       idUsuario: auth.user!.idUsuario,
       titulo: 'Canje realizado',

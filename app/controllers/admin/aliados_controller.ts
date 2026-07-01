@@ -40,13 +40,13 @@ export default class AliadosController {
     const datos = await request.validateUsing(crearAliadoValidator)
     console.log('=== DATOS VALIDADOS ===', datos)
 
-    const { latitud, longitud, ubicacionDireccion, materiales, ...datosSinCoordenadas } = datos as any
+    const { latitud, longitud, ubicacionDireccion, materiales, ...datosSinCoordenadas } =
+      datos as any
     console.log('=== COORDENADAS ===', { latitud, longitud, ubicacionDireccion })
 
     const aliado = await Aliado.create({ ...datosSinCoordenadas, idEstadoAliado: 1 })
 
     const punto = await PuntoReciclaje.create({
-
       idAliado: aliado.idAliado,
       idEstadoPunto: 1,
       nombre: `Punto principal - ${aliado.nombre}`,
@@ -68,7 +68,7 @@ export default class AliadosController {
     const aliado = await Aliado.findOrFail(params.id)
     const datos = await request.validateUsing(actualizarAliadoValidator)
     const { latitud, longitud } = datos
-    const { latitud: _l, longitud: _ll, ...datosAliado } = datos
+    const { latitud: latitudIgnorada, longitud: longitudIgnorada, ...datosAliado } = datos
     aliado.merge(datosAliado)
     await aliado.save()
     if (latitud !== undefined || longitud !== undefined) {
@@ -99,7 +99,9 @@ export default class AliadosController {
         materialesSet.add(JSON.stringify(mat))
       }
     }
-    const materiales = Array.from(materialesSet).map(m => JSON.parse(m) as Record<string, unknown>)
+    const materiales = Array.from(materialesSet).map(
+      (m) => JSON.parse(m) as Record<string, unknown>
+    )
     return response.ok({ materiales })
   }
 

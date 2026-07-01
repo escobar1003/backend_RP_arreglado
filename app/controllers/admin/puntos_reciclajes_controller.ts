@@ -20,9 +20,7 @@ export default class AdminPuntosReciclajesController {
   }
 
   async update({ params, request, response }: HttpContext) {
-    const punto = await PuntoReciclaje.query()
-      .where('id_aliado', params.id)
-      .firstOrFail()
+    const punto = await PuntoReciclaje.query().where('id_aliado', params.id).firstOrFail()
 
     punto.merge(request.only(['nombre', 'direccion', 'latitud', 'longitud', 'horario']))
     await punto.save()

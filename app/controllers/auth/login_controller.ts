@@ -24,19 +24,25 @@ export default class LoginController {
     // Verificar password manualmente
     const passwordValido = await hash.verify(usuario.password, password)
     if (!passwordValido) {
-      console.log('HASH LOGIN - FAILED email:', correo, 'pass provided:', password, 'hash in DB starts with:', usuario.password?.substring(0, 25))
+      console.log(
+        'HASH LOGIN - FAILED email:',
+        correo,
+        'pass provided:',
+        password,
+        'hash in DB starts with:',
+        usuario.password?.substring(0, 25)
+      )
       return response.unauthorized({
         mensaje: 'Credenciales inválidas',
       })
     }
-    console.log ('HASH LOGIN - OK EMAIL:', correo)
+    console.log('HASH LOGIN - OK EMAIL:', correo)
 
     if (usuario.idEstadoUsuario !== 1) {
       return response.forbidden({
         mensaje: 'Tu cuenta está inactiva o suspendida',
       })
     }
-    
 
     const token = await Usuario.accessTokens.create(usuario)
 

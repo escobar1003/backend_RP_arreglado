@@ -3,10 +3,8 @@ import db from '@adonisjs/lucid/services/db'
 import hash from '@adonisjs/core/services/hash'
 import Usuario from '#models/usuario'
 
-
 export default class DatabaseSeeder extends BaseSeeder {
   async run() {
-
     // ROLES
 
     await db.table('roles').multiInsert([
@@ -17,54 +15,33 @@ export default class DatabaseSeeder extends BaseSeeder {
       { nombre: 'superadmin', descripcion: 'Super Administrador del sistema' },
     ])
 
-
     // ESTADOS USUARIOS
 
-    await db.table('estados_usuarios').multiInsert([
-      { nombre: 'activo' },
-      { nombre: 'inactivo' },
-      { nombre: 'suspendido' },
-    ])
+    await db
+      .table('estados_usuarios')
+      .multiInsert([{ nombre: 'activo' }, { nombre: 'inactivo' }, { nombre: 'suspendido' }])
 
-    await db.table('estados_encargados').multiInsert([
-      { nombre: 'activo' },
-      { nombre: 'inactivo' },
-    ])
-
+    await db.table('estados_encargados').multiInsert([{ nombre: 'activo' }, { nombre: 'inactivo' }])
 
     // ESTADOS ALIADOS
 
-    await db.table('estados_aliados').multiInsert([
-      { nombre: 'activo' },
-      { nombre: 'inactivo' },
-    ])
-
+    await db.table('estados_aliados').multiInsert([{ nombre: 'activo' }, { nombre: 'inactivo' }])
 
     // ESTADOS MATERIALES
 
-    await db.table('estados_materiales').multiInsert([
-      { nombre: 'activo' },
-      { nombre: 'inactivo' },
-    ])
-
+    await db.table('estados_materiales').multiInsert([{ nombre: 'activo' }, { nombre: 'inactivo' }])
 
     // ESTADOS PUNTOS
 
-    await db.table('estados_puntos').multiInsert([
-      { nombre: 'activo' },
-      { nombre: 'inactivo' },
-      { nombre: 'mantenimiento' },
-    ])
-
+    await db
+      .table('estados_puntos')
+      .multiInsert([{ nombre: 'activo' }, { nombre: 'inactivo' }, { nombre: 'mantenimiento' }])
 
     // ESTADOS ENTREGAS
 
-    await db.table('estados_entregas').multiInsert([
-      { nombre: 'pendiente' },
-      { nombre: 'completada' },
-      { nombre: 'cancelada' },
-    ])
-
+    await db
+      .table('estados_entregas')
+      .multiInsert([{ nombre: 'pendiente' }, { nombre: 'completada' }, { nombre: 'cancelada' }])
 
     // TIPOS RECOMPENSA
 
@@ -75,21 +52,15 @@ export default class DatabaseSeeder extends BaseSeeder {
     ])
 
     // ESTADOS RECOMPENSAS
-    await db.table('estados_recompensas').multiInsert([
-      { nombre: 'activo' },
-      { nombre: 'inactivo' },
-      { nombre: 'agotado' },
-    ])
-
+    await db
+      .table('estados_recompensas')
+      .multiInsert([{ nombre: 'activo' }, { nombre: 'inactivo' }, { nombre: 'agotado' }])
 
     // ESTADOS CANJES
 
-    await db.table('estados_canjes').multiInsert([
-      { nombre: 'pendiente' },
-      { nombre: 'canjeado' },
-      { nombre: 'vencido' },
-    ])
-
+    await db
+      .table('estados_canjes')
+      .multiInsert([{ nombre: 'pendiente' }, { nombre: 'canjeado' }, { nombre: 'vencido' }])
 
     const adminExiste = await db.from('usuarios').where('correo', 'admin@test.com').first()
     if (!adminExiste) {
@@ -106,18 +77,20 @@ export default class DatabaseSeeder extends BaseSeeder {
       console.log('Usuario admin creado: admin@test.com / 123456')
     }
 
-    
-
     const superadminExiste = await Usuario.findBy('correo', 'superadmin@test.com')
-if (!superadminExiste) {
-  await db.table('usuarios').insert({
-    id_rol: 5, id_estado_usuario: 1,
-    nombre: 'Super Administrador', correo: 'superadmin@test.com',
-    password: await hash.make('123456'),
-    fecha_registro: new Date(), created_at: new Date(), updated_at: new Date(),
-  })
-}
-// MATERIALES
+    if (!superadminExiste) {
+      await db.table('usuarios').insert({
+        id_rol: 5,
+        id_estado_usuario: 1,
+        nombre: 'Super Administrador',
+        correo: 'superadmin@test.com',
+        password: await hash.make('123456'),
+        fecha_registro: new Date(),
+        created_at: new Date(),
+        updated_at: new Date(),
+      })
+    }
+    // MATERIALES
     const materialesData = [
       {
         id_estado_material: 1,
@@ -152,7 +125,10 @@ if (!superadminExiste) {
     ]
 
     for (const mat of materialesData) {
-      const [existe] = await db.rawQuery('SELECT COUNT(*) as total FROM materiales WHERE nombre = ?', [mat.nombre])
+      const [existe] = await db.rawQuery(
+        'SELECT COUNT(*) as total FROM materiales WHERE nombre = ?',
+        [mat.nombre]
+      )
       if (Number(existe[0]?.total ?? 0) === 0) {
         await db.table('materiales').insert(mat)
       }
@@ -175,9 +151,8 @@ if (!superadminExiste) {
 
     console.log('Aliado creado con id:', idAliado)
 
-    
     // ENCARGADO
-    
+
     const [idEncargado] = await db.table('usuarios').insert({
       id_rol: 4,
       id_estado_usuario: 1,
@@ -191,7 +166,6 @@ if (!superadminExiste) {
 
     console.log('Encargado creado con id:', idEncargado)
 
-
     // PUNTO DE RECICLAJE
 
     const [idPunto] = await db.table('puntos_reciclaje').insert({
@@ -200,13 +174,12 @@ if (!superadminExiste) {
       id_encargado: idEncargado,
       nombre: 'Punto Reciclaje Test',
       direccion: 'Calle 123 # 45-67',
-      latitud: 4.7110,
+      latitud: 4.711,
       longitud: -74.0721,
       horario: 'Lunes a Viernes 8am - 6pm',
       created_at: new Date(),
       updated_at: new Date(),
     })
-    
 
     // ASIGNAR MATERIALES AL PUNTO DE RECICLAJE
     const materiales = await db.from('materiales').select('id_material')

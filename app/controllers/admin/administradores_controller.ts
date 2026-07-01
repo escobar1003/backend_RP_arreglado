@@ -42,10 +42,7 @@ export default class AdministradoresController {
     })
 
     await mail.send((message) => {
-      message
-        .to(datos.correo)
-        .subject('Recycling Points - Credenciales de administrador')
-        .html(`
+      message.to(datos.correo).subject('Recycling Points - Credenciales de administrador').html(`
           <h2>Hola ${datos.nombre},</h2>
           <p>Has sido registrado como <strong>administrador</strong> en Recycling Points.</p>
           <p><strong>Correo:</strong> ${datos.correo}</p>
@@ -56,7 +53,10 @@ export default class AdministradoresController {
         `)
     })
 
-    return response.created({ mensaje: 'Administrador creado correctamente. Se enviaron las credenciales al correo.', admin })
+    return response.created({
+      mensaje: 'Administrador creado correctamente. Se enviaron las credenciales al correo.',
+      admin,
+    })
   }
 
   async update({ auth, params, request, response }: HttpContext) {
@@ -70,7 +70,14 @@ export default class AdministradoresController {
     }
 
     const admin = await query.firstOrFail()
-    const datos = request.only(['nombre', 'telefono', 'imagen', 'idEstadoUsuario', 'correo', 'idAliado'])
+    const datos = request.only([
+      'nombre',
+      'telefono',
+      'imagen',
+      'idEstadoUsuario',
+      'correo',
+      'idAliado',
+    ])
     admin.merge(datos)
     await admin.save()
     return response.ok({ mensaje: 'Administrador actualizado correctamente', admin })

@@ -28,7 +28,8 @@ export default class ReportesController {
     const idPunto = punto.idPunto
 
     // KPIs principales
-    const kgResult = await db.from('entregas')
+    const kgResult = await db
+      .from('entregas')
       .join('detalle_entregas', 'entregas.id_entrega', 'detalle_entregas.id_entrega')
       .where('entregas.id_punto', idPunto)
       .whereBetween('entregas.fecha_entrega', [desdeStr, hastaStr])
@@ -36,7 +37,8 @@ export default class ReportesController {
       .count('entregas.id_entrega as totalEntregas')
       .first()
 
-    const ptsResult = await db.from('movimientos_puntos')
+    const ptsResult = await db
+      .from('movimientos_puntos')
       .join('entregas', 'movimientos_puntos.id_entrega', 'entregas.id_entrega')
       .where('entregas.id_punto', idPunto)
       .where('movimientos_puntos.tipo_movimiento', 'ganados')
@@ -44,30 +46,36 @@ export default class ReportesController {
       .sum('movimientos_puntos.puntos as total')
       .first()
 
-    const canjesResult = await db.from('canjes')
+    const canjesResult = await db
+      .from('canjes')
       .join('usuarios', 'canjes.id_usuario', 'usuarios.id_usuario')
       .where('usuarios.id_aliado', usuario.idAliado!)
       .whereBetween('canjes.created_at', [desdeStr, hastaStr])
       .count('* as total')
       .first()
 
-    const usuariosResult = await db.from('entregas')
+    const usuariosResult = await db
+      .from('entregas')
       .where('id_punto', idPunto)
       .whereBetween('fecha_entrega', [desdeStr, hastaStr])
       .countDistinct('id_usuario as total')
       .first()
 
     // Materiales por mes (últimos 5 meses)
-    const materialesMes = await db.from('entregas')
+    const materialesMes = await db
+      .from('entregas')
       .join('detalle_entregas', 'entregas.id_entrega', 'detalle_entregas.id_entrega')
       .where('entregas.id_punto', idPunto)
       .where('entregas.fecha_entrega', '>=', DateTime.now().minus({ months: 5 }).toISODate())
       .groupByRaw('DATE_FORMAT(entregas.fecha_entrega, "%Y-%m")')
-      .select(db.raw('DATE_FORMAT(entregas.fecha_entrega, "%b") as mes, SUM(detalle_entregas.peso) as kg'))
+      .select(
+        db.raw('DATE_FORMAT(entregas.fecha_entrega, "%b") as mes, SUM(detalle_entregas.peso) as kg')
+      )
       .orderByRaw('MIN(entregas.fecha_entrega) asc')
 
     // Canjes por recompensa
-    const canjesRecompensa = await db.from('canjes')
+    const canjesRecompensa = await db
+      .from('canjes')
       .join('recompensas', 'canjes.id_recompensa', 'recompensas.id_recompensa')
       .join('usuarios', 'canjes.id_usuario', 'usuarios.id_usuario')
       .where('usuarios.id_aliado', usuario.idAliado!)
@@ -79,7 +87,8 @@ export default class ReportesController {
       .limit(5)
 
     // Ranking usuarios
-    const ranking = await db.from('entregas')
+    const ranking = await db
+      .from('entregas')
       .join('usuarios', 'entregas.id_usuario', 'usuarios.id_usuario')
       .where('entregas.id_punto', idPunto)
       .whereBetween('entregas.fecha_entrega', [desdeStr, hastaStr])
@@ -92,7 +101,12 @@ export default class ReportesController {
 
     const rankingConDatos = ranking.map((u: any) => ({
       nombre: u.nombre,
-      iniciales: u.nombre.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase(),
+      iniciales: u.nombre
+        .split(' ')
+        .map((n: string) => n[0])
+        .join('')
+        .slice(0, 2)
+        .toUpperCase(),
       entregas: Number(u.entregas),
       pts: 0,
       canjes: 0,
@@ -100,7 +114,8 @@ export default class ReportesController {
 
     // Puntos
     const totalEntregados = Number(ptsResult?.total ?? 0)
-    const totalCanjeados = await db.from('movimientos_puntos')
+    const totalCanjeados = await db
+      .from('movimientos_puntos')
       .join('entregas', 'movimientos_puntos.id_entrega', 'entregas.id_entrega')
       .where('entregas.id_punto', idPunto)
       .where('movimientos_puntos.tipo_movimiento', 'descontados')
@@ -120,7 +135,10 @@ export default class ReportesController {
         usuariosActivos: Number(usuariosResult?.total ?? 0),
       },
       materialesMes: materialesMes.map((m: any) => ({ mes: m.mes, kg: Number(m.kg) })),
-      canjesRecompensa: canjesRecompensa.map((c: any) => ({ recompensa: c.recompensa, cantidad: Number(c.cantidad) })),
+      canjesRecompensa: canjesRecompensa.map((c: any) => ({
+        recompensa: c.recompensa,
+        cantidad: Number(c.cantidad),
+      })),
       rankingUsuarios: rankingConDatos,
       puntos: {
         entregados: totalEntregados,

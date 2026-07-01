@@ -6,7 +6,13 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('id_reserva').unsigned().notNullable().references('id_reserva').inTable('reservas').onDelete('CASCADE')
+      table
+        .integer('id_reserva')
+        .unsigned()
+        .notNullable()
+        .references('id_reserva')
+        .inTable('reservas')
+        .onDelete('CASCADE')
       table.string('url', 500).notNullable()
       table.timestamps(true, true)
     })

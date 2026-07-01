@@ -28,11 +28,16 @@ export default class ReservaImagene extends BaseModel {
   declare confianza: number | null
 
   @column({
-    prepare: (value: unknown) => (value === null || value === undefined ? null : JSON.stringify(value)),
+    prepare: (value: unknown) =>
+      value === null || value === undefined ? null : JSON.stringify(value),
     consume: (value: unknown) => {
       if (value === null || value === undefined) return null
       if (typeof value === 'string') {
-        try { return JSON.parse(value) } catch { return value }
+        try {
+          return JSON.parse(value)
+        } catch {
+          return value
+        }
       }
       return value
     },

@@ -60,14 +60,17 @@ export default class EncargadosController {
         return response.conflict({ mensaje: 'Este usuario ya es encargado' })
       }
       const idAliado = datos.idAliado ?? (usuario.rol.nombre === 'admin' ? usuario.idAliado : null)
-      await db.from('usuarios').where('id_usuario', encargado.idUsuario).update({
-        id_rol: 4,
-        id_aliado: idAliado,
-        password: hashedPassword,
-        nombre: datos.nombre || encargado.nombre,
-        telefono: datos.telefono || encargado.telefono,
-        updated_at: new Date(),
-      })
+      await db
+        .from('usuarios')
+        .where('id_usuario', encargado.idUsuario)
+        .update({
+          id_rol: 4,
+          id_aliado: idAliado,
+          password: hashedPassword,
+          nombre: datos.nombre || encargado.nombre,
+          telefono: datos.telefono || encargado.telefono,
+          updated_at: new Date(),
+        })
       encargado.idRol = 4
       encargado.idAliado = idAliado
       encargado.password = hashedPassword
@@ -90,10 +93,7 @@ export default class EncargadosController {
     }
 
     await mail.send((message) => {
-      message
-        .to(datos.correo)
-        .subject('Recycling Points - Credenciales de encargado')
-        .html(`
+      message.to(datos.correo).subject('Recycling Points - Credenciales de encargado').html(`
           <h2>Hola ${encargado.nombre},</h2>
           <p>Has sido registrado como <strong>encargado</strong> en Recycling Points.</p>
           <p><strong>Correo:</strong> ${datos.correo}</p>
@@ -105,7 +105,8 @@ export default class EncargadosController {
     })
 
     // Asignar automáticamente el primer punto del aliado al encargado
-    const idAliadoAsignado = datos.idAliado ?? (usuario.rol.nombre === 'admin' ? usuario.idAliado : null)
+    const idAliadoAsignado =
+      datos.idAliado ?? (usuario.rol.nombre === 'admin' ? usuario.idAliado : null)
     if (idAliadoAsignado) {
       await encargado.load('puntoACargo')
       if (!encargado.puntoACargo) {
@@ -120,7 +121,10 @@ export default class EncargadosController {
       }
     }
 
-    return response.ok({ mensaje: 'Encargado creado correctamente. Se enviaron las credenciales al correo.', encargado })
+    return response.ok({
+      mensaje: 'Encargado creado correctamente. Se enviaron las credenciales al correo.',
+      encargado,
+    })
   }
 
   async update({ auth, params, request, response }: HttpContext) {
@@ -162,9 +166,7 @@ export default class EncargadosController {
     const usuario = auth.user!
     await usuario.load('rol')
 
-    const query = Usuario.query()
-      .where('id_usuario', params.id)
-      .where('id_rol', 4)
+    const query = Usuario.query().where('id_usuario', params.id).where('id_rol', 4)
 
     if (usuario.rol.nombre === 'admin' && usuario.idAliado) {
       query.where('id_aliado', usuario.idAliado)

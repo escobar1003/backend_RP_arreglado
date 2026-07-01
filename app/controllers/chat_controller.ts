@@ -33,18 +33,17 @@ export default class ChatController {
         config: {
           systemInstruction: systemInstruction,
           temperature: 0.7,
-        }
+        },
       })
 
       // 5. Devolver la respuesta en texto limpio directo a Flutter
       return response.ok({
-        respuesta: aiResponse.text
+        respuesta: aiResponse.text,
       })
-
     } catch (error) {
       console.error('Error en el módulo de Chat IA:', error)
       return response.internalServerError({
-        error: 'Hubo un problema al procesar tu consulta con la IA. Inténtalo de nuevo.'
+        error: 'Hubo un problema al procesar tu consulta con la IA. Inténtalo de nuevo.',
       })
     }
   }

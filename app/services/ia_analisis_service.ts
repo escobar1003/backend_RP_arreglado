@@ -18,7 +18,14 @@ class IaAnalisisService {
     const iaUrl = process.env.IA_SERVICE_URL || 'http://localhost:5000'
     try {
       if (!fs.existsSync(filePath)) {
-        return { estado: 'error', detectado: false, material: null, confianza: null, raw: null, error: 'Archivo no disponible' }
+        return {
+          estado: 'error',
+          detectado: false,
+          material: null,
+          confianza: null,
+          raw: null,
+          error: 'Archivo no disponible',
+        }
       }
       const formData = new FormData()
       formData.append('image', fs.createReadStream(filePath))
@@ -38,9 +45,22 @@ class IaAnalisisService {
           raw: data,
         }
       }
-      return { estado: 'sin_deteccion', detectado: false, material: null, confianza: null, raw: data ?? null }
+      return {
+        estado: 'sin_deteccion',
+        detectado: false,
+        material: null,
+        confianza: null,
+        raw: data ?? null,
+      }
     } catch (error: any) {
-      return { estado: 'error', detectado: false, material: null, confianza: null, raw: null, error: error?.message ?? 'Error al contactar la IA' }
+      return {
+        estado: 'error',
+        detectado: false,
+        material: null,
+        confianza: null,
+        raw: null,
+        error: error?.message ?? 'Error al contactar la IA',
+      }
     }
   }
 }

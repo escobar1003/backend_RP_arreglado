@@ -46,7 +46,6 @@ export default class ReservaImagenesController {
 
     await this.notificarAnalisis(reserva, reservaImagen, analisis)
 
-
     return response.created({
       success: true,
       mensaje: 'Imagen subida correctamente',
@@ -65,14 +64,26 @@ export default class ReservaImagenesController {
       .where('id_usuario', auth.user!.idUsuario)
       .firstOrFail()
 
-    const imagenes = await ReservaImagene.query().where('id_reserva', reserva.idReserva).orderBy('created_at', 'asc')
+    const imagenes = await ReservaImagene.query()
+      .where('id_reserva', reserva.idReserva)
+      .orderBy('created_at', 'asc')
 
-    return response.ok({ success: true, idReserva: reserva.idReserva, imagenes: imagenes.map(serializarImagenConAnalisis) })
+    return response.ok({
+      success: true,
+      idReserva: reserva.idReserva,
+      imagenes: imagenes.map(serializarImagenConAnalisis),
+    })
   }
 
-  private async notificarAnalisis(reserva: Reserva, reservaImagen: ReservaImagene, analisis: ResultadoAnalisisIA) {
+  private async notificarAnalisis(
+    reserva: Reserva,
+    reservaImagen: ReservaImagene,
+    analisis: ResultadoAnalisisIA
+  ) {
     const punto = await PuntoReciclaje.query().where('id_punto', reserva.idPunto).first()
-    const encargado = punto ? await Usuario.query().where('id_aliado', punto.idAliado).where('id_rol', 4).first() : null
+    const encargado = punto
+      ? await Usuario.query().where('id_aliado', punto.idAliado).where('id_rol', 4).first()
+      : null
     const mensaje = construirMensajeAnalisis(analisis)
 
     const payload = {
@@ -113,12 +124,14 @@ export default class ReservaImagenesController {
 
 function construirMensajeAnalisis(analisis: ResultadoAnalisisIA): string {
   if (analisis.estado === 'completado' && analisis.detectado) {
-    const porcentaje = typeof analisis.confianza === 'number' ? Math.round(analisis.confianza * 100) : null
+    const porcentaje =
+      typeof analisis.confianza === 'number' ? Math.round(analisis.confianza * 100) : null
     return porcentaje !== null
       ? `Se detectó "${analisis.material}" con ${porcentaje}% de confianza en la imagen enviada.`
       : `Se detectó "${analisis.material}" en la imagen enviada.`
   }
-  if (analisis.estado === 'error') return 'No fue posible analizar la imagen con IA en este momento.'
+  if (analisis.estado === 'error')
+    return 'No fue posible analizar la imagen con IA en este momento.'
   return 'No se identificó un material reciclable claro en la imagen.'
 }
 

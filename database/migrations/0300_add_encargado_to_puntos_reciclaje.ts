@@ -1,8 +1,8 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
- 
+
 export default class extends BaseSchema {
   protected tableName = 'puntos_reciclaje'
- 
+
   async up() {
     this.schema.alterTable(this.tableName, (table) => {
       table
@@ -21,7 +21,7 @@ export default class extends BaseSchema {
         .onDelete('SET NULL')
     })
   }
- 
+
   async down() {
     this.schema.alterTable(this.tableName, (table) => {
       table.dropForeign(['id_encargado'])
