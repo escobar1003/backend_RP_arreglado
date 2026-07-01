@@ -2,11 +2,12 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Reserva from '#models/reserva'
 import { asegurarPuntoEncargado } from '#services/encargado_punto'
 import Notificacion from '#models/notificacion'
+import { serializarImagenConAnalisis } from '#controllers/usuario/reserva_imagenes_controller'
 import Ws from '#services/ws_service'
 
 export default class ReservasEncargadoController {
   async index({ auth, request, response }: HttpContext) {
-    console.log('✅ Llegó al controlador de reservas encargado')
+    console.log('Llegó al controlador de reservas encargado')
     const usuario = auth.user!
     console.log('👤 Usuario:', usuario.idUsuario)
 
@@ -47,9 +48,24 @@ export default class ReservasEncargadoController {
       .where('id_reserva', params.id)
       .where('id_punto', punto.idPunto)
       .preload('usuario', (q) => q.select('id_usuario', 'nombre', 'correo', 'telefono'))
+      .preload('imagenes', (q) => q.orderBy('created_at', 'asc'))
       .firstOrFail()
 
-    return response.ok({ reserva })
+    return response.ok({ reserva, imagenes: reserva.imagenes.map(serializarImagenConAnalisis) })
+  }
+
+  async imagenes({ auth, params, response }: HttpContext) {
+    const usuario = auth.user!
+    const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
+    if (!punto) return response.notFound({ mensaje })
+
+    const reserva = await Reserva.query()
+      .where('id_reserva', params.id)
+      .where('id_punto', punto.idPunto)
+      .preload('imagenes', (q) => q.orderBy('created_at', 'asc'))
+      .firstOrFail()
+
+    return response.ok({ success: true, idReserva: reserva.idReserva, imagenes: reserva.imagenes.map(serializarImagenConAnalisis) })
   }
 
   async store({ auth, request, response }: HttpContext) {

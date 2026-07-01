@@ -4,6 +4,7 @@ import Reserva from '#models/reserva'
 import PuntoReciclaje from '#models/punto_reciclaje'
 import Notificacion from '#models/notificacion'
 import WsService from '#services/ws_service'
+import { serializarImagenConAnalisis } from '#controllers/usuario/reserva_imagenes_controller'
 import Usuario from '#models/usuario'
 
 export default class ReservasUsuarioController {
@@ -33,6 +34,7 @@ export default class ReservasUsuarioController {
       .where('id_reserva', params.id) //Evita que alguien consulte reservas ajenas modificando la URL.
       .where('id_usuario', auth.user!.idUsuario)
       .preload('punto', (q) => q.select('id_punto', 'nombre', 'direccion', 'horario', 'latitud', 'longitud'))
+      .preload('imagenes', (q) => q.orderBy('created_at', 'asc'))
       .firstOrFail()
 
     return response.ok({
@@ -46,7 +48,8 @@ export default class ReservasUsuarioController {
         direccion: reserva.punto.direccion,
         latitud: reserva.punto.latitud,
         longitud: reserva.punto.longitud,
-      }
+      },
+      imagenes: reserva.imagenes.map(serializarImagenConAnalisis),
     })
   }
 
