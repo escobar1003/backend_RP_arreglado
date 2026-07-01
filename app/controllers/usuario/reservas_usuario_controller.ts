@@ -5,6 +5,7 @@ import PuntoReciclaje from '#models/punto_reciclaje'
 import Notificacion from '#models/notificacion'
 import WsService from '#services/ws_service'
 import { serializarImagenConAnalisis } from '#controllers/usuario/reserva_imagenes_controller'
+// Imágenes enviadas por el usuario junto con el resultado del análisis de IA
 import Usuario from '#models/usuario'
 
 export default class ReservasUsuarioController {
@@ -49,18 +50,22 @@ export default class ReservasUsuarioController {
         latitud: reserva.punto.latitud,
         longitud: reserva.punto.longitud,
       },
+      // Imágenes enviadas por el usuario junto con el resultado del análisis de IA
       imagenes: reserva.imagenes.map(serializarImagenConAnalisis),
     })
   }
 
   async store({ auth, request, response }: HttpContext) {
-  console.log("🚀 Entró al store de reservas")
+  console.log("Entró al store de reservas")
 
-  const { idPunto, fecha, hora, notas } = request.only([ //Obtiene únicamente los datos enviados por el frontend.
+  const { idPunto, fecha, hora, notas, urlFoto, iaMaterial, iaConfianza } = request.only([ //Obtiene únicamente los datos enviados por el frontend.
     'idPunto',
     'fecha',
     'hora',
     'notas',
+    'urlFoto',
+    'iaMaterial',
+    'iaConfianza'
   ])
 
 
@@ -77,6 +82,9 @@ export default class ReservasUsuarioController {
       hora,
       estado: 'pendiente',
       notas: notas ?? null,
+      urlFoto: urlFoto ?? null,
+      iaMaterial: iaMaterial ?? null,
+      iaConfianza: iaConfianza ?? null,
     })
 
     const encargado = await Usuario.query() //Busca al encargado del aliado correspondiente al punto de reciclaje.
@@ -84,10 +92,10 @@ export default class ReservasUsuarioController {
       .where('id_rol', 4)
       .first()
 
-      console.log("👤 Encargado encontrado:", encargado)
+      console.log("Encargado encontrado:", encargado)
 
     if (encargado) { //Comprueba si realmente existe un encargado.
-      console.log("📤 Voy a emitir socket al encargado", encargado.idUsuario)
+      console.log("Voy a emitir socket al encargado", encargado.idUsuario)
       await Notificacion.create({ //Guarda una notificación permanente en la base de datos.
         idUsuario: encargado.idUsuario,
         tipo: 'reserva',
@@ -106,9 +114,13 @@ export default class ReservasUsuarioController {
           fecha,
           hora,
           estado: 'pendiente', //Solo permite cancelar reservas pendientes.
+          urlFoto: urlFoto ?? null,
+          iaMaterial: iaMaterial ?? null,
+          iaConfianza: iaConfianza ?? null,
+          mensajeUsuario: notas ?? null,
         },
       })
-    }  // ← esta llave faltaba
+    }
 
     return response.created({
       mensaje: 'Reserva registrada correctamente',

@@ -29,6 +29,15 @@ export default class Reserva extends BaseModel {
   @column()
   declare notas: string | null
 
+  @column()
+  declare urlFoto: string | null
+
+  @column()
+  declare iaMaterial: string | null
+
+  @column()
+  declare iaConfianza: string | null
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
