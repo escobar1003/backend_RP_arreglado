@@ -181,6 +181,7 @@ export interface ApiDefinition {
   }
   reservaImagenes: {
     store: typeof routes['reserva_imagenes.store']
+    index: typeof routes['reserva_imagenes.index']
   }
   notificacionesUsuario: {
     index: typeof routes['notificaciones_usuario.index']
@@ -208,6 +209,7 @@ export interface ApiDefinition {
     store: typeof routes['reservas_encargado.store']
     update: typeof routes['reservas_encargado.update']
     destroy: typeof routes['reservas_encargado.destroy']
+    imagenes: typeof routes['reservas_encargado.imagenes']
   }
   notificaciones: {
     index: typeof routes['notificaciones.index']

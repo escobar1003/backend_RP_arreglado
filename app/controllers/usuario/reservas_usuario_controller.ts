@@ -4,19 +4,21 @@ import Reserva from '#models/reserva'
 import PuntoReciclaje from '#models/punto_reciclaje'
 import Notificacion from '#models/notificacion'
 import WsService from '#services/ws_service'
+import { crearReservaValidator } from '#validators/usuario/reserva'
 import { serializarImagenConAnalisis } from '#controllers/usuario/reserva_imagenes_controller'
 // Imágenes enviadas por el usuario junto con el resultado del análisis de IA
 import Usuario from '#models/usuario'
 
 export default class ReservasUsuarioController {
-  async index({ auth, response }: HttpContext) { //obtiene todas las reservas del usuario autenticado
+  async index({ auth, response }: HttpContext) {
+    //obtiene todas las reservas del usuario autenticado
     const reservas = await Reserva.query() //inicia la consulta sobre la tabla de reservas
       .where('id_usuario', auth.user!.idUsuario) //filtra reservas por el id del usuario autenticado
       .preload('punto', (q) => q.select('id_punto', 'nombre', 'direccion', 'horario')) //carga informacion del punto de reciclaje
       .orderBy('fecha', 'desc') //odena las reservas
 
     return response.ok({
-      reservas: reservas.map(r => ({
+      reservas: reservas.map((r) => ({
         idReserva: r.idReserva,
         estado: r.estado,
         fecha: r.fecha,
@@ -25,8 +27,8 @@ export default class ReservasUsuarioController {
         puntoReciclaje: {
           nombre: r.punto.nombre,
           direccion: r.punto.direccion,
-        }
-      }))
+        },
+      })),
     })
   }
 
@@ -34,7 +36,9 @@ export default class ReservasUsuarioController {
     const reserva = await Reserva.query()
       .where('id_reserva', params.id) //Evita que alguien consulte reservas ajenas modificando la URL.
       .where('id_usuario', auth.user!.idUsuario)
-      .preload('punto', (q) => q.select('id_punto', 'nombre', 'direccion', 'horario', 'latitud', 'longitud'))
+      .preload('punto', (q) =>
+        q.select('id_punto', 'nombre', 'direccion', 'horario', 'latitud', 'longitud')
+      )
       .preload('imagenes', (q) => q.orderBy('created_at', 'asc'))
       .firstOrFail()
 
@@ -56,26 +60,18 @@ export default class ReservasUsuarioController {
   }
 
   async store({ auth, request, response }: HttpContext) {
-  console.log("Entró al store de reservas")
+    console.log('Entró al store de reservas')
 
-  const { idPunto, fecha, hora, notas, urlFoto, iaMaterial, iaConfianza } = request.only([ //Obtiene únicamente los datos enviados por el frontend.
-    'idPunto',
-    'fecha',
-    'hora',
-    'notas',
-    'urlFoto',
-    'iaMaterial',
-    'iaConfianza'
-  ])
-
-
+    const { idPunto, fecha, hora, notas, urlFoto, iaMaterial, iaConfianza } =
+      await request.validateUsing(crearReservaValidator)
 
     const punto = await PuntoReciclaje.query() //Busca el punto de reciclaje donde se realizará la reserva.
       .where('id_punto', idPunto)
       .preload('aliado')
       .firstOrFail()
 
-    const reserva = await Reserva.create({ //Crea una nueva reserva en la base de datos.
+    const reserva = await Reserva.create({
+      //Crea una nueva reserva en la base de datos.
       idUsuario: auth.user!.idUsuario,
       idPunto,
       fecha,
@@ -92,11 +88,13 @@ export default class ReservasUsuarioController {
       .where('id_rol', 4)
       .first()
 
-      console.log("Encargado encontrado:", encargado)
+    console.log('Encargado encontrado:', encargado)
 
-    if (encargado) { //Comprueba si realmente existe un encargado.
-      console.log("Voy a emitir socket al encargado", encargado.idUsuario)
-      await Notificacion.create({ //Guarda una notificación permanente en la base de datos.
+    if (encargado) {
+      //Comprueba si realmente existe un encargado.
+      console.log('Voy a emitir socket al encargado', encargado.idUsuario)
+      await Notificacion.create({
+        //Guarda una notificación permanente en la base de datos.
         idUsuario: encargado.idUsuario,
         tipo: 'reserva',
         titulo: 'Nueva reserva',
@@ -105,7 +103,8 @@ export default class ReservasUsuarioController {
         idReferencia: reserva.idReserva,
       })
 
-      WsService.emitToEncargado(encargado.idUsuario, 'notificacion', { //Envía una notificación mediante WebSocket.
+      WsService.emitToEncargado(encargado.idUsuario, 'notificacion', {
+        //Envía una notificación mediante WebSocket.
         tipo: 'nueva_reserva',
         reserva: {
           idReserva: reserva.idReserva,
@@ -149,9 +148,7 @@ export default class ReservasUsuarioController {
     reserva.estado = 'cancelada'
     await reserva.save() //Simplemente cambia su estado en la base de datos.
 
-    const punto = await PuntoReciclaje.query()
-      .where('id_punto', reserva.idPunto)
-      .firstOrFail()
+    const punto = await PuntoReciclaje.query().where('id_punto', reserva.idPunto).firstOrFail()
 
     const encargado = await Usuario.query()
       .where('id_aliado', punto.idAliado)
