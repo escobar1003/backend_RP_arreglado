@@ -60,8 +60,6 @@ export default class ReservasUsuarioController {
   }
 
   async store({ auth, request, response }: HttpContext) {
-    console.log('Entró al store de reservas')
-
     const { idPunto, fecha, hora, notas, urlFoto, iaMaterial, iaConfianza } =
       await request.validateUsing(crearReservaValidator)
 
@@ -88,11 +86,8 @@ export default class ReservasUsuarioController {
       .where('id_rol', 4)
       .first()
 
-    console.log('Encargado encontrado:', encargado)
-
     if (encargado) {
       //Comprueba si realmente existe un encargado.
-      console.log('Voy a emitir socket al encargado', encargado.idUsuario)
       await Notificacion.create({
         //Guarda una notificación permanente en la base de datos.
         idUsuario: encargado.idUsuario,
@@ -170,15 +165,7 @@ export default class ReservasUsuarioController {
     })
   }
 
-  async destroy({ auth, params, response }: HttpContext) {
-    const reserva = await Reserva.query()
-      .where('id_reserva', params.id)
-      .where('id_usuario', auth.user!.idUsuario)
-      .firstOrFail()
-
-    reserva.estado = 'cancelada'
-    await reserva.save()
-
-    return response.ok({ mensaje: 'Reserva cancelada correctamente' })
+  async destroy(ctx: HttpContext) {
+    return this.cancelar(ctx)
   }
 }
