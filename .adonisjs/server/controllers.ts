@@ -64,6 +64,5 @@ export const controllers = {
     Recompensas: () => import('#controllers/usuario/recompensas_controller'),
     ReservaImagenes: () => import('#controllers/usuario/reserva_imagenes_controller'),
     ReservasUsuario: () => import('#controllers/usuario/reservas_usuario_controller'),
-    ReservasUsuarios: () => import('#controllers/usuario/reservas_usuarios_controller'),
   },
 }
