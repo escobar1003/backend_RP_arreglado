@@ -13,6 +13,8 @@ cloudinary.config({
 
 export default class DeteccionController {
   public async procesarCamara({ request, response }: HttpContext) {
+    console.log('🔥 procesarCamara llamado')
+    
     // 1. Recibir la foto de la app móvil
     const imagenMobile = request.file('image', {
       size: '5mb',
