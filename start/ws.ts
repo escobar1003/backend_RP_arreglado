@@ -3,8 +3,10 @@ import server from '@adonisjs/core/services/server'
 import { Secret } from '@adonisjs/core/helpers'
 import WsService from '#services/ws_service'
 import Usuario from '#models/usuario'
+import fs from 'node:fs'
 
 app.ready(() => {
+  fs.mkdirSync(app.tmpPath('uploads'), { recursive: true })
   WsService.boot(server.getNodeServer())
   const io = WsService.io!
 
