@@ -39,17 +39,9 @@ export default class PerfilAliadoController {
       })
     }
 
-    const aliado = await Aliado.query()
-      .where('correo', usuario.correo)
-      .firstOrFail()
+    const aliado = await Aliado.query().where('correo', usuario.correo).firstOrFail()
 
-    const datos = request.only([
-      'nombre',
-      'tipoNegocio',
-      'descripcion',
-      'direccion',
-      'telefono',
-    ])
+    const datos = request.only(['nombre', 'tipoNegocio', 'descripcion', 'direccion', 'telefono'])
 
     aliado.merge(datos)
     await aliado.save()
@@ -69,17 +61,9 @@ export default class PerfilAliadoController {
       })
     }
 
-    const aliado = await Aliado.query()
-      .where('correo', usuario.correo)
-      .firstOrFail()
+    const aliado = await Aliado.query().where('correo', usuario.correo).firstOrFail()
 
-    const datos = request.only([
-      'nombre',
-      'direccion',
-      'latitud',
-      'longitud',
-      'horario',
-    ])
+    const datos = request.only(['nombre', 'direccion', 'latitud', 'longitud', 'horario'])
 
     const punto = await PuntoReciclaje.create({
       idAliado: aliado.idAliado,
@@ -102,9 +86,7 @@ export default class PerfilAliadoController {
       })
     }
 
-    const aliado = await Aliado.query()
-      .where('correo', usuario.correo)
-      .firstOrFail()
+    const aliado = await Aliado.query().where('correo', usuario.correo).firstOrFail()
 
     const punto = await PuntoReciclaje.query()
       .where('id_punto', params.id)

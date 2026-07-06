@@ -1,8 +1,9 @@
-import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
+import { BaseModel, column, belongsTo, hasMany } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
-import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
 import Usuario from './usuario.js'
 import PuntoReciclaje from './punto_reciclaje.js'
+import ReservaImagene from './reserva_imagene.js'
 
 export default class Reserva extends BaseModel {
   public static table = 'reservas'
@@ -28,6 +29,15 @@ export default class Reserva extends BaseModel {
   @column()
   declare notas: string | null
 
+  @column()
+  declare urlFoto: string | null
+
+  @column()
+  declare iaMaterial: string | null
+
+  @column()
+  declare iaConfianza: string | null
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 
@@ -39,4 +49,7 @@ export default class Reserva extends BaseModel {
 
   @belongsTo(() => PuntoReciclaje, { foreignKey: 'idPunto' })
   declare punto: BelongsTo<typeof PuntoReciclaje>
+
+  @hasMany(() => ReservaImagene, { foreignKey: 'idReserva' })
+  declare imagenes: HasMany<typeof ReservaImagene>
 }

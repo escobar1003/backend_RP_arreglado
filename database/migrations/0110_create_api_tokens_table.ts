@@ -4,7 +4,13 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.integer('tokenable_id').unsigned().notNullable().references('id_usuario').inTable('usuarios').onDelete('CASCADE')
+      table
+        .integer('tokenable_id')
+        .unsigned()
+        .notNullable()
+        .references('id_usuario')
+        .inTable('usuarios')
+        .onDelete('CASCADE')
       table.string('type').notNullable()
       table.string('name').nullable()
       table.string('hash').notNullable()
@@ -14,5 +20,7 @@ export default class extends BaseSchema {
       table.datetime('updated_at').nullable()
     })
   }
-  async down() { this.schema.dropTable(this.tableName) }
+  async down() {
+    this.schema.dropTable(this.tableName)
+  }
 }

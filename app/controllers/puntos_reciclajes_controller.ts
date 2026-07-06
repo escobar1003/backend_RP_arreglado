@@ -11,7 +11,7 @@ export default class PuntosReciclajeController {
 
     return response.ok({
       total: puntos.length,
-      puntos: puntos.map(p => ({
+      puntos: puntos.map((p) => ({
         id: p.idPunto,
         nombre: p.nombre,
         direccion: p.direccion,
@@ -21,12 +21,12 @@ export default class PuntosReciclajeController {
         aliado: {
           nombre: p.aliado.nombre,
         },
-        materiales: p.materiales.map(m => ({
+        materiales: p.materiales.map((m) => ({
           id: m.idMaterial,
           nombre: m.nombre,
           puntosPorKg: m.puntosPorKg,
-        }))
-      }))
+        })),
+      })),
     })
   }
 
@@ -47,11 +47,11 @@ export default class PuntosReciclajeController {
       aliado: {
         nombre: punto.aliado.nombre,
       },
-      materiales: punto.materiales.map(m => ({
+      materiales: punto.materiales.map((m) => ({
         id: m.idMaterial,
         nombre: m.nombre,
         puntosPorKg: m.puntosPorKg,
-      }))
+      })),
     })
   }
 }

@@ -1,6 +1,9 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Recompensa from '#models/recompensa'
-import { crearRecompensaValidator, actualizarRecompensaValidator } from '#validators/admin/recompensa'
+import {
+  crearRecompensaValidator,
+  actualizarRecompensaValidator,
+} from '#validators/admin/recompensa'
 
 export default class RecompensasController {
   async index({ response }: HttpContext) {

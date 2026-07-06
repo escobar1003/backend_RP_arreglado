@@ -25,7 +25,7 @@ export default class PerfilEncargadoController {
     }
 
     return response.ok({
-      usuario:{
+      usuario: {
         idUsuario: usuario.idUsuario,
         nombre: usuario.nombre,
         apellido: usuario.apellido,
@@ -37,11 +37,13 @@ export default class PerfilEncargadoController {
         estado: usuario.estadoUsuario.nombre,
         idAliado: usuario.idAliado,
         aliado: usuario.aliado?.nombre ?? null,
-        puntoACargo: usuario.puntoACargo ? {
-          idPunto: usuario.puntoACargo.idPunto,
-          nombre: usuario.puntoACargo.nombre,
-        } : null,
-      } 
+        puntoACargo: usuario.puntoACargo
+          ? {
+              idPunto: usuario.puntoACargo.idPunto,
+              nombre: usuario.puntoACargo.nombre,
+            }
+          : null,
+      },
     })
   }
 
@@ -53,13 +55,14 @@ export default class PerfilEncargadoController {
 
     return response.ok({
       mensaje: 'Perfil actualizado correctamente',
-       usuario:{
+      usuario: {
         idUsuario: usuario.idUsuario,
         nombre: usuario.nombre,
         apellido: usuario.apellido,
         correo: usuario.correo,
         telefono: usuario.telefono,
         imagen: usuario.imagen,
-       } })
+      },
+    })
   }
 }

@@ -35,10 +35,7 @@ export default class RecuperarPasswordsController {
 
     try {
       await mail.send((message) => {
-        message
-          .to(correo)
-          .subject('Recycling Points - Código de recuperación')
-          .html(`
+        message.to(correo).subject('Recycling Points - Código de recuperación').html(`
             <h2>Hola ${usuario.nombre},</h2>
             <p>Recibimos una solicitud para restablecer tu contraseña.</p>
             <p>Tu código de recuperación es:</p>

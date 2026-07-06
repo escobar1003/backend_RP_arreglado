@@ -13,6 +13,7 @@ export const crearAliadoValidator = vine.compile(
     latitud: vine.number().min(-90).max(90).optional(),
     longitud: vine.number().min(-180).max(180).optional(),
     ubicacionDireccion: vine.string().maxLength(255).optional(),
+    materiales: vine.array(vine.number().positive()).optional(), // ← AGREGAR AQUÍ
   })
 )
 

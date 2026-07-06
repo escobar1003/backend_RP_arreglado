@@ -4,8 +4,20 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id_punto')
-      table.integer('id_estado_punto').unsigned().notNullable().references('id_estado_punto').inTable('estados_puntos').onDelete('RESTRICT')
-      table.integer('id_aliado').unsigned().notNullable().references('id_aliado').inTable('aliados').onDelete('CASCADE')
+      table
+        .integer('id_estado_punto')
+        .unsigned()
+        .notNullable()
+        .references('id_estado_punto')
+        .inTable('estados_puntos')
+        .onDelete('RESTRICT')
+      table
+        .integer('id_aliado')
+        .unsigned()
+        .notNullable()
+        .references('id_aliado')
+        .inTable('aliados')
+        .onDelete('CASCADE')
       table.string('nombre', 100).notNullable()
       table.string('direccion', 150).nullable()
       table.decimal('latitud', 10, 7).nullable()
@@ -15,5 +27,7 @@ export default class extends BaseSchema {
       table.datetime('updated_at').nullable()
     })
   }
-  async down() { this.schema.dropTable(this.tableName) }
+  async down() {
+    this.schema.dropTable(this.tableName)
+  }
 }

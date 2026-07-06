@@ -6,11 +6,16 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       // Usamos 'id_transaccion' para que coincida con tu @column idTransaccion
-      table.increments('id_transaccion') 
-      
+      table.increments('id_transaccion')
+
       // Relación con el usuario
-      table.integer('id_usuario').unsigned().references('id_usuario').inTable('usuarios').onDelete('CASCADE')
-      
+      table
+        .integer('id_usuario')
+        .unsigned()
+        .references('id_usuario')
+        .inTable('usuarios')
+        .onDelete('CASCADE')
+
       // Columnas para los puntos y el material
       table.integer('cantidad_puntos').notNullable()
       table.string('tipo_material', 50).notNullable()

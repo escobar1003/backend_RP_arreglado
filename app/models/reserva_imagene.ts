@@ -15,6 +15,38 @@ export default class ReservaImagene extends BaseModel {
   @column()
   declare url: string
 
+  @column()
+  declare estadoAnalisis: 'pendiente' | 'completado' | 'sin_deteccion' | 'error'
+
+  @column()
+  declare detectado: boolean
+
+  @column()
+  declare materialDetectado: string | null
+
+  @column()
+  declare confianza: number | null
+
+  @column({
+    prepare: (value: unknown) =>
+      value === null || value === undefined ? null : JSON.stringify(value),
+    consume: (value: unknown) => {
+      if (value === null || value === undefined) return null
+      if (typeof value === 'string') {
+        try {
+          return JSON.parse(value)
+        } catch {
+          return value
+        }
+      }
+      return value
+    },
+  })
+  declare analisisRaw: Record<string, any> | null
+
+  @column.dateTime()
+  declare analizadoEn: DateTime | null
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

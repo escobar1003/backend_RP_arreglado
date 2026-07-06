@@ -10,6 +10,10 @@ export default defineConfig({
     },
     servers: [
       {
+        url: 'https://backend-rp-arreglado-n8p8.onrender.com',
+        description: 'Servidor de producción',
+      },
+      {
         url: 'http://localhost:3333',
         description: 'Servidor de desarrollo',
       },

@@ -2,22 +2,8 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Usuario from '#models/usuario'
 import hash from '@adonisjs/core/services/hash'
 import { loginValidator } from '#validators/auth/login'
-import { ApiBody, ApiResponse } from '@foadonis/openapi/decorators'
 
 export default class LoginController {
-  @ApiBody({
-    schema: {
-      type: 'object',
-      properties: {
-        correo: { type: 'string', format: 'email', description: 'Correo electrónico del usuario' },
-        password: { type: 'string', minLength: 6, description: 'Contraseña del usuario' },
-      },
-      required: ['correo', 'password'],
-    },
-  })
-  @ApiResponse({ status: 200, description: 'Inicio de sesión exitoso', schema: { type: 'object', properties: { mensaje: { type: 'string' }, token: { type: 'string' }, usuario: { type: 'object' } } } })
-  @ApiResponse({ status: 401, description: 'Credenciales inválidas' })
-  @ApiResponse({ status: 422, description: 'Error de validación' })
   async iniciarSesion({ request, response }: HttpContext) {
     const { correo, password } = await request.validateUsing(loginValidator)
 
@@ -39,19 +25,25 @@ export default class LoginController {
     // Verificar password manualmente
     const passwordValido = await hash.verify(usuario.password, password)
     if (!passwordValido) {
-      console.log('HASH LOGIN - FAILED email:', correo, 'pass provided:', password, 'hash in DB starts with:', usuario.password?.substring(0, 25))
+      console.log(
+        'HASH LOGIN - FAILED email:',
+        correo,
+        'pass provided:',
+        password,
+        'hash in DB starts with:',
+        usuario.password?.substring(0, 25)
+      )
       return response.unauthorized({
         mensaje: 'Credenciales inválidas',
       })
     }
-    console.log ('HASH LOGIN - OK EMAIL:', correo)
+    console.log('HASH LOGIN - OK EMAIL:', correo)
 
     if (usuario.idEstadoUsuario !== 1) {
       return response.forbidden({
         mensaje: 'Tu cuenta está inactiva o suspendida',
       })
     }
-    
 
     const token = await Usuario.accessTokens.create(usuario)
 

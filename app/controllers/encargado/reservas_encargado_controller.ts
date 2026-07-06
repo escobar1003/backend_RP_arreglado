@@ -2,13 +2,12 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Reserva from '#models/reserva'
 import { asegurarPuntoEncargado } from '#services/encargado_punto'
 import Notificacion from '#models/notificacion'
+import { serializarImagenConAnalisis } from '#controllers/usuario/reserva_imagenes_controller'
 import Ws from '#services/ws_service'
 
 export default class ReservasEncargadoController {
   async index({ auth, request, response }: HttpContext) {
-    console.log('✅ Llegó al controlador de reservas encargado')
     const usuario = auth.user!
-    console.log('👤 Usuario:', usuario.idUsuario)
 
     const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
     if (!punto) {
@@ -47,9 +46,28 @@ export default class ReservasEncargadoController {
       .where('id_reserva', params.id)
       .where('id_punto', punto.idPunto)
       .preload('usuario', (q) => q.select('id_usuario', 'nombre', 'correo', 'telefono'))
+      .preload('imagenes', (q) => q.orderBy('created_at', 'asc'))
       .firstOrFail()
 
-    return response.ok({ reserva })
+    return response.ok({ reserva, imagenes: reserva.imagenes.map(serializarImagenConAnalisis) })
+  }
+
+  async imagenes({ auth, params, response }: HttpContext) {
+    const usuario = auth.user!
+    const { punto, mensaje } = await asegurarPuntoEncargado(usuario)
+    if (!punto) return response.notFound({ mensaje })
+
+    const reserva = await Reserva.query()
+      .where('id_reserva', params.id)
+      .where('id_punto', punto.idPunto)
+      .preload('imagenes', (q) => q.orderBy('created_at', 'asc'))
+      .firstOrFail()
+
+    return response.ok({
+      success: true,
+      idReserva: reserva.idReserva,
+      imagenes: reserva.imagenes.map(serializarImagenConAnalisis),
+    })
   }
 
   async store({ auth, request, response }: HttpContext) {
@@ -114,22 +132,37 @@ export default class ReservasEncargadoController {
     await reserva.load('usuario', (q) => q.select('id_usuario', 'nombre', 'correo', 'telefono'))
 
     if (estado) {
-      const estadoLabel: Record<string, string> = { confirmada: 'aceptada', cancelada: 'rechazada' }
+      const estadoLabel: Record<string, string> = {
+        pendiente: 'puesta en pendiente',
+        confirmada: 'aceptada',
+        cancelada: 'rechazada',
+        completada: 'completada',
+      }
+
+      const eventoPorEstado: Record<string, string> = {
+        pendiente: 'reserva_pendiente',
+        confirmada: 'reserva_aceptada',
+        cancelada: 'reserva_rechazada',
+        completada: 'reserva_completada',
+      }
+
+      const etiqueta = estadoLabel[estado] ?? estado
+      const evento = eventoPorEstado[estado] ?? 'reserva_actualizada'
+
       await Notificacion.create({
         idUsuario: reserva.idUsuario,
-        titulo: `Reserva ${estadoLabel[estado] || estado}`,
-        mensaje: `Tu reserva en ${punto.nombre} para el ${reserva.fecha} a las ${reserva.hora} fue ${estadoLabel[estado] || estado}.`,
+        titulo: `Reserva ${etiqueta}`,
+        mensaje: `Tu reserva en ${punto.nombre} para el ${reserva.fecha} a las ${reserva.hora} fue ${etiqueta}.`,
         leida: false,
         tipo: 'reserva',
         idReferencia: reserva.idReserva,
       })
 
-      const evento = estado === 'confirmada' ? 'reserva_aceptada' : 'reserva_rechazada'
       Ws.emitToUsuario(reserva.idUsuario, evento, {
         idReserva: reserva.idReserva,
         estado,
-        titulo: `Reserva ${estadoLabel[estado]}`,
-        mensaje: `Tu reserva en ${punto.nombre} para el ${reserva.fecha} a las ${reserva.hora} fue ${estadoLabel[estado]}.`,
+        titulo: `Reserva ${etiqueta}`,
+        mensaje: `Tu reserva en ${punto.nombre} para el ${reserva.fecha} a las ${reserva.hora} fue ${etiqueta}.`,
       })
     }
 
@@ -149,7 +182,30 @@ export default class ReservasEncargadoController {
       .where('id_punto', punto.idPunto)
       .firstOrFail()
 
+    // Guardamos los datos antes de borrar, porque después de reserva.delete()
+    // ya no tiene sentido confiar en la instancia para armar la notificación.
+    const idReservaEliminada = reserva.idReserva
+    const idUsuarioReserva = reserva.idUsuario
+    const fechaReserva = reserva.fecha
+    const horaReserva = reserva.hora
+
     await reserva.delete()
+
+    const mensajeAviso = `Tu reserva en ${punto.nombre} para el ${fechaReserva} a las ${horaReserva} fue eliminada por el punto de reciclaje.`
+
+    await Notificacion.create({
+      idUsuario: idUsuarioReserva,
+      titulo: 'Reserva eliminada',
+      mensaje: mensajeAviso,
+      leida: false,
+      tipo: 'reserva',
+      idReferencia: idReservaEliminada,
+    })
+
+    Ws.emitToUsuario(idUsuarioReserva, 'reserva_eliminada', {
+      idReserva: idReservaEliminada,
+      mensaje: mensajeAviso,
+    })
 
     return response.ok({ mensaje: 'Reserva eliminada exitosamente' })
   }

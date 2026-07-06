@@ -768,6 +768,12 @@ const routes = {
     tokens: [{"old":"/api/usuario/reservas/:id/imagenes","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas/:id/imagenes","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas/:id/imagenes","type":0,"val":"reservas","end":""},{"old":"/api/usuario/reservas/:id/imagenes","type":1,"val":"id","end":""},{"old":"/api/usuario/reservas/:id/imagenes","type":0,"val":"imagenes","end":""}],
     types: placeholder as Registry['reserva_imagenes.store']['types'],
   },
+  'reserva_imagenes.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/usuario/reservas/:id/imagenes',
+    tokens: [{"old":"/api/usuario/reservas/:id/imagenes","type":0,"val":"api","end":""},{"old":"/api/usuario/reservas/:id/imagenes","type":0,"val":"usuario","end":""},{"old":"/api/usuario/reservas/:id/imagenes","type":0,"val":"reservas","end":""},{"old":"/api/usuario/reservas/:id/imagenes","type":1,"val":"id","end":""},{"old":"/api/usuario/reservas/:id/imagenes","type":0,"val":"imagenes","end":""}],
+    types: placeholder as Registry['reserva_imagenes.index']['types'],
+  },
   'notificaciones_usuario.index': {
     methods: ["GET","HEAD"],
     pattern: '/api/usuario/notificaciones',
@@ -869,6 +875,12 @@ const routes = {
     pattern: '/api/encargado/reservas/:id',
     tokens: [{"old":"/api/encargado/reservas/:id","type":0,"val":"api","end":""},{"old":"/api/encargado/reservas/:id","type":0,"val":"encargado","end":""},{"old":"/api/encargado/reservas/:id","type":0,"val":"reservas","end":""},{"old":"/api/encargado/reservas/:id","type":1,"val":"id","end":""}],
     types: placeholder as Registry['reservas_encargado.destroy']['types'],
+  },
+  'reservas_encargado.imagenes': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/reservas/:id/imagenes',
+    tokens: [{"old":"/api/encargado/reservas/:id/imagenes","type":0,"val":"api","end":""},{"old":"/api/encargado/reservas/:id/imagenes","type":0,"val":"encargado","end":""},{"old":"/api/encargado/reservas/:id/imagenes","type":0,"val":"reservas","end":""},{"old":"/api/encargado/reservas/:id/imagenes","type":1,"val":"id","end":""},{"old":"/api/encargado/reservas/:id/imagenes","type":0,"val":"imagenes","end":""}],
+    types: placeholder as Registry['reservas_encargado.imagenes']['types'],
   },
   'materiales.index': {
     methods: ["GET","HEAD"],

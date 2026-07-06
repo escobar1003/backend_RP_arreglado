@@ -2,7 +2,6 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Notificacion from '#models/notificacion'
 
 export default class NotificacionesUsuarioController {
-
   // GET /api/usuario/notificaciones
   async index({ auth, response }: HttpContext) {
     const usuario = auth.user!
@@ -47,3 +46,4 @@ export default class NotificacionesUsuarioController {
     return response.ok({ mensaje: 'Todas las notificaciones marcadas como leídas' })
   }
 }
+//para consultar notiicaciones desde la app

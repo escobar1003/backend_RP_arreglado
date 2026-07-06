@@ -1,9 +1,13 @@
 import db from '@adonisjs/lucid/services/db'
 
 async function seedMateriales() {
-  const [existeEstado] = await db.rawQuery("SELECT COUNT(*) as total FROM estados_materiales WHERE id_estado_material = 1")
+  const [existeEstado] = await db.rawQuery(
+    'SELECT COUNT(*) as total FROM estados_materiales WHERE id_estado_material = 1'
+  )
   if (Number(existeEstado[0]?.total ?? 0) === 0) {
-    await db.rawQuery("INSERT INTO estados_materiales (id_estado_material, nombre) VALUES (1, 'Activo')")
+    await db.rawQuery(
+      "INSERT INTO estados_materiales (id_estado_material, nombre) VALUES (1, 'Activo')"
+    )
   }
 
   const materiales = [
@@ -15,7 +19,10 @@ async function seedMateriales() {
 
   let creados = 0
   for (const mat of materiales) {
-    const [existe] = await db.rawQuery('SELECT COUNT(*) as total FROM materiales WHERE nombre = ?', [mat.nombre])
+    const [existe] = await db.rawQuery(
+      'SELECT COUNT(*) as total FROM materiales WHERE nombre = ?',
+      [mat.nombre]
+    )
     if (Number(existe[0]?.total ?? 0) === 0) {
       await db.table('materiales').insert({
         id_estado_material: 1,

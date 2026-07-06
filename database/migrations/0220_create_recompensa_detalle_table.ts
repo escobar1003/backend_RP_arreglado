@@ -4,7 +4,13 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id_detalle_recompensa')
-      table.integer('id_recompensa').unsigned().notNullable().references('id_recompensa').inTable('recompensas').onDelete('CASCADE')
+      table
+        .integer('id_recompensa')
+        .unsigned()
+        .notNullable()
+        .references('id_recompensa')
+        .inTable('recompensas')
+        .onDelete('CASCADE')
       table.decimal('valor_porcentaje', 5, 2).nullable()
       table.decimal('valor_fijo', 10, 2).nullable()
       table.string('codigo_cupon', 50).nullable()
@@ -12,5 +18,7 @@ export default class extends BaseSchema {
       table.text('condiciones').nullable()
     })
   }
-  async down() { this.schema.dropTable(this.tableName) }
+  async down() {
+    this.schema.dropTable(this.tableName)
+  }
 }

@@ -8,5 +8,7 @@ export default class extends BaseSchema {
       table.string('descripcion', 255).nullable()
     })
   }
-  async down() { this.schema.dropTable(this.tableName) }
+  async down() {
+    this.schema.dropTable(this.tableName)
+  }
 }

@@ -8,12 +8,12 @@ services:
     container_name: reciclin_point_backend
     restart: always
     ports:
-      - "3333:3333"
+      - '3333:3333'
     environment:
       - NODE_ENV=production
       - PORT=3333
       - HOST=0.0.0.0
-      
+
       # 🚀 VARIABLES REQUERIDAS POR ADONIS v6
       - LOG_LEVEL=info
       - APP_KEY=wBPyiDPvleUkLM8jCd1yt2zC__E0ao_Z
@@ -22,12 +22,12 @@ services:
       - CORS_ORIGIN=*
 
       # 🔌 ☁️ CONEXIÓN A TU BASE DE DATOS DESPLEGADA EN LA NUBE (RENDER/NEON)
-      - DB_CONNECTION=mysql   # O postgresql, según la que uses en la nube
+      - DB_CONNECTION=mysql # O postgresql, según la que uses en la nube
       - DB_HOST= bsczq2jyp0c0ier7ihzy-mysql.services.clever-cloud.com
-      - DB_PORT=3306        # O el puerto que te dé tu proveedor (ej. 3306 para MySQL, 5432 para Postgres)
+      - DB_PORT=3306 # O el puerto que te dé tu proveedor (ej. 3306 para MySQL, 5432 para Postgres)
       - DB_USER=uw9k92byoe4asegy
       - DB_PASSWORD= B9IjiIAoHSqDxYsAY5ls
       - DB_DATABASE=bsczq2jyp0c0ier7ihzy
-      
+
       # 🤖 CONFIGURACIÓN DE IA (GEMINI)
       - GEMINI_API_KEY=AIzaSyDL_W3wddiZV1jR30OfT0avQ9ABNMMvqeI
