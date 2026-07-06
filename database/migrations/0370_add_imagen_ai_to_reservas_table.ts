@@ -4,10 +4,15 @@ export default class extends BaseSchema {
   protected tableName = 'reservas'
 
   async up() {
-    this.schema.alterTable(this.tableName, (table) => {
-      table.text('imagen').nullable().after('notas')
-      table.text('ai_resultado').nullable().after('imagen')
-    })
+    const hasImagen = await this.schema.hasColumn(this.tableName, 'imagen')
+    const hasAiResultado = await this.schema.hasColumn(this.tableName, 'ai_resultado')
+
+    if (!hasImagen || !hasAiResultado) {
+      this.schema.alterTable(this.tableName, (table) => {
+        if (!hasImagen) table.text('imagen').nullable().after('notas')
+        if (!hasAiResultado) table.text('ai_resultado').nullable().after('imagen')
+      })
+    }
   }
 
   async down() {

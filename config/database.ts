@@ -7,28 +7,15 @@ const dbConfig = defineConfig({
   connections: {
     mysql: {
       client: 'mysql2',
+
       connection: {
-        host: env.get('DB_HOST'),
+        host: env.get('MYSQL_HOST', env.get('DB_HOST', 'localhost')),
         port: Number(env.get('DB_PORT', '3306')),
-        user: env.get('DB_USER'),
-        password: env.get('DB_PASSWORD'),
-        database: env.get('DB_DATABASE'),
-        ssl: env.get('DB_SSL') === 'true' ? { rejectUnauthorized: false } : undefined,
+        user: env.get('MYSQL_USER', env.get('DB_USER', 'root')),
+        password: env.get('MYSQL_PASSWORD', env.get('DB_PASSWORD', '')),
+        database: env.get('MYSQL_DB_NAME', env.get('DB_DATABASE', 'reciclyng_points')),
       },
-      pool: {
-        min: 1,
-        max: 3,
-        acquireTimeoutMillis: 15000,
-        createTimeoutMillis: 15000,
-        idleTimeoutMillis: 10000,
-        reapIntervalMillis: 1000,
-        createRetryIntervalMillis: 200,
-        afterCreate: (conn: any, done: any) => {
-          conn.query('SELECT 1', (err: any) => {
-            done(err, conn)
-          })
-        },
-      },
+
       migrations: {
         naturalSort: true,
         paths: ['database/migrations'],
