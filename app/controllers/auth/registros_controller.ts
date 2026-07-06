@@ -4,7 +4,7 @@ import { DateTime } from 'luxon'
 
 export default class RegistrosController {
   async registrarse({ request, response }: HttpContext) {
-    const datos = request.only(['nombre', 'apellido', 'correo', 'password', 'telefono'])
+    const datos = request.only(['nombre', 'apellido', 'correo', 'password', 'telefono', 'cedula'])
 
     const correoExiste = await Usuario.findBy('correo', datos.correo)
     if (correoExiste) {
@@ -21,6 +21,7 @@ export default class RegistrosController {
       correo: datos.correo,
       password: datos.password,
       telefono: datos.telefono ?? null,
+      cedula: datos.cedula ?? null,
       fechaRegistro: DateTime.now(),
     })
 
@@ -37,6 +38,7 @@ export default class RegistrosController {
         apellido: usuario.apellido,
         correo: usuario.correo,
         telefono: usuario.telefono,
+        cedula: usuario.cedula,
         rol: usuario.rol.nombre,
       },
     })
