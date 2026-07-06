@@ -17,7 +17,13 @@ export default class UsuariosController {
 
     const usuarios = await Usuario.query()
       .where('id_rol', 3)
-      .where('cedula', q)
+      .where((query) => {
+        query
+          .where('nombre', 'LIKE', `%${q}%`)
+          .orWhere('correo', 'LIKE', `%${q}%`)
+          .orWhere('cedula', 'LIKE', `%${q}%`)
+      })
+      .limit(10)
 
     const ahora = DateTime.now()
     const result = await Promise.all(
@@ -36,6 +42,7 @@ export default class UsuariosController {
           idUsuario: u.idUsuario,
           nombre: u.nombre,
           correo: u.correo,
+          cedula: u.cedula,
           puntosDisponibles: ganados - descontados + ajuste,
         }
       })
