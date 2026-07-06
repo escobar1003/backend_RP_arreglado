@@ -46,7 +46,7 @@ export default class EncargadosController {
   }
 
   async store({ auth, request, response }: HttpContext) {
-    const datos = request.only(['nombre', 'correo', 'telefono', 'zona', 'idAliado', 'idPunto'])
+    const datos = request.only(['nombre', 'correo', 'telefono', 'zona', 'idAliado', 'idPunto', 'cedula'])
     const usuario = auth.user!
     await usuario.load('rol')
 
@@ -81,6 +81,7 @@ export default class EncargadosController {
         correo: datos.correo,
         password: hashedPassword,
         telefono: datos.telefono ?? null,
+        cedula: datos.cedula ?? null,
         id_aliado: idAliado,
         zona: datos.zona || null,
         fecha_registro: new Date(),

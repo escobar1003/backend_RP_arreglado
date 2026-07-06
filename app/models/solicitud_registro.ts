@@ -22,6 +22,9 @@ export default class SolicitudRegistro extends BaseModel {
   declare telefono: string | null
 
   @column()
+  declare cedula: string | null
+
+  @column()
   declare mensaje: string | null
 
   @column()

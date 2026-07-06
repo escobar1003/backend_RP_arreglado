@@ -64,7 +64,7 @@ export default class AliadosController {
     const { latitud, longitud, ubicacionDireccion, ...datosSinCoordenadas } = datos as any
     console.log('=== COORDENADAS ===', { latitud, longitud, ubicacionDireccion })
 
-    const aliado = await Aliado.create({ ...datosSinCoordenadas, idEstadoAliado: 1 })
+    const aliado = await Aliado.create({ ...datosSinCoordenadas, idEstadoAliado: 1, direccion: ubicacionDireccion ?? null })
 
     await PuntoReciclaje.create({
       idAliado: aliado.idAliado,

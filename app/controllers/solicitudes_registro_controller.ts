@@ -18,6 +18,7 @@ export default class SolicitudesRegistroController {
       'idAliado',
       'rolSolicitado',
       'mensaje',
+      'cedula',
     ])
 
     if (!['admin', 'encargado'].includes(datos.rolSolicitado)) {
@@ -44,6 +45,7 @@ export default class SolicitudesRegistroController {
       correo: datos.correo,
       passwordHash,
       telefono: datos.telefono ?? null,
+      cedula: datos.cedula ?? null,
       idAliado: datos.idAliado || null,
       rolSolicitado: datos.rolSolicitado,
       mensaje: datos.mensaje ?? null,
@@ -155,6 +157,7 @@ export default class SolicitudesRegistroController {
       correo: solicitud.correo,
       password: hashedPassword,
       telefono: solicitud.telefono ?? null,
+      cedula: solicitud.cedula ?? null,
       idAliado: solicitud.idAliado || null,
       zona: aliado?.zona || null,
       fechaRegistro: DateTime.now(),

@@ -19,7 +19,7 @@ export default class AdministradoresController {
   }
 
   async store({ auth, request, response }: HttpContext) {
-    const datos = request.only(['nombre', 'correo', 'telefono', 'zona', 'idAliado'])
+    const datos = request.only(['nombre', 'correo', 'telefono', 'zona', 'idAliado', 'cedula'])
     const usuario = auth.user!
     await usuario.load('rol')
 
@@ -37,6 +37,7 @@ export default class AdministradoresController {
       correo: datos.correo,
       password: passwordTemporal,
       telefono: datos.telefono ?? null,
+      cedula: datos.cedula ?? null,
       zona: datos.zona || null,
       idAliado: datos.idAliado ?? (usuario.rol.nombre === 'admin' ? usuario.idAliado : null),
       fechaRegistro: DateTime.now(),

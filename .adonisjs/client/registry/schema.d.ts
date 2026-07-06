@@ -1531,18 +1531,6 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reserva_imagenes_controller').default['store']>>>
     }
   }
-  'reserva_imagenes.index': {
-    methods: ["GET","HEAD"]
-    pattern: '/api/usuario/reservas/:id/imagenes'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/reserva_imagenes_controller').default['index']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reserva_imagenes_controller').default['index']>>>
-    }
-  }
   'notificaciones_usuario.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/usuario/notificaciones'
@@ -1745,18 +1733,6 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['destroy']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['destroy']>>>
-    }
-  }
-  'reservas_encargado.imagenes': {
-    methods: ["GET","HEAD"]
-    pattern: '/api/encargado/reservas/:id/imagenes'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['imagenes']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['imagenes']>>>
     }
   }
   'materiales.index': {

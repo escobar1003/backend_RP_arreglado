@@ -6,5 +6,6 @@ export const registroValidator = vine.compile(
     correo: vine.string().email().normalizeEmail(),
     password: vine.string().minLength(6).maxLength(255),
     telefono: vine.string().maxLength(20).optional(),
+    cedula: vine.string().maxLength(20).optional(),
   })
 )

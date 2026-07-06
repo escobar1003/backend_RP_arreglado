@@ -4,6 +4,7 @@ import { asegurarPuntoEncargado } from '#services/encargado_punto'
 import Notificacion from '#models/notificacion'
 import { serializarImagenConAnalisis } from '#controllers/usuario/reserva_imagenes_controller'
 import Ws from '#services/ws_service'
+import SseManager from '#services/sse_manager'
 
 export default class ReservasEncargadoController {
   async index({ auth, request, response }: HttpContext) {
@@ -130,6 +131,7 @@ export default class ReservasEncargadoController {
 
     await reserva.save()
     await reserva.load('usuario', (q) => q.select('id_usuario', 'nombre', 'correo', 'telefono'))
+    await reserva.load('imagenes', (q) => q.orderBy('created_at', 'asc'))
 
     if (estado) {
       const estadoLabel: Record<string, string> = {
@@ -158,11 +160,27 @@ export default class ReservasEncargadoController {
         idReferencia: reserva.idReserva,
       })
 
+      const materialLabel = reserva.iaMaterial
+        ? `Material detectado: ${reserva.iaMaterial}${reserva.iaConfianza ? ` (${reserva.iaConfianza}% confianza)` : ''}`
+        : null
+
       Ws.emitToUsuario(reserva.idUsuario, evento, {
         idReserva: reserva.idReserva,
         estado,
         titulo: `Reserva ${etiqueta}`,
         mensaje: `Tu reserva en ${punto.nombre} para el ${reserva.fecha} a las ${reserva.hora} fue ${etiqueta}.`,
+        urlFoto: reserva.urlFoto,
+        iaMaterial: reserva.iaMaterial,
+        iaConfianza: reserva.iaConfianza,
+        materialLabel,
+        imagenes: reserva.imagenes.map(serializarImagenConAnalisis),
+      })
+
+      SseManager.notificarEncargado(usuario.idUsuario, {
+        tipo: 'reserva_actualizada',
+        idReserva: reserva.idReserva,
+        estado,
+        mensaje: `Reserva #${reserva.idReserva} ${etiqueta}`,
       })
     }
 

@@ -49,6 +49,9 @@ export default class Usuario extends compose(BaseModel, AuthFinder) {
   declare password: string
 
   @column()
+  declare cedula: string | null
+
+  @column()
   declare telefono: string | null
 
   @column()

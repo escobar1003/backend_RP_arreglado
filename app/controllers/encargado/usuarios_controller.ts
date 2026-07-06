@@ -17,27 +17,20 @@ export default class UsuariosController {
 
     const usuarios = await Usuario.query()
       .where('id_rol', 3)
-      .where((query) => {
-        query.where('nombre', 'LIKE', `%${q}%`).orWhere('correo', 'LIKE', `%${q}%`)
-      })
-      .limit(10)
+      .where('cedula', q)
 
     const ahora = DateTime.now()
     const result = await Promise.all(
       usuarios.map(async (u) => {
         const movimientos = await MovimientoPunto.query().where('id_usuario', u.idUsuario)
         const ganados = movimientos
-          .filter(
-            (m) => m.tipoMovimiento === 'ganados' && (!m.fechaCaducidad || m.fechaCaducidad > ahora)
-          )
+          .filter(m => m.tipoMovimiento === 'ganados' && (!m.fechaCaducidad || m.fechaCaducidad > ahora))
           .reduce((s, m) => s + m.puntos, 0)
         const descontados = movimientos
-          .filter((m) => m.tipoMovimiento === 'descontados')
+          .filter(m => m.tipoMovimiento === 'descontados')
           .reduce((s, m) => s + m.puntos, 0)
         const ajuste = movimientos
-          .filter(
-            (m) => m.tipoMovimiento === 'ajuste' && (!m.fechaCaducidad || m.fechaCaducidad > ahora)
-          )
+          .filter(m => m.tipoMovimiento === 'ajuste' && (!m.fechaCaducidad || m.fechaCaducidad > ahora))
           .reduce((s, m) => s + m.puntos, 0)
         return {
           idUsuario: u.idUsuario,

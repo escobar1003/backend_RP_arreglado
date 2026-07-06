@@ -270,20 +270,6 @@ router.group(() => {
   router.get('/perfil', [() => import('#controllers/encargado/perfil_encargado_controller'), 'mostrar'])
   router.put('/perfil', [() => import('#controllers/encargado/perfil_encargado_controller'), 'actualizar'])
 
-  // SSE - Notificaciones en tiempo real
-  router.get('/sse', async ({ auth, response }) => {
-    response.response.setHeader('Content-Type', 'text/event-stream')
-    response.response.setHeader('Cache-Control', 'no-cache')
-    response.response.setHeader('Connection', 'keep-alive')
-
-    const { default: SseManager } = await import('#services/sse_manager')
-    SseManager.addClient(auth.user!.idUsuario, response)
-
-    response.response.on('close', () => {
-      SseManager.removeClient(auth.user!.idUsuario)
-    })
-  })
-
  // Entregas
   router.get('/entregas', [() => import('#controllers/encargado/entregas_controller'), 'index'])
   router.get('/entregas/:id', [() => import('#controllers/encargado/entregas_controller'), 'show'])
@@ -311,6 +297,43 @@ router.group(() => {
 
 }).prefix('/api/encargado').use([middleware.auth(), middleware.verificar_rol(['encargado'])])
 
+// SSE - Notificaciones en tiempo real (fuera del grupo auth para usar EventSource con token en query)
+router.get('/api/encargado/sse', async ({ request, response }) => {
+  const bearerToken = request.input('token')
+  if (!bearerToken) {
+    response.status(401).send({ error: 'Token requerido' })
+    return
+  }
+
+  const { default: Usuario } = await import('#models/usuario')
+
+  const apiToken = await Usuario.accessTokens.verify(bearerToken)
+  if (!apiToken) {
+    response.status(401).send({ error: 'Token inválido' })
+    return
+  }
+
+  const usuario = await Usuario.find(apiToken.tokenableId)
+  if (!usuario) {
+    response.status(401).send({ error: 'Usuario no encontrado' })
+    return
+  }
+  if (usuario.idRol !== 4) {
+    response.status(403).send({ error: 'Solo encargados' })
+    return
+  }
+
+  response.response.setHeader('Content-Type', 'text/event-stream')
+  response.response.setHeader('Cache-Control', 'no-cache')
+  response.response.setHeader('Connection', 'keep-alive')
+
+  const { default: SseManager } = await import('#services/sse_manager')
+  SseManager.addClient(usuario.idUsuario, response)
+
+  response.response.on('close', () => {
+    SseManager.removeClient(usuario.idUsuario)
+  })
+})
 
 // SWAGGER / OPENAPI
 import openapi from '@foadonis/openapi/services/main'
