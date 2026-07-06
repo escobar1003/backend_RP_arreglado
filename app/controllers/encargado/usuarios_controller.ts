@@ -11,19 +11,17 @@ export default class UsuariosController {
     }
 
     const q = (request.qs().q || '').trim()
-    if (!q) {
-      return response.ok({ usuarios: [] })
-    }
 
-    const usuarios = await Usuario.query()
-      .where('id_rol', 3)
-      .where((query) => {
-        query
+    let query = Usuario.query().where('id_rol', 3)
+    if (q) {
+      query = query.where((sub) => {
+        sub
           .where('nombre', 'LIKE', `%${q}%`)
           .orWhere('correo', 'LIKE', `%${q}%`)
           .orWhere('cedula', 'LIKE', `%${q}%`)
       })
-      .limit(10)
+    }
+    const usuarios = await query.limit(50)
 
     const ahora = DateTime.now()
     const result = await Promise.all(
