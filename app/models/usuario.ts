@@ -52,6 +52,9 @@ export default class Usuario extends compose(BaseModel, AuthFinder) {
   declare telefono: string | null
 
   @column()
+  declare cedula: string | null
+
+  @column()
   declare imagen: string | null
 
   // Agrega esto a tu clase Usuario
