@@ -16,6 +16,15 @@ const dbConfig = defineConfig({
         database: env.get('MYSQL_DB_NAME', env.get('DB_DATABASE', 'reciclyng_points')),
       },
 
+      pool: {
+        min: 0,
+        max: 2,
+        acquireTimeoutMillis: 5000,
+        createTimeoutMillis: 5000,
+        idleTimeoutMillis: 1000,
+        reapIntervalMillis: 500,
+      },
+
       migrations: {
         naturalSort: true,
         paths: ['database/migrations'],
