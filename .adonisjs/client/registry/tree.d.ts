@@ -236,6 +236,9 @@ export interface ApiDefinition {
     actualizarEstado: typeof routes['canjes_encargado.actualizar_estado']
     validar: typeof routes['canjes_encargado.validar']
   }
+  reportes: {
+    index: typeof routes['reportes.index']
+  }
   openapi: {
     html: typeof routes['openapi.html']
     json: typeof routes['openapi.json']

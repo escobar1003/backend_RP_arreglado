@@ -18,11 +18,11 @@ const dbConfig = defineConfig({
 
       pool: {
         min: 0,
-        max: 2,
-        acquireTimeoutMillis: 5000,
-        createTimeoutMillis: 5000,
-        idleTimeoutMillis: 1000,
-        reapIntervalMillis: 500,
+        max: 1,
+        acquireTimeoutMillis: 3000,
+        createTimeoutMillis: 3000,
+        idleTimeoutMillis: 100,
+        reapIntervalMillis: 200,
       },
 
       migrations: {

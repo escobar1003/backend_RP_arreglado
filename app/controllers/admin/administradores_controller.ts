@@ -43,21 +43,25 @@ export default class AdministradoresController {
       fechaRegistro: DateTime.now(),
     })
 
-    await mail.send((message) => {
-      message
-        .to(datos.correo)
-        .from(process.env.SMTP_USERNAME!)
-        .subject('Recycling Points - Credenciales de administrador')
-        .html(`
-          <h2>Hola ${datos.nombre},</h2>
-          <p>Has sido registrado como <strong>administrador</strong> en Recycling Points.</p>
-          <p><strong>Correo:</strong> ${datos.correo}</p>
-          <p><strong>Contraseña temporal:</strong> ${passwordTemporal}</p>
-          <p>Te recomendamos cambiar tu contraseña después de iniciar sesión.</p>
-          <br>
-          <p>Saludos,<br>Equipo Recycling Points</p>
-        `)
-    })
+    try {
+      mail.send((message) => {
+        message
+          .to(datos.correo)
+          .from(process.env.SMTP_USERNAME!)
+          .subject('Recycling Points - Credenciales de administrador')
+          .html(`
+            <h2>Hola ${datos.nombre},</h2>
+            <p>Has sido registrado como <strong>administrador</strong> en Recycling Points.</p>
+            <p><strong>Correo:</strong> ${datos.correo}</p>
+            <p><strong>Contraseña temporal:</strong> ${passwordTemporal}</p>
+            <p>Te recomendamos cambiar tu contraseña después de iniciar sesión.</p>
+            <br>
+            <p>Saludos,<br>Equipo Recycling Points</p>
+          `)
+      })
+    } catch (err) {
+      console.error('Error al enviar email a admin:', err)
+    }
 
     return response.created({ mensaje: 'Administrador creado correctamente. Se enviaron las credenciales al correo.', admin })
   }

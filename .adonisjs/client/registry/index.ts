@@ -996,6 +996,12 @@ const routes = {
     tokens: [{"old":"/api/encargado/aliados/:id/punto","type":0,"val":"api","end":""},{"old":"/api/encargado/aliados/:id/punto","type":0,"val":"encargado","end":""},{"old":"/api/encargado/aliados/:id/punto","type":0,"val":"aliados","end":""},{"old":"/api/encargado/aliados/:id/punto","type":1,"val":"id","end":""},{"old":"/api/encargado/aliados/:id/punto","type":0,"val":"punto","end":""}],
     types: placeholder as Registry['puntos_reciclajes.update']['types'],
   },
+  'reportes.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/api/encargado/reportes',
+    tokens: [{"old":"/api/encargado/reportes","type":0,"val":"api","end":""},{"old":"/api/encargado/reportes","type":0,"val":"encargado","end":""},{"old":"/api/encargado/reportes","type":0,"val":"reportes","end":""}],
+    types: placeholder as Registry['reportes.index']['types'],
+  },
   'openapi.html': {
     methods: ["GET","HEAD"],
     pattern: '/swagger',

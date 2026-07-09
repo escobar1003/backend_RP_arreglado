@@ -1987,6 +1987,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/puntos_reciclajes_controller').default['update']>>>
     }
   }
+  'reportes.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/reportes'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/reportes_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/reportes_controller').default['index']>>>
+    }
+  }
   'openapi.html': {
     methods: ["GET","HEAD"]
     pattern: '/swagger'

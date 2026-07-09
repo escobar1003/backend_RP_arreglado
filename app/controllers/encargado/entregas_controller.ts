@@ -27,7 +27,7 @@ export default class EntregasController {
       .preload('detalles', (q) => q.preload('material'))
       .orderBy('fecha_entrega', 'desc')
 
-    const { supermercadoId, usuarioId, encargadoId } = request.qs()
+    const { supermercadoId, usuario_id, encargadoId } = request.qs()
 
     if (supermercadoId) {
       query.whereHas('puntoReciclaje', (q) => {
@@ -35,8 +35,8 @@ export default class EntregasController {
       })
     }
 
-    if (usuarioId) {
-      query.where('id_usuario', usuarioId)
+    if (usuario_id) {
+      query.where('id_usuario', usuario_id)
     }
 
     if (encargadoId) {

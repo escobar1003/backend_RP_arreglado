@@ -291,9 +291,12 @@ router.group(() => {
   //usuarios
   router.get('/usuarios', [() => import('#controllers/encargado/usuarios_controller'), 'index'])
 
-    // Puntos de reciclaje del aliado
+     // Puntos de reciclaje del aliado
   router.post('/aliados/:id/punto', [() => import('#controllers/admin/puntos_reciclajes_controller'), 'store'])
   router.put('/aliados/:id/punto', [() => import('#controllers/admin/puntos_reciclajes_controller'), 'update'])
+
+  // Reportes
+  router.get('/reportes', [() => import('#controllers/encargado/reportes_controller'), 'index'])
 
 }).prefix('/api/encargado').use([middleware.auth(), middleware.verificar_rol(['encargado'])])
 
