@@ -35,7 +35,7 @@ export default class ReportesController {
       .first()
 
     const canjesCount = await db.from('canjes')
-      .whereBetween('created_at', [desdeStr, hastaStr])
+          .whereBetween('fecha_canje', [desdeStr, hastaStr])
       .count('* as total')
       .first()
 
@@ -55,7 +55,7 @@ export default class ReportesController {
     // Canjes por recompensa (global)
     const canjesRecompensa = await db.from('canjes')
       .join('recompensas', 'canjes.id_recompensa', 'recompensas.id_recompensa')
-      .whereBetween('canjes.created_at', [desdeStr, hastaStr])
+      .whereBetween('canjes.fecha_canje', [desdeStr, hastaStr])
       .groupBy('recompensas.id_recompensa', 'recompensas.nombre')
       .select('recompensas.nombre as recompensa')
       .count('* as cantidad')
@@ -99,7 +99,7 @@ export default class ReportesController {
     const canjesRanking = idsRanking.length
       ? await db.from('canjes')
           .whereIn('id_usuario', idsRanking)
-          .whereBetween('created_at', [desdeStr, hastaStr])
+      .whereBetween('fecha_canje', [desdeStr, hastaStr])
           .groupBy('id_usuario')
           .select('id_usuario')
           .count('* as total')
@@ -116,7 +116,7 @@ export default class ReportesController {
         nombre: u.nombre,
         iniciales: u.nombre.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase(),
         entregas: Number(u.entregas),
-        pts: p.ganados - p.descontados + p.ajuste,
+        pts: Math.max(0, p.ganados - p.descontados + p.ajuste),
         canjes: canjesPorUsuario.get(u.id_usuario) ?? 0,
       }
     })
@@ -130,7 +130,7 @@ export default class ReportesController {
       .first()
 
     const canjeados = Number((totalCanjeados as any)?.$extras?.total ?? (totalCanjeados as any)?.total ?? 0)
-    const disponibles = totalEntregados - canjeados
+    const disponibles = Math.max(0, totalEntregados - canjeados)
     const tasaCanje = totalEntregados > 0 ? Math.round((canjeados / totalEntregados) * 100) : 0
 
     return response.ok({

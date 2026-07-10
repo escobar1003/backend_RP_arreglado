@@ -68,7 +68,7 @@ export default class CanjesController {
       )
       .reduce((sum, m) => sum + m.puntos, 0)
 
-    const saldo = ganados - descontados + ajuste
+    const saldo = Math.max(0, ganados - descontados + ajuste)
 
     if (saldo < recompensa.puntosRequeridos) {
       return response.badRequest({

@@ -30,7 +30,7 @@ export default class PerfilController {
     const ajuste = movimientos
       .filter((m) => m.tipoMovimiento === 'ajuste')
       .reduce((sum, m) => sum + m.puntos, 0)
-    const puntosAcumulados = ganados - descontados + ajuste
+    const puntosAcumulados = Math.max(0, ganados - descontados + ajuste)
 
     // SCRUM-876: Total de canjes
     const { default: Canje } = await import('#models/canje')

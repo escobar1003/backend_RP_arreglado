@@ -46,7 +46,7 @@ export default class UsuariosController {
         nombre: u.nombre,
         correo: u.correo,
         cedula: u.cedula,
-        puntosDisponibles: p.ganados - p.descontados + p.ajuste,
+        puntosDisponibles: Math.max(0, p.ganados - p.descontados + p.ajuste),
       }
     })
 

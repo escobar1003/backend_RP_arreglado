@@ -107,7 +107,7 @@ export default class CanjesEncargadoController {
         (m) => m.tipoMovimiento === 'ajuste' && (!m.fechaCaducidad || m.fechaCaducidad > ahora)
       )
       .reduce((s, m) => s + m.puntos, 0)
-    const saldo = ganados - descontados + ajuste
+    const saldo = Math.max(0, ganados - descontados + ajuste)
 
     if (saldo < recompensa.puntosRequeridos)
       return response.badRequest({
@@ -136,7 +136,7 @@ export default class CanjesEncargadoController {
     })
 
     const usuarioObj = await Usuario.findOrFail(idUsuario)
-    usuarioObj.puntosTotales = (usuarioObj.puntosTotales ?? 0) - recompensa.puntosRequeridos
+    usuarioObj.puntosTotales = Math.max(0, (usuarioObj.puntosTotales ?? 0) - recompensa.puntosRequeridos)
     await usuarioObj.save()
 
     if (recompensa.stock !== null) {

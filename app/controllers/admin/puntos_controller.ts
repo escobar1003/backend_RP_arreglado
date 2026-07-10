@@ -11,6 +11,14 @@ export default class PuntosController {
 
     const usuario = await Usuario.findOrFail(params.idUsuario)
 
+    // Validar que el ajuste no deje el saldo negativo
+    const nuevoSaldo = (usuario.puntosTotales ?? 0) + puntos
+    if (nuevoSaldo < 0) {
+      return response.badRequest({
+        mensaje: `No se puede aplicar este ajuste. El usuario tiene ${usuario.puntosTotales ?? 0} pts y el ajuste de ${puntos} pts dejaría el saldo en ${nuevoSaldo}.`,
+      })
+    }
+
     // Crear movimiento de ajuste
     const movimiento = await MovimientoPunto.create({
       idUsuario: usuario.idUsuario,
@@ -22,7 +30,7 @@ export default class PuntosController {
     })
 
     // Actualizar saldo del usuario
-    usuario.puntosTotales = (usuario.puntosTotales ?? 0) + puntos
+    usuario.puntosTotales = Math.max(0, nuevoSaldo)
     await usuario.save()
 
     // Generar notificación al usuario
