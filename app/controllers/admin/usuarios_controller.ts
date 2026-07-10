@@ -50,6 +50,7 @@ export default class UsuariosController {
       correo: datos.correo,
       password: datos.password,
       telefono: datos.telefono ?? null,
+      cedula: datos.cedula ?? null,
       fechaRegistro: DateTime.now(),
     })
 

@@ -394,26 +394,14 @@ export class RecompensaSchema extends BaseModel {
 }
 
 export class ReservaImageneSchema extends BaseModel {
-  static $columns = ['analisisRaw', 'analizadoEn', 'confianza', 'createdAt', 'detectado', 'estadoAnalisis', 'id', 'idReserva', 'materialDetectado', 'updatedAt', 'url'] as const
+  static $columns = ['createdAt', 'id', 'idReserva', 'updatedAt', 'url'] as const
   $columns = ReservaImageneSchema.$columns
-  @column()
-  declare analisisRaw: any | null
-  @column.dateTime()
-  declare analizadoEn: DateTime | null
-  @column()
-  declare confianza: string | null
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
-  @column()
-  declare detectado: boolean
-  @column()
-  declare estadoAnalisis: string
   @column({ isPrimary: true })
   declare id: number
   @column()
   declare idReserva: number
-  @column()
-  declare materialDetectado: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
   @column()
@@ -421,7 +409,7 @@ export class ReservaImageneSchema extends BaseModel {
 }
 
 export class ReservaSchema extends BaseModel {
-  static $columns = ['aiResultado', 'createdAt', 'estado', 'fecha', 'hora', 'iaConfianza', 'iaMaterial', 'idPunto', 'idReserva', 'idUsuario', 'imagen', 'notas', 'updatedAt', 'urlFoto'] as const
+  static $columns = ['aiResultado', 'createdAt', 'estado', 'fecha', 'hora', 'idPunto', 'idReserva', 'idUsuario', 'imagen', 'notas', 'updatedAt'] as const
   $columns = ReservaSchema.$columns
   @column()
   declare aiResultado: string | null
@@ -434,10 +422,6 @@ export class ReservaSchema extends BaseModel {
   @column()
   declare hora: string
   @column()
-  declare iaConfianza: string | null
-  @column()
-  declare iaMaterial: string | null
-  @column()
   declare idPunto: number
   @column({ isPrimary: true })
   declare idReserva: number
@@ -449,8 +433,6 @@ export class ReservaSchema extends BaseModel {
   declare notas: string | null
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
-  @column()
-  declare urlFoto: string | null
 }
 
 export class RoleSchema extends BaseModel {

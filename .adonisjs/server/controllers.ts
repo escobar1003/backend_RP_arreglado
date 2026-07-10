@@ -26,6 +26,7 @@ export const controllers = {
     Roles: () => import('#controllers/admin/roles_controller'),
     TiposRecompensas: () => import('#controllers/admin/tipos_recompensas_controller'),
     Usuarios: () => import('#controllers/admin/usuarios_controller'),
+    Zonas: () => import('#controllers/admin/zonas_controller'),
   },
   aliado: {
     Clasificacion: () => import('#controllers/aliado/clasificacion_controller'),
@@ -53,6 +54,7 @@ export const controllers = {
   },
   Puntos: () => import('#controllers/puntos_controller'),
   PuntosReciclajes: () => import('#controllers/puntos_reciclajes_controller'),
+  SolicitudesRegistro: () => import('#controllers/solicitudes_registro_controller'),
   usuario: {
     AliadosUsuarios: () => import('#controllers/usuario/aliados_usuarios_controller'),
     Canjes: () => import('#controllers/usuario/canjes_controller'),

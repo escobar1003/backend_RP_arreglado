@@ -4,6 +4,7 @@ import Reserva from '#models/reserva'
 import PuntoReciclaje from '#models/punto_reciclaje'
 import Notificacion from '#models/notificacion'
 import WsService from '#services/ws_service'
+import SseManager from '#services/sse_manager'
 import { crearReservaValidator } from '#validators/usuario/reserva'
 import { serializarImagenConAnalisis } from '#controllers/usuario/reserva_imagenes_controller'
 // Imágenes enviadas por el usuario junto con el resultado del análisis de IA
@@ -48,6 +49,9 @@ export default class ReservasUsuarioController {
       fecha: reserva.fecha,
       hora: reserva.hora,
       notas: reserva.notas,
+      urlFoto: reserva.urlFoto,
+      iaMaterial: reserva.iaMaterial,
+      iaConfianza: reserva.iaConfianza,
       puntoReciclaje: {
         nombre: reserva.punto.nombre,
         direccion: reserva.punto.direccion,
@@ -113,6 +117,12 @@ export default class ReservasUsuarioController {
           iaConfianza: iaConfianza ?? null,
           mensajeUsuario: notas ?? null,
         },
+      })
+
+      SseManager.notificarEncargado(encargado.idUsuario, {
+        tipo: 'nueva_reserva',
+        idReserva: reserva.idReserva,
+        mensaje: `Nueva reserva de ${auth.user!.nombre} en ${punto.nombre}`,
       })
     }
 

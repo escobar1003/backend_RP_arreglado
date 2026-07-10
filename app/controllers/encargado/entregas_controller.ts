@@ -5,6 +5,7 @@ import DetalleEntrega from '#models/detalle_entrega'
 import MovimientoPunto from '#models/movimiento_punto'
 import Material from '#models/material'
 import Usuario from '#models/usuario'
+import EstadoEntrega from '#models/estado_entrega'
 import { DateTime } from 'luxon'
 import { asegurarPuntoEncargado } from '#services/encargado_punto'
 import WsService from '#services/ws_service'
@@ -26,7 +27,7 @@ export default class EntregasController {
       .preload('detalles', (q) => q.preload('material'))
       .orderBy('fecha_entrega', 'desc')
 
-    const { supermercadoId, usuarioId, encargadoId } = request.qs()
+    const { supermercadoId, usuario_id, encargadoId } = request.qs()
 
     if (supermercadoId) {
       query.whereHas('puntoReciclaje', (q) => {
@@ -34,8 +35,8 @@ export default class EntregasController {
       })
     }
 
-    if (usuarioId) {
-      query.where('id_usuario', usuarioId)
+    if (usuario_id) {
+      query.where('id_usuario', usuario_id)
     }
 
     if (encargadoId) {
@@ -190,12 +191,24 @@ export default class EntregasController {
     entrega.idEstadoEntrega = idEstadoEntrega
     await entrega.save()
 
+    const estadoEntrega = await EstadoEntrega.find(idEstadoEntrega)
+    const nombreEstado = estadoEntrega?.nombre ?? 'actualizado'
+
     await Notificacion.create({
       idUsuario: entrega.idUsuario,
       titulo: 'Estado de entrega actualizado',
-      mensaje: `Tu entrega #${entrega.idEntrega} ha cambiado de estado.`,
+      mensaje: `Tu entrega #${entrega.idEntrega} ha cambiado a "${nombreEstado}".`,
       leida: false,
       tipo: 'entrega',
+      idReferencia: entrega.idEntrega,
+    })
+
+    WsService.emitToUsuario(entrega.idUsuario, 'nueva_entrega', {
+      idEntrega: entrega.idEntrega,
+      estado: nombreEstado,
+      idEstadoEntrega,
+      pesoTotal: entrega.pesoTotal,
+      puntosTotales: entrega.puntosTotales,
     })
 
     return response.ok({

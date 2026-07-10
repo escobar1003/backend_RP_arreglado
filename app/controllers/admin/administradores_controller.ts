@@ -19,7 +19,7 @@ export default class AdministradoresController {
   }
 
   async store({ auth, request, response }: HttpContext) {
-    const datos = request.only(['nombre', 'correo', 'telefono', 'idAliado'])
+    const datos = request.only(['nombre', 'correo', 'telefono', 'zona', 'idAliado', 'cedula'])
     const usuario = auth.user!
     await usuario.load('rol')
 
@@ -37,26 +37,33 @@ export default class AdministradoresController {
       correo: datos.correo,
       password: passwordTemporal,
       telefono: datos.telefono ?? null,
+      cedula: datos.cedula ?? null,
+      zona: datos.zona || null,
       idAliado: datos.idAliado ?? (usuario.rol.nombre === 'admin' ? usuario.idAliado : null),
       fechaRegistro: DateTime.now(),
     })
 
-    await mail.send((message) => {
-      message.to(datos.correo).subject('Recycling Points - Credenciales de administrador').html(`
-          <h2>Hola ${datos.nombre},</h2>
-          <p>Has sido registrado como <strong>administrador</strong> en Recycling Points.</p>
-          <p><strong>Correo:</strong> ${datos.correo}</p>
-          <p><strong>Contraseña temporal:</strong> ${passwordTemporal}</p>
-          <p>Te recomendamos cambiar tu contraseña después de iniciar sesión.</p>
-          <br>
-          <p>Saludos,<br>Equipo Recycling Points</p>
-        `)
-    })
+    try {
+      mail.send((message) => {
+        message
+          .to(datos.correo)
+          .from(process.env.SMTP_USERNAME!)
+          .subject('Recycling Points - Credenciales de administrador')
+          .html(`
+            <h2>Hola ${datos.nombre},</h2>
+            <p>Has sido registrado como <strong>administrador</strong> en Recycling Points.</p>
+            <p><strong>Correo:</strong> ${datos.correo}</p>
+            <p><strong>Contraseña temporal:</strong> ${passwordTemporal}</p>
+            <p>Te recomendamos cambiar tu contraseña después de iniciar sesión.</p>
+            <br>
+            <p>Saludos,<br>Equipo Recycling Points</p>
+          `)
+      })
+    } catch (err) {
+      console.error('Error al enviar email a admin:', err)
+    }
 
-    return response.created({
-      mensaje: 'Administrador creado correctamente. Se enviaron las credenciales al correo.',
-      admin,
-    })
+    return response.created({ mensaje: 'Administrador creado correctamente. Se enviaron las credenciales al correo.', admin })
   }
 
   async update({ auth, params, request, response }: HttpContext) {
@@ -70,14 +77,7 @@ export default class AdministradoresController {
     }
 
     const admin = await query.firstOrFail()
-    const datos = request.only([
-      'nombre',
-      'telefono',
-      'imagen',
-      'idEstadoUsuario',
-      'correo',
-      'idAliado',
-    ])
+    const datos = request.only(['nombre', 'telefono', 'imagen', 'idEstadoUsuario', 'correo', 'idAliado', 'zona'])
     admin.merge(datos)
     await admin.save()
     return response.ok({ mensaje: 'Administrador actualizado correctamente', admin })

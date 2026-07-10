@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Aliado from '#models/aliado'
 import PuntoReciclaje from '#models/punto_reciclaje'
 import { crearAliadoValidator, actualizarAliadoValidator } from '#validators/admin/aliado'
+import { ApiBody, ApiResponse, ApiParam } from '@foadonis/openapi/decorators'
 
 export default class AliadosController {
   async index({ auth, response }: HttpContext) {
@@ -35,18 +36,37 @@ export default class AliadosController {
     return response.ok({ aliado })
   }
 
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        nombre: { type: 'string', minLength: 2, maxLength: 100, description: 'Nombre del supermercado' },
+        tipoNegocio: { type: 'string', maxLength: 50, description: 'Tipo de negocio' },
+        descripcion: { type: 'string', maxLength: 255, description: 'Descripción' },
+        direccion: { type: 'string', maxLength: 150, description: 'Dirección' },
+        telefono: { type: 'string', maxLength: 20, description: 'Teléfono' },
+        correo: { type: 'string', format: 'email', description: 'Correo de contacto' },
+        comision: { type: 'number', minimum: 0, maximum: 100, description: 'Comisión %' },
+        latitud: { type: 'number', description: 'Latitud (-90 a 90)' },
+        longitud: { type: 'number', description: 'Longitud (-180 a 180)' },
+        materiales: { type: 'array', items: { type: 'number' }, description: 'IDs de materiales: 1=Plástico, 2=Papel, 3=Cartón, 4=Vidrio' },
+      },
+      required: ['nombre'],
+    },
+  })
+  @ApiResponse({ status: 201, description: 'Aliado creado correctamente' })
+  @ApiResponse({ status: 422, description: 'Error de validación' })
   async store({ request, response }: HttpContext) {
     console.log('=== DATOS CRUDOS ===', request.all())
     const datos = await request.validateUsing(crearAliadoValidator)
     console.log('=== DATOS VALIDADOS ===', datos)
 
-    const { latitud, longitud, ubicacionDireccion, materiales, ...datosSinCoordenadas } =
-      datos as any
+    const { latitud, longitud, ubicacionDireccion, ...datosSinCoordenadas } = datos as any
     console.log('=== COORDENADAS ===', { latitud, longitud, ubicacionDireccion })
 
-    const aliado = await Aliado.create({ ...datosSinCoordenadas, idEstadoAliado: 1 })
+    const aliado = await Aliado.create({ ...datosSinCoordenadas, idEstadoAliado: 1, direccion: ubicacionDireccion ?? null })
 
-    const punto = await PuntoReciclaje.create({
+    await PuntoReciclaje.create({
       idAliado: aliado.idAliado,
       idEstadoPunto: 1,
       nombre: `Punto principal - ${aliado.nombre}`,
@@ -55,28 +75,23 @@ export default class AliadosController {
       longitud: longitud ?? null,
     })
 
-    if (materiales && materiales.length > 0) {
-      await punto.related('materiales').sync(materiales)
-    }
-    console.log('=== MATERIALES RECIBIDOS ===', materiales)
-    console.log('=== PUNTO CREADO ID ===', punto.idPunto)
-
     return response.created({ mensaje: 'Aliado creado correctamente', aliado })
   }
 
   async update({ params, request, response }: HttpContext) {
     const aliado = await Aliado.findOrFail(params.id)
     const datos = await request.validateUsing(actualizarAliadoValidator)
-    const { latitud, longitud } = datos
-    const { latitud: latitudIgnorada, longitud: longitudIgnorada, ...datosAliado } = datos
+    const { latitud, longitud, ubicacionDireccion } = datos
+    const { latitud: _l, longitud: _ll, ubicacionDireccion: _ud, ...datosAliado } = datos
     aliado.merge(datosAliado)
     await aliado.save()
-    if (latitud !== undefined || longitud !== undefined) {
+    if (latitud !== undefined || longitud !== undefined || ubicacionDireccion !== undefined) {
       await aliado.load('puntosReciclaje')
       const punto = aliado.puntosReciclaje[0]
       if (punto) {
         punto.latitud = latitud ?? punto.latitud
         punto.longitud = longitud ?? punto.longitud
+        punto.direccion = ubicacionDireccion ?? punto.direccion
         await punto.save()
       }
     }
@@ -99,12 +114,21 @@ export default class AliadosController {
         materialesSet.add(JSON.stringify(mat))
       }
     }
-    const materiales = Array.from(materialesSet).map(
-      (m) => JSON.parse(m) as Record<string, unknown>
-    )
+    const materiales = Array.from(materialesSet).map(m => JSON.parse(m) as Record<string, unknown>)
     return response.ok({ materiales })
   }
 
+  @ApiParam({ name: 'id', schema: { type: 'number' }, description: 'ID del aliado' })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      required: ['materiales'],
+      properties: {
+        materiales: { type: 'array', items: { type: 'number' }, description: 'IDs de materiales: 1=Plástico, 2=Papel, 3=Cartón, 4=Vidrio' },
+      },
+    },
+  })
+  @ApiResponse({ status: 200, description: 'Materiales sincronizados correctamente' })
   async sincronizarMateriales({ params, request, response }: HttpContext) {
     const { materiales: materialIds } = request.only(['materiales'])
     const aliado = await Aliado.findOrFail(params.id)
@@ -113,5 +137,12 @@ export default class AliadosController {
     if (!punto) return response.notFound({ mensaje: 'Punto de reciclaje no encontrado' })
     await punto.related('materiales').sync(materialIds ?? [])
     return response.ok({ mensaje: 'Materiales sincronizados correctamente' })
+  }
+
+  async listaPublica({ response }: HttpContext) {
+    const aliados = await Aliado.query()
+      .preload('estadoAliado')
+      .orderBy('nombre', 'asc')
+    return response.ok({ aliados })
   }
 }

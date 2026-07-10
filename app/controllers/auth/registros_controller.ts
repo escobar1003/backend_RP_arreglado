@@ -14,8 +14,8 @@ export default class RegistrosController {
     }
 
     const usuario = await Usuario.create({
-      idRol: 3, // rol: usuario
-      idEstadoUsuario: 1, // estado: activo
+      idRol: 3,             // rol: usuario
+      idEstadoUsuario: 1,   // estado: activo
       nombre: datos.nombre,
       apellido: datos.apellido ?? null,
       correo: datos.correo,

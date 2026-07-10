@@ -9,6 +9,7 @@ export const actualizarUsuarioValidator = vine.compile(
     idRol: vine.number().positive().optional(),
     idEstadoUsuario: vine.number().positive().optional(),
     idAliado: vine.number().positive().optional(),
+    cedula: vine.string().maxLength(20).optional(),
   })
 )
 export const crearUsuarioValidator = vine.compile(
@@ -17,6 +18,7 @@ export const crearUsuarioValidator = vine.compile(
     correo: vine.string().email().normalizeEmail(),
     password: vine.string().minLength(6).maxLength(255),
     telefono: vine.string().maxLength(20).optional(),
+    cedula: vine.string().maxLength(20).optional(),
     idRol: vine.number().positive().optional(),
     idEstadoUsuario: vine.number().positive().optional(),
   })

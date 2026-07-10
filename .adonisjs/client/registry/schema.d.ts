@@ -43,6 +43,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/chatbot_controller').default['preguntar']>>>
     }
   }
+  'aliados.lista_publica': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/aliados-lista'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/aliados_controller').default['listaPublica']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/aliados_controller').default['listaPublica']>>>
+    }
+  }
   'login.iniciar_sesion': {
     methods: ["POST"]
     pattern: '/api/auth/iniciar-sesion'
@@ -65,6 +77,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/registros_controller').default['registrarse']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/registros_controller').default['registrarse']>>>
+    }
+  }
+  'solicitudes_registro.solicitar': {
+    methods: ["POST"]
+    pattern: '/api/auth/solicitar-registro'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['solicitar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['solicitar']>>>
     }
   }
   'recuperar_passwords.solicitar_codigo': {
@@ -113,6 +137,54 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/login_controller').default['cerrarSesion']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/login_controller').default['cerrarSesion']>>>
+    }
+  }
+  'solicitudes_registro.listar': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/solicitudes-registro'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['listar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['listar']>>>
+    }
+  }
+  'solicitudes_registro.pendientes_count': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/solicitudes-registro/pendientes-count'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['pendientesCount']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['pendientesCount']>>>
+    }
+  }
+  'solicitudes_registro.aprobar': {
+    methods: ["PUT"]
+    pattern: '/api/admin/solicitudes-registro/:id/aprobar'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['aprobar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['aprobar']>>>
+    }
+  }
+  'solicitudes_registro.rechazar': {
+    methods: ["PUT"]
+    pattern: '/api/admin/solicitudes-registro/:id/rechazar'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['rechazar']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/solicitudes_registro_controller').default['rechazar']>>>
     }
   }
   'administradores.index': {
@@ -1099,6 +1171,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/tipos_recompensas_controller').default['destroy']>>>
     }
   }
+  'zonas.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/admin/zonas'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/zonas_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/zonas_controller').default['index']>>>
+    }
+  }
   'estados_encargados.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/admin/estados-encargados'
@@ -1447,18 +1531,6 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reserva_imagenes_controller').default['store']>>>
     }
   }
-  'reserva_imagenes.index': {
-    methods: ["GET","HEAD"]
-    pattern: '/api/usuario/reservas/:id/imagenes'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/usuario/reserva_imagenes_controller').default['index']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/usuario/reserva_imagenes_controller').default['index']>>>
-    }
-  }
   'notificaciones_usuario.index': {
     methods: ["GET","HEAD"]
     pattern: '/api/usuario/notificaciones'
@@ -1661,18 +1733,6 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['destroy']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['destroy']>>>
-    }
-  }
-  'reservas_encargado.imagenes': {
-    methods: ["GET","HEAD"]
-    pattern: '/api/encargado/reservas/:id/imagenes'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { id: ParamValue }
-      query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['imagenes']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/reservas_encargado_controller').default['imagenes']>>>
     }
   }
   'materiales.index': {
@@ -1925,6 +1985,18 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin/puntos_reciclajes_controller').default['update']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin/puntos_reciclajes_controller').default['update']>>>
+    }
+  }
+  'reportes.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/encargado/reportes'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/encargado/reportes_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/encargado/reportes_controller').default['index']>>>
     }
   }
   'openapi.html': {

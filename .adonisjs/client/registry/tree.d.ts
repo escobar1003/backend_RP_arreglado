@@ -11,12 +11,29 @@ export interface ApiDefinition {
   chatbot: {
     preguntar: typeof routes['chatbot.preguntar']
   }
+  aliados: {
+    listaPublica: typeof routes['aliados.lista_publica']
+    index: typeof routes['aliados.index']
+    show: typeof routes['aliados.show']
+    store: typeof routes['aliados.store']
+    update: typeof routes['aliados.update']
+    destroy: typeof routes['aliados.destroy']
+    materiales: typeof routes['aliados.materiales']
+    sincronizarMateriales: typeof routes['aliados.sincronizar_materiales']
+  }
   login: {
     iniciarSesion: typeof routes['login.iniciar_sesion']
     cerrarSesion: typeof routes['login.cerrar_sesion']
   }
   registros: {
     registrarse: typeof routes['registros.registrarse']
+  }
+  solicitudesRegistro: {
+    solicitar: typeof routes['solicitudes_registro.solicitar']
+    listar: typeof routes['solicitudes_registro.listar']
+    pendientesCount: typeof routes['solicitudes_registro.pendientes_count']
+    aprobar: typeof routes['solicitudes_registro.aprobar']
+    rechazar: typeof routes['solicitudes_registro.rechazar']
   }
   recuperarPasswords: {
     solicitarCodigo: typeof routes['recuperar_passwords.solicitar_codigo']
@@ -43,15 +60,6 @@ export interface ApiDefinition {
     store: typeof routes['usuarios.store']
     update: typeof routes['usuarios.update']
     destroy: typeof routes['usuarios.destroy']
-  }
-  aliados: {
-    index: typeof routes['aliados.index']
-    show: typeof routes['aliados.show']
-    store: typeof routes['aliados.store']
-    update: typeof routes['aliados.update']
-    destroy: typeof routes['aliados.destroy']
-    materiales: typeof routes['aliados.materiales']
-    sincronizarMateriales: typeof routes['aliados.sincronizar_materiales']
   }
   materiales: {
     index: typeof routes['materiales.index']
@@ -145,6 +153,9 @@ export interface ApiDefinition {
     update: typeof routes['tipos_recompensas.update']
     destroy: typeof routes['tipos_recompensas.destroy']
   }
+  zonas: {
+    index: typeof routes['zonas.index']
+  }
   estadosEncargados: {
     index: typeof routes['estados_encargados.index']
     store: typeof routes['estados_encargados.store']
@@ -181,7 +192,6 @@ export interface ApiDefinition {
   }
   reservaImagenes: {
     store: typeof routes['reserva_imagenes.store']
-    index: typeof routes['reserva_imagenes.index']
   }
   notificacionesUsuario: {
     index: typeof routes['notificaciones_usuario.index']
@@ -209,7 +219,6 @@ export interface ApiDefinition {
     store: typeof routes['reservas_encargado.store']
     update: typeof routes['reservas_encargado.update']
     destroy: typeof routes['reservas_encargado.destroy']
-    imagenes: typeof routes['reservas_encargado.imagenes']
   }
   notificaciones: {
     index: typeof routes['notificaciones.index']
@@ -226,6 +235,9 @@ export interface ApiDefinition {
     store: typeof routes['canjes_encargado.store']
     actualizarEstado: typeof routes['canjes_encargado.actualizar_estado']
     validar: typeof routes['canjes_encargado.validar']
+  }
+  reportes: {
+    index: typeof routes['reportes.index']
   }
   openapi: {
     html: typeof routes['openapi.html']

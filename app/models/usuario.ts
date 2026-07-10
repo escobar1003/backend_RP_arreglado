@@ -49,10 +49,10 @@ export default class Usuario extends compose(BaseModel, AuthFinder) {
   declare password: string
 
   @column()
-  declare telefono: string | null
+  declare cedula: string | null
 
   @column()
-  declare cedula: string | null
+  declare telefono: string | null
 
   @column()
   declare imagen: string | null
@@ -83,6 +83,9 @@ export default class Usuario extends compose(BaseModel, AuthFinder) {
 
   @belongsTo(() => EstadoUsuario, { foreignKey: 'idEstadoUsuario' })
   declare estadoUsuario: BelongsTo<typeof EstadoUsuario>
+
+  @column()
+  declare zona: string | null
 
   @column()
   declare idAliado: number | null

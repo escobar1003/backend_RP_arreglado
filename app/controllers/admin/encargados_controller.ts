@@ -46,7 +46,7 @@ export default class EncargadosController {
   }
 
   async store({ auth, request, response }: HttpContext) {
-    const datos = request.only(['nombre', 'correo', 'telefono', 'zona', 'idAliado'])
+    const datos = request.only(['nombre', 'correo', 'telefono', 'zona', 'idAliado', 'idPunto', 'cedula'])
     const usuario = auth.user!
     await usuario.load('rol')
 
@@ -60,17 +60,15 @@ export default class EncargadosController {
         return response.conflict({ mensaje: 'Este usuario ya es encargado' })
       }
       const idAliado = datos.idAliado ?? (usuario.rol.nombre === 'admin' ? usuario.idAliado : null)
-      await db
-        .from('usuarios')
-        .where('id_usuario', encargado.idUsuario)
-        .update({
-          id_rol: 4,
-          id_aliado: idAliado,
-          password: hashedPassword,
-          nombre: datos.nombre || encargado.nombre,
-          telefono: datos.telefono || encargado.telefono,
-          updated_at: new Date(),
-        })
+      await db.from('usuarios').where('id_usuario', encargado.idUsuario).update({
+        id_rol: 4,
+        id_aliado: idAliado,
+        password: hashedPassword,
+        nombre: datos.nombre || encargado.nombre,
+        telefono: datos.telefono || encargado.telefono,
+        zona: datos.zona || null,
+        updated_at: new Date(),
+      })
       encargado.idRol = 4
       encargado.idAliado = idAliado
       encargado.password = hashedPassword
@@ -83,7 +81,9 @@ export default class EncargadosController {
         correo: datos.correo,
         password: hashedPassword,
         telefono: datos.telefono ?? null,
+        cedula: datos.cedula ?? null,
         id_aliado: idAliado,
+        zona: datos.zona || null,
         fecha_registro: new Date(),
         created_at: new Date(),
         updated_at: new Date(),
@@ -92,8 +92,12 @@ export default class EncargadosController {
       encargado.idAliado = idAliado
     }
 
-    await mail.send((message) => {
-      message.to(datos.correo).subject('Recycling Points - Credenciales de encargado').html(`
+    mail.send((message) => {
+      message
+        .to(datos.correo)
+        .from(process.env.SMTP_USERNAME!)
+        .subject('Recycling Points - Credenciales de encargado')
+        .html(`
           <h2>Hola ${encargado.nombre},</h2>
           <p>Has sido registrado como <strong>encargado</strong> en Recycling Points.</p>
           <p><strong>Correo:</strong> ${datos.correo}</p>
@@ -102,29 +106,45 @@ export default class EncargadosController {
           <br/>
           <p>Equipo Recycling Points</p>
         `)
-    })
+    }).catch(err => console.error('Error al enviar email a encargado:', err))
 
-    // Asignar automáticamente el primer punto del aliado al encargado
-    const idAliadoAsignado =
-      datos.idAliado ?? (usuario.rol.nombre === 'admin' ? usuario.idAliado : null)
-    if (idAliadoAsignado) {
-      await encargado.load('puntoACargo')
-      if (!encargado.puntoACargo) {
-        const punto = await PuntoReciclaje.query()
-          .where('id_aliado', idAliadoAsignado)
-          .whereNull('id_encargado')
-          .first()
-        if (punto) {
-          punto.idEncargado = encargado!.idUsuario
-          await punto.save()
+    // Asignar punto al encargado
+    if (datos.idPunto) {
+      const punto = await PuntoReciclaje.query()
+        .where('id_punto', datos.idPunto)
+        .first()
+      if (!punto) {
+        return response.notFound({ mensaje: 'El punto seleccionado no existe' })
+      }
+      if (punto.idEncargado && punto.idEncargado !== encargado!.idUsuario) {
+        return response.conflict({ mensaje: 'Este punto ya tiene otro encargado asignado' })
+      }
+      // Desasignar punto anterior del encargado (por si estaba en otro punto)
+      await PuntoReciclaje.query()
+        .where('id_encargado', encargado!.idUsuario)
+        .whereNot('id_punto', punto.idPunto)
+        .update({ idEncargado: null })
+      punto.idEncargado = encargado!.idUsuario
+      await punto.save()
+    } else {
+      // Auto-asignar el primer punto del aliado sin encargado
+      const idAliadoAsignado = datos.idAliado ?? (usuario.rol.nombre === 'admin' ? usuario.idAliado : null)
+      if (idAliadoAsignado) {
+        await encargado.load('puntoACargo')
+        if (!encargado.puntoACargo) {
+          const punto = await PuntoReciclaje.query()
+            .where('id_aliado', idAliadoAsignado)
+            .whereNull('id_encargado')
+            .first()
+          if (punto) {
+            punto.idEncargado = encargado!.idUsuario
+            await punto.save()
+          }
         }
       }
     }
 
-    return response.ok({
-      mensaje: 'Encargado creado correctamente. Se enviaron las credenciales al correo.',
-      encargado,
-    })
+    return response.ok({ mensaje: 'Encargado creado correctamente. Se enviaron las credenciales al correo.', encargado })
   }
 
   async update({ auth, params, request, response }: HttpContext) {
@@ -138,7 +158,7 @@ export default class EncargadosController {
     }
 
     const encargado = await query.firstOrFail()
-    const datos = request.only(['nombre', 'telefono', 'idEstadoUsuario', 'idAliado', 'correo'])
+    const datos = request.only(['nombre', 'telefono', 'idEstadoUsuario', 'idAliado', 'correo', 'zona'])
     encargado.merge(datos)
     if (request.input('password')) {
       encargado.password = await hash.make(request.input('password'))
@@ -166,27 +186,54 @@ export default class EncargadosController {
     const usuario = auth.user!
     await usuario.load('rol')
 
-    const query = Usuario.query().where('id_usuario', params.id).where('id_rol', 4)
+    const query = Usuario.query()
+      .where('id_usuario', params.id)
+      .where('id_rol', 4)
 
     if (usuario.rol.nombre === 'admin' && usuario.idAliado) {
       query.where('id_aliado', usuario.idAliado)
     }
 
     const encargado = await query.firstOrFail()
+    await encargado.load('aliado')
 
     const { idPunto } = request.only(['idPunto'])
 
-    const puntoQuery = PuntoReciclaje.query().where('id_punto', idPunto)
+    let punto: PuntoReciclaje | null
 
-    if (usuario.rol.nombre === 'admin' && usuario.idAliado) {
-      puntoQuery.where('id_aliado', usuario.idAliado)
+    if (idPunto) {
+      const puntoQuery = PuntoReciclaje.query().where('id_punto', idPunto)
+
+      if (usuario.rol.nombre === 'admin' && usuario.idAliado) {
+        puntoQuery.where('id_aliado', usuario.idAliado)
+      }
+
+      punto = await puntoQuery.firstOrFail()
+
+      if (punto.idEncargado && punto.idEncargado !== encargado.idUsuario) {
+        return response.conflict({ mensaje: 'Este punto ya tiene un encargado asignado' })
+      }
+    } else {
+      const idAliadoAsignar = encargado.idAliado ?? (usuario.rol.nombre === 'admin' ? usuario.idAliado : null)
+      if (!idAliadoAsignar) {
+        return response.badRequest({ mensaje: 'El encargado no tiene un aliado asignado para auto-asignar punto' })
+      }
+
+      punto = await PuntoReciclaje.query()
+        .where('id_aliado', idAliadoAsignar)
+        .whereNull('id_encargado')
+        .first()
+
+      if (!punto) {
+        return response.notFound({ mensaje: 'No hay puntos disponibles sin encargado en este aliado' })
+      }
     }
 
-    const punto = await puntoQuery.firstOrFail()
-
-    if (punto.idEncargado && punto.idEncargado !== encargado.idUsuario) {
-      return response.conflict({ mensaje: 'Este punto ya tiene un encargado asignado' })
-    }
+    // Si el encargado ya tenía otro punto, desasignarlo
+    await PuntoReciclaje.query()
+      .where('id_encargado', encargado.idUsuario)
+      .whereNot('id_punto', punto.idPunto)
+      .update({ idEncargado: null })
 
     punto.idEncargado = encargado.idUsuario
     await punto.save()

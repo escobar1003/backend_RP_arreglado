@@ -11,46 +11,44 @@ export default class UsuariosController {
     }
 
     const q = (request.qs().q || '').trim()
-    if (!q) {
-      return response.ok({ usuarios: [] })
-    }
-
-    const usuarios = await Usuario.query()
-      .where('id_rol', 3)
-      .where((query) => {
-        query
-          .where('nombre', 'LIKE', `%${q}%`)
-          .orWhere('correo', 'LIKE', `%${q}%`)
-          .orWhere('cedula', 'LIKE', `%${q}%`)
-      })
-      .limit(10)
 
     const ahora = DateTime.now()
-    const result = await Promise.all(
-      usuarios.map(async (u) => {
-        const movimientos = await MovimientoPunto.query().where('id_usuario', u.idUsuario)
-        const ganados = movimientos
-          .filter(
-            (m) => m.tipoMovimiento === 'ganados' && (!m.fechaCaducidad || m.fechaCaducidad > ahora)
-          )
-          .reduce((s, m) => s + m.puntos, 0)
-        const descontados = movimientos
-          .filter((m) => m.tipoMovimiento === 'descontados')
-          .reduce((s, m) => s + m.puntos, 0)
-        const ajuste = movimientos
-          .filter(
-            (m) => m.tipoMovimiento === 'ajuste' && (!m.fechaCaducidad || m.fechaCaducidad > ahora)
-          )
-          .reduce((s, m) => s + m.puntos, 0)
-        return {
-          idUsuario: u.idUsuario,
-          nombre: u.nombre,
-          correo: u.correo,
-          cedula: u.cedula,
-          puntosDisponibles: ganados - descontados + ajuste,
-        }
-      })
-    )
+    let query = Usuario.query().where('id_rol', 3)
+    if (q) {
+      query = query.whereRaw('(nombre LIKE ? OR correo LIKE ? OR cedula LIKE ?)', [`%${q}%`, `%${q}%`, `%${q}%`])
+    }
+    const usuarios = await query.limit(20)
+
+    const ids = usuarios.map((u) => u.idUsuario)
+    const todosMovimientos = ids.length
+      ? await MovimientoPunto.query().whereIn('id_usuario', ids)
+      : []
+
+    const ptsPorUsuario = new Map()
+    for (const m of todosMovimientos) {
+      if (!ptsPorUsuario.has(m.idUsuario)) {
+        ptsPorUsuario.set(m.idUsuario, { ganados: 0, descontados: 0, ajuste: 0 })
+      }
+      const acc = ptsPorUsuario.get(m.idUsuario)
+      if (m.tipoMovimiento === 'ganados' && (!m.fechaCaducidad || m.fechaCaducidad > ahora)) {
+        acc.ganados += m.puntos
+      } else if (m.tipoMovimiento === 'descontados') {
+        acc.descontados += m.puntos
+      } else if (m.tipoMovimiento === 'ajuste' && (!m.fechaCaducidad || m.fechaCaducidad > ahora)) {
+        acc.ajuste += m.puntos
+      }
+    }
+
+    const result = usuarios.map((u) => {
+      const p = ptsPorUsuario.get(u.idUsuario) || { ganados: 0, descontados: 0, ajuste: 0 }
+      return {
+        idUsuario: u.idUsuario,
+        nombre: u.nombre,
+        correo: u.correo,
+        cedula: u.cedula,
+        puntosDisponibles: p.ganados - p.descontados + p.ajuste,
+      }
+    })
 
     return response.ok({ usuarios: result })
   }

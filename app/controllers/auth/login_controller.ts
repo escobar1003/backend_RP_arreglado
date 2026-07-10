@@ -13,6 +13,7 @@ export default class LoginController {
       .preload('rol')
       .preload('estadoUsuario')
       .preload('aliado')
+      .preload('puntoACargo')
       .first()
 
     if (!usuario) {
@@ -60,6 +61,10 @@ export default class LoginController {
         rol: usuario.rol.nombre,
         idAliado: usuario.idAliado,
         aliadoNombre: usuario.aliado?.nombre ?? null,
+        puntoACargo: usuario.puntoACargo ? {
+          idPunto: usuario.puntoACargo.idPunto,
+          nombre: usuario.puntoACargo.nombre,
+        } : null,
       },
     })
   }
